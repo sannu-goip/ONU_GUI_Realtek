@@ -1,4 +1,5 @@
 <% SendWebHeadStr();%>
+//hi
 <META HTTP-EQUIV=Refresh CONTENT="10; URL=status.asp">
 <title><% multilang(LANG_DEVICE_STATUS); %></title>
 <script>
