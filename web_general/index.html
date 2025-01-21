@@ -1,0 +1,235 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>HGU</title>
+<script language="JavaScript" type="text/javascript">
+
+var VirServerModifyMappingIndex = -1;
+var VirServerModifyEntryIndex = -1;
+var AclFilterEditRule = new Array();
+var AclEditNumber = -1;
+var ssidIdx = 0;
+var lanDevIndex = 1;
+var QoSCurInterface = '';
+var DDNSProvider = '';
+var curUser = "0";
+var ripIndex = "";
+var previousPage = "";
+var gateWayName = "GateWay";
+var ModelName = "XPON";
+var IPv6Support = "Yes";
+var ipsecSupport = "No";
+var pageMap =  new Array();//pageMap[8][9]
+var voipType = "SIP";
+
+var Content_Status="Status";
+var Content_DeviceInfo="DeviceInfo";
+var Content_NetInfo="NetInfo";
+var Content_UserInfo="UserInfo";
+var Content_VoIPInfo="VoIPInfo";
+var Content_CWMPInfo="CWMPStatus";
+var Content_WifiInfo="WiFiInfo";
+var Content_CATVInfo="CATVInfo";
+var Content_PonInfo="PonInfo";
+var Content_ConnectivityInfo="ConnectStatus";
+
+var Content_Net="Net";
+var Content_WAN="Wan";
+var Content_Binding="Binding";
+var Content_LAN="Lan";
+var Content_Iphone="IPhone";
+var Content_Qos="QoS";
+var Content_Time="Time";
+var Content_Route="Route";
+var Content_QosBand="BandWidth";
+
+var Content_Wireless="Wireless";
+var Content_WLAN="WLan";
+var Content_WLAN5G="WLan5G";
+var Content_WIFI="WiFi";
+var Content_WIFI5G="Wifi5G";
+var Content_Bandsteering="BandSteering";
+var Content_EasyMesh="EasyMesh";
+
+var Content_VoiceSetup="VoIP";
+var Content_VoIPSet="VoIP Basic";
+var Content_VoIPSetAdv="VoIP Advanced";
+var Content_VoiceHistory="VoIP History";
+
+var Content_TR069="Tr069";
+
+var Content_Security="Security";
+var Content_URLFilter="URLFilter";
+var Content_Firewall="Firewall";
+var Content_MACFilter="MACFilter";
+var Content_PortFilter="PortFilter";
+var Content_AclFilter="AclFilter";
+var Content_Parental="Parental";
+var Content_LoopDetect="LoopDetect";
+
+var Content_APP="APP";
+var Content_DDNS="DDNS";
+var Content_NAT="AdvancedNAT";
+var Content_UPNP="UPNP";
+var Content_IGMPOrMLD="IGMPMLD";
+var Content_IGMP="IGMP";
+var Content_DailyAPP="DailyAPP";
+var Content_SAMBA="SAMBA";
+var Content_VPN="VPN";
+var Content_SNMP="SNMP";
+var Content_FTP="FTP";
+var Content_IPTV="IPTV";
+
+var Content_Management="Manage";
+var Content_UserManagement="User Manage";
+var Content_DeviceManagement="Device Manage";
+var Content_LogManagement="Log Manage";
+var Content_Upgrade="Upgrade";
+var Content_Maintain="Maintain";
+var Content_Telnet="Telnet";
+
+var Content_Diagnose="Diagnose";
+var Content_InternetDiagnose="InternetDiagnose";
+var Content_SpeedTestDiagnose="SpeedTest";
+
+var Content_Help="Help";
+var Content_UseHelp="Use Help";
+
+var getWlanWpsTimerCount = 0;
+var maxWlanWpsTimerCount = 10;
+for (i = 0; i < 11; i++)
+{
+   pageMap[i] = new Array();
+}
+
+pageMap[0][0] = "1";
+pageMap[1][0] = "1";
+pageMap[2][0] = "1";
+pageMap[3][0] = "1";
+pageMap[4][0] = "1";
+pageMap[5][0] = "1";
+pageMap[6][0] = "1";
+pageMap[7][0] = "1";
+pageMap[8][0] = "1";
+pageMap[9][0] = "1";
+pageMap[10][0] = "1";
+
+pageMap[0][1] = "1";
+pageMap[0][2] = "1";
+pageMap[0][3] = "1";
+pageMap[0][4] = "1";
+pageMap[0][5] = "1";
+pageMap[0][6] = "1";
+pageMap[0][7] = "1";
+pageMap[0][8] = "1";
+
+pageMap[1][1] = "1";
+pageMap[1][2] = "1";
+pageMap[1][3] = "1";
+pageMap[1][4] = "0";
+
+pageMap[1][5] = "1";
+pageMap[1][6] = "1";
+pageMap[1][7] = "1";
+pageMap[1][8] = "1";
+
+pageMap[2][1] = "1";
+pageMap[2][2] = "1";
+pageMap[2][3] = "1";
+pageMap[2][4] = "1";
+pageMap[2][5] = "1";
+pageMap[2][6] = "1";
+pageMap[2][7] = "1";
+pageMap[2][8] = "1";
+pageMap[2][9] = "1";
+pageMap[2][10] = "1";
+pageMap[2][11] = "0";
+pageMap[2][12] = "0";
+
+pageMap[2][13] = "0";
+
+pageMap[3][1] = "1";
+pageMap[3][2] = "1";
+pageMap[3][3] = "1";
+pageMap[3][4] = "1";
+pageMap[3][5] = "1";
+pageMap[3][6] = 0;
+
+pageMap[3][7] = "1";
+pageMap[3][8] = "1";
+pageMap[3][9] = "0";
+
+pageMap[4][1] = "1";
+pageMap[4][2] = "1";
+pageMap[4][3] = "1";
+pageMap[4][4] = "1";
+pageMap[4][5] = "1";
+pageMap[4][6] = "1";
+pageMap[4][7] = "0";
+pageMap[4][8] = "1";
+pageMap[4][9] = "0";
+pageMap[4][10] = "0";
+pageMap[4][11] = "1";
+
+pageMap[5][1] = "1";
+pageMap[5][2] = "1";
+pageMap[5][3] = "1";
+pageMap[5][4] = "1";
+pageMap[5][5] = "0";
+pageMap[5][6] = "1";
+pageMap[5][7] = "1";
+pageMap[5][8] = "1";
+
+pageMap[6][1] = "1";
+pageMap[6][2] = "1";
+pageMap[6][3] = "1";
+pageMap[6][4] = "1";
+pageMap[6][5] = "1";
+pageMap[6][6] = "1";
+pageMap[6][7] = "1";
+pageMap[6][8] = "1";
+
+pageMap[7][1] = "1";
+pageMap[7][2] = "1";
+pageMap[7][3] = "1";
+pageMap[7][4] = "1";
+pageMap[7][5] = "1";
+pageMap[7][6] = "1";
+pageMap[7][7] = "1";
+pageMap[7][8] = "1";
+
+pageMap[8][1] = "1";
+pageMap[8][2] = "1";
+pageMap[8][3] = "1";
+pageMap[8][4] = "1";
+pageMap[8][5] = "1";
+pageMap[8][6] = "1";
+pageMap[8][7] = "1";
+pageMap[8][8] = "1";
+
+pageMap[9][1] = "1";
+pageMap[9][2] = "1";
+pageMap[9][3] = "1";
+pageMap[9][4] = "1";
+pageMap[9][5] = "1";
+pageMap[9][6] = "1";
+pageMap[9][7] = "1";
+pageMap[9][8] = "1";
+
+pageMap[10][1] = "1";
+pageMap[10][2] = "1";
+pageMap[10][3] = "1";
+pageMap[10][4] = "1";
+pageMap[10][5] = "1";
+pageMap[10][6] = "1";
+pageMap[10][7] = "1";
+pageMap[10][8] = "1";
+</script>
+<frameset rows='0,*' frameborder='0' border='0'>
+<frame src='refresh.asp' name='refreshfrm' frameborder='no' border='0' scrolling='no' target='_self' marginwidth='0' marginheight='0' noresize>
+      <frame src='status.asp' name='contentfrm' frameborder='no' border='0' target='_self' marginwidth='0' marginheight='0' >
+</frameset>
+<noframes>The information on the page makes use of frame technology. For best results, use the new version of Browser.</noframes>
+</head>
+</body>
+</html>
