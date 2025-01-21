@@ -157,7 +157,7 @@ visibility:hidden;
                                     </div>
                                     <span class="gateway_box">Gateway Name:Home Gateway</span>
                                     <span class="model_box">Gateway Type:SY-GPON-2010-WADONT</span>
-                                    <a onclick="DoLogout()" href="/cgi-bin/logout.cgi" id="logOut" name="logOut" target="_top" class="Power_btn">
+                                    <a onclick="document.getElementById('cmlogout').submit();" id="logOut" name="logOut" target="_top" class="Power_btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 22 25"> 
                                             <path id="power_icon" data-name="power_icon" class="cls-1" d="M15.405,3.524s-1.324-.6-1.324.8A3.166,3.166,0,0,0,15.41,6.65,8.495,8.495,0,0,1,11,22.253,8.495,8.495,0,0,1,6.59,6.65,3.167,3.167,0,0,0,7.919,4.322c0-1.4-1.324-.8-1.324-0.8A11.242,11.242,0,0,0,11,25,11.242,11.242,0,0,0,15.405,3.524ZM11.077,0A1.47,1.47,0,0,0,9.46,1.258V12.325a1.47,1.47,0,0,0,1.618,1.258,1.3,1.3,0,0,0,1.463-1.258V1.258A1.3,1.3,0,0,0,11.077,0Z">
                                             </path>
@@ -258,7 +258,7 @@ visibility:hidden;
                                                                 <th style="width:25%">Hardware Version </th>
                                                                 <td style="width:75%">
                                                                     <SCRIPT language=javascript>
-                                                                        document.write('');
+                                                                        document.write('<% HwVer(); %>');
                                                                     </SCRIPT>
                                                                 </td>
                                                             </tr>
@@ -382,7 +382,7 @@ visibility:hidden;
                                                                                  <SCRIPT language=javascript>
                                                                                     document.write('<tr>
     <th width=40%>Memory Usage</th>
-    <td width=60%><% memUtility(); %>
+    <td width=60%><% memUtility(); %></td>
 
 </td>
 </tr>
@@ -1664,22 +1664,21 @@ visibility:hidden;
                                                                         </tr>
 
                                                                         <tr>
-                                                                            <th style="width: 30%"> PON Link Connection
-                                                                                Status</th>
+                                                                            <th style="width: 30%"> ONU State</th>
                                                                             <td colspan="2">
                                                                                  <Script language=JavaScript type=text/javascript>
 												                                    if( PonInfo.PonState == "up")
-													                                    document.write("");
+													                                    document.write('<% showgpon_status(); %> ');
 												                                    else if ( PonInfo.PonState == "connecting")
-													                                    document.write("");
+													                                    document.write('<% showgpon_status(); %> ');
 												                                    else
-													                                    document.write("");
+													                                    document.write('<% showgpon_status(); %> ');
 												                                </Script>
                                                                             </td>
 
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>PON Mode </th>
+                                                                            <th>Working Mode </th>
                                                                             <td colspan="2">
                                                                                 <Script language=JavaScript type=text/javascript>
                                                                                     if(( PonInfo.PonState == "up") || ( PonInfo.PonState == "connecting")) {
@@ -1696,7 +1695,7 @@ visibility:hidden;
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>FEC Status</th>
+                                                                            <th>FEC Errors</th>
                                                                             <td colspan="2">
                                                                                  <SCRIPT language=JavaScript type=text/javascript>
 
@@ -1713,7 +1712,7 @@ visibility:hidden;
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Encryption Mode </th>
+                                                                            <th>LOID Status </th>
                                                                             <td colspan="2">
                                                                                 <SCRIPT language=JavaScript type=text/javascript>
                                                                                         if ( '1' == PonInfo.LinkSta )
@@ -1737,7 +1736,7 @@ visibility:hidden;
 
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Alarm Information
+                                                                            <th>ONU ID
                                                                             </th>
                                                                             <td colspan="2">
                                                                                  <SCRIPT language=JavaScript type=text/javascript>
@@ -1760,7 +1759,7 @@ visibility:hidden;
                                                                             <th>Number Of Packets PON Port Sent </th>
                                                                             <td colspan="2">
                                                                                 <SCRIPT language=javascript>
-                                                                                    document.write(PonInfo.PonSendPkt);
+                                                                                    document.write('<% ponGetStatus("packets-sent"); %>');
                                                                                 </SCRIPT>
                                                                             </td>
                                                                         </tr>
@@ -1768,7 +1767,7 @@ visibility:hidden;
                                                                             <th>Number Of Packets PON Port Received</th>
                                                                             <td colspan="2">
                                                                                  <SCRIPT language=javascript>
-                                                                                    document.write(PonInfo.PonRecvPkt);
+                                                                                    document.write('<% ponGetStatus("packets-received"); %>');
                                                                                 </SCRIPT>
                                                                             </td>
                                                                         </tr>
@@ -3631,14 +3630,14 @@ function insert(source, start, newStr)
                                                 <img src="/Dashboard/images/ethernet.png" style="width:45px;">
                                             </span>
                                             <h2 class="modal-title" style="display: inline;"> &nbsp;
-                                                Eth Port Information
+                                                LAN Port Information
                                             </h2>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>On this page, you can query the user-side Ethernet port information.
+                                            <p> This page shows the current LAN Port status.
                                             </p>
-                                            <h5>Ethernet Port Status</h5>
+                                            <h5>LAN Port Status</h5>
                                             <table class="table  table-bordered table-striped">
                                                 <tbody>
                                                     <tr>
