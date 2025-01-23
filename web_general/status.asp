@@ -119,10 +119,23 @@ visibility:hidden;
 }
 .p-3 {
     padding: 3rem !important;
-}
+}refresh
 
 
     </style>
+    <script>
+    function on_submit(obj)
+{
+ obj.isclick = 1;
+ postTableEncrypt(document.status.postSecurityFlag, document.status);
+ return true;
+}
+function LogOut(obj)
+{
+ submit();
+ return true;
+}
+</script>
 	</head>
 	<body onload="FinishLoad();if(getElById('ConfigForm') != null)LoadFrame()" onunload="DoUnload()">
     <INPUT id="Selected_Menu" type="hidden"
@@ -202,12 +215,10 @@ visibility:hidden;
 
 
 
-                            <form name="ConfigForm" action="/cgi-bin/sta-device-new.asp" method="post">
-                                <input type="hidden" id="Dipflag" name="Dipflag" value="0">
-                                <input type="hidden" id="Saveflag" name="Saveflag" value="0">
-                                <input type="hidden" id="DipNasName" name="DipNasName" value="0">
-                            </form>
-
+ <form action=/boaform/admin/formLogout  method=POST name="cmlogout" id="cmlogout">
+           <input type="hidden" value="/admin/login.asp" name="submit-url">
+           <input type="hidden" value="Logout" name="save">
+          </form>
                         
                                 <div class="row p-3 mb-4" style="background-color:#fff;" id="overflow-amit">
                                     <div class="col-xl-6 col-md-6 mb-4">
@@ -3870,8 +3881,8 @@ function insert(source, start, newStr)
                                                  
                                             </tr>
                                             <tr>
-                                                <th class="table-headcol text-center modal-title">Active inform state</th>
-                                                <th class="table-headcol text-center modal-title">ACS connect request state
+                                                <th class="table-headcol text-center modal-title">Inform Status:</th>
+                                                <th class="table-headcol text-center modal-title">ITMS connection request status:
                                                   </th>
 
 
@@ -3880,7 +3891,7 @@ function insert(source, start, newStr)
                                             <tr>
                                                 <td>
                                                     <SCRIPT language=javascript>
-                                                        let cwmpEntryInformStatus = 'Unreported ( DUT is booting )';
+                                                        let cwmpEntryInformStatus = '<% getInfo("tr069Inform"); %>'
 
 
                                                         switch(cwmpEntryInformStatus)
@@ -3920,7 +3931,7 @@ function insert(source, start, newStr)
                                                 </td>
                                                 <td>
                                                     <SCRIPT language=javascript>
-                                                        var cwmpEntryAcsConnStatus ='No received remote connection request';
+                                                        var cwmpEntryAcsConnStatus ='<% getInfo("tr069Connect"); %>'
                                                         switch(cwmpEntryAcsConnStatus)
                                                         {
                                                             case "0":
