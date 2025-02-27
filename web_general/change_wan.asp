@@ -246,7 +246,7 @@ function cleanload()
 								
 							 						 
 								
-                                 <FORM name="ConfigForm" id='ConfigForm' action="/web/change_wan.asp" method="post">
+                                 <FORM name="ConfigForm" id='ConfigForm' action="/change_wan.asp" method="post">
 								<div class="white_box">
 									<h1 class="heading_grey"><img src="/Dashboard/images/internet.png" width="45" height="40" class="img_sub" alt=""/> Internet Connection</h1>
 									<div class="container-fluid">
@@ -254,8 +254,9 @@ function cleanload()
 										
                                        
 																				
-<div class="col-md-12 form-group">
-        <h2 class="sub_heading" style="color:#fd7e14;" id="ip_text">WAN Mode</h2>
+
+
+
     <div class="row">
         <div class="col-md-3 custom-radio custom-control" style="margin-left:7px">
         
@@ -444,7 +445,7 @@ function adslConnectionModeSelection() {
                                                                                 </div>
                                                                                 </div>
 
-<div id="tbl_ppp" style="display:none" >
+<div id="tbl_ppp">
       <div class="col-md-12 form-group" >
              <h2 class="sub_heading left-field" style="color:#fd7e14;" >PPP Settings:</h2>
              </div>
@@ -504,7 +505,7 @@ function adslConnectionModeSelection() {
 </div>
 
 </div>
-<div style="display:none" id="tbl_ip">
+<div  id="tbl_ip">
         <div class="col-md-12 form-group" >
              <h2 class="sub_heading left-field" style="color:#fd7e14;" >WAN IP Setting</h2>
              </div>
@@ -582,7 +583,7 @@ function adslConnectionModeSelection() {
                                                       
                                                                                 </div>
                                                         
-                                                        <div id="tbipv6wan" style="display:none">
+                                                        <div id="tbipv6wan">
                                                           <div class="col-md-12 form-group" id="tbipv6wan" >
              <h2 class="sub_heading left-field" style="color:#fd7e14;" >6rd Config:</h2>
              </div>
@@ -613,7 +614,7 @@ function adslConnectionModeSelection() {
 </div>
 </div>
 
-                                 <div id="tbipv6wan" style="display:none">
+                                 <div id="tbipv6wan" >
                                  
                                                         <div class="col-md-12 form-group">
              <h2 class="sub_heading left-field" style="color:#fd7e14; width:230px" >IPv6 WAN Settings:</h2>
@@ -718,11 +719,12 @@ function adslConnectionModeSelection() {
                                                                                                   </div>
                                                                                                   </div>
                                                             </div>
+                                                            </div>
                
                                                                                 <div class="col-md-12 form-group left-field" id="div_pmap">
-                                                                                        <h2 class="sub_heading" style="color:#fd7e14;" >Port Mapping</h2>
+                                                                                        <h2 class="sub_heading" style="color:#fd7e14;">Port Mapping</h2>
                                               
-                                                                              </div
+                                                                            
                                                                                 <div class="form-group row" id="tbl_pmap">
 
                                                                             <div class="col-md-12">
@@ -758,7 +760,7 @@ function adslConnectionModeSelection() {
                                                                                        </div>
                                                                                                                 </div>                                                     
                                                                                
-                                             
+                                             </div>
 
                                                                              <hr style="width: 104.7%;margin-left: -29px;">
                                                                              
@@ -789,6 +791,7 @@ function adslConnectionModeSelection() {
                                                                          <input class="right-field" name="nattype" type="radio" value="NAT4">NAT4 (default)
                                                                          </label>
                                                                                                 </div>
+                                                                                </div>
                                                                                 </div>
                                                                              <hr style="width: 107%;margin-left: -44px;">
                  <div class="btn_ctl">

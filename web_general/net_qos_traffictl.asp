@@ -14,16 +14,28 @@
     <link href="/Dashboard/Modules/leftmenu/css/simple-line-icons.css" rel="stylesheet">
     <link href="/Dashboard/Modules/leftmenu/css/jquery.mCustomScrollbar.css" rel="stylesheet">
     <link href="/Dashboard/css/custom.css" type="text/css" rel="stylesheet">
-      <link href="/css/custom-nav.css" type="text/css" rel="stylesheet">
-
-        <script language="javascript" src="/Dashboard/JS/menu.js"></script>
+    <link href="/css/custom-nav.css" type="text/css" rel="stylesheet">
+    <script language="javascript" src="/Dashboard/JS/menu.js"></script>
      <script language="javascript" src="/Dashboard/JS/util.js"></script>
 <script language="javascript" src="common.js"></script>
 <script type="text/javascript" src="share.js"></script>
 <style>
+ .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+    .table th,
+    .table td {
+        border: 1px solid #dee2e6;
+    }
+    .table thead th {
+        background-color: #e9ecef;
+    }
 .left-field{
     margin-left:-15px;
-    width:195px;
+    width:1248px;
 }
 .right-field{
     margin-left:50px
@@ -126,6 +138,301 @@ function qpolicy_click() {
  bandwidth_defined_check();
 }
 </script>
+<SCRIPT language="javascript" type="text/javascript">
+var dscps = new it_nr("dscplst",
+ new it(0, ""),
+ new it(1, "Default(000000)"),
+ new it(57, "AF13(001110)"),
+ new it(49, "AF12(001100)"),
+ new it(41, "AF11(001010)"),
+ new it(33, "CS1(001000)"),
+ new it(89, "AF23(010110)"),
+ new it(81, "AF22(010100)"),
+ new it(73, "AF21(010010)"),
+ new it(65, "CS2(010000)"),
+ new it(121, "AF33(011110)"),
+ new it(113, "AF32(011100)"),
+ new it(105, "AF31(011010)"),
+ new it(97, "CS3(011000)"),
+ new it(153, "AF43(100110)"),
+ new it(145, "AF42(100100)"),
+ new it(137, "AF41(100010)"),
+ new it(129, "CS4(100000)"),
+ new it(185, "EF(101110)"),
+ new it(161, "CS5(101000)"),
+ new it(193, "CS6(110000)"),
+ new it(225, "CS7(111000)")
+);
+var iffs = new Array("", "LAN_1", "LAN_2", "LAN_3", "LAN_4");
+<!--var protos = new Array("", "ICMP", "TCP", "UDP", "TCP/UDP");-->
+var protos = new Array("", "TCP", "UDP", "ICMP", "TCP/UDP");
+var rules = new Array();
+
+function button_onoff_image(enable)
+{
+ if (enable)
+  return "image src='graphics/button-on.png'";
+ else
+  return "image src='graphics/button-off.png'";
+}
+function button_onoff_html(index, item)
+{
+ var str;
+ str = "<"+button_onoff_image(rules[index].state)+" onClick=on_onoffClick("+index+","+item+"); />";
+ return str;
+}
+function on_chkclick(index)
+{
+ if(index < 0 || index >= rules.length)
+  return;
+ rules[index].select = !rules[index].select;
+}
+function on_onedit(index)
+{
+ if(index < 0 || index >= rules.length)
+  return;
+ window.location.href = "net_qos_cls_edit.asp?rule_index="+rules[index].index+"&rule=" + rules[index].enc();
+}
+function on_onoffClick(index, item)
+{
+ if(index < 0 || index >= rules.length)
+  return;
+ rules[index].state = !rules[index].state;
+ if (rules[index].state != 0)
+  lstrc.rows[index+2].bgColor = "#FFFFFF";
+ else
+  lstrc.rows[index+2].bgColor = "#EEEEEE";
+ lstrc.rows[index+2].cells[item].innerHTML = button_onoff_html(index, item);
+}
+function on_init()
+{
+ if(lstrc.rows){while(lstrc.rows.length > 2) lstrc.deleteRow(2);}
+ for(var i = 0; i < rules.length; i++)
+ {
+  var account = 0;
+  var row = lstrc.insertRow(i + 2);
+  var strprio = "";
+  row.nowrap = true;
+  row.vAlign = "center";
+  row.align = "left";
+  var cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = rules[i].index;
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = rules[i].name;
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = rules[i].qos_order;
+  cell = row.insertCell(account);
+  account = account +1;
+  if (rules[i].mdscp != "0") {
+   cell.innerHTML = "0x"+(rules[i].mdscp-1).toString(16);
+  } else
+   cell.innerHTML = " <br>";
+  cell = row.insertCell(account);
+  account = account +1;
+  if (rules[i].m1p != "0") {
+   cell.innerHTML = rules[i].m1p-1;
+  } else
+   cell.innerHTML = "<br> ";
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = rules[i].prio;
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = rules[i].wanifname;
+  cell = row.insertCell(account);
+  account = account +1;
+  switch(rules[i].ipqos_rule_type)
+  {
+   case 0:
+    cell.innerHTML = "<b>Port Base<br></b>";
+    switch(rules[i].phypt)
+    {
+     case 1:
+      cell.innerHTML += "LAN1<br>";
+      break;
+     case 2:
+      cell.innerHTML += "LAN2<br>";
+      break;
+     case 3:
+      cell.innerHTML += "LAN3<br>";
+      break;
+     case 4:
+      cell.innerHTML += "LAN4<br>";
+      break;
+    }
+    break;
+   case 1:
+    cell.innerHTML = "<b>EtherType Base<br></b>";
+    cell.innerHTML +="0x"+rules[i].ethType;
+    break;
+   case 2:
+    cell.innerHTML = "<b>IP/Protocol Base<br></b>";
+    switch(rules[i].proto)
+    {
+     case 0:
+      break;
+     case 1:
+      cell.innerHTML+= "Protocol: "+ "TCP<br>";
+      break;
+     case 2:
+      cell.innerHTML+= "Protocol: "+ "UDP<br>";
+      break;
+     case 3:
+      cell.innerHTML+= "Protocol: "+ "ICMP<br>";
+      break;
+     case 4:
+      cell.innerHTML+= "Protocol: "+ "TCP/UDP<br>";
+      break;
+    }
+    if(rules[i].dscp == 0)
+     ;
+    else
+      cell.innerHTML+= "DSCP: "+dscps[rules[i].dscp]+"<br>";
+    switch(rules[i].IpProtocolType)
+    {
+     case 1:
+      if(rules[i].sip!= "0.0.0.0")
+       {
+        cell.innerHTML += "Source IP: "+ rules[i].sip+"<br>";
+        cell.innerHTML += "Source Mask: "+ rules[i].smsk+"<br>";
+       }
+      if(rules[i].dip!= "0.0.0.0")
+       {
+        cell.innerHTML += "Destination IP: "+ rules[i].dip+"<br>";
+        cell.innerHTML += "Destination Mask: "+ rules[i].dmsk+"<br>";
+       }
+      break;
+     case 2:
+      if (rules[i].sip6 != "::")
+       {
+        if(rules[i].sip6PrefixLen == "")
+         cell.innerHTML += "Source IP: "+ rules[i].sip6+"<br>";
+        else
+         cell.innerHTML += "Source IP: "+ rules[i].sip6 + "/" + rules[i].sip6PrefixLen+"<br>";
+       }
+      break;
+    }
+    if(rules[i].spts != "0" || rules[i].spte != "0")
+     {
+      cell.innerHTML+= "Source Port: ";
+      if(rules[i].spte == "0")
+       cell.innerHTML+=rules[i].spts + ":"+"<br>";
+      else
+       cell.innerHTML+=rules[i].spts + ":" + rules[i].spte+"<br>";
+     }
+    if(rules[i].dpts != "0" || rules[i].dpte != "0")
+     {
+      cell.innerHTML+= "Destination Port: ";
+      if(rules[i].dpte == "0")
+       cell.innerHTML+=rules[i].dpts + ":"+"<br>";
+      else
+       cell.innerHTML+=rules[i].dpts + ":" + rules[i].dpte+"<br>";
+     }
+    break;
+   case 3:
+    cell.innerHTML = "<b>MAC Address Base<br></b>";
+    cell.innerHTML += "Source MAC: "+ ((rules[i].smac=="00:00:00:00:00:00")?"":rules[i].smac)+"<br>";
+    cell.innerHTML += "Destination MAC:"+ ((rules[i].dmac=="00:00:00:00:00:00")?"":rules[i].dmac)+"<br>";
+    break;
+   case 4:
+    cell.innerHTML = "<b>DHCP Option Base<br></b>";
+    if(typeof rules[i].dhcpopt_type_select !== "undefined")
+    {
+     switch(rules[i].dhcpopt_type_select)
+     {
+      case "0":
+       cell.innerHTML += "Option 60<br>";
+       cell.innerHTML += "Vendor Class ID:"+rules[i].opt60_vendorclass;
+       break;
+      case "1":
+       cell.innerHTML += "Option 61<br>";
+       switch(rules[i].dhcpopt61_DUID_select)
+       {
+        case "0":
+         cell.innerHTML += "DUID Type: DUID_LLT<br>";
+         cell.innerHTML += "IAID: "+rules[i].opt61_iaid+"<br>";
+         cell.innerHTML += "Hardware Type:"+rules[i].duid_hw_type+"<br>";
+         cell.innerHTML += "Time"+rules[i].duid_time+"<br>";
+         cell.innerHTML += "Link-layer Address"+rules[i].duid_mac+"<br>";
+         break;
+        case "1":
+         cell.innerHTML += "DUID Type: DUID_EN<br>";
+         cell.innerHTML += "IAID: "+rules[i].opt61_iaid+"<br>";
+         cell.innerHTML += "Enterprise Number: "+rules[i].duid_ent_num+"<br>";
+         cell.innerHTML += "Identifier: "+rules[i].duid_ent_id+"<br>";
+         break;
+        case "2":
+         cell.innerHTML += "DUID Type: DUID_LL<br>";
+         cell.innerHTML += "IAID: "+rules[i].opt61_iaid+"<br>";
+         cell.innerHTML += "Hardware Type: "+rules[i].duid_hw_type+"<br>";
+         cell.innerHTML += "Link-layer Address: "+rules[i].duid_mac+"<br>";
+         break;
+       }
+       break;
+      case "2":
+       cell.innerHTML += "Option 125<br>";
+       cell.innerHTML += "Enterprise Number: "+rules[i].opt125_ent_num+"<br>";
+       cell.innerHTML += "Manufacturer OUI: "+rules[i].opt125_manufacturer+"<br>";
+       cell.innerHTML += "Product Class: "+rules[i].opt125_product_class+"<br>";
+       cell.innerHTML += "Model Name: "+rules[i].opt125_model+"<br>";
+       cell.innerHTML += "Serial Number: "+rules[i].opt125_serial+"<br>";
+       break;
+     }
+    }
+    break;
+   default:
+    break;
+  }
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.align = "center";
+  cell.innerHTML = "<input type=\"checkbox\" onClick=\"on_chkclick(" + i + ");\">";
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.align = "center";
+  cell.innerHTML = "<input type=\"button\" onClick=\"on_onedit(" + i + ");\" value=\"Edit\">";
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = button_onoff_html(i, account);
+  if (rules[i].state != 0)
+   row.bgColor = "#FFFFFF";
+  else
+   row.bgColor = "#EEEEEE";
+ }
+}
+function rc2string(it)
+{
+ return it.index + "," + Number(it.state) + "," + Number(it.select);
+}
+function on_submit()
+{
+ var tmplst = "";
+ var first = true;
+ if (rules.length == 0)
+  return;
+ with ( document.forms[0] )
+ {
+  for(var i = 0; i < rules.length; i++)
+  {
+   if(first)
+   {
+    first = false;
+   }
+   else
+   {
+    tmplst += "&";
+   }
+   tmplst += rc2string(rules[i]);
+  }
+  lst.value = tmplst;
+  postTableEncrypt(document.forms[0].postSecurityFlag, document.forms[0]);
+  submit();
+ }
+}
+</SCRIPT>
 </head>
 <body onload="FinishLoad();if(getElById('ConfigForm') != null)LoadFrame()" onunload="DoUnload()">
 <INPUT id=Selected_Menu type=hidden 
@@ -166,359 +473,248 @@ function qpolicy_click() {
 									  
 								
 							  							 
-								 <form name="ConfigForm" action="/cgi-bin/net-qos.asp" method="post">
+								 <form name="ConfigForm" action="/net_qos_traffictl.asp" method="post">
 								 <div class="white_box">
-									<h1 class="heading_grey heading_margin"><img src="/Dashboard/images/internet.png" width="45" height="40" class="img_sub" alt=""/> QoS</h1>
+									<h1 class="heading_grey heading_margin">
+									<img src="/Dashboard/images/internet.png" width="45" height="40" class="img_sub" alt=""/> QoS</h1>
 									<div class="container-fluid">
 										<hr class="margin_adjs" />
 				<div class="col-md-12 form-group left-field">
-        <h2 class="sub_heading " style="color:#fd7e14; width:250px" id="ip_text">IP QoS Configuration</h2>
+        <h2 class="sub_heading " style="color:#fd7e14; width:250px">IP QoS Configuration</h2>
 		</div>
-										  <div class="col-md-12 form-group" >
+
+										  <div class="col-md-12 form-group left-field" >
 
                                                   <div class="custom-control custom-radio">
                                                               
-                                                                            <label class="left-field" >IP Qos:</label>
+                                                                            <label  >IP Qos:</label>
                                                                            <input class="right-field" type="radio" name="qosen" value="0" onclick="qosen_click();">Disable
                                                                   <input class="right-field" type="radio" name="qosen" value="1" onclick="qosen_click();">Enable
                                                                                                 </div>
                                                                                 </div>
+                                                                                </div>
       
-            <div class="col-md-12 form-group left-field" id="qosPly">
-         <h2 class="sub_heading " style="color:#fd7e14; width:250px" id="ip_text">QoS Queue Config</h2>
-            
-        <div class="data_common">
-            <div class="col-md-12 form-group">
-                <div class="custom-control">
-                    <p class="left-field">This page is used to configure the QoS policy and Queue. If select PRIO of policy, the lower numbers imply greater precedence. If select WRR of policy, please input the weight of this queue. Default is 40:30:20:10. After configuration, please click 'Apply Changes'</p>
-                </div>
-            </div>
-            <div class="col-md-12 form-group">
-                <div class="custom-control">
-                    <label class="left-field">Policy:</label>
-                    <input type="radio" name="queuepolicy" value="prio" onClick="qpolicy_click();" class="right-field">PRIO
-                    <input type="radio" name="queuepolicy" value="wrr" onClick="qpolicy_click();" class="right-field">WRR
-                </div>
+       <div class="col-md-12 form-group left-field">
+       <div class="custom-control">
+            <h2 class="sub_heading " style="color:#fd7e14; width:259px">QoS Queue Config</p>
             </div>
         </div>
-        <div class="data_common data_vertical">
-            <div class="col-md-12 form-group" id="lstrc">
-                <div class="row hdb" align="center">
-                    <div class="col-md-2">Queue</div>
-                    <div class="col-md-2">Policy</div>
-                    <div class="col-md-2">Priority</div>
-                    <div class="col-md-2">Weight</div>
-                    <div class="col-md-2">Enable</div>
-                </div>
-                <!-- Add rows dynamically using JavaScript -->
-            </div>
+ 
+   <div class="col-md-12 form-group">
+   <div class="custom-control">
+   
+    <p class="left-field">This page is used to configure the QoS policy and Queue. If select PRIO of policy, the lower numbers imply greater precedence. If select WRR of policy, please input the weight of this queue. Default is 40:30:20:10. After configration, please click 'Apply Changes'</p>
+  <div class="col-md-12 form-group">
+    <div class="custom-control">
+        <table class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:-35px;">
+            <thead>
+                <tr>
+                    <th>Policy:</th>
+                    <td><input type="radio" name="queuepolicy" value="prio" onclick="qpolicy_click();" >PRIO</td>
+                    <td><input type="radio" name="queuepolicy" value="wrr" onclick="qpolicy_click();" >WRR</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+  <div class="col-md-12 form-group">
+    <div class="custom-control">
+        <table id="lstrc" class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:-35px;">
+            <thead>
+                <tr class="left-field" align="center">
+                    <th>Queue</th>
+                    <th>Policy</th>
+                    <th>Priority</th>
+                    <th>Weight</th>
+                    <th>Enable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr valign="center" align="center">
+                    <td>Q1</td>
+                    <td><p>WRR</p></td>
+                    <td><input type="text" name="w0" value="40" size="3" class="form-control"></td>
+                    <td><input type="checkbox" name="qen0"></td>
+                </tr>
+                <tr valign="center" align="center">
+                    <td>Q2</td>
+                    <td><p>WRR</p></td>
+                    <td><p>--</p></td>
+                    <td><input type="text" name="w1" value="30" size="3" class="form-control"></td>
+                    <td><input type="checkbox" name="qen1"></td>
+                </tr>
+                <tr valign="center" align="center">
+                    <td>Q3</td>
+                    <td><p>WRR</p></td>
+                    <td><p>--</p></td>
+                    <td><input type="text" name="w2" value="20" size="3" class="form-control"></td>
+                    <td><input type="checkbox" name="qen2"></td>
+                </tr>
+                <tr valign="center" align="center">
+                    <td>Q4</td>
+                    <td><p>WRR</p></td>
+                    <td><p>--</p></td>
+                    <td><input type="text" name="w3" value="10" size="3" class="form-control"></td>
+                    <td><input type="checkbox" name="qen3"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+      <div class="col-md-12 form-group left-field">
+      <div class="custom-control">
+            <h2 class="sub_heading " style="color:#fd7e14; width:259px">QoS Bandwidth Config</p>
+         </div>   
         </div>
-  
-     <div class="col-md-12 form-group left-field" >
-            <h2 class="sub_heading " style="color:#fd7e14; width:250px" id="ip_text">QoS Bandwidth Config</p>
-            
-        </div>
-        <div class="data_common">
+       
             <div class="col-md-12 form-group">
                 <div class="custom-control">
                     <p class="left-field">This part is used to configure the bandwidth of different type of WAN. If select Disable, CPE will select the appropriate bandwidth based on WAN. If select Enable, User is allowed to configure specific bandwidth of WAN.</p>
                 </div>
             </div>
             <div class="col-md-12 form-group">
-                <div class="custom-control">
-                    <label class="left-field">User Defined Bandwidth:</label>
-                    <input type="radio" name="bandwidth_defined" value="0" onClick="bandwidth_defined_check();" class="right-field">Disable
-                    <input type="radio" name="bandwidth_defined" value="1" onClick="bandwidth_defined_check();" class="right-field">Enable
+                <div class="custom-control custom-radio">
+                    <label>User Defined Bandwidth:</label>
+                    <input class="right-field" type="radio" name="bandwidth_defined" value="0" onClick="bandwidth_defined_check();" >Disable
+                    <input class="right-field"  type="radio" name="bandwidth_defined" value="1" onClick="bandwidth_defined_check();">Enable
                 </div>
             </div>
             <div class="col-md-12 form-group">
                 <div class="custom-control">
-                    <label class="left-field">Total Bandwidth Limit:</label>
-                    <input type="text" name="totalbandwidth" id="totalbandwidth" value="1005" class="right-field" style="width:150px">Kb
+                    <label>Total Bandwidth Limit:</label>
+                    <input type="text" name="totalbandwidth" id="totalbandwidth" value="1005" class="right-field">Kb
                 </div>
             </div>
-        </div>
-  
-<div class="btn_ctl">
-    <input class="link_bg button right-field" type="button" value="Apply Changes" onClick="on_save();">
-    <input type="hidden" id="lst" name="lst" value="">
-    <input type="hidden" name="submit-url" value="/net_qos_imq_policy.asp">
-    <input type="hidden" name="postSecurityFlag" value="">
+
+ <div class="col-md-12 form-group left-field">
+                <div class="custom-control">
+   <h2 class="sub_heading " style="color:#fd7e14; width:259px">QoS Classification</h2>
+   </div>
+   </div>
+    <div class="col-md-12 form-group left-field">
+                <div class="custom-control">
+ <p> This page is used to add or delete classicification rule.<font color="red">(After add a new rule, please click 'Apply Changes' to take effect.)</font></p>
+</div>
 </div>
 
-                                        <div class="row col-md-12" id="QOSGlobe">
-                                        <div class="col-md-4 form-group">
-											<label>Uplink Bandwidth:</label>
-                                            <input id=Bandwidth class="form-control" maxlength="10" size="16" value="0" name="Bandwidth">
-											<label>(8192-1000000000)bps</label>
-										</div>
+<div class="col-md-12 form-group">
+    <div class="custom-control">
+        <table id="lstrc" class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:-35px">
+            <thead>
+                <tr>
+                    <th colspan="2">&nbsp;</th>
+                    <th colspan="3" class="text-center">Mark</th>
+                    <th colspan="3">Classification Rules</th>
+                    <th colspan="3" class="text-center">&nbsp;</th>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Order</th>
+                  
+                    <th>DSCP Mark</th>
+                    <th>802.1p</th>
+                    <th>Queue</th>
+                    <th>WanIf</th>
+                    <th>Rule Detail</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Add rows dynamically using JavaScript -->
+            </tbody>
+        </table>
+     
+    </div>
+</div>
+<div class=btn_ctl>
+ <input class=link_bg type="button" class="button" onClick="location.href='net_qos_cls_edit.asp';" value="Add">
 
-                                        <div class="col-md-12 form-group" >
-											<label>Scheduling Policy:</label>
-											<div class="col-md-4 form-group">
-											<div class=" custom-radio custom-control-inline">
-											<!--	  <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-												  <label class="custom-control-label" for="customRadioInline1">PQ</label>-->
-                                                  <input id="Plan" onclick="PlanChange()" type="radio" value="priority" name="Plan" checked/> PQ
-												</div>
-												<div class="custom-control custom-radio custom-control-inline">
-												  <!--<input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-												  <label class="custom-control-label" for="customRadioInline2">WRR</label>-->
-                                                  <INPUT id="Plan" onclick="PlanChange()" type=radio value="weight" name="Plan" /> WRR
-												</div>
-											<div class="custom-control custom-radio custom-control-inline">
-												 <!-- <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
-												  <label class="custom-control-label" for="customRadioInline3">CAR</label>-->
-                                                  <INPUT id="Plan" onclick="PlanChange()"  type=radio value="car" name="Plan" /> CAR
-												</div>
-											</div>
-										</div>
-                                    <div class="col-md-4 form-group" id="EnableForce">
-											<div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="EnableForceWeight" type="checkbox" value="0" name="EnableForceWeight" />
-                                            <label class="custom-control-label" for="EnableForceWeight">Enable Forced Bandwidth:</label>
-                                    <input type="hidden" id="EnableForceFlag" name="EnableForceFlag" value="No"/>
-											</div>
-										</div>
+</div>
+<br>
 
-                                        <div class="col-md-4 form-group">
-											<div class="custom-control custom-checkbox">
-												<label ></label>
-                                       <input id="EnableDSCPMark" type="checkbox"  class="custom-control-input" value="0"  name="EnableDSCPMark" />
-                                    <input type="hidden" id="EnDscpFlag" name="EnDscpFlag" value="No">
-                                            <label class="custom-control-label" for="EnableDSCPMark">Enable DSCP/TC Flag</label>
-                                    <input type="hidden" id="Hidden1" name="EnableForceFlag" value="No"/>
-											</div>
-										</div>
+ <div class="col-md-12 form-group">
+        <div class="custom-control">
+        <h2 class="sub_heading " style="color:#fd7e14; width:340px">Add QoS Classification Rules</h2>
+        <p>This page is used to add a IP QoS classification rule.</p>
+        </div>
+        </div>
 
-										<div class="col-md-4 form-group">
-											<label>Enable 802.1P Flag:</label>
-                                            <SELECT id="Enable8021P" size=1 name="Enable8021P" class="custom-select"> 
-                          <OPTION value="0" selected>0 Flag</OPTION> 
-						  <OPTION value="1" >Transparent Transmission</OPTION> 
-						  <OPTION value="2" >Repeated Mark</OPTION>
-						  </SELECT>
-										</div>
-                                        </div>
-										
-										
-										<div class="col-md-12 form-group" id="COMVlanBtn">
-                                            <INPUT id="COMVlanCls" class="btn orange_border_btn" onclick="VlanSubmit('/cgi-bin/qos-comvlan.asp')" type=button value="Setting VLAN " name="COMVlanCls">
-										</div>
-
-                                        <div class="row col-md-12" id="QueueEdit">
-                                        <div class="col-md-12 table-responsive" id="PQEdit"> 
-										 <TABLE  class="table table-bordered table_text_center">
-                    <TBODY>
-                    <TR>
-                      <th >Queue</th>
-                      <th>Priority</th>
-                      <th >Enable</th>
-                      </TR>
-                    <TR>
-                      <TD>Q1</TD>
-                      <TD>Highest</TD>
-                      <TD>
-                      <div class="custom-control custom-checkbox">
-                       <INPUT  class="custom-control-input" id="Q1Enable" name="Q1Enable" type="checkbox" value="0" checked/>
-                       <label class="custom-control-label" for="Q1Enable"></label>
-											</div>
-                      </TD></TR>
-                    <TR>
-                      <TD >Q2</TD>
-                      <TD>High</TD>
-                      <TD >
-                       <div class="custom-control custom-checkbox">
-                      <INPUT  class="custom-control-input" id="Q2Enable" name="Q2Enable" type="checkbox" value=0 checked/>
-                       <label class="custom-control-label" for="Q2Enable"></label>
-											</div>
-                      </TD></TR>
-                    <TR>
-                      <TD>Q3</TD>
-                      <TD>Middle</TD>
-                      <TD>
-                       <div class="custom-control custom-checkbox">
-                      <INPUT  class="custom-control-input" id="Q3Enable" name="Q3Enable" type="checkbox" value=0 checked/>
-                      <label class="custom-control-label" for="Q3Enable"></label>
-											</div>
-                      </TD></TR>
-                    <TR>
-                      <TD>Q4</TD>
-                      <TD>Low</TD>
-                      <TD>
-                       <div class="custom-control custom-checkbox">
-                      <INPUT   class="custom-control-input" id="Q4Enable" name="Q4Enable" type=checkbox value=0 />
-                         <label class="custom-control-label" for="Q4Enable"></label>
-											</div>
-                      </TD></TR>
-
-					  </TBODY></TABLE>
-										</div>
-
-                                         <div class="col-md-12 table-responsive" id="WRREdit"> 
-                                         <TABLE class="table table-bordered table_text_center">
-                    <TBODY>
-                    <TR>
-                      <th >Queue</th>
-                      <th  >Weight</th>
-                      <th >Enable</th></TR>
-                    <TR>
-                      <TD >Q1</TD>
-                      <TD  ><INPUT class="form-control" id="Q1Weight" name="Q1Weight" size=3 value=""/></TD>
-                      <TD >
-                        <div class="custom-control custom-checkbox">
-                      <INPUT id="Q5Enable" class="custom-control-input" name="Q5Enable" type="checkbox" value=0 checked/>
-                        <label class="custom-control-label" for="Q5Enable"></label>
-											</div>
-                      </TD></TR>
-                    <TR>
-                      <TD >Q2</TD>
-                      <TD ><INPUT class="form-control" id=Q2Weight name="Q2Weight" size=3 value=""/> 
-                      <TD >
-                        <div class="custom-control custom-checkbox">
-                      <INPUT id="Q6Enable" class="custom-control-input" name="Q6Enable" type="checkbox" value=0 checked/>
-                      <label class="custom-control-label" for="Q6Enable"></label></div>
-                      </TD></TR>
-                    <TR>
-                      <TD >Q3</TD>
-                      <TD ><INPUT class="form-control" id=Q3Weight  name="Q3Weight" size=3 value=""/> 
-                      <TD >
-                        <div class="custom-control custom-checkbox">
-                      <INPUT id="Q7Enable" class="custom-control-input" name="Q7Enable" type=checkbox value=0  checked/>
-                        <label class="custom-control-label" for="Q7Enable"></label></div>
-                      </TD></TR>
-                    <TR>
-                      <TD >Q4</TD>
-                      <TD ><INPUT class="form-control" id=Q4Weight name="Q4Weight" size=3 value=""/> 
-                      <TD >
-                        <div class="custom-control custom-checkbox">
-                      <INPUT id=Q8Enable class="custom-control-input" name=Q8Enable type=checkbox value=0 />
-                        <label class="custom-control-label" for="Q8Enable"></label></div>
-                      </TD></TR>
-
-                      </TBODY></TABLE>
-
-                                         </div>
-
-										<div class="col-md-12 table-responsive" > 
-                                        
-                  <div id="CAREdit" style="width:100%">
-                  <TABLE  class="table table-bordered table_text_center">
-                    <TBODY>
-                    <TR>
-                      <th >Queue</th>
-                      <th >Bandwidth:(kbps)</th>
-                      <th  >Enable</th></TR>
-                    <TR>
-                      <TD  >Q1</TD>
-                      <TD ><INPUT class="form-control" id=Q1Car size=3 name="Q1Car" value=""></TD>
-                      <TD >
-                        <div class="custom-control custom-checkbox">
-                      <INPUT id=Q9Enable type=checkbox class="custom-control-input" name="Q9Enable" checked/>
-                        <label class="custom-control-label" for="Q9Enable"></label></div>
-                      </TD></TR>
-                    <TR>
-                      <TD >Q2</TD>
-                      <TD ><INPUT class="form-control" id=Q2Car size=3 name="Q2Car" value=""> 
-                      <TD >
-                        <div class="custom-control custom-checkbox">
-                      <INPUT id=Q10Enable type=checkbox class="custom-control-input" name="Q10Enable" checked/>
-                        <label class="custom-control-label" for="Q10Enable"></label></div>
-                      </TD></TR>
-                    <TR>
-                      <TD >Q3</TD>
-                      <TD ><INPUT class="form-control" id=Q3Car size=3 name="Q3Car" value=""> 
-                      <TD  >
-                        <div class="custom-control custom-checkbox">
-                      <INPUT id=Q11Enable type=checkbox class="custom-control-input" name="Q11Enable" checked/>
-                        <label class="custom-control-label" for="Q11Enable"></label></div>
-                      </TD></TR>
-                    <TR>
-                      <TD >Q4</TD>
-                      <TD ><INPUT class="form-control" id=Q4Car size=3 name="Q4Car" value=""> 
-                      <TD >
-                        <div class="custom-control custom-checkbox">
-                      <INPUT id=Q12Enable type=checkbox class="custom-control-input" name="Q12Enable" />
-                        <label class="custom-control-label" for="Q12Enable"></label></div>
-                      </TD></TR>
-                    <TR>
-                      <TD >Q5</TD>
-                      <TD ><INPUT class="form-control" id=Q5Car size=3 name="Q5Car" value=""> 
-                      <TD  >
-                        <div class="custom-control custom-checkbox">
-                      <INPUT id=Q13Enable type=checkbox class="custom-control-input" name="Q13Enable" />
-                        <label class="custom-control-label" for="Q13Enable"></label></div>
-                      </TD></TR>
-                    <TR>
-                      <TD >Q6</TD>
-                      <TD ><INPUT class="form-control" id=Q6Car size=3 name="Q6Car" value=""> 
-                      <TD  >
-                        <div class="custom-control custom-checkbox">
-                      <INPUT id=Q14Enable type=checkbox class="custom-control-input" name="Q14Enable" />
-                       <label class="custom-control-label" for="Q14Enable"></label></div>
-                      </TD>
-                      </TR>
-
-                      </TBODY></TABLE></DIV>
-                                        </div>
+  <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">RuleName:</label>
+            <input type="text" id="name" size="22"  class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">RuleOrder:</label>
+            <input type="text" id="qos_order" size="22" style="width:200px" class="right-field">
+        </div>
+    </div>
+    
+ <div class="col-md-12 form-group">
+        <div class="custom-control">
+        <h2 class="sub_heading " style="color:#fd7e14; width:400px">Assign IP Precedence/DSCP/802.1p</h2>
+        </div>
+        </div>
+    <div class="data_common">
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Precedence:</label>
+                <select id="prio" size="1" class="right-field">
+                <option value="1">Queue 1</option>
+                <option value="2">Queue 2</option>
+                <option value="3">Queue 3</option>
+                <option value="4">Queue 4</option>
+                <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">DSCP:</label>
+                <select id="mdscp" size="1" class="right-field">
+                <option value="0"></option>
+                <option value="1">default(000000)</option>
+                <option value="33">CS1(001000)</option>
+                <option value="41">AF11(001010)</option>
+                <option value="49">AF12(001100)</option>
+                <option value="57">AF13(001110)</option>
+                <option value="65">CS2(010000)</option>
+                <option value="73">AF21(010010)</option>
+                <option value="81">AF22(010100)</option><option value="89">AF23(010110)</option>
+                <option value="97">CS3(011000)</option><option value="105">AF31(011010)</option>
+                <option value="113">AF32(011100)</option><option value="121">AF33(011110)</option>
+                <option value="129">CS4(100000)</option><option value="137">AF41(100010)</option>
+                <option value="145">AF42(100100)</option><option value="153">AF43(100110)</option>
+                <option value="161">CS5(101000)</option><option value="185">EF(101110)</option>
+                <option value="193">CS6(110000)</option><option value="225">CS7(111000)</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">802.1p:</label>
+                <select id="m1p" size="1" class="right-field">
+                <option value="0"></option>
+                <option value="1">0</option>
+                <option value="2">1</option>
+                <option value="3">2</option>
+                <option value="4">3</option>
+                <option value="5">4</option>
+                <option value="6">5</option>
+                <option value="7">6</option>
+                <option value="8">7</option>
+                </select>
+            </div>
+        </div>
+    </div>                                    
 
                                         </div>
-                                        <div class="row">
-                                            <input type="hidden" id="Q1EnableFlag" name="Q1EnableFlag" value="Yes">
-                            <input type="hidden" id="Q2EnableFlag" name="Q2EnableFlag" value="Yes">
-                            <input type="hidden" id="Q3EnableFlag" name="Q3EnableFlag" value="Yes">
-                            <input type="hidden" id="Q4EnableFlag" name="Q4EnableFlag" value="No">
-                            <input type="hidden" id="Q5EnableFlag" name="Q5EnableFlag" value="No">
-                            <input type="hidden" id="Q6EnableFlag" name="Q6EnableFlag" value="No">
-					
-                            <input type="hidden" id="Q1PValue" name="Q1PValue" value="1">
-                            <input type="hidden" id="Q2PValue" name="Q2PValue" value="2">
-                            <input type="hidden" id="Q3PValue" name="Q3PValue" value="3">
-                            <input type="hidden" id="Q4PValue" name="Q4PValue" value="4">
-                            <input type="hidden" id="Q5PValue" name="Q5PValue" value="5">
-                            <input type="hidden" id="Q6PValue" name="Q6PValue" value="6">
-					
-                            <input type="hidden" id="Entry_Const_0" name="Entry_Const_0" value="0">
-                            <input type="hidden" id="Entry_Const_1" name="Entry_Const_1" value="1">
-                            <input type="hidden" id="Entry_Const_2" name="Entry_Const_2" value="2">
-                            <input type="hidden" id="Entry_Const_3" name="Entry_Const_3" value="3">
-                            <input type="hidden" id="Entry_Const_4" name="Entry_Const_4" value="4">
-                            <input type="hidden" id="Entry_Const_5" name="Entry_Const_5" value="5">
-                            <input type="hidden" id="Entry_Const_6" name="Entry_Const_6" value="6">
-                            <input type="hidden" id="Entry_Const_7" name="Entry_Const_7" value="7">
-                            <input type="hidden" id="Entry_Const_8" name="Entry_Const_8" value="8">
-                            <input type="hidden" id="Entry_Const_9" name="Entry_Const_9" value="9">
-
-                            <input type="hidden" id="Entry_Const_10" name="Entry_Const_10" value="10">
-                            <input type="hidden" id="Entry_Const_11" name="Entry_Const_11" value="11">
-                            <input type="hidden" id="Entry_Const_12" name="Entry_Const_12" value="12">
-                            <input type="hidden" id="Entry_Const_13" name="Entry_Const_13" value="13">
-                            <input type="hidden" id="ReCommitFlg" name="ReCommitFlg" value="-1">
-						 	<input type="hidden" id="TypeRuleFlag" name="TypeRuleFlag" value="typeRule">
-	  						<input type="hidden" id="AppRuleFlag" name="AppRuleFlag" value="appRule">
-	  						<input type="hidden" id="oldDSCP" name="oldDSCP" value="No">
-	  						<input type="hidden" id="old8021P" name="old8021P" value="0">
-	  						<input type="hidden" id="oldActive" name="oldActive" value="Yes">
-	  						<input type="hidden" id="NAValue" name="NAValue" value="N/A">
-                                        </div>
-										<div class="col-md-12 form-group" id="AddBtn">
-       <INPUT  class="btn orange_border_btn" id="AddCls" onclick="VlanSubmit('/cgi-bin/qos-clsedit.asp')" type=button value="Enter the classification edit page" "name=AddCls">
-       <input type="hidden" id="SaveFlag" name="SaveFlag" value="0"> 
-       <SCRIPT language=JavaScript type=text/javascript>
-           CurQoSShow();
-</SCRIPT>
-										</div>
-										
-							      </div>
-										<hr class="margin_adjs" />
-										<div class="form-footer">
-										<button class="btn orange_btn" type="button" onclick="btnSave()" id="btnOK">Save</button>
-										<button class="btn grey_btn" type="button" onclick="RefreshPage()" id="btnCancel" >Cancel</button>	
-										</div>
-								</div>
-							</div>                           
-                             </form>
-						</div>
                         </div>
                     </div>
                 </div>
