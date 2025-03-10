@@ -1,14 +1,39 @@
-<% SendWebHeadStr();%>
-<title><% multilang("163" "LANG_WLAN_ADVANCED_SETTINGS"); %></title>
+
+<!DOCTYPE html>
+<! Copyright (c) Realtek Semiconductor Corp., 2003. All Rights Reserved. ->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<meta HTTP-equiv="Cache-Control" content="no-cache">
+<link href="/Dashboard/Modules/leftmenu/css/scoop-vertical.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="/Dashboard/css/bootstrap.min.css" type="text/css">
+<link href="/Dashboard/Modules/leftmenu/css/simple-line-icons.css" type="text/css" rel="stylesheet">
+<link href="/Dashboard/Modules/leftmenu/css/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet">
+<link href="/Dashboard/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/css/custom-nav.css" type="text/css" rel="stylesheet">
+
+<!-- JavaScript Files -->
+<script src="/Dashboard/JS/jquery.js"></script>
+<script src="/Dashboard/JS/menu.js"></script>
+<script src="/Dashboard/JS/util.js"></script>
+<script src="/Dashboard/JS/printtable.js"></script>
+<link rel="stylesheet" href="/admin/reset.css">
+<link rel="stylesheet" href="/admin/base.css">
+<link rel="stylesheet" href="/admin/style.css">
+<script language="javascript" src="common.js"></script>
+<script type="text/javascript" src="share.js"></script>
+
+<title>WLAN Advanced Settings</title>
 <script type="text/javascript" src="base64_code.js"></script>
 <SCRIPT>
-var rootBand=<% checkWrite("band"); %>;
-var is_wlan_qtn = <% checkWrite("is_wlan_qtn"); %>;
+var rootBand=75;
+var is_wlan_qtn = 0;
 function validateNum(str)
 {
   for (var i=0; i<str.length; i++) {
     if ( !(str.charAt(i) >='0' && str.charAt(i) <= '9')) {
-  alert("<% multilang("2501" "LANG_INVALID_VALUE_IT_SHOULD_BE_IN_DECIMAL_NUMBER_0_9"); %>");
+  alert("Invalid value. It should be in decimal number (0-9).");
   return false;
    }
   }
@@ -22,7 +47,7 @@ function saveChanges(obj)
   }
   num = parseInt(document.advanceSetup.fragThreshold.value);
   if (document.advanceSetup.fragThreshold.value == "" || num < 256 || num > 2346) {
-   alert("<% multilang("2502" "LANG_INVALID_VALUE_OF_FRAGMENT_THRESHOLD_INPUT_VALUE_SHOULD_BE_BETWEEN_256_2346_IN_DECIMAL"); %>");
+   alert("Invalid value of Fragment Threshold. Input value should be between 256-2346 in decimal.");
    document.advanceSetup.fragThreshold.focus();
  return false;
   }
@@ -32,7 +57,7 @@ function saveChanges(obj)
   }
   num = parseInt(document.advanceSetup.rtsThreshold.value);
   if (document.advanceSetup.rtsThreshold.value=="" || num > 2347) {
-   alert("<% multilang("2503" "LANG_INVALID_VALUE_OF_RTS_THRESHOLD_INPUT_VALUE_SHOULD_BE_BETWEEN_0_2347_IN_DECIMAL"); %>");
+   alert("Invalid value of RTS Threshold. Input value should be between 0-2347 in decimal.");
    document.advanceSetup.rtsThreshold.focus();
  return false;
   }
@@ -42,13 +67,13 @@ function saveChanges(obj)
   }
   num = parseInt(document.advanceSetup.beaconInterval.value);
   if (document.advanceSetup.beaconInterval.value=="" || num < 20 || num > 1024) {
-   alert("<% multilang("2504" "LANG_INVALID_VALUE_OF_BEACON_INTERVAL_INPUT_VALUE_SHOULD_BE_BETWEEN_20_1024_IN_DECIMAL"); %>");
+   alert("Invalid value of Beacon Interval. Input value should be between 20-1024 in decimal.");
    document.advanceSetup.beaconInterval.focus();
  return false;
   }
   num = parseInt(document.advanceSetup.dtimPeriod.value);
   if (document.advanceSetup.dtimPeriod.value=="" || num < 1 || num > 255) {
- alert("<% multilang("2505" "LANG_INVALID_VALUE_OF_DTIM_PRERIOD_INPUT_VALUE_SHOULD_BE_BETWEEN_1_255_IN_DECIMAL"); %>");
+ alert("Invalid value of DTIM Period. Input value should be between 1-255 in decimal.");
    document.advanceSetup.dtimPeriod.focus();
  return false;
   }
@@ -129,39 +154,139 @@ function updateState()
   }
 }
 </SCRIPT>
+<style>
+.form-group {
+    margin-bottom: 1rem;
+}
+.custom-control {
+    position: relative;
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.5rem;
+}
+.form-group label {
+    color: #584848;
+    font-size: 13px;
+    line-height: 22px;
+}
+.left-field {
+    margin-left: -10px;
+    width: 143px;
+}
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+.right-field {
+    margin-left: 178px;
+    padding: 2px;
+    width: 248px;
+}
+.right-field-radio{
+    margin-left:165px;
+    width:33px; 
+    padding:2px
+}
+.margin_adjs {
+    margin-right: -29px;
+    margin-left: -29px;
+}
+
+</style>
+</head>
 <body>
-<div class="intro_main ">
- <p class="intro_title"><% multilang("163" "LANG_WLAN_ADVANCED_SETTINGS"); %></p>
- <p class="intro_content"><% multilang("164" "LANG_PAGE_DESC_WLAN_ADVANCE_SETTING"); %></p>
+<INPUT id="Selected_Menu" type="hidden" 
+            value="Wireless->WiFi" name="Net_Wlan">
+    <div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left"
+        vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact"
+        vertical-effect="shrink" vnavigation-view="view1">
+        <div class="scoop-overlay-box">
+        </div>
+        <div class="scoop-container">
+            <div class="scoop-main-container">
+                <div class="scoop-wrapper">
+                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
+                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
+							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+							<div class="scoop-inner-navbar"> 
+								<div class="scoop-logo"> 
+								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/logo.png" class="img-fluid" alt=""/></span></a>
+							</div> 
+							    <div id="LeftMenu">
+							        <SCRIPT language=javascript>
+							        MakeLeftMenu("Wireless","WiFi");
+							        </SCRIPT>
+							    </div>
+							</div> 
+						</nav>
+                    <div class="scoop-content">
+                        <div id="Header">
+                            <SCRIPT language=javascript>
+                            MakeHeader('Gateway Name:','Gateway Type:','Wi-Fi',"Wi-Fi 2.4G",'Welcome!','#');
+                            </SCRIPT>
+                        </div>
+                        <div class="">
+                            
+
+                             
+                               <div class="scoop-inner-content">								 
+				
+                	<div class="white_box" name="CwmpConfig">
+                  <h1 class="heading_grey heading_margin"><img src="/Dashboard/images/wi-fi.png" width="45" height="40" class="img_sub" alt=""/> WLAN Advanced Settings</h1>
+                  <div class="container-fluid">
+                                    <hr class="margin_adjs" />
+									<div class="row">
+										    <div class="col-md-12 form-group left-field-para">
+            <div class="custom-control">
+
+ <p>These settings are only for more technically advanced users who have a sufficient knowledge about WLAN. These settings should not be changed unless you know what effect the changes will have on your Access Point.</p>
+ </div>
 </div>
 <form action=/boaform/admin/formAdvanceSetup method=POST name="advanceSetup">
  <div class="data_common data_common_notitle">
  <table>
-  <input type=hidden name="wlanDisabled" value=<% wlanStatus(); %>>
-     <tr <% checkWrite("wlan_qtn_hidden_function"); %>>
-       <th width="30%"><% multilang("165" "LANG_FRAGMENT_THRESHOLD"); %>:</th>
-       <td width="70%"><input type="text" name="fragThreshold" size="10" maxlength="4" value=<% getInfo("fragThreshold"); %>>(256-2346)</td>
-     </tr>
-     <tr>
-       <th width="30%"><% multilang("166" "LANG_RTS_THRESHOLD"); %>:</th>
-       <td width="70%"><input type="text" name="rtsThreshold" size="10" maxlength="4" value=<% getInfo("rtsThreshold"); %>>(0-2347)</td>
-     </tr>
-     <tr>
-       <th width="30%"><% multilang("167" "LANG_BEACON_INTERVAL"); %>:</th>
-       <td width="70%"><input type="text" name="beaconInterval" size="10" maxlength="4" value=<% getInfo("beaconInterval"); %>> (20-1024 <% multilang("978" "LANG_MS"); %>)</td>
-     </tr>
-     <tr>
-       <th width="30%"><% multilang("172" "LANG_DTIM_PERIOD"); %>:</th>
-       <td width="70%"><input type="text" name="dtimPeriod" size="10" maxlength="4" value=<% getInfo("dtimPeriod"); %>> (1-255)</td>
-     </tr>
-     <tr>
-       <th width="30%"><% multilang("168" "LANG_DATA_RATE"); %>:</th>
-       <td width="70%"><select size="1" name="txRate">
+  <input type=hidden name="wlanDisabled" value="OFF">
+      <div class="data_common">
+       <div class="col-md-12 form-group">
+       <div class="custom-control">
+       <label class="left-field">Fragment Threshold:</label>
+       <input type="text" name="fragThreshold" size="10" maxlength="4" value="2346" class="right-field custom-select" >(256-2346)
+       
+       </div>
+       </div>
+    
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">RTS Threshold:</label>
+            <input type="text" class="right-field custom-select"  name="rtsThreshold" size="10" maxlength="4" value=2347>(0-2347)
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+    <div class="custom-control">
+        <label class="left-field">Beacon Interval:</label>
+       <input type="text"  class="right-field custom-select" name="beaconInterval" size="10" maxlength="4" value=100> (20-1024 ms)</input>
+   </div>
+   </div>
+     <div class="col-md-12 form-group">
+       <div class="custom-control">
+       <label class="left-field">DTIM Period:</label>
+       <input type="text" class="right-field custom-select"  name="dtimPeriod" size="10" maxlength="4" value=1> (1-255)</input>
+       </div>
+       </div>
+      <div class="col-md-12 form-group">
+       <div class="custom-control">
+       <label class="left-field">Data Rate:</label>
+       <select  class="right-field custom-select" size="1" name="txRate">
     <SCRIPT>
-     <% checkWrite("wl_txRate"); %>
+     band=76
+txrate=1
+auto=1
+chanwid=2
+rf_num=2
+
      if(!is_wlan_qtn){
       rate_mask = [31,1,1,1,1,2,2,2,2,2,2,2,2,4,4,4,4,4,4,4,4,8,8,8,8,8,8,8,8,16,16,16,16,16,16,16,16];
-      rate_name =["<% multilang("169" "LANG_AUTO"); %>","1M","2M","5.5M","11M","6M","9M","12M","18M","24M","36M","48M","54M", "MCS0", "MCS1",
+      rate_name =["Auto","1M","2M","5.5M","11M","6M","9M","12M","18M","24M","36M","48M","54M", "MCS0", "MCS1",
        "MCS2", "MCS3", "MCS4", "MCS5", "MCS6", "MCS7", "MCS8", "MCS9", "MCS10", "MCS11", "MCS12", "MCS13", "MCS14", "MCS15",
        "MCS16", "MCS17", "MCS18", "MCS19", "MCS20", "MCS21", "MCS22", "MCS23"];
       vht_rate_name=["NSS1-MCS0","NSS1-MCS1","NSS1-MCS2","NSS1-MCS3","NSS1-MCS4",
@@ -220,7 +345,7 @@ function updateState()
      }
      else{
       idx=0, i=0;
-      document.write('<option value="' + (i) + '">' +'<% multilang("169" "LANG_AUTO"); %>'+ '\n');
+      document.write('<option value="' + (i) + '">' +'Auto'+ '\n');
       idx++;
       defidx=0;
       if ((band & 8) || (band&4)) {
@@ -247,11 +372,11 @@ function updateState()
      }
     </SCRIPT>
    </select>
-      </td>
-    </tr>
+      </div>
+      </div>
    <!-- for WiFi test, start --
      <tr>
-       <td width="30%"><font size=2><b><% multilang("170" "LANG_TX_OPERATION_RATE"); %>:</b></td>
+       <td width="30%"><font size=2><b>Tx Operation Rate:</b></td>
        <td width="70%"><font size=2>
          <input type="checkbox" name="operRate1M" value="1M">1M&nbsp;&nbsp;&nbsp;
          <input type="checkbox" name="operRate2M" value="2M">2M&nbsp;&nbsp;
@@ -269,7 +394,7 @@ function updateState()
         </td>
      </tr>
      <tr>
-       <td width="30%"><font size=2><b><% multilang("171" "LANG_TX_BASIC_RATE"); %>:</b></td>
+       <td width="30%"><font size=2><b>Tx Basic Rate:</b></td>
        <td width="70%"><font size=2>
          <input type="checkbox" name="basicRate1M" value="1M">1M&nbsp;&nbsp;&nbsp;
          <input type="checkbox" name="basicRate2M" value="2M">2M&nbsp;&nbsp;
@@ -287,23 +412,151 @@ function updateState()
          </td>
       </tr>
       <tr>
-        <td width="30%"><font size=2><b><% multilang("172" "LANG_DTIM_PERIOD"); %>:</b></td>
-        <td width="70%"><font size=2><input type="text" name="dtimPeriod" size="5" maxlength="3" value=<% getInfo("dtimPeriod"); %>>(1-255)</td>
+        <td width="30%"><font size=2><b>DTIM Period:</b></td>
+        <td width="70%"><font size=2><input type="text" name="dtimPeriod" size="5" maxlength="3" value=1>(1-255)</td>
       </tr>
   -- for WiFi test, end -->
-       <% write_wladvanced(); %>
-    <% ShowWmm(); %>
-    <% ShowDot11k_v(); %>
-    <% extra_wladvanced(); %>
-   </table>
+     <div class="col-md-12 form-group">
+        <div class="custom-control">
+  
+        <label class="left-field">Preamble Type:</label>
+
+<input class="right-field-radio" type="radio" value="long" name="preamble">Long Preamble
+<input class="right-field-radio" style="margin-left:125px;" type="radio" name="preamble" value="short">Short Preamble
+</div>
+</div>
+<div class="col-md-12 form-group">
+        <div class="custom-control">
+  <label class="left-field">Broadcast SSID:</label>
+<input class="right-field-radio" type="radio" name="hiddenSSID" value="no">Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name="hiddenSSID" value="yes" onClick="alert('If you disable this, WPS will be disabled!')">Disabled
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control">
+   <label class="left-field">Relay Blocking:</label>
+<input class="right-field-radio" type="radio" name=block value=1>Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name=block value=0>disabled
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control">
+<label class="left-field">Protection:</label>
+<input class="right-field-radio" type="radio" name="protection" value="yes">Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name="protection" value="no">disabled
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control">
+<label class="left-field">Aggregation:</label>
+<input class="right-field-radio" type="radio" name="aggregation" value="enable">Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name="aggregation" value="disable">Disabled
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control">
+<label  class="left-field">Short GI:</label>
+<input class="right-field-radio" type="radio" name="shortGI0" value="on">Enabled&nbsp;&nbsp;
+<input  class="right-field-radio"  type="radio" name="shortGI0" value="off">disabled
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control">
+<label class="left-field" id="txbf_div">TX beamforming:</label>
+<input class="right-field-radio" type="radio" name="txbf" value=1 onClick='wltxbfChange()'>Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name="txbf" value=0 onClick='wltxbfChange()'>Disabled
+</div>
+</div>
+
+<div class="col-md-12 form-group">
+<div class="custom-control">
+<label class="left-field" id="txbf_mu_div">MU MIMO: </label>
+<input class="right-field-radio" type="radio" name="txbf_mu" value=1>Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name="txbf_mu" value=0>disabled
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control">
+<label class="left-field">Multicast to Unicast:</label>
+<input class="right-field-radio" type="radio" name="mc2u_disable" value=0>Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name="mc2u_disable" value=1>Disabled
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control">
+<label class="left-field">Band Steering:</label>
+<input class="right-field-radio" type="radio" name="sta_control" value=1 onChange='stactrlPreBandChange()'>Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name="sta_control" value=0 onChange='stactrlPreBandChange()'>Disabled
+<select class="right-field custom-select" size="1" name="stactrl_prefer_band">
+<option value="0">Prefer 5GHz</option>
+<option value="1">Prefer 2.4GHz</option>
+</select>   
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control" id="sta_high">
+<label class="left-field">Band Steering RSSI Threshold(5G):</label>
+<input class="right-field-radio" type="text" name="RssiThHigh" size="10" maxlength="4">-(0-100) dBm
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control" id="sta_low">
+<label class="left-field">Band Steering RSSI Threshold(2.4G):</label>
+<input class="right-field-radio" type="text" name="RssiThLow" size="10" maxlength="4">-(0-100) dBm
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control">
+<label class="left-field">WMM Support:</label>
+<input class="right-field-radio" type="radio" name=WmmEnabled value=1>Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name=WmmEnabled value=0>Disabled
+</div>
+</div>
+<div class="col-md-12 form-group">
+<div class="custom-control">
+<label class="left-field">802.11k Support:</label>
+<input class="right-field-radio" type="radio" name=dot11kEnabled value=1 onClick='wlDot11kChange()'>Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name=dot11kEnabled value=0 onClick='wlDot11kChange()'>Disabled
+</div>
+</div>
+<div class="col-md-12 form-group" id="dot11v"  style="display:none">
+<div class="custom-control">
+<label class="left-field">802.11v Support:</label>
+<input class="right-field-radio" type="radio" name=dot11vEnabled value=1>Enabled&nbsp;&nbsp;
+<input class="right-field-radio" type="radio" name=dot11vEnabled value=0>Disabled
+</div>
+</div>
+</table>
+  <hr class="margin_adjs" style="margin-left: -16px;width: 160%;">
   </div>
-  <div class="btn_ctl">
-   <input type="submit" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>" name="save" onClick="return saveChanges(this)" class="link_bg">&nbsp;&nbsp;
+  <div class="btn_ctl form-footer">
+   <input type="submit" value="Apply Changes" name="save" onClick="return saveChanges(this)" class="link_bg btn orange_btn" style="margin-right:-478px;">&nbsp;&nbsp;
    <input type="hidden" value="/admin/wladvanced.asp" name="submit-url">
-   <input type="hidden" value=<% checkWrite("wlan_idx"); %> name="wlan_idx">
+   <input type="hidden" value=0 name="wlan_idx">
    <input type="hidden" name="postSecurityFlag" value="">
    <script>
-    <% initPage("wladv"); %>
+    document.advanceSetup.preamble[0].checked = true;
+document.advanceSetup.hiddenSSID[0].checked = true;
+document.advanceSetup.block[1].checked = true;
+document.advanceSetup.protection[1].checked = true;
+document.advanceSetup.aggregation[0].checked = true;
+document.advanceSetup.shortGI0[0].checked = true;
+document.advanceSetup.txbf[0].checked = true;
+document.advanceSetup.txbf_mu[1].checked = true;
+document.advanceSetup.mc2u_disable[0].checked = true;
+document.advanceSetup.WmmEnabled[0].checked = true;
+document.advanceSetup.dot11kEnabled[0].checked = true;
+document.advanceSetup.dot11vEnabled[0].checked = true;
+document.advanceSetup.sta_control[1].checked = true;
+document.advanceSetup.stactrl_prefer_band.selectedIndex = 0;
+document.advanceSetup.RssiThHigh.value = -50;
+document.advanceSetup.RssiThLow.value = -65;
+document.advanceSetup.sta_control[0].disabled = true;
+document.advanceSetup.sta_control[1].disabled = true;
+document.advanceSetup.stactrl_prefer_band.disabled = true;
+document.advanceSetup.RssiThHigh.disabled = true;
+document.advanceSetup.RssiThLow.disabled = true;
+
     updateState();
     wltxbfChange();
     wlDot11kChange();
@@ -311,6 +564,14 @@ function updateState()
    </script>
   </div>
  </form>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div class="text-center p-3" style="background-color: rgb(235 234 234 / 20%);">
+&copy; 2022-2025 Copyright :
+<a class="text-white" style="color:#fd7e14 !important;" href="#">Syrotech Networks Pvt. Ltd.</a>
+</div>
 <br><br>
 </body>
 </html>

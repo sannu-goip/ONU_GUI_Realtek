@@ -1,5 +1,30 @@
-<% SendWebHeadStr();%>
-<title><% multilang("199" "LANG_WLAN_SECURITY_SETTINGS"); %></title>
+
+<!DOCTYPE html>
+<! Copyright (c) Realtek Semiconductor Corp., 2003. All Rights Reserved. ->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<meta HTTP-equiv="Cache-Control" content="no-cache">
+<link rel="stylesheet" href="/admin/reset.css">
+<link rel="stylesheet" href="/admin/base.css">
+<link rel="stylesheet" href="/admin/style.css">
+<script language="javascript" src="common.js"></script>
+<script type="text/javascript" src="share.js"></script>
+<link href="/Dashboard/Modules/leftmenu/css/scoop-vertical.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="/Dashboard/css/bootstrap.min.css" type="text/css">
+<link href="/Dashboard/Modules/leftmenu/css/simple-line-icons.css" type="text/css" rel="stylesheet">
+<link href="/Dashboard/Modules/leftmenu/css/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet">
+<link href="/Dashboard/css/custom.css" type="text/css" rel="stylesheet">
+<link href="/css/custom-nav.css" type="text/css" rel="stylesheet">
+
+<!-- JavaScript Files -->
+<script src="/Dashboard/JS/jquery.js"></script>
+<script src="/Dashboard/JS/menu.js"></script>
+<script src="/Dashboard/JS/util.js"></script>
+<script src="/Dashboard/JS/printtable.js"></script>
+
+<title>WLAN Security Settings</title>
 <style>
 .on {display:on}
 .off {display:none}
@@ -8,7 +33,7 @@
 <script>
 var defPskLen, defPskFormat;
 var wps20, ssid_num;
-var wps20_use_version=<% getInfo("wpsUseVersion"); %>;
+var wps20_use_version=1;
 var oldMethod;
 var wlanMode;
 var _wlan_mode=new Array();
@@ -30,13 +55,13 @@ var _wepAuth=new Array();
 var _wepLen=new Array();
 var _wepKeyFormat=new Array();
 var _wlan_isNmode=new Array();
-var new_wifi_sec=<% checkWrite("new_wifi_security"); %>;
-var support_11w=<% checkWrite("11w_support"); %>;
+var new_wifi_sec=0;
+var support_11w=1;
 var _dotIEEE80211W=new Array();
 var _sha256=new Array();
-var is_wlan_qtn = <% checkWrite("is_wlan_qtn"); %>;
+var is_wlan_qtn = 0;
 var wepkeyform;
-var is_radius_2set = <% checkWrite("is_wlan_radius_2set"); %>;
+var is_radius_2set = 1;
 function show_8021x_settings()
 {
  var security = get_by_id("security_method");
@@ -162,7 +187,7 @@ function show_authentication()
  var enable_1x = get_by_id("use1x");
  var form1 = document.formEncrypt ;
  if (wlanMode==1 && security.value == 6) {
-  alert("<% multilang("2538" "LANG_NOT_ALLOWED_FOR_THE_CLIENT_MODE"); %>");
+  alert("Not allowed for the Client mode.");
   security.value = oldMethod;
   return false;
  }
@@ -380,7 +405,7 @@ function check_wepkey()
   keyLen = 26;
  }
  if (form.key0.value.length != keyLen) {
-  alert('<% multilang("2539" "LANG_INVALID_LENGTH_OF_KEY_VALUE"); %>');
+  alert('Invalid length of Key value.');
   form.key0.focus();
   return 0;
  }
@@ -391,7 +416,7 @@ function check_wepkey()
   if(wepkeyform==form.format0.value)
    return 1;
   else{
-   alert("<% multilang("2532" "LANG_INVALID_KEY_VALUE"); %>");
+   alert("Invalid Key Value. ");
    form.key0.focus();
    return 0;
   }
@@ -403,7 +428,7 @@ function check_wepkey()
    (form.key0.value.charAt(i) >= 'a' && form.key0.value.charAt(i) <= 'f') ||
    (form.key0.value.charAt(i) >= 'A' && form.key0.value.charAt(i) <= 'F') )
    continue;
-  alert("<% multilang("2533" "LANG_INVALID_KEY_VALUE_IT_SHOULD_BE_IN_HEX_NUMBER_0_9_OR_A_F"); %>");
+  alert("Invalid key value. It should be in hex number (0-9 or a-f).");
   form.key0.focus();
   return 0;
  }
@@ -416,18 +441,18 @@ function check_rs()
   return false;
  }
  if (form.radiusPort.value=="") {
-  alert("<% multilang("2540" "LANG_RADIUS_SERVER_PORT_NUMBER_CANNOT_BE_EMPTY_IT_SHOULD_BE_A_DECIMAL_NUMBER_BETWEEN_1_65535"); %>");
+  alert("RADIUS Server port number cannot be empty! It should be a decimal number between 1-65535.");
   form.radiusPort.focus();
   return false;
    }
  if (validateKey(form.radiusPort.value)==0) {
-  alert("<% multilang("2540" "LANG_RADIUS_SERVER_PORT_NUMBER_CANNOT_BE_EMPTY_IT_SHOULD_BE_A_DECIMAL_NUMBER_BETWEEN_1_65535"); %>");
+  alert("RADIUS Server port number cannot be empty! It should be a decimal number between 1-65535.");
   form.radiusPort.focus();
   return false;
  }
         port = parseInt(form.radiusPort.value, 10);
   if (port > 65535 || port < 1) {
-  alert("<% multilang("2541" "LANG_INVALID_PORT_NUMBER_OF_RADIUS_SERVER_IT_SHOULD_BE_A_DECIMAL_NUMBER_BETWEEN_1_65535"); %>");
+  alert("Invalid port number of RADIUS Server! It should be a decimal number between 1-65535.");
   form.radiusPort.focus();
   return false;
    }
@@ -437,18 +462,18 @@ function check_rs()
     return false;
    }
    if (form.radius2Port.value=="") {
-    alert("<% multilang("2540" "LANG_RADIUS_SERVER_PORT_NUMBER_CANNOT_BE_EMPTY_IT_SHOULD_BE_A_DECIMAL_NUMBER_BETWEEN_1_65535"); %>");
+    alert("RADIUS Server port number cannot be empty! It should be a decimal number between 1-65535.");
     form.radius2Port.focus();
     return false;
      }
    if (validateKey(form.radius2Port.value)==0) {
-    alert("<% multilang("2540" "LANG_RADIUS_SERVER_PORT_NUMBER_CANNOT_BE_EMPTY_IT_SHOULD_BE_A_DECIMAL_NUMBER_BETWEEN_1_65535"); %>");
+    alert("RADIUS Server port number cannot be empty! It should be a decimal number between 1-65535.");
     form.radiusPort.focus();
     return false;
    }
           port = parseInt(form.radius2Port.value, 10);
     if (port > 65535 || port < 1) {
-    alert("<% multilang("2541" "LANG_INVALID_PORT_NUMBER_OF_RADIUS_SERVER_IT_SHOULD_BE_A_DECIMAL_NUMBER_BETWEEN_1_65535"); %>");
+    alert("Invalid port number of RADIUS Server! It should be a decimal number between 1-65535.");
     form.radius2Port.focus();
     return false;
      }
@@ -467,7 +492,7 @@ function saveChanges(obj)
   if (check_rs() == false)
      return false;
    }
-   alert("<% multilang("2542" "LANG_WARNING_SECURITY_IS_NOT_SETTHIS_MAY_BE_DANGEROUS"); %>");
+   alert("Warning : security is not set!this may be dangerous!");
   }
   else if (form.security_method.value == 1) {
    if (form.use1x.checked == false) {
@@ -479,59 +504,59 @@ function saveChanges(obj)
      return false;
    }
  if (wps20 && wps20_use_version!=0 && form.wpaSSID.value==0)
-  alert("<% multilang("2543" "LANG_INFO_WPS_WILL_BE_DISABLED_WHEN_USING_WEP"); %>");
+  alert("Info : WPS will be disabled when using WEP!");
   }
   else if (form.security_method.value == 2 || form.security_method.value == 4 || form.security_method.value == 6) {
     if (form.security_method.value == 2) {
      if(form.ciphersuite_t.checked == false && form.ciphersuite_a.checked == false )
   {
-   alert("<% multilang("2544" "LANG_WPA_CIPHER_SUITE_CAN_NOT_BE_EMPTY"); %>");
+   alert("WPA Cipher Suite can not be empty.");
    return false;
   }
   if (form.isNmode.value == 1 && form.ciphersuite_t.checked == true && form.ciphersuite_a.checked == true)
   {
-   alert("<% multilang("2545" "LANG_CAN_NOT_SELECT_TKIP_AND_AES_IN_THE_SAME_TIME"); %>");
+   alert("Can not select TKIP and AES in the same time.");
    return false;
   }
   if (wps20 && wps20_use_version!=0 && form.wpaSSID.value==0)
-   alert("<% multilang("2546" "LANG_INFO_WPS_WILL_BE_DISABLED_WHEN_USING_WPA_ONLY"); %>");
+   alert("Info : WPS will be disabled when using WPA only!");
     }
     if (form.security_method.value == 4) {
      if(form.wpa2ciphersuite_t.checked == false && form.wpa2ciphersuite_a.checked == false )
   {
-   alert("<% multilang("2547" "LANG_WPA2_CIPHER_SUITE_CAN_NOT_BE_EMPTY"); %>");
+   alert("WPA2 Cipher Suite can not be empty.");
    return false;
   }
   if (form.isNmode.value == 1 && form.wpa2ciphersuite_t.checked == true && form.wpa2ciphersuite_a.checked == true)
   {
-   alert("<% multilang("2545" "LANG_CAN_NOT_SELECT_TKIP_AND_AES_IN_THE_SAME_TIME"); %>");
+   alert("Can not select TKIP and AES in the same time.");
    return false;
   }
   if (form.wpa2ciphersuite_t.checked == true) {
    if (wps20 && wps20_use_version!=0 && form.wpaSSID.value==0 && form.wpa2ciphersuite_a.checked == false)
-    alert("<% multilang("2548" "LANG_INFO_WPS_WILL_BE_DISABLED_WHEN_USING_TKIP_ONLY"); %>");
+    alert("Info : WPS will be disabled when using TKIP only!");
   }
     }
  if (form.security_method.value == 6) {
   if(wlanMode == 1 && ((form.ciphersuite_t.checked == true && form.ciphersuite_a.checked == true)
    || (form.wpa2ciphersuite_t.checked == true && form.wpa2ciphersuite_a.checked == true)))
   {
-   alert("<% multilang("2549" "LANG_IN_THE_CLIENT_MODE_YOU_CAN_T_SELECT_TKIP_AND_AES_IN_THE_SAME_TIME"); %>");
+   alert("In the Client mode, you can not select TKIP and AES in the same time.");
    return false;
   }
      if(form.ciphersuite_t.checked == false && form.ciphersuite_a.checked == false )
   {
-   alert("<% multilang("2544" "LANG_WPA_CIPHER_SUITE_CAN_NOT_BE_EMPTY"); %>");
+   alert("WPA Cipher Suite can not be empty.");
    return false;
   }
   if(form.wpa2ciphersuite_t.checked == false && form.wpa2ciphersuite_a.checked == false )
   {
-   alert("<% multilang("2547" "LANG_WPA2_CIPHER_SUITE_CAN_NOT_BE_EMPTY"); %>");
+   alert("WPA2 Cipher Suite can not be empty.");
    return false;
   }
   if (wps20 && wps20_use_version!=0 && form.wpaSSID.value==0 && form.ciphersuite_t.checked == true && form.wpa2ciphersuite_t.checked == true
    && form.ciphersuite_a.checked == false && form.wpa2ciphersuite_a.checked == false)
-   alert("<% multilang("2548" "LANG_INFO_WPS_WILL_BE_DISABLED_WHEN_USING_TKIP_ONLY"); %>");
+   alert("Info : WPS will be disabled when using TKIP only!");
     }
  if(wpaAuth[0].checked){
   if(check_rs()==false)
@@ -540,7 +565,7 @@ function saveChanges(obj)
  var str = form.pskValue.value;
  if (form.pskFormat.selectedIndex==1) {
   if (str.length != 64) {
-   alert('<% multilang("2534" "LANG_PRE_SHARED_KEY_VALUE_SHOULD_BE_64_CHARACTERS"); %>');
+   alert('Pre-Shared Key value should be 64 characters.');
    form.pskValue.focus();
    return false;
   }
@@ -559,7 +584,7 @@ function saveChanges(obj)
      (str.charAt(i) >= 'a' && str.charAt(i) <= 'f') ||
      (str.charAt(i) >= 'A' && str.charAt(i) <= 'F') )
      continue;
-    alert("<% multilang("2535" "LANG_INVALID_PRE_SHARED_KEY_VALUE_IT_SHOULD_BE_IN_HEX_NUMBER_0_9_OR_A_F"); %>");
+    alert("Invalid Pre-Shared Key value. It should be in hex number (0-9 or a-f).");
     form.pskValue.focus();
     return false;
      }
@@ -568,17 +593,17 @@ function saveChanges(obj)
  else {
   if ( (form.security_method.value > 1) && wpaAuth[1].checked ) {
    if (str.length < 8) {
-    alert('<% multilang("2536" "LANG_PRE_SHARED_KEY_VALUE_SHOULD_BE_SET_AT_LEAST_8_CHARACTERS"); %>');
+    alert('Pre-Shared Key value should be set at least 8 characters.');
     form.pskValue.focus();
     return false;
    }
    if (str.length > 63) {
-    alert('<% multilang("2537" "LANG_PRE_SHARED_KEY_VALUE_SHOULD_BE_LESS_THAN_64_CHARACTERS"); %>');
+    alert('Pre-Shared Key value should be less than 64 characters.');
     form.pskValue.focus();
     return false;
    }
    if (checkString(form.pskValue.value) == 0) {
-    alert('<% multilang("2550" "LANG_INVALID_PRE_SHARED_KEY"); %>');
+    alert('Invalid Pre-Shared Key!');
     form.pskValue.focus();
     return false;
    }
@@ -732,54 +757,149 @@ function showkey2Clicked()
  }
 }
 </script>
+<style>
+.form-group {
+    margin-bottom: 1rem;
+}
+.custom-control {
+    position: relative;
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.5rem;
+}
+.form-group label {
+    color: #584848;
+    font-size: 13px;
+    line-height: 22px;
+}
+.left-field {
+    margin-left: -10px;
+    width: 143px;
+}
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+.right-field {
+    margin-left: 178px;
+    padding: 2px;
+    width: 248px;
+}
+.right-field-radio{
+    margin-left:165px;
+    width:33px; 
+    padding:2px
+}
+.margin_adjs {
+    margin-right: -29px;
+    margin-left: -29px;
+}
+
+</style>
 </head>
 <body onload="SSIDSelected(0);">
-<div class="intro_main ">
- <p class="intro_title"><% multilang("199" "LANG_WLAN_SECURITY_SETTINGS"); %></p>
- <p class="intro_content"><% multilang("200" "LANG_PAGE_DESC_WLAN_SECURITY_SETTING"); %></p>
+<INPUT id="Selected_Menu" type="hidden" 
+            value="Wireless->WiFi" name="Net_Wlan">
+    <div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left"
+        vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact"
+        vertical-effect="shrink" vnavigation-view="view1">
+        <div class="scoop-overlay-box">
+        </div>
+        <div class="scoop-container">
+            <div class="scoop-main-container">
+                <div class="scoop-wrapper">
+                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
+                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
+							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+							<div class="scoop-inner-navbar"> 
+								<div class="scoop-logo"> 
+								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/logo.png" class="img-fluid" alt=""/></span></a>
+							</div> 
+							    <div id="LeftMenu">
+							        <SCRIPT language=javascript>
+							        MakeLeftMenu("Wireless","WiFi");
+							        </SCRIPT>
+							    </div>
+							</div> 
+						</nav>
+                    <div class="scoop-content">
+                        <div id="Header">
+                            <SCRIPT language=javascript>
+                            MakeHeader('Gateway Name:','Gateway Type:','Wi-Fi',"Wi-Fi 2.4G",'Welcome!','#');
+                            </SCRIPT>
+                        </div>
+                        <div class="">
+                            
+
+                             
+                               <div class="scoop-inner-content">								 
+				
+                	<div class="white_box" name="CwmpConfig">
+                  <h1 class="heading_grey heading_margin"><img src="/Dashboard/images/wi-fi.png" width="45" height="40" class="img_sub" alt=""/> WLAN Security Settings</h1>
+                  <div class="container-fluid">
+                                    <hr class="margin_adjs" />
+									<div class="row">
+										    <div class="col-md-12 form-group left-field-para">
+            <div class="custom-control">
+
+ <p>This page allows you setup the WLAN security. Turn on WEP or WPA by using Encryption Keys could prevent any unauthorized access to your wireless network</p>
+ </div>
 </div>
+</div>
+
 <form action=/boaform/admin/formWlEncrypt method=POST name="formEncrypt">
+ <div class="data_common data_common_notitle">
 <div id="wlan_security_table" style="display:none" class="data_common data_common_notitle">
- <table>
-  <input type=hidden name="wlanDisabled" value=<% wlanStatus(); %>>
+  <input type=hidden name="wlanDisabled" value="OFF">
   <input type=hidden name="isNmode" value=0 >
-  <tr>
-   <th width="30%"><% multilang("135" "LANG_SSID"); %> <% multilang("293" "LANG_TYPE"); %>:</th>
-   <td width="70%">
-    <select name=wpaSSID onChange="SSIDSelected( this.selectedIndex )">
-    <% SSID_select(); %>
+  <div class="data_common">
+       <div class="col-md-12 form-group">
+       <div class="custom-control">
+        <label class="left-field">SSID:</label/>
+    <select name=wpaSSID   class="right-field custom-select" onChange="SSIDSelected( this.selectedIndex )">
+    <option value=0>Root AP - FTTH-84E8</option>
+		<option value=1>AP1 - EasyMeshBH-MquxcLHpr
+
     </select>
-   </td>
-  </tr>
- </table>
+    </div>
+    </div>
+    
  <table>
-  <tr>
-   <th width="30%"><% multilang("201" "LANG_ENCRYPTION"); %>:&nbsp;</th>
-   <td width="70%">
-    <select size="1" id="security_method" name="security_method" onChange="show_authentication()">
-     <% checkWrite("wifiSecurity"); %>
+   <label class="left-field">Encryption:&nbsp;</label>
+   
+    <select size="1" class="right-field custom-select"id="security_method" name="security_method" onChange="show_authentication()">
+     <option value=0>NONE</option>
+<option value=1>WEP</option>
+<option value=2>WPA</option>
+<option value=4>WPA2</option>
+<option value=6>WPA2 Mixed</option>
+
     </select>
-   </td>
+
   </tr>
-  <tr id="enable_8021x" style="display:none">
-   <th width="30%">802.1x <% multilang("202" "LANG_AUTHENTICATION"); %>:</th>
-   <td width="70%">
-    <input type="checkbox" id="use1x" name="use1x" value="ON" onClick="show_8021x_settings()">
-   </td>
-  </tr>
+  <div id="enable_8021x"   class="col-md-12 form-group">
+  <div class="col-md-12 form-group">
+   <div class="custom-control">
+   <label class="left-field">802.1x Authentication:</label>
+   <input class="right-field custom-select" type="checkbox" id="use1x" name="use1x" value="ON" onClick="show_8021x_settings()">
+    </div>
+    </div>
+  </div>
+
+   
   <tr id="show_wep_auth" style="display:none">
-   <th width="30%"><% multilang("202" "LANG_AUTHENTICATION"); %>:</th>
+   <th width="30%">Authentication:</th>
    <td width="70%">
-    <input name="auth_type" type=radio value="open"><% multilang("203" "LANG_OPEN_SYSTEM"); %>
-    <input name="auth_type" type=radio value="shared"><% multilang("204" "LANG_SHARED_KEY"); %>
-    <input name="auth_type" type=radio value="both"><% multilang("169" "LANG_AUTO"); %>
+    <input name="auth_type" type=radio value="open">Open System
+    <input name="auth_type" type=radio value="shared">Shared Key
+    <input name="auth_type" type=radio value="both">Auto
    </td>
   </tr>
  </table>
     <table id="setting_wep" style="display:none">
      <input type="hidden" name="wepEnabled" value="ON" checked>
   <tr>
-   <th width="30%"><% multilang("205" "LANG_KEY_LENGTH"); %>:</th>
+   <th width="30%">Key Length:</th>
    <td width="70%">
     <select size="1" name="length0" id="key_length" onChange="updateWepFormat(document.formEncrypt, 0)">
      <option value=1> 64-bit</option>
@@ -788,7 +908,7 @@ function showkey2Clicked()
    </td>
   </tr>
   <tr>
-   <th width="30%"><% multilang("206" "LANG_KEY_FORMAT"); %>:</th>
+   <th width="30%">Key Format:</th>
    <td width="70%">
     <select id="key_format" name="format0" onChange="setDefaultKeyValue(document.formEncrypt, 0)">
      <option value="1">ASCII</option>
@@ -797,7 +917,7 @@ function showkey2Clicked()
    </td>
   </tr>
   <tr>
-   <th width="30%"><% multilang("207" "LANG_ENCRYPTION_KEY"); %>:</th>
+   <th width="30%">Encryption Key:</th>
    <td width="70%" id="pwd0">
     <input type="password" id="key" name="key0" maxlength="26" size="26" value="">
     <img id="showkey_0" onclick="showkey0Clicked()" src="graphics/visible.png" style="width:15px; height:12px">
@@ -806,14 +926,14 @@ function showkey2Clicked()
  </table>
  <table id="setting_wpa" style="display:none">
   <tr id="show_wpaAuth">
-   <th width="30%"><% multilang("208" "LANG_AUTHENTICATION_MODE"); %>:</th>
+   <th width="30%">Authentication Mode:</th>
    <td width="70%">
     <input name="wpaAuth" type="radio" value="eap" onClick="show_wpa_settings()">Enterprise (RADIUS)
     <input name="wpaAuth" type="radio" value="psk" onClick="show_wpa_settings()">Personal (Pre-Shared Key)
    </td>
   </tr>
   <tr id="show_dotIEEE80211W" style="display:none">
-   <th width="30%"><% multilang("215" "LANG_IEEE_802_11W"); %>:</th>
+   <th width="30%">IEEE 802.11w:</th>
    <td width="70%">
     <input name="dotIEEE80211W" type="radio" value="0" onClick="show_sha256_settings()">None
     <input name="dotIEEE80211W" type="radio" value="1" onClick="show_sha256_settings()">Capable
@@ -821,40 +941,40 @@ function showkey2Clicked()
    </td>
   </tr>
   <tr id="show_sha256" style="display:none">
-   <th width="30%"><% multilang("216" "LANG_SHA256"); %>:</th>
+   <th width="30%">SHA256:</th>
    <td width="70%">
     <input name="sha256" type="radio" value="0">Disable
     <input name="sha256" type="radio" value="1">Enable
    </td>
   </tr>
   <tr id="show_wpa_cipher" style="display:none">
-   <th width="30%">WPA <% multilang("209" "LANG_CIPHER_SUITE"); %>:</th>
+   <th width="30%">WPA Cipher Suite:</th>
    <td width="70%">
     <input type="checkbox" name="ciphersuite_t" value=1>TKIP&nbsp;
     <input type="checkbox" name="ciphersuite_a" value=1>AES
    </td>
   </tr>
   <tr id="show_wpa2_cipher" style="display:none">
-   <th width="30%">WPA2 <% multilang("209" "LANG_CIPHER_SUITE"); %>:</th>
+   <th width="30%">WPA2 Cipher Suite:</th>
    <td width="70%">
     <input type="checkbox" name="wpa2ciphersuite_t" value=1>TKIP&nbsp;
     <input type="checkbox" name="wpa2ciphersuite_a" value=1>AES
    </td>
   </tr>
   <tr id="show_wpa3_cipher" style="display:none">
-   <th width="30%"><% multilang("209" "LANG_CIPHER_SUITE"); %>:</th>
+   <th width="30%">Cipher Suite:</th>
    <td width="70%">
     <!--<input type="checkbox" name="wpa3ciphersuite_t" value=1>TKIP&nbsp;-->
     <input type="checkbox" name="wpa3ciphersuite_a" value=1>AES
    </td>
   </tr>
   <tr id="show_wpa_gk_rekey" style="display:none">
-   <th width="30%"><% multilang("210" "LANG_GROUP_KEY_UPDATE_TIMER"); %>:</th>
+   <th width="30%">Group Key Update Timer:</th>
    <td width="70%"><input type="text" name="gk_rekey" size="32" maxlength="10" value="">
    </td>
   </tr>
   <tr id="show_wpa_psk1" style="display:none">
-   <th width="30%"><% multilang("211" "LANG_PRE_SHARED_KEY_FORMAT"); %>:</th>
+   <th width="30%">Pre-Shared Key Format:</th>
    <td width="70%">
     <select id="psk_fmt" name="pskFormat" onChange="">
      <option value="0">Passphrase</option>
@@ -863,7 +983,7 @@ function showkey2Clicked()
    </td>
   </tr>
   <tr id="show_wpa_psk2" style="display:none">
-   <th width="30%"><% multilang("212" "LANG_PRE_SHARED_KEY"); %>:</th>
+   <th width="30%">Pre-Shared Key:</th>
    <td width="70%" id="pwd1">
     <input type="password" name="pskValue" id="wpapsk" size="32" maxlength="64" value="">
     <img id="showwpapsk" onclick="showkey1Clicked()" src="graphics/visible.png" style="width:15px; height:12px">
@@ -872,14 +992,14 @@ function showkey2Clicked()
   </table>
  <table id="setting_wapi" style="display:none">
   <tr>
-   <th width="30%"><% multilang("208" "LANG_AUTHENTICATION_MODE"); %>:</th>
+   <th width="30%">Authentication Mode:</th>
    <td width="70%">
            <input name="wapiAuth" type="radio" value="eap" onClick="show_wapi_settings()">Enterprise (AS Server)
            <input name="wapiAuth" type="radio" value="psk" onClick="show_wapi_settings()">Personal (Pre-Shared Key)
    </td>
   </tr>
   <tr id="show_wapi_psk1" style="display:none">
-   <th width="30%"><% multilang("211" "LANG_PRE_SHARED_KEY_FORMAT"); %>:</th>
+   <th width="30%">Pre-Shared Key Format:</th>
    <td width="70%">
    <select id="wapi_psk_fmt" name="wapiPskFormat" onChange="">
            <option value="0">Passphrase</option>
@@ -888,7 +1008,7 @@ function showkey2Clicked()
    </td>
   </tr>
   <tr id="show_wapi_psk2" style="display:none">
-   <th width="30%"><% multilang("212" "LANG_PRE_SHARED_KEY"); %>:</th>
+   <th width="30%">Pre-Shared Key:</th>
    <td width="70%" id="pwd2">
     <input type="password" name="wapiPskValue" id="wapipsk" size="32" maxlength="64" value="">
      <img id="showwapipsk" onclick="showkey2Clicked()" src="graphics/visible.png" style="width:15px; height:12px">
@@ -897,7 +1017,7 @@ function showkey2Clicked()
  </table>
  <table id="show_1x_wep" style="display:none">
   <tr>
-   <th width="30%"><% multilang("205" "LANG_KEY_LENGTH"); %>:</th>
+   <th width="30%">Key Length:</th>
    <td width="70%">
     <input name="wepKeyLen" type="radio" value="wep64">64 Bits
     <input name="wepKeyLen" type="radio" value="wep128">128 Bits
@@ -906,46 +1026,91 @@ function showkey2Clicked()
  </table>
  <table id="show_8021x_eap" style="display:none">
   <tr>
-   <th width="30%">RADIUS <% multilang("91" "LANG_SERVER"); %>:</th>
+   <th width="30%">RADIUS Server:</th>
    <td width="70%">
-   <% multilang("89" "LANG_IP_ADDRESS"); %>:<input id="radius_ip" name="radiusIP" size="16" maxlength="15" value="0.0.0.0">
-   <% multilang("213" "LANG_PORT"); %>:<input type="text" id="radius_port" name="radiusPort" size="4" maxlength="5" value="1812">
-   <% multilang("67" "LANG_PASSWORD"); %>:<input type="password" id="radius_pass" name="radiusPass" size="20" maxlength="64" value="12345">
+   IP Address:<input id="radius_ip" name="radiusIP" size="16" maxlength="15" value="0.0.0.0">
+   Port:<input type="text" id="radius_port" name="radiusPort" size="4" maxlength="5" value="1812">
+   Password:<input type="password" id="radius_pass" name="radiusPass" size="20" maxlength="64" value="12345">
    </td>
   </tr>
  </table>
  <table id="show2_8021x_eap" style="display:none">
   <tr>
-   <th width="30%">Backup RADIUS <% multilang("91" "LANG_SERVER"); %>:</th>
+   <th width="30%">Backup RADIUS Server:</th>
    <td width="70%">
-   <% multilang("89" "LANG_IP_ADDRESS"); %>:<input id="radius2_ip" name="radius2IP" size="16" maxlength="15" value="0.0.0.0">
-   <% multilang("213" "LANG_PORT"); %>:<input type="text" id="radius2_port" name="radius2Port" size="4" maxlength="5" value="1812">
-   <% multilang("67" "LANG_PASSWORD"); %>:<input type="password" id="radius2_pass" name="radius2Pass" size="20" maxlength="64" value="12345">
+   IP Address:<input id="radius2_ip" name="radius2IP" size="16" maxlength="15" value="0.0.0.0">
+   Port:<input type="text" id="radius2_port" name="radius2Port" size="4" maxlength="5" value="1812">
+   Password:<input type="password" id="radius2_pass" name="radius2Pass" size="20" maxlength="64" value="12345">
    </td>
   </tr>
  </table>
  <table id="show_8021x_wapi" style="display:none">
   <tr id="show_8021x_wapi_local_as" style="">
-   <th width="30%"><% multilang("214" "LANG_USE_LOCAL_AS_SERVER"); %>:</th>
+   <th width="30%">Use Local AS Server:</th>
    <td width="70%">
    <input type="checkbox" id="uselocalAS" name="uselocalAS" value="ON" onClick="show_wapi_ASip()">
    </td>
   </tr>
   <tr>
-   <th width="30%">AS <% multilang("91" "LANG_SERVER"); %> <% multilang("89" "LANG_IP_ADDRESS"); %>:</th>
+   <th width="30%">AS Server IP Address:</th>
    <td width="70%"><input id="wapiAS_ip" name="wapiASIP" size="16" maxlength="15" value="0.0.0.0"></td>
   </tr>
  </table>
 </div>
 <div class="btn_ctl">
- <input type="hidden" name="wlan_idx" value=<% checkWrite("wlan_idx"); %>>
+ <input type="hidden" name="wlan_idx" value=1>
  <input type=hidden value="/admin/wlwpa.asp" name="submit-url">
- <input type=submit name="save" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>" onClick="return saveChanges(this)" class="link_bg">&nbsp;
+ <input type=submit name="save" value="Apply Changes" onClick="return saveChanges(this)" class="link_bg">&nbsp;
  <input type="hidden" name="postSecurityFlag" value="">
 </div>
 <script>
- <% initPage("wlwpa_mbssid"); %>
- <% checkWrite("wpsVer"); %>
+ _wlan_mode[0]=0;
+	_encrypt[0]=6;
+	_enable1X[0]=0;
+	_wpaAuth[0]=2;
+	_wpaPSKFormat[0]=0;
+	_wpaPSK[0]='12345678';
+	_wpaGroupRekeyTime[0]='86400';
+	_rsPort[0]=1812;
+	_rsIpAddr[0]='0.0.0.0';
+	_rsPassword[0]='';
+	_rs2Port[0]=1812;
+	_rs2IpAddr[0]='0.0.0.0';
+	_rs2Password[0]='';
+	_uCipher[0]=3;
+	_wpa2uCipher[0]=3;
+	_wepAuth[0]=2;
+	_wepLen[0]=0;
+	_wepKeyFormat[0]=0;
+	_wlan_isNmode[0]=1;
+	_dotIEEE80211W[0]=0;
+	_sha256[0]=0;
+	_wlan_mode[1]=0;
+	_encrypt[1]=4;
+	_enable1X[1]=0;
+	_wpaAuth[1]=2;
+	_wpaPSKFormat[1]=0;
+	_wpaPSK[1]='qoUb6J_)3?2!RSDzH(iRZZW[onpi0I';
+	_wpaGroupRekeyTime[1]='86400';
+	_rsPort[1]=1812;
+	_rsIpAddr[1]='0.0.0.0';
+	_rsPassword[1]='';
+	_rs2Port[1]=1812;
+	_rs2IpAddr[1]='0.0.0.0';
+	_rs2Password[1]='';
+	_uCipher[1]=1;
+	_wpa2uCipher[1]=2;
+	_wepAuth[1]=2;
+	_wepLen[1]=0;
+	_wepKeyFormat[1]=0;
+	_wlan_isNmode[1]=1;
+	_dotIEEE80211W[1]=0;
+	_sha256[1]=0;
+		ssid_num=2;
+	document.getElementById("wlan_security_table").style.display = "";
+
+ wps20 = 1;
+
  show_authentication();
  defPskLen = document.formEncrypt.pskValue.value.length;
  defPskFormat = document.formEncrypt.pskFormat.selectedIndex;

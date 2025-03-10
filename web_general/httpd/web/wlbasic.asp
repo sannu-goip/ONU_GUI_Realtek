@@ -1,25 +1,56 @@
-<% SendWebHeadStr();%>
-<title><% multilang("130" "LANG_WLAN_BASIC_SETTINGS"); %></title>
+<!DOCTYPE html>
+<! Copyright (c) Realtek Semiconductor Corp., 2003. All Rights Reserved. ->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<meta HTTP-equiv="Cache-Control" content="no-cache">
+<link rel="stylesheet" href="/admin/reset.css">
+<link rel="stylesheet" href="/admin/base.css">
+<link rel="stylesheet" href="/admin/style.css">
+<link rel="stylesheet" href="/Dashboard/Modules/fontawesome/css/font-awesome.min.css"> 
+    <link href="/Dashboard/Modules/leftmenu/css/scoop-vertical.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Dashboard/css/bootstrap.min.css">
+    <link href="/Dashboard/Modules/leftmenu/css/simple-line-icons.css" rel="stylesheet">
+    <link href="/Dashboard/Modules/leftmenu/css/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <link href="/Dashboard/css/custom.css" type="text/css" rel="stylesheet">
+      <link href="/css/custom-nav.css" type="text/css" rel="stylesheet">
+<script language="javascript" src="common.js"></script>
+<script type="text/javascript" src="share.js"></script>
+<script language="javascript" src="voip_script.js"></script>
+<script type="text/javascript" src="base64_code.js"></script>
+ <script language="javascript" src="/Dashboard/JS/menu.js"></script>
+  <SCRIPT language=javascript src="/Dashboard/JS/util.js"></SCRIPT>
+  <script type="text/javascript" src="/JS/jquery.min.js"></script>
+	<script type="text/javascript" src="/JS/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="/JS/popper.min.js"></script>
+    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/scoop.min.js"></script>
+    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/left_menu.js"></script>
+
+
+<title>WLAN Basic Settings</title>
 <script type="text/javascript" src="base64_code.js"></script>
 <style>
 .on {display:on}
 .off {display:none}
+
 </style>
+
 <SCRIPT>
 var regDomain, regDomain_qtn, defaultChan, lastBand=0, lastMode=0;
-var is_regdomain_demo=<% checkWrite("is_regdomain_demo"); %>;
-var WiFiTest=<% getInfo("WiFiTest"); %>;
-var wlan_idx= <% checkWrite("wlan_idx"); %>;
-var ssid_2g="<% checkWrite("2G_ssid"); %>";
-var ssid_5g="<% checkWrite("5G_ssid"); %>";
-var defaultBand=<% checkWrite("band"); %>;
-var dfs_enable=<% checkWrite("dfs_enable"); %>;
-var wlan_support_8812e=<% checkWrite("wlan_support_8812e"); %>;
-var wlan_support_11ncoexist=<% checkWrite("wlan_support_11ncoexist"); %>;
-var is_wlan_qtn = <% checkWrite("is_wlan_qtn"); %>;
-var ch_list_20 = <% checkWrite("ch_list_20"); %>;
-var ch_list_40 = <% checkWrite("ch_list_40"); %>;
-var ch_list_80 = <% checkWrite("ch_list_80"); %>;
+var is_regdomain_demo=1;
+var WiFiTest=0;
+var wlan_idx= 1;
+var ssid_2g="FTTH-84E8";
+var ssid_5g="FTTH-84E8-5G";
+var defaultBand=10;
+var dfs_enable=1;
+var wlan_support_8812e=1;
+var wlan_support_11ncoexist=1;
+var is_wlan_qtn = 0;
+var ch_list_20 = 0;
+var ch_list_40 = 0;
+var ch_list_80 = 0;
 var ch_list_none = "1,2,3,4,5,6,7,8,9,10,11,12,13,36,40,44,48,52,56,60,64,100,104,108,112,116,120,124,128,132,136,149,153,157,161,165";
 var channel_list_5g_dfs =[[],
        [36,40,44,48,52,56,60,64,100,104,108,112,116,136,140,149,153,157,161,165],
@@ -82,13 +113,13 @@ function saveChanges(obj)
  var idx_value= document.wlanSetup.band.selectedIndex;
  var selectText=document.wlanSetup.band.options[idx_value].text.substr(0,1);
  if (document.wlanSetup.ssid.value=="") {
-  alert("<% multilang("2506" "LANG_SSID_CANNOT_BE_EMPTY"); %>");
+  alert("SSID cannot be empty!");
   document.wlanSetup.ssid.value = document.wlanSetup.ssid.defaultValue;
   document.wlanSetup.ssid.focus();
   return false;
  }
  if(byteLength(document.wlanSetup.ssid.value)>32){
-  alert("<% multilang("2507" "LANG_SSID_LENGTH_SHOULD_BE_MAXIMUM_32_OCTETS"); %>");
+  alert("The length of SSID should be a maximum of 32 octets(bytes).");
   document.wlanSetup.ssid.focus();
   return false;
  }
@@ -129,7 +160,7 @@ function saveChanges(obj)
  }
  if(document.wlanSetup.wl_limitstanum.value == 1){
   if(!isNumber(document.wlanSetup.wl_stanum.value)){
-   alert("<% multilang("2508" "LANG_INVALID_LIMIT_ASSOCIATED_CLIENT_NUMBER"); %>");
+   alert("Invalid Limit Associated Client Number!");
    document.wlanSetup.wl_stanum.focus();
    return false;
   }
@@ -805,7 +836,7 @@ function showChannel2G(bound_40, band)
  }
  document.wlanSetup.chan.length=0;
  idx=0;
- document.wlanSetup.chan.options[idx] = new Option("<% multilang("169" "LANG_AUTO"); %>", 0, false, false);
+ document.wlanSetup.chan.options[idx] = new Option("Auto", 0, false, false);
  if (0 == wlan_channel) {
   document.wlanSetup.chan.selectedIndex = 0;
  }
@@ -963,57 +994,228 @@ function updateWlstanum()
   document.wlanSetup.wl_stanum.disabled = true;
 }
 </SCRIPT>
+<style>
+   table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        width: 30%; /* Adjust as needed for equal width */
+        text-align: left;
+        padding: 8px;
+    }
+
+    td {
+        width: 70%; /* Ensures equal width for right-side fields */
+        padding: 8px;
+    }
+
+    .flex-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .height-select-inputs{
+      height: 30px;
+    }
+    select, input {
+        width: 100%; /* Ensures input and select fields take full width */
+        max-width: 250px; /* Adjust as per requirement */
+    }
+
+    .inner_btn {
+        white-space: nowrap; /* Prevents button from resizing weirdly */
+    }
+th, td {
+    padding: 15px 0; /* Adds vertical spacing */
+}
+.white_box {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.container-fluid {
+    width: 100%;
+    padding-right: 85px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 55px;
+}
+
+hr {
+    border-top: 1px solid #ced4da;
+}
+input[type="checkbox"]:checked {
+    background-color: orange;
+    border-color: orange;
+}
+.heading_grey {
+    font-weight: 300;
+    color: #f58220;
+    font-size: 30px;
+    padding: 0px 12px;
+    margin: 0px;
+}
+.custom-checkbox {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+}
+
+.custom-checkbox:checked {
+    background-color: orange;
+    border-color: orange;
+}
+
+.custom-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.orange_border_btn {
+    background: #fff;
+    color: #f58220;
+    font-size: 13px;
+    font-weight: 500;
+    border: solid 2px #f58220;
+}
+.w-400 {
+    width: 320px;
+}
+.margin_adjs {
+    margin-right: -30px;
+    margin-left: -85px;
+}
+</style>
 </head>
 <body>
+  <INPUT id="Selected_Menu" type="hidden" 
+            value="Wireless->WiFi" name="Net_DHCP"/> 
+    <div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left"
+        vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact"
+        vertical-effect="shrink" vnavigation-view="view1">
+        <div class="scoop-overlay-box">
+        </div>
+        <div class="scoop-container">
+            <div class="scoop-main-container">
+                <div class="scoop-wrapper">
+                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
+                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
+							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+							<div class="scoop-inner-navbar"> 
+								<div class="scoop-logo"> 
+								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/logo.png" class="img-fluid" alt=""/></span></a>
+							</div> 
+							    <div id="LeftMenu">
+							        <SCRIPT language=javascript>
+							        MakeLeftMenu('Wireless','WiFi')
+							        </SCRIPT>
+							    </div>
+							</div> 
+						</nav>
+                    <div class="scoop-content">
+                        <div id="Header">
+                          
+                           
+                    
+                            <SCRIPT language=javascript>
+                            MakeHeader('Gateway Name:','Gateway Type:','Wireless','WiFi','Welcome!','#');
+                            </SCRIPT>
+                        </div>
+                        
+                            
+
+                        <div class="">
+                            
+
+                             
+                               <div class="scoop-inner-content">								 
+								<div class="white_box">
 <div class="intro_main ">
- <p class="intro_title"><% multilang("130" "LANG_WLAN_BASIC_SETTINGS"); %></p>
- <p class="intro_content"><% multilang("131" "LANG_PAGE_DESC_WLAN_BASIC_SETTING"); %></p>
+ <p class="intro_title heading_grey" style="margin-left:42px;">
+ <img src="/Dashboard/images/wi-fi.png" width="45" height="35" class="img_sub" alt="">
+ WLAN Basic Settings</p>
+ <p class="intro_content" style="margin-left:57px;">This page is used to configure the parameters for WLAN clients which may connect to your Access Point. Here you may change wireless encryption settings as well as wireless network parameters.</p>
 </div>
 <form action=/boaform/formWlanSetup method=POST name="wlanSetup">
+<div class="container-fluid">
+
+									<hr class="margin_adjs">
 <div class="data_common data_common_notitle">
  <table>
+
   <tr>
-   <th colspan=2>
-    <input type="checkbox" name="wlanDisabled" value=<% wlanStatus(); %>
-    ONCLICK=updateState(document.wlanSetup)>&nbsp;&nbsp;<% multilang("132" "LANG_DISABLE_WLAN_INTERFACE"); %>
-   </th>
-  </tr>
+    <th colspan="2">
+     <div class="flex-container" style="gap:385px;">
+       <span style="font-weight:lighter;">Disable WLAN Interface</span>
+       <input class="custom-checkbox" type="checkbox" name="wlanDisabled" value="OFF" ONCLICK="updateState(document.wlanSetup)">
+     </div>
+    </th>
+   </tr>
+  
+  
   <tr>
-   <th width="26%"><% multilang("133" "LANG_BAND"); %>:</th>
-   <td width="74%"><select size=1 name=band onChange="updateChan(); Set_SSIDbyBand(document.wlanSetup);">
-    <% checkWrite("wlband"); %>
+   <th class="width" style="font-weight:lighter">Band:</th>
+   <td ><select class="height-select-inputs custom-select w-400" size=1 name=band onChange="updateChan(); Set_SSIDbyBand(document.wlanSetup);">
+    <option value=0>2.4 GHz (B)</option>
+<option value=1>2.4 GHz (G)</option>
+<option value=2>2.4 GHz (B+G)</option>
+<option value=7>2.4 GHz (N)</option>
+<option value=9>2.4 GHz (G+N)</option>
+<option value=10>2.4 GHz (B+G+N)</option>
+
     </select>
     <SCRIPT>updateBand_selectedIndex(defaultBand);</SCRIPT>
    </td>
   </tr>
+
   <tr>
-   <th width="26%"><% multilang("134" "LANG_MODE"); %>:</th>
-   <td width="74%"><select size="1" name="mode" onChange="updateMode()">
-    <% checkWrite("wlmode"); %>
+   <th class="width"  style="font-weight:lighter">Mode:</th>
+   <td><select class="height-select-inputs custom-select w-400" size="1" name="mode" onChange="updateMode()">
+    <option selected value="0">AP</option>
+
     </select>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="<% checkWrite("display_multi_ap") %>" value="<% multilang("154" "LANG_MULTIPLE_AP"); %>" name="multipleAP" onClick="showMultipleAP(document.wlanSetup, '/admin/wlmultipleap.asp')" class="inner_btn">
+    <input style="width:100px" class="btn orange_border_btn" type="button" value="Multiple AP" name="multipleAP" onClick="showMultipleAP(document.wlanSetup, '/admin/wlmultipleap.asp')" class="inner_btn height-select-inputs">
    </td>
   </tr>
   <tr>
-   <th width="26%"><% multilang("135" "LANG_SSID"); %>:</th>
-   <td width="74%"><input type=text name=ssid size="25" maxlength="32" value="<% getInfo("ssid"); %>">
+   <th  style="font-weight:lighter" width="26%">SSID:</th>
+   <td width="74%"><input class="height-select-inputs custom-select w-400" type=text name=ssid size="25" maxlength="32" value="FTTH-84E8">
    </td>
   </tr>
  </table>
  <div id="optionfor11n" style="display:none">
   <table>
    <tr>
-    <th width="26%"><% multilang("136" "LANG_CHANNEL_WIDTH"); %>:</th>
-    <td width="74%"><select size="1" name="chanwid" onChange="updateChan1()">
-         <% checkWrite("wlchanwid"); %>
+    <th  style="font-weight:lighter" class="width">Channel Width:</th>
+    <td><select class="height-select-inputs custom-select w-400" size="1" name="chanwid" onChange="updateChan1()">
+         <option value="0">20MHZ</option>
+<option value="1">40MHZ</option>
+<option value="3">20/40MHZ</option>
+
       </select>
     </td>
    </tr>
-   <tr <% checkWrite("wlan_qtn_hidden_function"); %> >
-    <th width="26%"><% multilang("144" "LANG_CONTROL_SIDEBAND"); %>:</th>
-    <td width="74%"><select size="1" name="ctlband" onChange="updateChan_channebound()">
-            <% checkWrite("wlctlband"); %>
+   <tr  >
+    <th  style="font-weight:lighter" width="26%">Control Sideband:</th>
+    <td width="74%"><select class="height-select-inputs custom-select w-400" size="1" name="ctlband" onChange="updateChan_channebound()">
+            <option value="0">Upper</option>
+<option value="1">Lower</option>
+
       </select>
     </td>
    </tr>
@@ -1021,76 +1223,118 @@ function updateWlstanum()
  </div>
  <table>
   <tr>
-   <th width="26%"><% multilang("145" "LANG_CHANNEL_NUMBER"); %>:</th>
-   <td width="74%"><select size="1" name="chan" onChange="updateChan_selectedIndex()"> </select></td>
+   <th width="26%"  style="font-weight:lighter">Channel Number:</th>
+   <td width="74%"><select class="height-select-inputs custom-select w-400" size="1" name="chan" onChange="updateChan_selectedIndex()"> </select></td>
    <SCRIPT>
-    <% checkWrite("wl_chno"); %>
+    regDomain=1
+defaultChan=0
+
     wlan_channel = defaultChan;
     updateChan();
    </SCRIPT>
   </tr>
-  <tr <% checkWrite("wlan_qtn_hidden_function"); %>>
-   <th width="26%"><% multilang("151" "LANG_RADIO_POWER"); %>:</th>
-   <td width="74%"><select size="1" name="txpower">
-    <% checkWrite("txpower"); %>
+  <tr >
+   <th width="26%"  style="font-weight:lighter">Radio Power (%):</th>
+   <td width="74%"><select class="height-select-inputs custom-select w-400" size="1" name="txpower">
+    <option value="0">100%</option>
+<option value="1">70%</option>
+<option value="2">50%</option>
+<option value="3">35%</option>
+<option value="4">15%</option>
+
     </select>
    </td>
   </tr>
-  <% extra_wlbasic(); %>
+  
   <tr id="wl_limit_stanum" style="display:none">
-   <th width="26%"><% multilang("147" "LANG_STA_NUMBER"); %>:</th>
+   <th width="26%"  style="font-weight:lighter">Limit Associated Client Number:</th>
    <td>
     <select name=wl_limitstanum onChange="updateWlstanum()">
-     <option value="0"><% multilang("179" "LANG_DISABLED"); %></option>
-     <option value="1"><% multilang("178" "LANG_ENABLED"); %></option>
+     <option value="0">Disabled</option>
+     <option value="1">Enabled</option>
     </select>
     <input size="3" maxlength="2" name="wl_stanum">
    </td>
   </tr>
   <tr>
-   <th width="26%"><% multilang("148" "LANG_ASSOCIATED_CLIENTS"); %>:</th>
-   <td width="74%"><input type="button"
-   value="<% multilang("149" "LANG_SHOW_ACTIVE_WLAN_CLIENTS"); %>" name="showMac"
-   onClick="showMacClick('/boaform/admin/formWirelessTbl?submit-url=/admin/wlstatbl.asp&wlan_idx=<% checkWrite("wlan_idx"); %>')" class="inner_btn">
+   <th width="26%" style="font-weight:lighter">Associated Clients:</th>
+   <td width="74%"><input class="height-select-inputs btn orange_border_btn" type="button"
+   value="Show Active WLAN Clients" name="showMac"
+   onClick="showMacClick('/boaform/admin/formWirelessTbl?submit-url=/admin/wlstatbl.asp&wlan_idx=1')" class="inner_btn">
    </td>
   </tr>
   <tr id="repeater_check" style="display:none">
-   <th colspan=2>
-    <input type="checkbox" name="repeaterEnabled" value="ON" <% checkWrite("repeaterEnabled"); %>
-    ONCLICK="updateRepeaterState(document.wlanSetup)">&nbsp;&nbsp; <% multilang("2988" "LANG_WLAN_REPEATER_MODE"); %>
-   </th>
-  </tr>
+    <th colspan=2>
+     <div  style="gap:106px;" class="flex-container">
+       <span  style="font-weight:lighter">Enable Universal Repeater Mode (Acting as AP and client simultaneously)</span>
+       <input class="custom-checkbox"  type="checkbox" name="repeaterEnabled" value="ON" ONCLICK="updateRepeaterState(document.wlanSetup)">
+     </div>
+    </th>
+ </tr>
    <!--<tr id="repeater_SSID" style="display:none">
-       <td width="100%" colspan=2><font size=2><b>SSID of Extended Interface:&nbsp;&nbsp;
-       <input type="text" name="repeaterSSID" size="33" maxlength="32" value="<% getInfo("repeaterSSID"); %>">
+       <td  style="font-weight:lighter" width="100%" colspan=2><font size=2><b>SSID of Extended Interface:&nbsp;&nbsp;
+       <input type="text" name="repeaterSSID" size="33" maxlength="32" value="">
        </td>
    </tr>-->
   <tr id="wifi_regdomain_demo" style="display:none">
-   <th width="26%"><% multilang("153" "LANG_REGDOMAIN"); %>:</th>
-   <td width="74%"><select size="1" name="regdomain_demo">
-    <% checkWrite("regdomain_list"); %>
+   <th  style="font-weight:lighter" width="26%">Regdomain:</th>
+   <td width="74%"><select class="height-select-inputs custom-select w-400" size="1" name="regdomain_demo">
+    <option value="1">FCC(1)</option>
+<option value="2">IC(2)</option>
+<option value="3">ETSI(3)</option>
+<option value="4">SPAIN(4)</option>
+<option value="5">FRANCE(5)</option>
+<option value="6">MKK(6)</option>
+<option value="7">ISREAL(7)</option>
+<option value="8">MKK1(8)</option>
+<option value="9">MKK2(9)</option>
+<option value="10">MKK3(10)</option>
+<option value="11">NCC(11)</option>
+<option value="12">RUSSIAN(12)</option>
+<option value="13">CN(13)</option>
+<option value="14">GLOBAL(14)</option>
+<option value="15">WORLD-WIDE(15)</option>
+
     </select>
    </td>
   </tr>
  </table>
 </div>
-<div class="btn_ctl">
+<hr class="margin_adjs">
+<div class="btn_ctl form-footer">
  <input type="hidden" value="/admin/wlbasic.asp" name="submit-url">
- <input type="submit" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>"
-  onClick="return saveChanges(this)" class="link_bg" name="save">
+ <input style="width:122px;"type="submit" value="Apply Changes"
+  onClick="return saveChanges(this)" class="link_bg btn orange_btn" name="save">
  <input type="hidden" name="basicrates" value=0>
  <input type="hidden" name="operrates" value=0>
- <input type="hidden" name="wlan_idx" value=<% checkWrite("wlan_idx"); %>>
- <input type="hidden" name="Band2G5GSupport" value=<% checkWrite("Band2G5GSupport"); %>>
- <input type="hidden" name="wlanBand2G5GSelect" value=<% checkWrite("wlanBand2G5GSelect"); %>>
- <input type="hidden" name="dfs_enable" value=<% checkWrite("dfs_enable"); %>>
+ <input type="hidden" name="wlan_idx" value=1>
+ <input type="hidden" name="Band2G5GSupport" value=1>
+ <input type="hidden" name="wlanBand2G5GSelect" value=0>
+ <input type="hidden" name="dfs_enable" value=1>
  <input type="hidden" name="postSecurityFlag" value="">
  <script>
-  <% initPage("wlbasic"); %>
+  document.getElementById("repeater_check").style.display = "";
+document.wlanSetup.band.value = 10;
+document.wlanSetup.chanwid.value = 1;
+document.wlanSetup.ctlband.value = 0;
+document.wlanSetup.txpower.selectedIndex = 0;
+document.getElementById("wifi_regdomain_demo").style.display = "";
+document.wlanSetup.regdomain_demo.selectedIndex = 0;
+
   updateState(document.wlanSetup);
  </script>
+ </div>
 </div>
 </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center p-3" style="background-color: rgb(235 234 234 / 20%);">
+© 2022-2025 Copyright :
+<a class="text-white" style="color:#fd7e14 !important;" href="#">Syrotech Networks Pvt. Ltd.</a>
+</div>
 <br><br>
 </body>
 </html>

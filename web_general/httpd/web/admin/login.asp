@@ -118,18 +118,18 @@
   <div class="login_body" style="background-color:#cacaca40; border-radius:10px;margin-left:-18%; margin-top:-50px !important;margin-right:40px;width:100%;height:100%; margin-top:20px">
    <h1 style="color: #fd6102;margin-left:-20px; font-size: 40px;">Login Now</h1>
    <div class="form-group input-group pb-2">
-      <input id="username" name="username" size="20" autocomplete="off" class="form-control" placeholder="Username: ">
+      <input id="username" name="username" size="20" autocomplete="off" class="form-control" placeholder="<% multilang("836" "LANG_USER"); %><% multilang("701" "LANG_NAME"); %>:">
    </div>
    <div class="form-group input-group pb-2">
-    <input id="password" type="password" name="password" size="20" autocomplete="off" class="form-control" placeholder="Password: ">
+    <input id="password" type="password" name="password" size="20" autocomplete="off" class="form-control" placeholder="<% multilang("67" "LANG_PASSWORD"); %>:">
    </div>
    <div class="form-group input-group" <% checkWrite("checkcode"); %>>
     <input id="input_code" class="form-control" type="validateCode" name="input_code" placeholder="ValidateCode"/>
    </div>
  <div <% checkWrite("checkcode"); %>><canvas id="canvas" width="130" height="40" size="0" autocomplete="off" class="form-captcha"></canvas></div>
    <div class="form-group">
-      <INPUT type=submit style="float: left;" value="Login" name="save" onClick="setpass(this)" id="login" class="login_btn">
-   <INPUT id="Refresh" onclick="refresh()" type="button" style="float: right;" value="Refresh" id="reset" class="login_btn">
+      <INPUT type=submit style="float: left;" value="<% multilang("815" "LANG_LOGIN"); %>" name="save" onClick="setpass(this)" id="login" class="login_btn">
+   <INPUT id="Refresh" onclick="refresh()" type="button" style="float: right;" value="<% multilang("222" "LANG_RESET"); %>" id="reset" class="login_btn">
       <INPUT type=hidden name=encodePassword value="">
    </div>
   <input type="hidden" value="/admin/login.asp" name="submit-url">

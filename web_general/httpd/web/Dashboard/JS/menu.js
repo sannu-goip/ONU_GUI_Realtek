@@ -256,7 +256,7 @@ if(vPageMap[2][0] == '1'){
 
 	if(vPageMap[2][1] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Net, "/change_wan.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Net, "change_wan.asp", "");
 
 	else if(vPageMap[2][2] == '1')
 
@@ -264,25 +264,25 @@ if(vPageMap[2][0] == '1'){
 
 	else if(vPageMap[2][3] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Net, "/dhcpd.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Net, "dhcpd.asp", "");
 
 	else if(vPageMap[2][4] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Net, "/net_qos_traffictl.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Net, "net_qos_traffictl.asp", "");
 
 	else if(vPageMap[2][5] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Net, "/cgi-bin/net-time.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Net, "tz.asp", "");
 
 	else if(vPageMap[2][6] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Net, "/cgi-bin/net-routeset.asp", "");								
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Net, "routing.asp");								
 
 }
 
 	if(vPageMap[2][1] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_WAN, "/change_wan.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_WAN, "change_wan.asp", "");
 
 	if(vPageMap[2][2] == '1')
 
@@ -290,19 +290,19 @@ if(vPageMap[2][0] == '1'){
 
 	if(vPageMap[2][3] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_LAN, "/dhcpd.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_LAN, "dhcpd.asp", "");
 
 	if(vPageMap[2][4] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Qos, "/net_qos_traffictl.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Qos, "net_qos_traffictl.asp", "");
 
 	if(vPageMap[2][5] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Time, "/cgi-bin/net-time.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Time, "tz.asp", "");
 
 	if(vPageMap[2][6] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Route, "/cgi-bin/net-routeset.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Route, "routing.asp", "");
 
 	//wifi 
 
@@ -310,7 +310,7 @@ if(vPageMap[2][0] == '1'){
 
 		if(vPageMap[3][1] == '1')
 
-			MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Wireless, "/cgi-bin/net-wlan.asp", "");
+			MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Wireless, "wlbasic.asp", "");
 
 		else if(vPageMap[3][2] == '1')
 
@@ -330,7 +330,7 @@ if(vPageMap[2][0] == '1'){
 
 	if(vPageMap[3][1] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_WIFI, "/cgi-bin/net-wlan.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_WIFI, "wlbasic.asp", "");
 
 	 if(vPageMap[3][2] == '1')
 
@@ -352,15 +352,15 @@ if(vPageMap[2][0] == '1'){
 
 		if(vPageMap[4][1] == '1')
 
-			MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_VoiceSetup, "/cgi-bin/app-VoIP.asp", "");
+			MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_VoiceSetup, "voip_general_new_web.asp", "");
 
 		else if(vPageMap[4][2] == '1')
 
-			MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_VoiceSetup, "/cgi-bin/app-VoIP_Adv.asp", "");
+			MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_VoiceSetup, "voip_advanced_new_web.asp", "");
 
 		else if(vPageMap[4][3] == '1')
 
-		 	MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_VoiceSetup, "/cgi-bin/app-VOIP_history.asp", "");
+		 	MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_VoiceSetup, "voip_callhistory_new_web.asp", "");
 
 	}
 
@@ -368,15 +368,15 @@ if(vPageMap[2][0] == '1'){
 
 	if(vPageMap[4][1] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_VoIPSet, "/cgi-bin/app-VoIP.asp", "");	
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_VoIPSet,"voip_general_new_web.asp", "");	
 
 	if(vPageMap[4][2] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_VoIPSetAdv, "/cgi-bin/app-VoIP_Adv.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_VoIPSetAdv, "voip_advanced_new_web.asp", "");
 
 	if(vPageMap[4][3] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_VoipHistory, "/cgi-bin/app-VoIP_history.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_VoipHistory, "voip_callhistory_new_web.asp", "");
 
 //TRO69
 
@@ -386,7 +386,7 @@ if(vPageMap[5][0] == '1'){
 
 	if(vPageMap[5][1] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_TR069, "/cgi-bin/net-tr069.asp", "");	
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_TR069, "tr069config_stun.asp", "");	
 
 	}
 
@@ -398,61 +398,61 @@ if(vPageMap[6][0] == '1'){
 
 	if(vPageMap[6][1] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "/cgi-bin/sec-urlfilter.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "url_blocking.asp", "");
 
 	else if(vPageMap[6][2] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "/cgi-bin/sec-firewall.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "fw_enable.asp", "");
 
 	else if(vPageMap[6][3] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "/cgi-bin/sec-macfilter.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "fw-macfilter_rg.asp", "");
 
 	else if(vPageMap[6][4] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "/cgi-bin/sec-portfilter.asp", "");				
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "fw-ipportfilter_rg.asp", "");				
 
 	else if(vPageMap[6][5] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "/cgi-bin/sec-aclfilter.asp", "");				
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "rmtacc.asp", "");				
 
 	else if(vPageMap[6][6] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "/cgi-bin/sec-parental.asp", "");	
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "domainblk.asp", "");	
 
 	else if(vPageMap[6][7] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "/cgi-bin/sec-loopdetect.asp", "");	
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Security, "lbd.asp", "");	
 
 }
 
 	if(vPageMap[6][1] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_URLFilter, "/cgi-bin/sec-urlfilter.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_URLFilter, "url_blocking.asp", "");
 
 	if(vPageMap[6][2] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Firewall, "/cgi-bin/sec-firewall.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Firewall, "fw_enable.asp", "");
 
 	if(vPageMap[6][3] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_MACFilter, "/cgi-bin/sec-macfilter.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_MACFilter, "fw-macfilter_rg.asp", "");
 
 	if(vPageMap[6][4] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_PortFilter, "/cgi-bin/sec-portfilter.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_PortFilter, "fw-ipportfilter_rg.asp", "");
 
 	if(vPageMap[6][5] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_AclFilter, "/cgi-bin/sec-aclfilter.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_AclFilter, "rmtacc.asp", "");
 
 	if(vPageMap[6][6] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Parental, "/cgi-bin/sec-parental.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Parental, "domainblk.asp", "");
 
 		if(vPageMap[6][7] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_LoopDetect, "/cgi-bin/sec-loopdetect.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_LoopDetect, "lbd.asp", "");
 
 	
 
@@ -594,7 +594,7 @@ if(vPageMap[5][0] == '1'){
 
 	else if(vPageMap[5][4] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Management, "/cgi-bin/upgrade.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(1, Menu_Management, "upgrade.asp", "");
 
 }
 
@@ -612,7 +612,7 @@ if(vPageMap[5][0] == '1'){
 
 	if(vPageMap[5][4] == '1')
 
-		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Upgrade, "/cgi-bin/upgrade.asp", "");
+		MenuArray[iCount++] = new MenuNodeConstruction(2, Menu_Upgrade, "upgrade.asp", "");
 
 	
 

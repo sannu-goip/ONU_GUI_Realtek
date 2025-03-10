@@ -10,7 +10,6 @@ function saveChanges()
 </SCRIPT>
 </head>
 
-<!-------------------------------------------------------------------------------------->
 <body>
 <div class="intro_main ">
 	<p class="intro_title"><% multilang(LANG_WAN); %> <% multilang(LANG_MODE); %></p>

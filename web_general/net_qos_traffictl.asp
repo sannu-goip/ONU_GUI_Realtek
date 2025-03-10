@@ -34,15 +34,25 @@
         background-color: #e9ecef;
     }
 .left-field{
-    margin-left:-15px;
+    margin-left:-10px;
+    width:142px;
+}
+.left-field-para{
+    margin-left:-10px;
     width:1248px;
 }
+.right-field-radio{
+    margin-left:165px;
+    width:33px; 
+    padding:3px
+}
 .right-field{
-    margin-left:50px
+    margin-left:178px;
+    padding:3px;
+    width:160px; 
 }
-.data_common{
-	width:150px
-}
+
+
 </style>
 <script language="javascript" type="text/javascript">
 var policy = 1;
@@ -480,19 +490,20 @@ function on_submit()
 									<div class="container-fluid">
 										<hr class="margin_adjs" />
 				<div class="col-md-12 form-group left-field">
+                <div class="custom-control">
         <h2 class="sub_heading " style="color:#fd7e14; width:250px">IP QoS Configuration</h2>
 		</div>
-
-										  <div class="col-md-12 form-group left-field" >
+</div>
+										  <div class="col-md-12 form-group" >
 
                                                   <div class="custom-control custom-radio">
                                                               
-                                                                            <label  >IP Qos:</label>
-                                                                           <input class="right-field" type="radio" name="qosen" value="0" onclick="qosen_click();">Disable
-                                                                  <input class="right-field" type="radio" name="qosen" value="1" onclick="qosen_click();">Enable
+                                                                            <label class="left-field" >IP Qos:</label>
+                                                                           <input class="right-field-radio" type="radio" name="qosen" value="0" onclick="qosen_click();">Disable
+                                                                  <input class="right-field-radio" type="radio" name="qosen" value="1" onclick="qosen_click();">Enable
                                                                                                 </div>
                                                                                 </div>
-                                                                                </div>
+                                                                                
       
        <div class="col-md-12 form-group left-field">
        <div class="custom-control">
@@ -503,10 +514,12 @@ function on_submit()
    <div class="col-md-12 form-group">
    <div class="custom-control">
    
-    <p class="left-field">This page is used to configure the QoS policy and Queue. If select PRIO of policy, the lower numbers imply greater precedence. If select WRR of policy, please input the weight of this queue. Default is 40:30:20:10. After configration, please click 'Apply Changes'</p>
+    <p class="left-field-para">This page is used to configure the QoS policy and Queue. If select PRIO of policy, the lower numbers imply greater precedence. If select WRR of policy, please input the weight of this queue. Default is 40:30:20:10. After configration, please click 'Apply Changes'</p>
+  </div>
+  </div>
   <div class="col-md-12 form-group">
     <div class="custom-control">
-        <table class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:-35px;">
+        <table class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:-14px; width:98%">
             <thead>
                 <tr>
                     <th>Policy:</th>
@@ -519,7 +532,7 @@ function on_submit()
 </div>
   <div class="col-md-12 form-group">
     <div class="custom-control">
-        <table id="lstrc" class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:-35px;">
+        <table id="lstrc" class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:-14px; width:98%">
             <thead>
                 <tr class="left-field" align="center">
                     <th>Queue</th>
@@ -533,35 +546,36 @@ function on_submit()
                 <tr valign="center" align="center">
                     <td>Q1</td>
                     <td><p>WRR</p></td>
-                    <td><input type="text" name="w0" value="40" size="3" class="form-control"></td>
+                    <td><p>--</p></td>
+                    <td><input type="text" name="w0" value="40" size="3"></td>
                     <td><input type="checkbox" name="qen0"></td>
                 </tr>
                 <tr valign="center" align="center">
                     <td>Q2</td>
                     <td><p>WRR</p></td>
                     <td><p>--</p></td>
-                    <td><input type="text" name="w1" value="30" size="3" class="form-control"></td>
+                    <td><input type="text" name="w1" value="30" size="3"></td>
                     <td><input type="checkbox" name="qen1"></td>
                 </tr>
                 <tr valign="center" align="center">
                     <td>Q3</td>
                     <td><p>WRR</p></td>
                     <td><p>--</p></td>
-                    <td><input type="text" name="w2" value="20" size="3" class="form-control"></td>
+                    <td><input type="text" name="w2" value="20" size="3" ></td>
                     <td><input type="checkbox" name="qen2"></td>
                 </tr>
                 <tr valign="center" align="center">
                     <td>Q4</td>
                     <td><p>WRR</p></td>
                     <td><p>--</p></td>
-                    <td><input type="text" name="w3" value="10" size="3" class="form-control"></td>
+                    <td><input type="text" name="w3" value="10" size="3" ></td>
                     <td><input type="checkbox" name="qen3"></td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-
+ <br>
       <div class="col-md-12 form-group left-field">
       <div class="custom-control">
             <h2 class="sub_heading " style="color:#fd7e14; width:259px">QoS Bandwidth Config</p>
@@ -570,29 +584,37 @@ function on_submit()
        
             <div class="col-md-12 form-group">
                 <div class="custom-control">
-                    <p class="left-field">This part is used to configure the bandwidth of different type of WAN. If select Disable, CPE will select the appropriate bandwidth based on WAN. If select Enable, User is allowed to configure specific bandwidth of WAN.</p>
+                    <p class="left-field-para">This part is used to configure the bandwidth of different type of WAN. If select Disable, CPE will select the appropriate bandwidth based on WAN. If select Enable, User is allowed to configure specific bandwidth of WAN.</p>
                 </div>
             </div>
             <div class="col-md-12 form-group">
                 <div class="custom-control custom-radio">
-                    <label>User Defined Bandwidth:</label>
-                    <input class="right-field" type="radio" name="bandwidth_defined" value="0" onClick="bandwidth_defined_check();" >Disable
-                    <input class="right-field"  type="radio" name="bandwidth_defined" value="1" onClick="bandwidth_defined_check();">Enable
+                    <label class="left-field">User Defined Bandwidth:</label>
+                    <input class="right-field-radio" type="radio" name="bandwidth_defined" value="0" onClick="bandwidth_defined_check();" >Disable
+                    <input class="right-field-radio"  type="radio" name="bandwidth_defined" value="1" onClick="bandwidth_defined_check();">Enable
                 </div>
             </div>
             <div class="col-md-12 form-group">
                 <div class="custom-control">
-                    <label>Total Bandwidth Limit:</label>
+                    <label class="left-field">Total Bandwidth Limit:</label>
                     <input type="text" name="totalbandwidth" id="totalbandwidth" value="1005" class="right-field">Kb
                 </div>
             </div>
-
+<br>
+ <hr class="margin_adjs" />
+  <div class="btn_ctl">
+  <input class="link_bg" type="button" value="Apply Changes" onclick="on_save();">
+  <input type="hidden" id="lst" name="lst" value="">
+  <input type="hidden" name="submit-url" value="/net_qos_imq_policy.asp">
+  <input type="hidden" name="postSecurityFlag" value="">
+</div>
+<hr class="margin_adjs" />
  <div class="col-md-12 form-group left-field">
                 <div class="custom-control">
    <h2 class="sub_heading " style="color:#fd7e14; width:259px">QoS Classification</h2>
    </div>
    </div>
-    <div class="col-md-12 form-group left-field">
+    <div class="col-md-12 form-group left-field-para">
                 <div class="custom-control">
  <p> This page is used to add or delete classicification rule.<font color="red">(After add a new rule, please click 'Apply Changes' to take effect.)</font></p>
 </div>
@@ -600,7 +622,7 @@ function on_submit()
 
 <div class="col-md-12 form-group">
     <div class="custom-control">
-        <table id="lstrc" class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:-35px">
+        <table id="lstrc" class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:-14px; width:98%">
             <thead>
                 <tr>
                     <th colspan="2">&nbsp;</th>
@@ -631,14 +653,21 @@ function on_submit()
     </div>
 </div>
 <div class=btn_ctl>
+<div class="col-md-12 form-group left-field">
+        <div class="custom-control">
  <input class=link_bg type="button" class="button" onClick="location.href='net_qos_cls_edit.asp';" value="Add">
-
+</div>
+</div>
 </div>
 <br>
 
- <div class="col-md-12 form-group">
+ <div class="col-md-12 form-group left-field">
         <div class="custom-control">
         <h2 class="sub_heading " style="color:#fd7e14; width:340px">Add QoS Classification Rules</h2>
+        </div>
+        </div>
+        <div class="col-md-12 form-group left-field-para">
+                <div class="custom-control">
         <p>This page is used to add a IP QoS classification rule.</p>
         </div>
         </div>
@@ -652,11 +681,11 @@ function on_submit()
     <div class="col-md-12 form-group">
         <div class="custom-control">
             <label class="left-field">RuleOrder:</label>
-            <input type="text" id="qos_order" size="22" style="width:200px" class="right-field">
+            <input type="text" id="qos_order" size="22"  class="right-field">
         </div>
     </div>
     
- <div class="col-md-12 form-group">
+ <div class="col-md-12 form-group left-field">
         <div class="custom-control">
         <h2 class="sub_heading " style="color:#fd7e14; width:400px">Assign IP Precedence/DSCP/802.1p</h2>
         </div>
@@ -665,7 +694,7 @@ function on_submit()
         <div class="col-md-12 form-group">
             <div class="custom-control">
                 <label class="left-field">Precedence:</label>
-                <select id="prio" size="1" class="right-field">
+                <select id="prio" size="1" class="right-field" >
                 <option value="1">Queue 1</option>
                 <option value="2">Queue 2</option>
                 <option value="3">Queue 3</option>
@@ -677,7 +706,7 @@ function on_submit()
         <div class="col-md-12 form-group">
             <div class="custom-control">
                 <label class="left-field">DSCP:</label>
-                <select id="mdscp" size="1" class="right-field">
+                <select id="mdscp" size="1" class="right-field" >
                 <option value="0"></option>
                 <option value="1">default(000000)</option>
                 <option value="33">CS1(001000)</option>
@@ -699,7 +728,7 @@ function on_submit()
         <div class="col-md-12 form-group">
             <div class="custom-control">
                 <label class="left-field">802.1p:</label>
-                <select id="m1p" size="1" class="right-field">
+                <select id="m1p" size="1" class="right-field" >
                 <option value="0"></option>
                 <option value="1">0</option>
                 <option value="2">1</option>
@@ -712,12 +741,545 @@ function on_submit()
                 </select>
             </div>
         </div>
-    </div>                                    
+    </div>   
+
+   <div class="col-md-12 form-group left-field">
+            <div class="custom-control">
+      <h2 class="sub_heading " style="color:#fd7e14; width:400px">Specify Traffic Classification Rules</h2>
+       
+    </div>
+    </div>
+ 
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">IP QoS Rule by type:</label>
+                <input type="radio" name="qos_rule_type" value="0" onclick="ruleType_click();" class="right-field-radio">Port
+                <input type="radio" name="qos_rule_type" value="1" onclick="ruleType_click();" class="right-field-radio">Ether Type
+                <input type="radio" name="qos_rule_type" value="2" onclick="ruleType_click();" class="right-field-radio">IP/Protocol
+                <input type="radio" name="qos_rule_type" value="3" onclick="ruleType_click();" class="right-field-radio">MAC Address
+            </div>
+        </div>
+  
+        <div class="col-md-12 form-group"  id="wan_interface" style="display:none;">
+            <div class="custom-control">
+                <label class="left-field">WAN:</label>
+                <select id="outif" size="1" onchange="onchange_sel1();" class="right-field">
+                    <option value="65535">Any</option>
+                </select>
+            </div>
+        </div>
+    
+    
+        <div class="col-md-12 form-group" id="port_base" style="display:block;">
+            <div class="custom-control">
+                <label class="left-field">Physical Port:</label>
+                <select id="phypt" size="1" onchange="onchange_sel1();" class="right-field">
+                    <option value="0"></option>
+                    <option value="1">LAN_1</option>
+                    <option value="2">LAN_2</option>
+                    <option value="3">LAN_3</option>
+                    <option value="4">LAN_4</option>
+                </select>
+            </div>
+        </div>
+
+    <div class="col-md-12 form-group"  id="ipprotbl" style="display: block;">
+        <div class="custom-control">
+            <label class="left-field">IP Version:</label>
+            <select id="IpProtocolType" size="1" onchange="protocolChange()" name="IpProtocolType" class="right-field">
+                <option value="0">Please select IP version</option>
+                <option value="1">IPv4</option>
+                <option value="2">IPv6</option>
+            </select>
+        </div>
+    </div>
+
+        <div class="data_common data_common_notitle" id="ip_proto_base" style="display: block;">
+    <div class="col-md-12 form-group" >
+        <div class="custom-control">
+            <label class="left-field">Protocol:</label>
+            <select id="proto" size="1" onchange="onChange_proto();" class="right-field">
+                <option value="0"></option>
+                <option value="1">TCP</option>
+                <option value="2">UDP</option>
+                <option value="3">ICMP</option>
+                <option value="4">TCP/UDP</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">DSCP:</label>
+            <select id="dscp" size="1" onchange="onchange_sel1();" class="right-field">
+                <option value="0"></option>
+                <option value="1">default(000000)</option>
+                <option value="33">CS1(001000)</option>
+                <option value="41">AF11(001010)</option>
+                <option value="49">AF12(001100)</option>
+                <option value="57">AF13(001110)</option>
+                <option value="65">CS2(010000)</option>
+                <option value="73">AF21(010010)</option>
+                <option value="81">AF22(010100)</option>
+                <option value="89">AF23(010110)</option>
+                <option value="97">CS3(011000)</option>
+                <option value="105">AF31(011010)</option>
+                <option value="113">AF32(011100)</option>
+                <option value="121">AF33(011110)</option>
+                <option value="129">CS4(100000)</option>
+                <option value="137">AF41(100010)</option>
+                <option value="145">AF42(100100)</option>
+                <option value="153">AF43(100110)</option>
+                <option value="161">CS5(101000)</option>
+                <option value="185">EF(101110)</option>
+                <option value="193">CS6(110000)</option>
+                <option value="225">CS7(111000)</option>
+            </select>
+        </div>
+    </div>
+    <div id="ip4tbl" style="display: none;">
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Source IP:</label>
+                <input type="text" id="sip" size="15" maxlength="15" onchange="onchange_sel1();" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Source Mask:</label>
+                <input type="text" id="smsk" size="15" maxlength="15"  onchange="onchange_sel1();" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Destination IP:</label>
+                <input type="text" id="dip" size="15" maxlength="15" onchange="onchange_sel1();" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Destination Mask:</label>
+                <input type="text" id="dmsk" size="15" maxlength="15"  onchange="onchange_sel1();" class="right-field">
+            </div>
+        </div>
+    </div>
+    <div id="ip6tbl" style="display: block;">
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Source IP:</label>
+                <input type="text" id="sip6" size="36" maxlength="39" onchange="onchange_sel1();" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Source Prefix Length:</label>
+                <input type="text" id="sip6PrefixLen" size="15" maxlength="15" onchange="onchange_sel1();" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Destination IP:</label>
+                <input type="text" id="dip6" size="36" maxlength="39" onchange="onchange_sel1();" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Destination Prefix Length:</label>
+                <input type="text" id="dip6PrefixLen" size="15" maxlength="15" onchange="onchange_sel1();" class="right-field">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Source Port:</label>
+            <input type="text" id="spts" size="5" maxlength="5" onchange="onchange_sel1();" class="right-field">:
+            <input type="text" id="spte" size="5" maxlength="5" onchange="onchange_sel1();"  style="width:170px; padding:3px">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Destination Port:</label>
+            <input type="text" id="dpts" size="5" maxlength="5"  onchange="onchange_sel1();" class="right-field">:
+            <input type="text" id="dpte" size="5" maxlength="5"  onchange="onchange_sel1();"  style="width:170px; padding:3px">
+        </div>
+    </div>
+</div>          
+
+<div class="data_common data_common_notitle" id="mac_base" >
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Source MAC:</label>
+            <input type="text" id="smac" size="17" maxlength="17" onchange="onchange_sel1();" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Destination MAC:</label>
+            <input type="text" id="dmac" size="17" maxlength="17" onchange="onchange_sel1();" class="right-field">
+        </div>
+    </div>
+</div>
+<div class="data_common data_common_notitle" id="ether_type_base" style="display:block;">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Ethernet Type:</label>
+            <b class="right-field">0x</b>
+            <input type="text" id="ethType" size="5" maxlength="5" onchange="onchange_sel3();" style="width: 136px;padding: 3px;">
+        </div>
+    </div>
+</div>
+
+ <hr class="margin_adjs">
+  <div class="btn_ctl">
+ <input class="link_bg" type="button" onclick="on_submit();" value="Apply Changes">
+ <input type="hidden" name="submit-url" value="/net_qos_cls.asp">
+ <input type="hidden" name="lst" value="">
+ <input type="hidden" name="index" value="0">
+ <input type="hidden" name="postSecurityFlag" value="">
+</div>
+ <hr class="margin_adjs">
+
+<div class="data_common data_common_notitle" id="dhcp_opt_base" style="display:none;">
+    <div id="dhcp_opt_base_opt60" style="display:none;"></div>
+    <div id="dhcp_opt_base_opt61" style="display:none;"></div>
+    <div id="dhcp_opt_base_opt125" style="display:none;"></div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">DHCP Options:</label>
+            <input type="radio" name="dhcpopt_type" value="0" onclick="dhcpopt_click();" class="right-field-radio">Option 60
+            <input type="radio" name="dhcpopt_type" value="1" onclick="dhcpopt_click();" class="right-field-radio">Option 61
+            <input type="radio" name="dhcpopt_type" value="2" onclick="dhcpopt_click();" class="right-field-radio">Option 125
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">Option 60:</label>
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">Value:</label>
+            <input type="text" name="vendorclass" size="32" maxlength="100" value="" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">DHCP Option 61:</label>
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">IAID:</label>
+            <input type="text" name="opt61_iaid" size="20" maxlength="10" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">DUID Type:</label>
+            <select size="1" name="duid_type" onchange="update_ui()" class="right-field">
+                <option selected="" value="1">DUID-LLT</option>
+                <option value="2">DUID-EN</option>
+                <option value="3">DUID-LL</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">Hardware Type:</label>
+            <input type="text" name="duid_hw_type" size="20" maxlength="10" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">Time:</label>
+            <input type="text" name="duid_time" size="20" maxlength="20" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">Link-Layer address:</label>
+            <input type="text" name="duid_mac" size="20" maxlength="20" class="right-field">(xx:xx:xx:xx:xx:xx)
+        </div>
+    </div>
+    <div class="col-md-12 form-group" style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">Enterprise Number:</label>
+            <input type="text" name="duid_ent_num" size="20" maxlength="10" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">Identifier:</label>
+            <input type="text" name="duid_ent_id" size="20" maxlength="32" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">DHCP Option 125:</label>
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+    
+        <div class="custom-control">
+            <label class="left-field">Enterprise Number:</label>
+            <input type="text" name="opt125_ent_num" size="20" maxlength="10" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group"  style="display:none;">
+    >
+        <div class="custom-control">
+            <label class="left-field">Manufacturer OUI:</label>
+            <input type="text" name="opt125_manufacturer" size="20" maxlength="32" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group" style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">Product Class:</label>
+            <input type="text" name="opt125_product_class" size="20" maxlength="32" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group" style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">Model Name:</label>
+            <input type="text" name="opt125_model" size="20" maxlength="32" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group" style="display:none;">
+        <div class="custom-control">
+            <label class="left-field">Serial Number:</label>
+            <input type="text" name="opt125_serial" size="20" maxlength="32" class="right-field">
+        </div>
+    </div>
+</div>
+
+<div class="data_common data_common_notitle" id="configuration_2" style="display:none;">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Configuration - 2</label>
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">802.1p:</label>
+            <select id="vlan1p" size="1" onchange="onchange_sel2();" class="right-field">
+                <option value="0"></option>
+                <option value="1">0</option>
+                <option value="2">1</option>
+                <option value="3">2</option>
+                <option value="4">3</option>
+                <option value="5">4</option>
+                <option value="6">5</option>
+                <option value="7">6</option>
+                <option value="8">7</option>
+            </select>
+        </div>
+    </div>
+</div>
+</div>
+<div class="col-md-12 form-group left-field">
+        <div class="custom-control">
+         <h2 class="sub_heading " style="color:#fd7e14; width:400px">IP QoS Traffic Shaping</h2>
+         </div>
+         </div>
+           
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Total Bandwidth Limit:</label>
+            <input type="text" id="totalbandwidth" value="1005" class="right-field">Kb
+        </div>
+    </div>
+
+  
+    <div class="col-md-12 form-group">
+    <div class="custom-control">
+        <table id="lstrc" class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:-14px; width:98%">
+      <tbody>
+      <tr>
+     <th>ID</th>
+     <th>Protocol</th>
+     <th>Source Port</th>
+     <th>Destination Port</th>
+     <th>Source IP</th>
+     <th>Destination IP</th>
+     <th style="display:none">VLAN ID</th>
+     <th style="display:none">SSID</th>
+     <th>Rate(kb/s)</th>
+     <th>Delete</th>
+     <th>IP Version</th>
+                 <th>Direction</th>
+     <th><div id="wan_interface" style="display:none">WAN Interface</div></th>
+    </tr>
+  </tbody>
+  </table>
+  
+ </div>
+</div>
+    <div class="btn_ctl col-md-12 form-group left-field">
+    <div class="custom-control">
+<input class="link_bg" type="button" onclick="location.href='net_qos_traffictl_edit.asp';" value="Add">
+</div>
+</div>
+<div class="col-md-12 form-group left-field">
+        <div class="custom-control">
+        <h2 class="sub_heading " style="color:#fd7e14; width:363px">Add IP QoS Traffic Shaping Rule</h2>
+        </div>
+        </div>
+        <div id="ipprotbl" style="display: block;" class="data_common data_common_notitle">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">IP Version:</label>
+            <select id="IpProtocolType" onchange="protocolChange()" name="IpProtocolType" class="right-field">
+                <option value="1">IPv4</option>
+                <option value="2">IPv6</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div id="qos_direction" style="display:block" class="data_common data_common_notitle">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Direction:</label>
+            <select name="direction" class="right-field" >
+                <option value="0">Upstream</option>
+                <option value="1">Downstream</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div id="vidDiv" style="display:none" class="data_common data_common_notitle">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">VLAN ID:</label>
+            <input type="text" name="vlanID" size="4" class="right-field">
+        </div>
+    </div>
+</div>
+<div id="ssidDiv" style="display:none" class="data_common data_common_notitle">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">SSID ID:</label>
+            <select name="ssid" class="right-field"></select>
+        </div>
+    </div>
+</div>
+
+<div class="data_common data_common_notitle" style="display:none">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field" id="wan_interface">Interface:</label>
+            <div id="wan_interface_value">
+                <select id="inflist" class="right-field"></select>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+        <label class="left-field">Protocol:</label>
+            <select name="protolist" class="right-field">
+                <option value="0">NONE</option>
+                <option value="1">TCP</option>
+                <option value="2">UDP</option>
+                <option value="3">ICMP</option>
+                <!-- <option value="4">TCP/UDP</option> -->
+            </select>
+        </div>
+    </div>
+
+
+<div id="ip4tbl" style="display: block;" class="data_common data_common_notitle">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Source IP:</label>
+            <input type="text" name="srcip" size="15" maxlength="15"  class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Source Mask:</label>
+            <input type="text" name="srcnetmask" size="15" maxlength="15" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Destination IP:</label>
+            <input type="text" name="dstip" size="15" maxlength="15"  class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Destination Mask:</label>
+            <input type="text" name="dstnetmask" size="15" maxlength="15" class="right-field">
+        </div>
+    </div>
+</div>
+
+<div id="ip6tbl" style="display: none;" class="data_common data_common_notitle">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Source IP:</label>
+            <input type="text" name="sip6" size="15" maxlength="15" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Source Prefix Length:</label>
+            <input type="text" name="sip6PrefixLen" size="15" maxlength="15" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Destination IP:</label>
+            <input type="text" name="dip6" size="15" maxlength="15" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Destination Prefix Length:</label>
+            <input type="text" name="dip6PrefixLen" size="15" maxlength="15" class="right-field">
+        </div>
+    </div>
+</div>
+
+<div class="data_common data_common_notitle">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field" >Source Port:</label>
+            <input type="text" name="sport" size="6" class="right-field" >
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Destination Port:</label>
+            <input type="text" name="dport" size="6" class="right-field" >
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Rate Limit:</label>
+            <input type="text" name="rate" size="6" class="right-field"> kb/s
+        </div>
+    </div>
+</div>
+<hr style="margin-left: -16px;width: 102.4%;">
+<div class="btn_ctl">
+ <input class="link_bg" type="button" name="return" value="Close" onclick="location.href='/net_qos_traffictl.asp';">
+ <input class="link_bg" type="button" name="apply" value="Apply Changes" onclick="on_apply();">
+ <input type="hidden" name="lst" id="lst" value="">
+ <input type="hidden" name="submit-url" value="/net_qos_traffictl.asp">
+ <input type="hidden" name="postSecurityFlag" value="">
+</div>
+<hr style="margin-left: -16px;width: 102.4%;">
+
+
+ <div class="form-footer">
+										<button class="btn orange_btn" type="button" onclick="btnSave()" id="btnOK">Save</button>
+										<button class="btn grey_btn" type="button" onclick="RefreshPage()" id="btnCancel">Cancel</button>	
+										</div>
 
                                         </div>
                         </div>
                     </div>
-                </div>
+        </div>
         
 		     <div class="text-center p-3" style="background-color: rgb(235 234 234 / 20%);">
 © 2022-2025 Copyright :

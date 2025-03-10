@@ -1,861 +1,39 @@
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html lang="en">
+<html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="N/A" type="image/x-icon">
-    <link rel="stylesheet" href="/Dashboard/Modules/fontawesome/css/font-awesome.min.css">
-    <title>
-         WAN</title>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<meta HTTP-equiv="Cache-Control" content="no-cache">
+<link rel="stylesheet" href="/admin/reset.css">
+<link rel="stylesheet" href="/admin/base.css">
+<link rel="stylesheet" href="/admin/style.css">
+<link rel="stylesheet" href="/Dashboard/Modules/fontawesome/css/font-awesome.min.css"> 
     <link href="/Dashboard/Modules/leftmenu/css/scoop-vertical.css" rel="stylesheet">
     <link rel="stylesheet" href="/Dashboard/css/bootstrap.min.css">
     <link href="/Dashboard/Modules/leftmenu/css/simple-line-icons.css" rel="stylesheet">
     <link href="/Dashboard/Modules/leftmenu/css/jquery.mCustomScrollbar.css" rel="stylesheet">
     <link href="/Dashboard/css/custom.css" type="text/css" rel="stylesheet">
       <link href="/css/custom-nav.css" type="text/css" rel="stylesheet">
- <script src="/Dashboard/JS/menu.js" type="text/javascript" ></script>
-     <script language="javascript" src="/Dashboard/JS/util.js"></script>
-	  <script src="admin/jquip_sizzle.js" type="text/javascript" ></script>
-    <script src="admin/jquip.js" type="text/javascript" ></script>
-    <script src="admin/juicer.js" type="text/javascript" ></script>
-    <script src="admin/ui.js" type="text/javascript" ></script>
-    <script language="javascript" src="common.js"></script>
+<script language="javascript" src="common.js"></script>
 <script type="text/javascript" src="share.js"></script>
-<script>
-document.write("<s"+"cript type='text/javascript' src='adminMenu.js?v="+Math.random()+"'></scr"+"ipt>");
-</script>
-    <script type="text/javascript" src="admin/init.js"></script>
-    <script id="nav-tmpl" type="text/template">
-        {@each items as item}
-            <li><a href="javascript:void(0)" rel="${item.sub}" class="">${item.name}</a><span></span></li>
-        {@/each}
-    </script>
-    <script id="side-tmpl" type="text/x-template">
-        {@each items as item}
-            <li class="{@if item.collapsed}collapsed{@/if}">
-                <h3><a href="#">${item.name}</a></h3>
-                <ul>
-                    {@each item.items as it}
-                        <li><a target="contentIframe" href="${it.href}" class="">${it.name}</a></li>
-                    {@/each}
-                </ul>
-            </li>
-        {@/each}
-    </script>
- <script>
-      function confirmlogout()
-      {
-       if ( !confirm('do you confirm to logout?') ) {
-      return false;
-      }
-      else
-   {
-     return true;
-   }
-     }
-function cleanload()
-{
- top.document.getElementById('shade').style.display = 'none';
- top.document.getElementById('loadpagediv').style.display = 'none';
-}
-    </script>
-</head>
-<META content="MSHTML 6.00.6000.16809" name=GENERATOR></HEAD>
-<style>
-.left-field{
-    margin-left:-15px;
-    width:195px;
-}
-.right-field{
-    margin-left:50px
-}
-.heading{
-    font-weight: 200;
-    color: #f58220;
-    font-size: 20px;
-    padding: 0px 12px;
-    margin: 0px;
-}
-	input[type="checkbox"] {
-	  appearance: none;
-	  -webkit-appearance: none;
-	  width: 16px;
-	  height: 15px;
-	  border: 1px solid darkgray;
-	  border-radius: 1px; 
-	  cursor: pointer;
-	  position: relative;
-	  background-color: white;
-	}	
+<script language="javascript" src="voip_script.js"></script>
+<script type="text/javascript" src="base64_code.js"></script>
+ <script language="javascript" src="/Dashboard/JS/menu.js"></script>
+  <SCRIPT language=javascript src="/Dashboard/JS/util.js"></SCRIPT>
+  <script type="text/javascript" src="/JS/jquery.min.js"></script>
+	<script type="text/javascript" src="/JS/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="/JS/popper.min.js"></script>
+    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/scoop.min.js"></script>
+    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/left_menu.js"></script>
 
-	input[type="checkbox"]:checked {
-	  background-color: orange;
-	  border-color: orange;
-	}	
-
-	input[type="checkbox"]:checked::after {
-	  content: "";
-	  position: absolute;
-	  top: 0px;
-	  left: 4px;
-	  width: 5px;
-	  height: 12px;
-	  border: solid white;
-	  border-width: 0 2px 2px 0;
-	  transform: rotate(45deg);
-	}
-	.body-container{
-		width: 150%;
-	}
-	.flex{
-		display: flex;	
-	}
-	.custom-select, #MTU, .select-input{
-		height: 30px;
-	}
-	.w-360{
-		width: 360px;
-	}
-	.w-400{
-		width: 400px;
-	}
-	.flex input{
-		width: 400px;
-	}
-	
-	.flex select{
-		width: 400px;
-	}
-	.custom-checkbox-col{
-		max-width: fit-content;
-	}
-	.w-400{
-		width: 400px;
-	}
-	.flexi-checkbox{
-		display: flex;
-		flex-direction: row-reverse;
-		margin-left: -3px;
-	}
-	.ipversionstyle{
-		display: flex; 
-		justify-content: normal; 
-		align-items: center;
-	}
-	.w-85{
-		width: 85px;
-	}
-	#secStaticItems div{
-		padding-bottom: 10px;
-	}
-	#secPppoeItems div{
-		padding-bottom: 10px;
-	}
-	.notePadding{
-		padding-inline: 18px;
-		padding-block: 18px;
-	}
-	
-</style>
-<body onLoad="on_init();">
-
-      <TABLE height=117 cellSpacing=0 cellPadding=0 width=808> 
- 
-
-<INPUT id="Selected_Menu" type="hidden" 
-            value="Net->WAN" name="Selected_Menu">
-    <div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left"
-        vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact"
-        vertical-effect="shrink" vnavigation-view="view1">
-        <div class="scoop-overlay-box">
-        </div>
-        <div class="scoop-container">
-            <div class="scoop-main-container">
-                <div class="scoop-wrapper">
-                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
-                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
-							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-							<div class="scoop-inner-navbar"> 
-								<div class="scoop-logo"> 
-								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/logo.png" class="img-fluid" alt=""/></span></a>
-							</div> 
-							    <div id="LeftMenu">
-							        <SCRIPT language=javascript>
-							        MakeLeftMenu('Net','WAN')
-							        </SCRIPT>
-							    </div>
-							</div> 
-						</nav>
-                    <div class="scoop-content">
-                        <div id="Header">
-                           <div id="Header">
-                                <header class="header_box scoop-header iscollapsed" header-theme="theme2" scoop-header-position="relative">
-                                    <div class="sidebar_toggle">
-                                        <a href="javascript:void(0)">
-                                            <i class="icon-menu"></i>
-                                        </a>
-                                    </div>
-                                    <span class="gateway_box">Gateway Name:Home Gateway</span>
-                                    <span class="model_box">Gateway Type:SY-GPON-2010-WADONT</span>
-                                    <a onclick="DoLogout()" href="/cgi-bin/logout.cgi" id="logOut" name="logOut" target="_top" class="Power_btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 22 25"> 
-                                            <path id="power_icon" data-name="power_icon" class="cls-1" d="M15.405,3.524s-1.324-.6-1.324.8A3.166,3.166,0,0,0,15.41,6.65,8.495,8.495,0,0,1,11,22.253,8.495,8.495,0,0,1,6.59,6.65,3.167,3.167,0,0,0,7.919,4.322c0-1.4-1.324-.8-1.324-0.8A11.242,11.242,0,0,0,11,25,11.242,11.242,0,0,0,15.405,3.524ZM11.077,0A1.47,1.47,0,0,0,9.46,1.258V12.325a1.47,1.47,0,0,0,1.618,1.258,1.3,1.3,0,0,0,1.463-1.258V1.258A1.3,1.3,0,0,0,11.077,0Z">
-                                            </path>
-                                        </svg>
-                                    </a> 
-                                </header>
-                                <div class="breadcrum_box">
-                                    <ul style="display: flex; align-items: center;">
-                                        <li><a href="#">Status</a></li>
-                                        <div>
-                                        <a href="https://www.facebook.com/SyrotechNetworks" target="_blank">
-                                            <img src="/img/facebook.png" style="width:30px">
-                                        </a>
-                                        <a href="https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2F13408012%2Fadmin%2F" target="_blank">
-                                            <img src="/img/linkedin.png" style="width:30px">
-
-
-                                        </a>
-                                        <a href="https://twitter.com/Syrotech" target="_blank">
-                                            <img src="/img/twitter.png" style="width:30px">
-                                        </a>
-                                        <a href="https://www.youtube.com/channel/UCxKPAshBZ3BjsKoryZqd1jg?reload=9" target="_blank">
-                                            <img src="/img/youtube.png" style="width:30px">
-                                        </a> <a href="https://www.instagram.com/syrotechnetworks/" target="_blank">
-                                            <img src="/img/insta.png" style="width:30px">
-                                        </a>
-
-                                    </div>
-                                    </ul>
-                                    <div class="help_icon">
-                                        <a href="/cgi-bin/help_content.asp#UPNP Configuration" target="_blank">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38"> 
-                                                <path id="help_Icon" data-name="help_Icon" class="cls-1" d="M18.746,0A19,19,0,1,0,38,18.744,19,19,0,0,0,18.746,0ZM18.69,30.565l-0.1,0a2.766,2.766,0,0,1,.065-5.531l0.094,0A2.766,2.766,0,1,1,18.69,30.565Zm6.8-13.49a12.558,12.558,0,0,1-2.268,2.031l-1.16.8a3.147,3.147,0,0,0-1.165,1.418,2.933,2.933,0,0,0-.18,1.19l0,0.186H16.286l0.013-.375c0.054-1.54.092-2.446,0.73-3.194a18.823,18.823,0,0,1,3.3-2.658,3.485,3.485,0,0,0,.782-0.8,2.816,2.816,0,0,0,.67-1.641,3.2,3.2,0,0,0-.608-1.89,2.531,2.531,0,0,0-2.19-.823,2.389,2.389,0,0,0-2.213,1.023,4.112,4.112,0,0,0-.67,2.21v0.189H11.539l0.008-.2c0.118-2.8,1.116-4.809,2.965-5.984a7.809,7.809,0,0,1,4.295-1.127,9.269,9.269,0,0,1,5.54,1.595A5.531,5.531,0,0,1,26.587,13.8,5.461,5.461,0,0,1,25.487,17.076Z"></path> 
-                                            </svg> 
-                                        </a> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="">
-                            
-
-                             <div class="scoop-inner-content">
-								
-							 						 
-								
-                                 <FORM name="ConfigForm" id='ConfigForm' action="/change_wan.asp" method="post">
-								<div class="white_box">
-									<h1 class="heading_grey"><img src="/Dashboard/images/internet.png" width="45" height="40" class="img_sub" alt=""/> Internet Connection</h1>
-									<div class="container-fluid">
-										<hr style="width: 104.8%; margin-left: -30px;">
-										
-                                       
-																				
-
-
-
-    <div class="row">
-        <div class="col-md-3 custom-radio custom-control" style="margin-left:7px">
-        
-                  <input  type="radio" value="GPON WAN " name="wanmode" Value="0">
-                 <!-- <label class="custom-control-label" for="IpVersion">IPv4</label>-->GPON WAN
-                </div>
-                 
-<div class="col-md-3 custom-control custom-radio " style="margin-left:-120px">
-                   <input type="radio" value="EPON WAN " name="wanmode" value="1">
-                 <!-- <label class="custom-control-label" for="IpVersion-6">IPv6</label>-->EPON WAN
-                </div>
-
-<div class="col-md-3 custom-control custom-radio" style="margin-left:-120px">
-                 <input type="radio" value="ETHERNET WAN" name="wanmode" value="2">
-                <!--  <label class="custom-control-label" for="IpVersion-46">IPv4/IPv6</label>-->ETHERNET WAN
-                </div>
-              </div>
-              <hr style="width: 107%;margin-left: -45px;">
-              <div class=" col-md-12 form-group ">
-                     <div class="btn btn-lg btn-group-lg">
-					 <input class="link_bg left-field" type="submit" value="Apply Changes" name="save" onclick="return saveChanges()" style="margin-top: -9px;margin-bottom: -6px; width:120px">
-                     <input type="hidden" value="/change_wan.asp" name="submit-url">
-                     <input type="hidden" name="postSecurityFlag" value="">
-						</div>
-                      
-                                  </div>
-                                 <hr style="width: 107%;margin-left: -45px;">
-               <SCRIPT>
+<TITLE>WAN Mode</TITLE>
+<script type="text/javascript" src="base64_code.js"></script>
+<SCRIPT>
 function saveChanges()
 {
-	document.forms[0].save.isclick = 1;
-	postTableEncrypt(document.forms[0].postSecurityFlag, document.forms[0]);	
-	return true;
-}
-</SCRIPT>
-<script>
-	<% showWanPortInfo() %>
-</script>
-                <div id="result"></div>
-                <script>
-                   function radiobutton() {
-                      var ele = document.getElementsByName('gender');
-                      for(i = 0; i < ele.length; i++) {
-                         if(ele[i].checked)
-                         document.getElementById("result").innerHTML = "Gender: "+ele[i].value;
-                      }
-                   }
-                </script>
-
-<div class="col-md-12 form-group left-field">
-          <h2 class="sub_heading" style="color:#fd7e14;" id="ip_text">PON WAN</h2>
-          
-              <div class="col-md-12 form-group">
-        <select name="" onchange="on_ctrlupdate()" size="1">
-        <option value="0">nas0_0</option>
-        <option value="new">new link</option></select>
-       </div>
-       </div>
-       
-                                        <div class="col-md-12 form-group" >
-
-                                                  <div class="custom-control custom-radio">
-                                                              
-                                                                            <label class="left-field" for="IpMode_dynamic">Admin Status:</label>
-                                                                           <input class="right-field" type="radio" value="1" name="chEnable">Enable
-                                                                  <input class="right-field" type="radio" value="0" name="chEnable" checked="">Disable
-                                                                                                </div>
-                                                                                </div>
-
-                                   
-
-<div class="col-md-12 form-group" id="vlan_tr">
-    <div class="custom-control">
-        <label class="left-field" for="IpMode_PPPoE">Enable VLAN:</label>
-        <input class="right-field" type="checkbox" name="vlan" size="2" maxlength="2" value="ON" onclick="vlanClicked()">
-    </div>
-</div>
-
-<div class="col-md-12 form-group" id="vid_tr" style="display: none;">
-    <div class="custom-control">
-        <label class="left-field" for="IpMode_PPPoE">VLAN ID</label>
-       <input class="right-field" name="vlan" size="2" maxlength="2" value="" style="width: 67px;">
-    </div>
-</div>
-
-<div class="col-md-12 form-group" id="cos_tr" style="display: none;">
-    <div class="custom-control">
-        <label class="left-field">802.1p_Mark:</label>
-        <select class="right-field" size="1" name="vprio" style="width: 69px;">
-            <option value="0"> </option>
-            <option value="1"> 0 </option>
-            <option value="2"> 1 </option>
-            <option value="3"> 2 </option>
-            <option value="4"> 3 </option>
-            <option value="5"> 4 </option>
-            <option value="6"> 5 </option>
-            <option value="7"> 6 </option>
-            <option value="8"> 7 </option>
-        </select>
-    </div>
-</div>      
-                                                                                <div class="col-md-12 form-group">
-                                                                                 <div class="custom-control">
-                                                                                        <label class="left-field">Channel Mode:</label>
-                                            <select class="right-field" size="1" name="adslConnectionMode" onchange="adslConnectionModeSelection()" style="width:150px">
-	  <option selected="" value="0">Bridged</option>
-	  <option value="1">IPoE</option>
-	  <option value="2">PPPoE</option>
-<option value="8">6rd</option></select>
-                                                                                </div>
-                                                                                </div>
-                                                                                <script>
-function adslConnectionModeSelection() {
-    var adslConnectionMode = document.getElementsByName("adslConnectionMode")[0];
-    var selectedValue = adslConnectionMode.value;
-    var tbmtu = document.getElementById("tbmtu");
-    var tbprotocol = document.getElementById("tbprotocol");
-
-    if (selectedValue === "1") { // IPoE
-        tbmtu.style.display = "";
-        tbprotocol.style.display = "";
-    } else {
-        tbmtu.style.display = "none";
-        tbprotocol.style.display = "none";
-    }
-}
-</script>
-     
-                                         <div class="col-md-12 form-group">
-
-                                                                                        <div class="custom-control">
-                                                                                                  
-                                                                                                  <label  class="left-field" for="IpMode_PPPoE">Enable  NAPT:</label>
-                                                                                                 <input class="right-field" type="checkbox" name="naptEnabled" maxlength="2" value="ON" onclick="naptClicked()" disabled="">
-                                                                                                </div>
-                                                                                </div>
-                                                                                 <div class="col-md-12 form-group">
-
-                                                                                        <div class="custom-control">
-                                                                                                  
-                                                                                                  <label class="left-field" for="IpMode_PPPoE">Enable  Qos:</label>
-                                                                                                 <input class="right-field " type="checkbox" name="qosEnabled" size="2" maxlength="2" value="ON">
-                                                                                                </div>
-                                                                                </div>
-                                                                                <div class="col-md-12 form-group">
-                                                                                 <div class="custom-control">
-                                                                                        <label class="left-field">Connection Type:</label>
-                                            <select class="right-field" size="1" id="ctype" name="ctype" onchange="onSelectSvrList()" style="width:150px">
-				
-			<option value="4">OTHER</option>
-            <option value="2">INTERNET</option></select>
-                                                                                </div>
-                                                                                </div>
-                                                                                <div class="col-md-12 form-group" style="display:none" id="tbmtu">
-
-                                                                                        <div class="custom-control">
-                                                                                                  
-                                                                                                  <label  class="left-field" for="IpMode_PPPoE">MTU:</label>
-                                                                                                 <input class="right-field" type="text" name="mtu" size="10" maxlength="15">
-                                                                                                </div>
-                                                                                </div>
-                                                                                   <div class="col-md-12 form-group">
-                                                                                 <div class="custom-control">
-                                                                                                  
-                                                                                                  <label class="left-field">Enable IGMP-Proxy:</label>
-                                                                                                 <input class="right-field"type="checkbox" name="igmpEnabled" size="2" maxlength="2" value="ON" disabled="">
-                                                                                                </div>
-                                                                                </div>
-                                                                             
-
-                                                                                   <div class="col-md-12 form-group">
-                                                                                 <div class="custom-control">
-                                                                                                  
-                                                                                                  <label  class="left-field">Enable MLD-Proxy:</label>
-                                                                                                 <input class="right-field" type="checkbox" name="mldEnabled" size="2" maxlength="2" value="ON" disabled="">
-                                                                                                </div>
-                                                                                </div>
-                                                                                 <div class="col-md-12 form-group" style="display:none" id="tbprotocol">
-                                                                                 <div class="custom-control">
-                                                                                        <label class="left-field">IP Protocol:</label>
-                                           <select class="right-field" id="IpProtocolType" onchange="protocolChange()" name="IpProtocolType">
-			<option value="1"> IPv4</option>
-			<option value="2"> IPv6</option>
-			<option value="3"> IPv4/IPv6</option>
-			</select>
-                                                                                </div>
-                                                                                </div>
-
-<div id="tbl_ppp">
-      <div class="col-md-12 form-group" >
-             <h2 class="sub_heading left-field" style="color:#fd7e14;" >PPP Settings:</h2>
-             </div>
-                                                                              <div class="col-md-12 form-group">
-    <div class="custom-control">
-        <label for="pppUserName" class="left-field">UserName:</label>
-        <input type="text" name="pppUserName" size="16" maxlength="63" class="right-field" style="width:150px">
-    </div>
-</div>
-<div class="col-md-12 form-group">
-    <div class="custom-control">
-        <label for="pppPassword" class="left-field">Password:</label>
-        <input type="password" name="pppPassword" size="10" maxlength="29" class="right-field" style="width:150px">
-        <input type="checkbox" onClick="show_password()">Show Password
-    </div>
-</div>
-
-<div class="col-md-12 form-group">
-    <div class="custom-control">
-        <label for="serviceName" class="left-field">Service-Name:</label>
-        <input type="text" name="serviceName" size="10" maxlength="30" class="right-field" style="width:150px">
-    </div>
-</div>
-
-<div class="col-md-12 form-group">
-    <div class="custom-control">
-        <label for="acName" class="left-field">AC-Name:</label>
-        <input type="text" name="acName" size="16" maxlength="30" class="right-field" style="width:150px">
-    </div>
-</div>
-
-<div class="col-md-12 form-group">
-    <div class="custom-control">
-        <label for="pppConnectType" class="left-field">Type:</label>
-        <select size="1" name="pppConnectType" onChange="pppTypeSelection()" class="right-field" style="width:150px">
-            <option selected value="0">Continuous</option>
-            <option value="1">Connect on Demand</option>
-            <option value="2">Manual</option>
-        </select> 
-    </div>
-</div>
-<div class="col-md-12 form-group">
-    <div class="custom-control">
-        <label for="pppIdleTime" class="left-field">Idle Time (sec):</label>
-        <input type="text" name="pppIdleTime" size="10" maxlength="10" class="right-field" style="width:150px">
-    </div>
-</div>
-<div class="col-md-12 form-group">
-    <div class="custom-control">
-        <label for="auth" class="left-field">Authentication Method:</label>
-        <select size="1" name="auth" class=" right-field" style="width:150px">
-            <option selected value="0">AUTO</option>
-            <option value="1">PAP</option>
-            <option value="2">CHAP</option>
-        </select>
-    </div>
-</div>
-
-</div>
-<div  id="tbl_ip">
-        <div class="col-md-12 form-group" >
-             <h2 class="sub_heading left-field" style="color:#fd7e14;" >WAN IP Setting</h2>
-             </div>
-              <div class="col-md-12 form-group" >
-
-                                                  <div class="custom-control custom-radio">
-                                                              
-                                                                            <label class="left-field" >Type:</label>
-                                                                           <input class="right-field" type="radio" value="0" name="ipMode" checked onclick="ipTypeSelection(0)">Fixed IP
-                                                                  <input class="right-field" type="radio" value="1" name="ipMode" onclick="ipTypeSelection(0)">DHCP
-                                                                                                </div>
-                                                                                </div>
-                          
-                           <div class="col-md-12 form-group" >
-
-                                                                                        <div class="custom-control">
-                                                                                                  
-                                                                                                  <label  class="left-field">Local IP Address:</label>
-                                                                                                 <input class="right-field" type="text" name="ip" size="10" maxlength="15" style="width:150px">
-                                                                                                </div>
-                                                                                </div>
-
-                                                                                     <div class="col-md-12 form-group" >
-
-                                                                                        <div class="custom-control">
-                                                                                                  
-                                                                                                  <label  class="left-field">Subnet Mask:</label>
-                                                                                                 <input class="right-field" type="text" name="netmask" size="10" maxlength="15" style="width:150px">
-                                                                                                </div>
-                                                                                </div>
-
-                                                                                 <div class="col-md-12 form-group" >
-
-                                                                                        <div class="custom-control">
-                                                                                                  
-                                                                                                  <label  class="left-field">Remote IP Address:</label>
-                                                                                                 <input class="right-field" type="text" name="remoteIp" size="10" maxlength="15" style="width:150px">
-                                                                                                </div>
-                                                                                </div> 
-
-                                                                                <div class="col-md-12 form-group" >
-
-                                                                                        <div class="custom-control">
-                                                                                                  
-                                                                                                  <label  class="left-field" >Primary DNS Server:</label>
-                                                                                                 <input class="right-field" type="text" name="dns1" size="18" maxlength="15" value="" style="width:150px">
-                                                                                                </div>
-                                                                                </div>
-
-                                                                                 <div class="col-md-12 form-group" >
-
-                                                                                        <div class="custom-control">
-                                                                                                  
-                                                                                                  <label  class="left-field">Secondary DNS Server:</label>
-                                                                                                 <input class="right-field"  type="text" name="dns2" size="18" maxlength="15" value="" style="width:150px">
-                                                                                                </div>
-                                                                                </div>
-
-                                                        <div class="col-md-12 form-group" >
-    <div class="custom-control">
-        <label class="left-field" >IP Unnumbered:</label>
-        <input class="right-field" type="checkbox" name="ipUnnum" size="2" maxlength="2" value="ON" onclick="ipModeSelection()">
-    </div>
-</div>
-                                                                                 <div class="col-md-12 form-group" >
-                                                                                  <div class="custom-control custom-radio">
-                                                              
-                                                                            <label class="left-field" >Request DNS:</label>
-                                                                              <input class="right-field" type="radio" value="1" name="dnsMode" onclick="dnsModeClicked()">Enable
-		                                                                             <input class="right-field" type="radio" value="0" name="dnsMode" checked="" onclick="dnsModeClicked()">Disable
-                                                                                                </div>
-                                                                                </div>
-
-                                                                               
-                                                      
-                                                                                </div>
-                                                        
-                                                        <div id="tbipv6wan">
-                                                          <div class="col-md-12 form-group" id="tbipv6wan" >
-             <h2 class="sub_heading left-field" style="color:#fd7e14;" >6rd Config:</h2>
-             </div>
-                                                        <div class="col-md-12 form-group">
-    <div class="custom-control">
-        <label for="SixrdBRv4IP" class="left-field">Board Router v4 Address:</label>
-        <input id="SixrdBRv4IP" maxLength="39" size="36" name="SixrdBRv4IP" style="width:150px" class="right-field">
-    </div>
-</div>
-<div class="col-md-12 form-group">
-    <div class="custom-control">
-        <label for="SixrdIPv4MaskLen" class="left-field">6rd IPv4 Mask Len:</label>
-        <input id="SixrdIPv4MaskLen" maxLength="39" size="36" name="SixrdIPv4MaskLen" style="width:150px" class="right-field">
-    </div>
-</div>
-<div class="col-md-12 form-group">
-    <div class="custom-control">
-        <label for="SixrdPrefix" class="left-field">6rd Prefix (EX:"2001:db8::"):</label>
-        <input id="SixrdPrefix" maxLength="39" size="36" name="SixrdPrefix" style="width:150px" class="right-field">
-    </div>
-</div>
-
-<div class="col-md-12 form-group">
- <div class="custom-control">
-    <label for="SixrdPrefixLen" class="left-field">6rd Prefix length:</label>
-        <input id="SixrdPrefixLen" maxLength="39" size="20" name="SixrdPrefixLen" style="width:150px"  class="right-field">
-    </div>
-</div>
-</div>
-
-                                 <div id="tbipv6wan" >
-                                 
-                                                        <div class="col-md-12 form-group">
-             <h2 class="sub_heading left-field" style="color:#fd7e14; width:230px" >IPv6 WAN Settings:</h2>
-             </div>
-    <div class="col-md-12 form-group">
-       <div class="custom-control" id="TrIpv6AddrType">
-        <label class="left-field" >Address Mode:</label>
-       <input class="right-field" type="checkbox" value="ON" name="slacc" id="send3">Slaac
-			<input class="right-field" type="checkbox" value="ON" name="staticIpv6" id="send4" onclick="ipv6StaticUpdate()">Static
-    </div>
-</div>
-
-                                  <div id="secIPv6Div">
-                                        <div class="col-md-12 form-group ">
-                                       <div class="custom-control" id="TrIpv6Addr">
-                                                                                                  
-                                                                                                  <label  class="left-field">IPv6 Address:</label>
-                                                                                                <input class="right-field" id="Ipv6Addr" maxlength="39" size="36" name="Ipv6Addr" style="width:150px">
-	                                                                                      	/
-		                                                                                  <input id="Ipv6PrefixLen" maxlength="3" size="3" name="Ipv6PrefixLen" style="width:150px">
-                                                                                </div>
-                                                                                </div>
-
-                                                                                   <div class="col-md-12 form-group ">
-                                       <div class="custom-control" id="TrIpv6Gateway">
-                                                                                                  
-                                                                                                  <label  class="left-field">IPv6 Gateway:</label>
-                                                                                                  <input class="right-field" id="Ipv6Gateway" maxlength="39" size="36" name="Ipv6Gateway" style="width:150px">
-                                                                                                  </div>
-                                                                                                  </div>
-</div>
-                           <div id="dhcp6c_ctrlblock" >                                                      
-                                  <div class="col-md-12 form-group" id="tbdhcpv6">
-       <div class="custom-control" >
-        <label class="left-field" >Enable DHCPv6 Client:</label>
-        <input class="right-field" type="checkbox" value="ON" name="itfenable" id="itfenable" onclick="dhcp6cEnable()">
-        </div>
-        </div>
-
-         <div class="col-md-12 form-group" id="dhcp6c_block">
-       <div class="custom-control" >
-        <label class="left-field" >Request Options:</label>
-        <input class="right-field" type="checkbox" value="ON" name="iana" id="send1">Request Address
-       <input class="right-field" type="checkbox" value="ON" name="iapd" id="send2">Request Prefix
-        </div>
-        </div>
-        </div>
-
-               <div id="IPv6DnsDiv">
-               <div class="col-md-6 form-group">
-
-                                                  <div class="custom-control custom-radio">
-                                                              
-                                                                            <label class="left-field">Request DNS:</label>
-                                                                           <input class="right-field" type="radio" value="1" name="dnsV6Mode" onclick="dnsModeV6Clicked()" disabled="">Enable
-			                                                   <input class="right-field" type="radio" value="0" name="dnsV6Mode" checked="" onclick="dnsModeV6Clicked()" disabled="">Disable
-                                                                         </label>
-                                                                                                </div>
-                                                                                </div>
-
-                                                                                <div class="col-md-12 form-group ">
-                                       <div class="custom-control" >
-                                                                                                  
-                                                                                                  <label  class="left-field">Primary IPv6 DNS:</label>
-                                                                                                  <input class="right-field"  maxlength="39" size="36" name="Ipv6Dns1" style="width:150px">
-                                                                                                  </div>
-                                                                                                  </div>
-
-                                                                                                    <div class="col-md-12 form-group ">
-                                       <div class="custom-control" >
-                                                                                                  
-                                                                                                  <label  class="left-field">Secondary IPv6 DNS:</label>
-                                                                                                  <input class="right-field" maxlength="39" size="36" name="Ipv6Dns2" style="width:150px">
-                                                                                                  </div>
-                                                                                                  </div>
-
-               </div>
-
-               <div id="DSLiteDiv">
-
-                                                                              <div class="col-md-12 form-group ">
-                                       <div class="custom-control" >
-                                                                                                  
-                                                                                                  <label  class="left-field">DS-Lite:</label>
-                                                                                                  <input class="right-field" type="checkbox" value="ON" name="dslite_enable" id="dslite_enable" onclick="dsliteSettingChange()" style="width:150px">
-                                                                                                  </div>
-                                                                                                  </div>
-                 <div class="col-md-12 form-group "> 
-                                       <div class="custom-control" >
-                                                          <label  class="left-field">AFTR Address Mode:</label>
-                                                          <select class="right-field" name="dslite_aftr_mode" onchange="dsliteAftrModeChange()" style="width:150px">
-			<option value="0">DHCPv6</option>
-			<option value="1">static</option>
-			</select>
-                                                          </div>
-                                                          </div>  
-                                                           <div class="col-md-12 form-group ">                             
-                                       <div class="custom-control" >
-                                                                                                  
-                                                                                                  <label  class="left-field">AFTR Address:</label>
-                                                                                                  <input class="right-field" type="text" name="dslite_aftr_hostname" size="37" maxlength="64" style="width:150px">
-                                                                                                  </div>
-                                                                                                  </div>
-                                                            </div>
-                                                            </div>
-               
-                                                                                <div class="col-md-12 form-group left-field" id="div_pmap">
-                                                                                        <h2 class="sub_heading" style="color:#fd7e14;">Port Mapping</h2>
-                                              
-                                                                            
-                                                                                <div class="form-group row" id="tbl_pmap">
-
-                                                                            <div class="col-md-12">
-                                                                            <input type="checkbox" name="chkpt">LAN_1
-                                                                                       </div>
-
-                                                                                         <div class="col-md-12">
-                                                                            <input type="checkbox" name="chkpt" >LAN_2
-                                                                                       </div>
-                                                                                         <div class="col-md-12">
-                                                                            <input type="checkbox" name="chkpt">SSID1(5G)
-                                                                                       </div>
-                                                                                         <div class="col-md-12">
-                                                                            <input type="checkbox" name="chkpt">SSID2
-                                                                                       </div> 
-                                                                                        <div class="col-md-12">
-                                                                            <input type="checkbox" name="chkpt">SSID3
-                                                                                       </div> 
-                                                                                        <div class="col-md-12">
-                                                                            <input type="checkbox" name="chkpt">SSID4
-                                                                                       </div>  
-                                                                                       <div class="col-md-12">
-                                                                            <input type="checkbox" name="chkpt">SSID5(2.4G)
-                                                                                       </div>  
-                                                                                       <div class="col-md-12">
-                                                                            <input type="checkbox" name="chkpt">SSID6
-                                                                                       </div>  
-                                                                                       <div class="col-md-12">
-                                                                            <input type="checkbox" name="chkpt">SSID7
-                                                                                       </div>
-                                                                                         <div class="col-md-12">
-                                                                            <input type="checkbox" name="chkpt">SSID8
-                                                                                       </div>
-                                                                                                                </div>                                                     
-                                                                               
-                                             </div>
-
-                                                                             <hr style="width: 104.7%;margin-left: -29px;">
-                                                                             
-                                                                                <div class="btn_ctl">
-<input type="hidden" value="/admin/multi_wan_generic.asp" name="submit-url">
-<input type="hidden" id="lst" name="lst" value="">
-<input type="hidden" name="encodePppUserName" value="">
-<input type="hidden" name="encodePppPassword" value="">
-<input class="link_bg left-field" type="submit" value="Apply Changes" name="apply" onClick="return applyCheck(this)" style="width: 110px;margin-left: 27px;">&nbsp; &nbsp; &nbsp; &nbsp;
-<input class="link_bg" type="submit" value="Delete" name="delete" id="delete" onClick="return deleteCheck(this)" >
-<input type="hidden" name="itfGroup" value=0>
-<input type="hidden" name="postSecurityFlag" value="">
-</div>
-<hr style="width: 104.7%;margin-left: -29px;">
-<br>
-
-                 <div class="col-md-12 form-group">
-              
-                   <h2 class="sub_heading" style="color:#fd7e14;" id="ip_text">NAT Type</h2>
-               
-                          <div class="col-md-6 form-group">
-
-                                                  <div class="custom-control custom-radio">
-                                                              
-                                                                            <label class="left-field">Admin Status:</label>
-                                                                           <input class="right-field" name="nattype" type="radio" value="NAT1">NAT1&nbsp;&nbsp;
-                                                                        <input class="right-field" name="nattype" type="radio" value="NAT2">NAT2&nbsp;&nbsp;
-                                                                         <input class="right-field" name="nattype" type="radio" value="NAT4">NAT4 (default)
-                                                                         </label>
-                                                                                                </div>
-                                                                                </div>
-                                                                                </div>
-                                                                             <hr style="width: 107%;margin-left: -44px;">
-                 <div class="btn_ctl">
-                                                                               
-                                                                                <input class="link_bg left-field" type="submit" value="Apply Changes" name="apply" onclick="return on_submit()" style="width: 110px;margin-left: 15px;">
-                                                                         </div>
-                                                                        <hr style="width: 107%;margin-left: -44px;">
-
-                                     <script language="javascript">
-
-var nattype=0
-function on_init()
-{
- if(nattype==0)
- {
-  document.forms[0].nattype[2].checked = true;
- }
- else if(nattype==1)
- {
-  document.forms[0].nattype[0].checked = true;
- }
- else
- {
-  document.forms[0].nattype[1].checked = true;
- }
-}
-function on_submit()
-{
+ document.forms[0].save.isclick = 1;
  postTableEncrypt(document.forms[0].postSecurityFlag, document.forms[0]);
  return true;
 }
-</script> 
-
-                                                                             <div class="form-footer text-right">
-                                                                                <button class="btn btn-orang btn-lg" type="button" id="btnOK" onclick="btnSave()">Apply</button>
-                                                                                <button class="btn  btn-secondary btn-lg" type="button" id="btnCancel" onclick="onCancel()">Cancel</button>
-                                                                                
-                                          					<input  class="btn btn-orang" id="btnRemoveCnt" name="btnRemoveCnt" onclick="btnRemoveWanCnt()" type="button" value="Delete Connection">
-                                                                                  
-                                                                                </div>
-                                                                </div>
-                                                        </div>
-                            </div>
-                            </div>
-                            </div>
-                          </div>
-               
-               <script>
- if (isAHMVersion == "0" && 0 == 1)
-  document.getElementById("delete").style.display="none";
- 			document.getElementById('IGMPProxy_show').style.display = '';
-
- var isConfigRTKRG = "yes";
- if((isSPVersion == "1")||(isAHMNormalUser != "1" && isGenevaVersion != "1" && adminAccount==1))
-  disableForm();
- if(isPRACTVersion == "1")
- {
-  document.getElementById("vlan_tr").style.display = "none";
-  document.getElementById("vid_tr").style.display = "none";
-  document.getElementById("cos_tr").style.display = "none";
- }
-</script>
-<script type="text/javascript" src="base64_code.js"></script>
-<script language="javascript">
 var initConnectMode;
 var pppConnectStatus=0;
 var dgwstatus;
@@ -881,7 +59,8 @@ var isDigiWayVersion = "0"
 var isGenevaVersion = "0"
 var isHBSVersion = "0"
 var isPRACTVersion = "0"
-with(links){push(new it_nr("nas0_0" , new it("applicationtype", 2), new it("cmode", 0), new it("brmode", 0), new it("napt", 1), new it("enableIGMP", 0), new it("enableIpQos", 0), new it("dgw", 0), new it("vlan", 0), new it("vid", 0), new it("vprio", 0), new it("enable", 1), new it("mtu", 1500), new it("IpProtocol", 3), new it("ipDhcp", 0), new it("ipAddr", "0.0.0.0"), new it("remoteIpAddr", "0.0.0.0"), new it("netMask", "0.0.0.0"), new it("dnsMode", 0), new it("v4dns1", ""), new it("v4dns2", ""), new it("pppUsername", ""), new it("pppPassword", ""), new it("pppCtype", 0), new it("pppIdleTime", 0), new it("pppAuth", 0), new it("pppACName", ""), new it("pppServiceName", ""), new it("AddrMode", 0), new it("Ipv6Addr", ""), new it("RemoteIpv6Addr", ""), new it("RemoteIpv6EndPointAddr", ""), new it("Ipv6Dns1", ""), new it("Ipv6Dns2", ""), new it("Ipv6AddrPrefixLen", 0), new it("Ipv6Dhcp", 0), new it("Ipv6DhcpRequest", 0), new it("dnsv6Mode", 1), new it("dslite_enable", 0), new it("dslite_aftr_mode", 0), new it("dslite_aftr_hostname", ""), new it("itfGroup", 0), new it("SixrdIPv4MaskLen", 0), new it("SixrdPrefixLen", 0), new it("SixrdPrefix", ""), new it("SixrdBRv4IP", ""), new it("enableMLD", 0)));
+with(links){push(new it_nr("nas0_0" , new it("applicationtype", 2), new it("cmode", 1), new it("brmode", 2), new it("napt", 1), new it("enableIGMP", 0), new it("enableIpQos", 0), new it("dgw", 1), new it("vlan", 0), new it("vid", 0), new it("vprio", 0), new it("enable", 1), new it("mtu", 1500), new it("IpProtocol", 1), new it("ipDhcp", 0), new it("ipAddr", "10.215.1.58"), new it("remoteIpAddr", "10.215.1.1"), new it("netMask", "255.255.255.0"), new it("dnsMode", 0), new it("v4dns1", "8.8.8.8"), new it("v4dns2", "8.8.4.4"), new it("pppUsername", ""), new it("pppPassword", ""), new it("pppCtype", 0), new it("pppIdleTime", 0), new it("pppAuth", 0), new it("pppACName", ""), new it("pppServiceName", ""), new it("AddrMode", 0), new it("Ipv6Addr", ""), new it("RemoteIpv6Addr", ""), new it("RemoteIpv6EndPointAddr", ""), new it("Ipv6Dns1", ""), new it("Ipv6Dns2", ""), new it("Ipv6AddrPrefixLen", 0), new it("Ipv6Dhcp", 0), new it("Ipv6DhcpRequest", 0), new it("dnsv6Mode", 0), new it("dslite_enable", 0), new it("dslite_aftr_mode", 0), new it("dslite_aftr_hostname", ""), new it("itfGroup", 1), new it("SixrdIPv4MaskLen", 0), new it("SixrdPrefixLen", 0), new it("SixrdPrefix", ""), new it("SixrdBRv4IP", ""), new it("enableMLD", 0)));
+push(new it_nr("ppp0_nas0_1" , new it("applicationtype", 2), new it("cmode", 2), new it("brmode", 2), new it("napt", 1), new it("enableIGMP", 0), new it("enableIpQos", 0), new it("dgw", 0), new it("vlan", 0), new it("vid", 0), new it("vprio", 0), new it("enable", 1), new it("mtu", 1492), new it("IpProtocol", 3), new it("ipDhcp", 0), new it("ipAddr", "0.0.0.0"), new it("remoteIpAddr", "0.0.0.0"), new it("netMask", "0.0.0.0"), new it("dnsMode", 0), new it("v4dns1", ""), new it("v4dns2", ""), new it("pppUsername", "c3lybzQ="), new it("pppPassword", "MTIzNDU2"), new it("pppCtype", 0), new it("pppIdleTime", 0), new it("pppAuth", 0), new it("pppACName", ""), new it("pppServiceName", ""), new it("AddrMode", 1), new it("Ipv6Addr", ""), new it("RemoteIpv6Addr", ""), new it("RemoteIpv6EndPointAddr", ""), new it("Ipv6Dns1", ""), new it("Ipv6Dns2", ""), new it("Ipv6AddrPrefixLen", 0), new it("Ipv6Dhcp", 1), new it("Ipv6DhcpRequest", 1), new it("dnsv6Mode", 1), new it("dslite_enable", 0), new it("dslite_aftr_mode", 0), new it("dslite_aftr_hostname", ""), new it("itfGroup", 0), new it("SixrdIPv4MaskLen", 0), new it("SixrdPrefixLen", 0), new it("SixrdPrefix", ""), new it("SixrdBRv4IP", ""), new it("enableMLD", 0)));
 }
 function show_password()
 {
@@ -1620,7 +799,111 @@ function updateCtype(isBridge)
   ctype_select.add(opt);
  }
 }
-
+function adslConnectionModeSelection(isLinkChanged)
+{
+ document.ethwan.naptEnabled.disabled = false;
+ document.ethwan.igmpEnabled.disabled = false;
+ document.ethwan.mldEnabled.disabled = false;
+ document.ethwan.ipUnnum.disabled = true;
+ document.ethwan.droute[0].disabled = false;
+ document.ethwan.droute[1].disabled = false;
+ if(!isLinkChanged)
+  document.ethwan.mtu.value = 1500;
+ if(!isLinkChanged){
+  var mode = document.ethwan.adslConnectionMode.value;
+  if(mode == '0')
+   updateCtype(true);
+  else
+   updateCtype(false);
+  if(isAHMVersion == "1" && isAHMNormalUser != "1")
+  {
+   if(mode == '0')
+    updateCtypeAHM(true);
+   else
+    updateCtypeAHM(false);
+  }
+ }
+ document.getElementById('tbl_ppp').style.display='none';
+ document.getElementById('tbl_ip').style.display='none';
+ if(document.getElementById('tbl_dhcp_opt') != null)
+  document.getElementById('tbl_dhcp_opt').style.display='none';
+ document.getElementById('6rdDiv').style.display='none';
+ if (1) {
+  ipv6SettingsEnable();
+  document.getElementById('tbprotocol').style.display="";
+  document.ethwan.IpProtocolType.disabled = false;
+ }else
+  document.getElementById('tbprotocol').style.display="none";
+ switch(document.ethwan.adslConnectionMode.value){
+  case '0':
+   document.getElementById('tbprotocol').style.display="none";
+   document.getElementById('tbmtu').style.display='none';
+   document.ethwan.naptEnabled.disabled = true;
+   document.ethwan.igmpEnabled.disabled = true;
+   document.ethwan.mldEnabled.disabled = true;
+   document.ethwan.droute[0].disabled = true;
+   document.ethwan.droute[1].disabled = true;
+   pppSettingsDisable();
+   ipSettingsDisable();
+   if (1) {
+    ipv6SettingsDisable();
+    document.getElementById('tbprotocol').style.display="none";
+   }
+   break;
+  case '8':
+   if (1 && 1)
+   {
+    document.getElementById('tbmtu').style.display='';
+    document.getElementById('6rdDiv').style.display='block';
+    document.ethwan.droute[0].checked = false;
+    document.ethwan.droute[1].checked = true;
+    document.ethwan.IpProtocolType.value = 3;
+    document.ethwan.slacc.checked = false;
+    document.ethwan.staticIpv6.checked = false;
+    document.ethwan.itfenable.checked = false;
+    ipSettingsEnable();
+    enableFixedIpInput();
+    ipv6SettingsDisable();
+    document.getElementById('tbprotocol').style.display="none";
+   }
+   break;
+  case '1':
+   document.getElementById('tbmtu').style.display='';
+   pppSettingsDisable();
+   if(!isLinkChanged)
+   {
+    document.ethwan.naptEnabled.checked = true;
+    document.ethwan.ipMode[1].checked = true;
+    document.ethwan.dnsMode[0].checked = true;
+   }
+   if (1) {
+    if(document.ethwan.IpProtocolType.value != 2)
+     ipSettingsEnable();
+   }
+   else
+    ipSettingsEnable();
+   break;
+  case '2':
+   if(!isLinkChanged)
+    document.ethwan.mtu.value = 1492;
+   if (0)
+   {
+    document.ethwan.serviceName.value = "";
+    document.ethwan.acName.value = "";
+   }
+   document.getElementById('tbmtu').style.display='';
+   document.getElementById('tbl_ppp').style.display='block';
+   ipSettingsDisable();
+   pppSettingsEnable();
+   if(!isLinkChanged)
+    document.ethwan.naptEnabled.checked = true;
+   break;
+  default:
+   pppSettingsDisable();
+   ipSettingsEnable();
+ }
+ updateBrMode(isLinkChanged);
+}
 function naptClicked()
 {
  if (document.ethwan.adslConnectionMode.value == 3) {
@@ -1635,16 +918,15 @@ function naptClicked()
 }
 function vlanClicked()
 {
-var vid_tr = document.getElementById("vid_tr");
-    var cos_tr = document.getElementById("cos_tr");
-    
-    if (vid_tr.style.display === "none") {
-        vid_tr.style.display = "";
-        cos_tr.style.display = "";
-    } else {
-        vid_tr.style.display = "none";
-        cos_tr.style.display = "none";
-    }
+ if (document.ethwan.vlan.checked)
+ {
+  document.getElementById('vid_tr').style.display = "";
+  document.getElementById('cos_tr').style.display = "";
+ }
+ else {
+  document.getElementById('vid_tr').style.display = "none";
+  document.getElementById('cos_tr').style.display = "none";
+ }
  if(isPRACTVersion == "1")
  {
   document.getElementById('vid_tr').style.display = "none";
@@ -2131,46 +1413,578 @@ function on_init()
   on_ctrlupdate();
  }
 }
-</script>
+var nattype=0
+function on_init()
+{
+ if(nattype==0)
+ {
+  document.forms[0].nattype[2].checked = true;
+ }
+ else if(nattype==1)
+ {
+  document.forms[0].nattype[0].checked = true;
+ }
+ else
+ {
+  document.forms[0].nattype[1].checked = true;
+ }
+}
+function on_submit()
+{
+ postTableEncrypt(document.forms[0].postSecurityFlag, document.forms[0]);
+ return true;
+}
+</SCRIPT>
+<style>
+.btn-group-lg>.btn, .btn-lg {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+}
+ .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+    .table th,
+    .table td {
+        border: 1px solid #dee2e6;
+    }
+    .table thead th {
+        background-color: #e9ecef;
+    }
+.left-field{
+    margin-left:-10px;
+    width:365px;
+}
+.left-field-para{
+    margin-left:-10px;
+    width:1248px;
+}
+.right-field-radio{
+    margin-left:17px;
+    width:33px; 
+    padding:2px
+}
+.right-field{
+    margin-left:178px;
+    padding:2px;
+    width:160px; 
+}
+.right-field-checkbox{
+    margin-left:178px;
+    padding:3px;
+     
+}
+.margin_adjs{
+    margin-left:-15px;
+    width:102.5%
+}
+</style>
+</head>
+<!-------------------------------------------------------------------------------------->
+<body>
+<INPUT id="Selected_Menu" type="hidden" 
+            value="Net->WAN" name="Selected_Menu">
+    <div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left"
+        vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact"
+        vertical-effect="shrink" vnavigation-view="view1">
+        <div class="scoop-overlay-box">
+        </div>
+        <div class="scoop-container">
+            <div class="scoop-main-container">
+                <div class="scoop-wrapper">
+                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
+                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
+							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+							<div class="scoop-inner-navbar"> 
+								<div class="scoop-logo"> 
+								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/logo.png" class="img-fluid" alt=""/></span></a>
+							</div> 
+							    <div id="LeftMenu">
+							        <SCRIPT language=javascript>
+							        MakeLeftMenu('Net','WAN')
+							        </SCRIPT>
+							    </div>
+							</div> 
+						</nav>
+                    <div class="scoop-content">
+                        <div id="Header">
+                            <SCRIPT language=javascript>
+                            MakeHeader('Gateway Name:','Gateway Type:','Net','WAN','Welcome!','#');
+                            </SCRIPT>
+                        </div>
+                        <div class="">
+                            
 
-            <div class="text-center p-3"  style="background-color: rgb(235 234 234 / 20%);">
-                &COPY; 2023 Copyright :
-                <a class="text-white" style="color:#fd7e14 !important;" href="#">Syrotech Networks Pvt. Ltd.</a>
-              </div>
+                             <div class="scoop-inner-content">
+								
+							 						 
+								<div class="white_box">
+									<h1 class="heading_grey"><img src="/Dashboard/images/internet.png" width="45" height="40" class="img_sub" alt=""/> Internet Connection</h1>
+									<div class="container-fluid">
+										<hr class="margin_adjs">
+										
+                                       
+																				<div class="col-md-12 form-group left-field">
+        <div class="custom-control">
+         <h2 class="sub_heading " style="color:#fd7e14">WAN Mode</h2>
+         </div>
+         </div>
+         																<div class="col-md-12 form-group left-field-para">
+        <div class="custom-control">
+ <p>This page is used to configure which WAN to use of your Router.When change the uplink mode , ONU will reboot.</p>
+</div>
+</div>
+<form action="/boaform/admin/formWanPortChange" method="post" name="wanMode">
+<div class="data_common data_common_notitle">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">WAN Mode:</label>
+           
+                <input type="radio" name="wanmode" value="0" class="right-field-radio"> GPON WAN
+                <input type="radio" name="wanmode" value="1" class="right-field-radio"> EPON WAN
+                <input type="radio" name="wanmode" value="2" class="right-field-radio"> Ethernet WAN
             </div>
         </div>
-    
+    </div>
 
-    
-    <script language="JavaScript">
-function lockObj(objName, readST)
-{
-	if ( null != getElById(objName) )
-	{
-		getElById(objName).readOnly = readST;
-		getElById(objName).style.color = readST ? 'gray' : '';
-	}
-}
-var UsernameOpenFlag = "1";
-var PasswordOpenFlag = "1";
-var VLANIDOpenFlag = "1";
-if(UsernameOpenFlag == "0")
-	lockObj('pppUserName', true);
-if(PasswordOpenFlag == "0")
-	lockObj('pppPassword', true);
-if(VLANIDOpenFlag == "0")
-	lockObj('vlan', true);
+										<hr class="margin_adjs">
+  
+<div class="btn_ctl">
+    <div class="col-md-12 form-group left-field">
+        <div class="custom-control">
+ <input class="link_bg" type="submit" value="Apply Changes" name="save" onClick="return saveChanges()">
+ <input type="hidden" value="/change_wan.asp" name="submit-url">
+ <input type="hidden" name="postSecurityFlag" value="">
+</div>
+</div>
+</div>
+										<hr class="margin_adjs">
+
+
+<script>
+ document.wanMode.wanmode[2].checked = true;
+
 </script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script type="text/javascript" src="/JS/jquery.min.js"></script>
-	<script type="text/javascript" src="/JS/bootstrap.min.js"></script>
-<!--    <script type="text/javascript" src="/Dashboard/Modules/leftmenu/js/Loader.js"></script>-->
-    <script type="text/javascript"  src="/JS/popper.min.js"></script>
-    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/scoop.min.js"></script>
-    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/left_menu.js"></script>
-    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/lib/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/lib/jquery.mousewheel.min.js"></script>
+</form>
+<div class="intro_main ">
+    <p class="intro_title">PON WAN</p>
+    <p class="intro_content"> This page is used to configure the parameters for PONWAN</p>
+   </div>
+   <form action=/boaform/admin/formWanEth method=POST name="ethwan">
+   <!--<table border="0" cellspacing="4" width="800" style="display:none">
+    <tr>
+     <td>
+      <b>WAN Mode:</b>
+      <span style="display: none"><input type="checkbox" value=1 name="wmchkbox">ATM</span>
+      <span ><input type="checkbox" value=2 name="wmchkbox">Ethernet</span>
+      <span style="display: none"><input type="checkbox" value=4 name="wmchkbox">PTM</span>
+      <span style="display: none"><input type="checkbox" value=8 name="wmchkbox">Bonding</span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="hidden" name="wan_mode" value=0>
+      <input type="submit" value="Submit" name="submitwan" onClick="return SubmitWANMode()">
+     </td>
+    </tr>
+    <tr><td><hr size=1 noshade align=top></td></tr>
+   </table>-->
+   <div class="data_common data_common_notitle">
+   <table>
+    <tr>
+     <th colspan=2><select name="lkname" onChange="on_ctrlupdate()" size="1"></th>
+    </tr>
+    <tr>
+     <th>Admin Status:</th>
+     <td><input type=radio value=1 name="chEnable">Enable
+      <input type=radio value=0 name="chEnable" checked>Disable
+     </td>
+    </tr>
+    <tr id="vlan_tr">
+     <th width=30%>Enable VLAN: </th>
+     <td width=70%><input type="checkbox" name="vlan" size="2" maxlength="2" value="ON" onClick=vlanClicked()></td>
+    </tr>
+    <tr id="vid_tr">
+     <th>VLAN ID:</th>
+     <td><input type="text" name="vid" size="10" maxlength="15"></td>
+    </tr>
+    <tr id="cos_tr">
+     <th>802.1p_Mark </th>
+     <td><select style="WIDTH: 60px" name="vprio">
+      <option value="0" > </option>
+      <option value="1" > 0 </option>
+      <option value="2" > 1 </option>
+      <option value="3" > 2 </option>
+      <option value="4" > 3 </option>
+      <option value="5" > 4 </option>
+      <option value="6" > 5 </option>
+      <option value="7" > 6 </option>
+      <option value="8" > 7 </option>
+      </select>
+     </td>
+    </tr>
+    <tr>
+     <th> Channel Mode:</th><td><select size="1" name="adslConnectionMode" onChange="adslConnectionModeSelection(false)">
+         <option selected value="0">Bridged</option>
+         <option value="1">IPoE</option>
+         <option value="2">PPPoE</option>
+   <option value="8">6rd</option></select></td>
    
+    </tr>
+    
+    <tr>
+     <th>Enable NAPT: </th><td><input type="checkbox" name="naptEnabled"
+    maxlength="2" value="ON" onClick=naptClicked()></td>
+    </tr>
+    <tr>
+     <th >
+     Enable QoS: </th>
+     <td><input type="checkbox" name="qosEnabled" size="2" maxlength="2" value="ON" >
+     </th>
+    </tr>
+    <tr>
+           <th>Connection Type:</th>
+           <td><select size=1 id="ctype" name="ctype"  onchange=onSelectSvrList() >
+                   <option  value=4>Other</option>
+                   <option  value=1>TR069</option>
+                   <option  value=2>INTERNET</option>
+                   <option  value=3>INTERNET_TR069</option>
+                   <option  value=8>VOICE</option>
+                   <option  value=9>VOICE_TR069</option>
+                   <option  value=10>VOICE_INTERNET</option>
+                   <option  value=11>VOICE_INTERNET_TR069</option>
+               </select>
+           </td>
+       </tr>
+   
+    <tr id=tbmtu>
+     <th>MTU: </th>
+     <td>
+     <input type="text" name="mtu" size="10" maxlength="15">
+     </td>
+    </tr>
+    <tr ID=dgwshow style="display:none">
+     <th>Default Route:</th>
+     <td>
+      <input type=radio value=0 name="droute">Disable
+      <input type=radio value=1 name="droute" checked>Enable
+     </td>
+    </tr>
+    <tr ID=IGMPProxy_show style="display:none">
+     <th>Enable IGMP-Proxy: </th><td><input type="checkbox" name="igmpEnabled"
+   size="2" maxlength="2" value="ON"></td>
+    </tr>
+    <tr>
+     <th>Enable MLD-Proxy:: </th><td><input type="checkbox" name="mldEnabled"
+   size="2" maxlength="2" value="ON"></td>
+    </tr>
+    <tr id="tbprotocol">
+           <th>IP Protocol:</th>
+           <td><select id="IpProtocolType" style="WIDTH: 130px" onChange="protocolChange()" name="IpProtocolType">
+               <option value="1" > IPv4</option>
+               <option value="2" > IPv6</option>
+               <option value="3" > IPv4/IPv6</option>
+               </select>
+           </td>
+       </tr>
+   
+   </table>
+   </div>
+   <div id=tbl_ppp class="column">
+    <div class="column_title">
+     <div class="column_title_left"></div>
+      <p>PPP Settings:</p>
+     <div class="column_title_right"></div>
+    </div>
+   <div class="data_common">
+   <table>
+   <tr>
+       <th>UserName:</th>
+       <td><input type="text" name="pppUserName" size="16" maxlength="63"></td>
+   </tr><tr>
+       <th>Password:</th>
+       <td><input type="password" name="pppPassword" size="10" maxlength="29">
+       <input type="checkbox" onClick="show_password()">Show Password</td>
+   </tr>
+   <tr>
+       <th>Type:</th>
+       <td><select size="1" name="pppConnectType" onChange="pppTypeSelection()">
+           <option selected value="0">Continuous</option>
+           <option value="1">Connect on Demand</option>
+           <option value="2">Manual</option>
+           </select>
+       </td>
+   </tr><tr>
+       <th>Idle Time (sec):</th>
+       <td><input type="text" name="pppIdleTime" size="10" maxlength="10"></td>
+   </tr>
+   <tr>
+       <th>Authentication Method:</th>
+       <td><select size="1" name="auth">
+           <option selected value="0">AUTO</option>
+           <option value="1">PAP</option>
+           <option value="2">CHAP</option>
+           </select>
+       </td>
+   </tr>
+   <tr>
+       <th>AC-Name:</th>
+       <td><input type="text" name="acName" size="16" maxlength="30"></td>
+   </tr><tr>
+       <th>Service-Name:</th>
+       <td><input type="text" name="serviceName" size="10" maxlength="30"></td>
+   </tr>
+   </table>
+   </div>
+   </div>
+   <div id=tbl_ip class="column">
+    <div class="column_title">
+     <div class="column_title_left"></div>
+      <p>WAN IP Settings:</p>
+     <div class="column_title_right"></div>
+    </div>
+   <div class="data_common">
+   <table>
+   <tr>
+   
+       <th>Type:</th>
+       <td>
+       <input type="radio" value="0" name="ipMode" checked onClick="ipTypeSelection(0)">Fixed IP
+       
+       <input type="radio" value="1" name="ipMode" onClick="ipTypeSelection(0)">DHCP</td>
+   </tr>
+   <tr>
+       <th>Local IP Address:</th>
+       <td><input type="text" name="ip" size="10" maxlength="15"></td>
+   </tr><tr>
+       <th>Remote IP Address:</th>
+       <td><input type="text" name="remoteIp" size="10" maxlength="15"></td>
+   </tr><tr>
+       <th>Subnet Mask:</th>
+       <td><input type="text" name="netmask" size="10" maxlength="15"></td>
+   </tr><tr>
+       <th>IP Unnumbered</th>
+       <td><input type="checkbox" name="ipUnnum" size="2" maxlength="2" value="ON"  onClick="ipModeSelection()"></td>
+   </tr>
+   <tr>
+   <th>Request DNS:</th>
+       <td><input type="radio" value="1" name="dnsMode" onClick='dnsModeClicked()'>Enable
+           <input type="radio" value="0" name="dnsMode" checked onClick='dnsModeClicked()'>Disable
+       </td>
+   </tr>
+   <tr>
+        <th>Primary DNS Server:</th>
+        <td><input type="text" name="dns1" size="18" maxlength="15" value=></td>
+   </tr>
+   <tr>
+        <th>Secondary DNS Server:</th>
+        <td><input type="text" name="dns2" size="18" maxlength="15" value=></td>
+   </tr>
+   </table>
+   </div>
+   </div>
+   <div id='gwInfo'>
+   <input type="hidden"  name="gwStr">
+   <div id='id_dfltgwy'>
+   <input type="hidden"  name="dstGtwy"></div>
+   <input type="hidden"  name="gwStr">
+   <div id='id_wanIf'>
+   <input type="hidden"  name="wanIf"></div>
+   </div>
+   
+   <div id=6rdDiv style="display:none" class="column">
+    <div class="column_title">
+     <div class="column_title_left"></div>
+      <p>6rd Config:</p>
+     <div class="column_title_right"></div>
+    </div>
+   <div class="data_common">
+   <table>
+       <tr>
+           <th>Board Router v4 Address:</th>
+           <td><input  id="SixrdBRv4IP" maxLength=39 size=36 name="SixrdBRv4IP" style="width:150px "></td>
+       </tr>
+       <tr>
+           <th>6rd IPv4 Mask Len:</th>
+           <td><input  id="SixrdIPv4MaskLen"  maxLength=39 size=36 name="SixrdIPv4MaskLen" style="width:150px "></td>
+       </tr>
+       <tr>
+           <th>6rd Prefix (EX:"2001:db8::"):</th>
+           <td><input  id="SixrdPrefix"  maxLength=39 size=36 name="SixrdPrefix" style="width:150px "></td>
+       </tr>
+       <tr>
+           <th>6rd Prefix length:</th>
+           <td><input  id="SixrdPrefixLen"  maxLength=39 size=36 name="SixrdPrefixLen" style="width:150px "></td>
+       </tr>
+   </table>
+   </div>
+   </div>
+   <div id=IPV6_wan_setting style="display:block" class="column">
+   <div id="tbipv6wan">
+   <div class="column_title">
+     <div class="column_title_left"></div>
+      <p>IPv6 WAN Setting:</p>
+     <div class="column_title_right"></div>
+    </div>
+   <div class="data_common">
+   <table>
+       <tr id=TrIpv6AddrType>
+           <th width=30%>Address Mode:</th>
+           <td width=70%>
+               <input type="checkbox" value="ON" name="slacc" id="send3">Slaac</b>
+               <input type="checkbox" value="ON" name="staticIpv6" id="send4" onclick="ipv6StaticUpdate()">Static</b>
+           </td>
+       </tr>
+   </table>
+   <table id=secIPv6Div style="display:none">
+       <tr id=TrIpv6Addr>
+           <th width=30%>IPv6 Address:</th>
+           <td width=70%><input  id=Ipv6Addr maxLength=39 size=36 name=Ipv6Addr>
+           /
+           <input id=Ipv6PrefixLen maxLength=3 size=3 name=Ipv6PrefixLen>
+           </td>
+       </tr>
+       <tr id=TrIpv6Gateway>
+           <th>IPv6 Gateway:</th>
+           <td><input  id=Ipv6Gateway  maxLength=39 size=36 name=Ipv6Gateway></td>
+       </tr>
+   </table>
+   <div  id="dhcp6c_ctrlblock"  style="display:block">
+   <table id="tbdhcpv6">
+       <tr width=30%><th>Enable DHCPv6 Client:</th>
+       <td width=70%><input type="checkbox" value="ON" name="itfenable" id="itfenable" onclick="dhcp6cEnable()" ></td>
+       </tr>
+   <tr id="dhcp6c_block"  style="display:none">
+   <th>Request Options:</th>
+   <td>
+   <input type="checkbox" value="ON" name="iana" id="send1">Request Address
+   <input type="checkbox" value="ON" name="iapd" id="send2">Request Prefix
+   </td>
+   </tr>
+   </table>
+   <table id=IPv6DnsDiv style="display:none">
+       <tr>
+           <th width=30%>Request DNS:</th>
+           <td width=70%>
+               <input type="radio" value="1" name="dnsV6Mode" onClick='dnsModeV6Clicked()'>Enable
+               <input type="radio" value="0" name="dnsV6Mode" checked onClick='dnsModeV6Clicked()'>Disable
+           </td>
+       </tr>
+       <tr>
+           <th>Primary IPv6 DNS:</th>
+           <td><input  maxLength=39 size=36 name=Ipv6Dns1></td>
+       </tr>
+       <tr>
+           <th>Secondary IPv6 DNS:</th>
+           <td><input  maxLength=39 size=36 name=Ipv6Dns2></td>
+       </tr>
+   </table>
+   <table id=DSLiteDiv style="display:none">
+       <tr><th width=30%>DS-Lite:</th>
+           <td width=70%> <input type=checkbox value=ON name=dslite_enable id=dslite_enable onClick=dsliteSettingChange()></td>
+       </tr>
+       <tr id="dslite_mode_div" style="display:none">
+           <th>AFTR address mode</th>
+           <td><select name="dslite_aftr_mode"  onChange=dsliteAftrModeChange()>
+               <option value=0>DHCPv6</option>
+               <option value=1>static</option>
+               </select></td> 
+       </tr>
+       <tr id="dslite_aftr_hostname_div" style="display:none">
+           <th>AFTR address:</th>
+           <td><input type=text name="dslite_aftr_hostname" size=64 maxlength=64></td>
+       </tr>
+   </table>
+   </div>
+   </div>
+   </div>
+   </div>
+   
+   <div id=div_pmap class="column">
+    <div class="column_title">
+     <div class="column_title_left"></div>
+      <p>Port Mapping:</p>
+     <div class="column_title_right"></div>
+    </div>
+   <div  class="data_common">
+   <table id="tbl_pmap">
+   <tr nowrap><tr nowrap><td style="display:none"><input type=checkbox name=chkpt>LAN_1</td><td><input type=checkbox name=chkpt>LAN_2</td>
+   </tr>
+   <input type=hidden name=chkpt>
+   <input type=hidden name=chkpt>
+   <tr><td><input type=checkbox name=chkpt>SSID1(5G)</td>
+   <td><input type=checkbox name=chkpt>SSID2</td>
+   </tr>
+   <tr><td><input type=checkbox name=chkpt>SSID3</td>
+   <td><input type=checkbox name=chkpt>SSID4</td>
+   </tr>
+   <input type=hidden name=chkpt>
+   <tr><td><input type=checkbox name=chkpt>SSID5(2.4G)</td>
+   <td><input type=checkbox name=chkpt>SSID6</td>
+   </tr>
+   <tr><td><input type=checkbox name=chkpt>SSID7</td>
+   <td><input type=checkbox name=chkpt>SSID8</td>
+   </tr>
+   <input type=hidden name=chkpt>
+   </table>
+   </div>
+   </div>
+   
+   <div class="btn_ctl">
+   <input type="hidden" value="/admin/multi_wan_generic.asp" name="submit-url">
+   <input type="hidden" id="lst" name="lst" value="">
+   <input type="hidden" name="encodePppUserName" value="">
+   <input type="hidden" name="encodePppPassword" value="">
+   <input class="link_bg" type="submit" value="Apply Changes" name="apply" onClick="return applyCheck(this)" >&nbsp; &nbsp; &nbsp; &nbsp;
+   <input class="link_bg" type="submit" value="Delete" name="delete" id="delete" onClick="return deleteCheck(this)" >
+   <input type="hidden" name="itfGroup" value=0>
+   <input type="hidden" name="postSecurityFlag" value="">
+   </div>
+   <script>
+    if (isAHMVersion == "0" && 0 == 1)
+     document.getElementById("delete").style.display="none";
+                document.getElementById('IGMPProxy_show').style.display = '';
+   
+    var isConfigRTKRG = "yes";
+    if((isSPVersion == "1")||(isAHMNormalUser != "1" && isGenevaVersion != "1" && adminAccount==1))
+     disableForm();
+    if(isPRACTVersion == "1")
+    {
+     document.getElementById("vlan_tr").style.display = "none";
+     document.getElementById("vid_tr").style.display = "none";
+     document.getElementById("cos_tr").style.display = "none";
+    }
+   </script>
+   </form>
+   </blockquote>
+   <div class="intro_main ">
+    <p class="intro_title">NAT Type</p>
+    <p class="intro_content">This page is used to set nat type.NAT1 is FullCone , NAT2 is RestrictedCone and  NAT4 is Symmetric.</p>
+   </div>
+   <form action=/boaform/admin/formNatType method=post name="formNatType">
+   <div class="data_common data_common_notitle">
+    <table>
+     <tr>
+      <th width="40%">NAT Type:</th>
+      <td width="60%">
+       <input name="nattype" type=radio value="NAT1">NAT1&nbsp;&nbsp
+       <input name="nattype" type=radio value="NAT2">NAT2&nbsp;&nbsp
+       <input name="nattype" type=radio value="NAT4">NAT4 (default)
+      </td>
+     </tr>
+    </table>
+   </div>
+   <div class="btn_ctl">
+    <input class="link_bg" type="submit" value="Apply Changes" onClick="return on_submit()">&nbsp;&nbsp;
+    <input type="hidden" value="/admin/fw_nat.asp" name="submit-url">
+    <input type="hidden" name="postSecurityFlag" value="">
+   </div>
+   </form>
+   </div>
+   </div>
+   </div>
+   </div>
+   </div>
+
 </body>
 </html>

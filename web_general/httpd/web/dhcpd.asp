@@ -1,6 +1,26 @@
-<% SendWebHeadStr();%>
-<title>DHCP <% multilang("375" "LANG_SETTINGS"); %></title>
-<SCRIPT>
+d
+
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="N/A" type="image/x-icon">
+    <link rel="stylesheet" href="/Dashboard/Modules/fontawesome/css/font-awesome.min.css">
+    <title>LAN</title>
+    <link href="/Dashboard/Modules/leftmenu/css/scoop-vertical.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Dashboard/css/bootstrap.min.css">
+    <link href="/Dashboard/Modules/leftmenu/css/simple-line-icons.css" rel="stylesheet">
+    <link href="/Dashboard/Modules/leftmenu/css/jquery.mCustomScrollbar.css" rel="stylesheet">
+
+    <link href="/Dashboard/css/custom.css" type="text/css" rel="stylesheet">
+      <link href="/css/custom-nav.css" type="text/css" rel="stylesheet">
+       <script language="javascript" src="/Dashboard/JS/menu.js"></script>
+        
+     <script language="javascript" src="/Dashboard/JS/util.js"></script>
+     <SCRIPT language=JavaScript src="/Dashboard/JS/printtable.js"></SCRIPT>
+       <SCRIPT language=JavaScript type=text/javascript>
+       <SCRIPT>
 var pool_ipprefix;
 var initialDhcp;
 function skip () { this.blur(); }
@@ -36,109 +56,23 @@ function showdns()
   }
  }
 }
-function showDhcpSvr(ip)
+function showdns()
 {
- var html;
- if (document.dhcpd.dhcpdenable[0].checked == true)
-  document.getElementById('displayDhcpSvr').innerHTML=
-   '<div class="btn_ctl">'+
-   '<input type="submit" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>" name="save" class="link_bg" onClick="return saveClick(0)">&nbsp;&nbsp;'+
-   '</div>';
- else if (document.dhcpd.dhcpdenable[1].checked == true)
-  document.getElementById('displayDhcpSvr').innerHTML=
-   '<div class="data_common data_common_notitle">'+
-   '<table>'+
-   '<tr><td colspan=2>'+
-   '<% multilang("352" "LANG_PAGE_DESC_CONFIGURE_DHCP_SERVER_IP_ADDRESS"); %>'+
-   '</td></tr>'+
-   '<tr>'+
-   '<th width="40%">DHCP <% multilang("91" "LANG_SERVER"); %> <% multilang("89" "LANG_IP_ADDRESS"); %>:</th>'+
-   '<td width="60%"><input type="text" name="dhcps" size="18" maxlength="15" value=<% getInfo("wan-dhcps"); %>></td>'+
-   '</tr>'+
-   '</table></div>'+
-   '<div class="btn_ctl">'+
-   '<input type="submit" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>" name="save" onClick="return saveClick(1)" class="link_bg">&nbsp;&nbsp;'+
-   '</div>';
- else if (document.dhcpd.dhcpdenable[2].checked == true) {
-  html=
-   '<div class="data_common data_common_notitle">'+
-   '<table>'+
-   '<tr><td colspan=2>'+
-   '<% multilang("353" "LANG_PAGE_DESC_ENABLE_DHCP_SERVER"); %>'+
-   '</td></tr>'+
-   '<tr><td colspan=2><b><% multilang("6" "LANG_LAN"); %> <% multilang("89" "LANG_IP_ADDRESS"); %>: </b><% getInfo("dhcplan-ip"); %>&nbsp;&nbsp;&nbsp;'+
-   '<b><% multilang("90" "LANG_SUBNET_MASK"); %>: </b><% getInfo("dhcplan-subnet"); %>'+
-   '</td></tr>'+
-   '<tr>'+
-   '<th width="30%"><% multilang("354" "LANG_IP_POOL_RANGE"); %>:</th>';
-  if (pool_ipprefix)
-   html+=
-    '<td width="70%">'+pool_ipprefix+'<input type="text" name="dhcpRangeStart" size=3 maxlength=3 value="<% getInfo("lan-dhcpRangeStart"); %>">'+
-    '<font face="Arial" size="5">- </font>'+pool_ipprefix+'<input type="text" name="dhcpRangeEnd" size=3 maxlength=3 value="<% getInfo("lan-dhcpRangeEnd"); %>">&nbsp;';
-  else
-   html+=
-    '<td width="70%"><input type="text" name="dhcpRangeStart" size=15 maxlength=15 value="<% getInfo("lan-dhcpRangeStart"); %>">'+
-    '<font face="Arial" size="5">- </font><input type="text" name="dhcpRangeEnd" size=15 maxlength=15 value="<% getInfo("lan-dhcpRangeEnd"); %>">&nbsp;';
-  html+=
-    '<input class="inner_btn" type="button" value="<% multilang("355" "LANG_SHOW_CLIENT"); %>" name="dhcpClientTbl" onClick="dhcpTblClick(\'/dhcptbl.asp\')" class="inner_btn">'+
-    '</td>'+
-    '</tr>';
-  if (!pool_ipprefix)
-  {
-   html +='<tr>'+
-    '<th width="30%"><% multilang("90" "LANG_SUBNET_MASK"); %>:</th>'+
-    '<td width="70%">'+
-    '<input type="text" name="dhcpSubnetMask" size=15 maxlength=15 value="<% getInfo("lan-dhcpSubnetMask"); %>">&nbsp;'+
-    '</td>'+
-    '</tr>';
+ if ((document.dhcpd.dhcpdns[0].checked == true) || (document.dhcpd.dhcpdns[2].checked == true)) {
+  if (document.getElementById)
+   document.getElementById('dnsset').style.display = 'none';
+  else {
+   if (document.layers == false)
+    document.all.dnsset.style.display = 'none';
   }
-  html += '<tr>'+
-   '<th width="30%"><% multilang("356" "LANG_MAX_LEASE_TIME"); %>:</th>'+
-   '<td width="70%">'+
-   '<input type="text" name="ltime" size=10 maxlength=9 value="<% getInfo("lan-dhcpLTime"); %>"> <% multilang("357" "LANG_SECONDS"); %> (<% multilang("358" "LANG_MINUS_1_INDICATES_AN_INFINITE_LEASE"); %>)'+
-   '</td>'+
-   '</tr>'+
-   '<tr>'+
-   '<th width="30%"><% multilang("419" "LANG_DOMAIN"); %><% multilang("701" "LANG_NAME"); %>:</th>'+
-   '<td width="70%">'+
-   '<input type="text" name="dname" size=32 maxlength=29 value="<% getInfo("lan-dhcpDName"); %>">'+
-   '</td>'+
-   '</tr>'+
-   '<tr>'+
-   '<th width="30%"><% multilang("359" "LANG_GATEWAY_ADDRESS"); %>:</th>'+
-   '<td width="70%"><input type="text" name="ip" size="15" maxlength="15" value=<% getInfo("lan-dhcp-gateway"); %>></td>'+
-   '</tr>'+
-   '</table>';
-  if (en_dnsopt == 0)
-   html += '<div ID=optID style="display:none">';
-  else
-   html += '<div ID=optID style="display:block">';
-   html +=
-    '<table><tr>'+
-    '<th width="30%"><% multilang("364" "LANG_DNS_OPTION"); %>:</th>'+
-    '<td width=70%><input type=radio name=dhcpdns value=0 onClick=showdns()><% multilang("365" "LANG_USE_DNS_RELAY"); %>&nbsp;&nbsp;'+
-    '<input type=radio name=dhcpdns value=1 onClick=showdns()><% multilang("366" "LANG_SET_MANUALLY"); %>&nbsp;&nbsp;'+
-    '<input type=radio name=dhcpdns value=2 onClick=showdns()><% multilang("2981" "LANG_DNS_FROM_WANISP"); %>&nbsp;&nbsp;</td>'+
-    '</tr></table></div>'+
-    '<div ID=dnsset style="display:none">'+
-    '<table>'+
-    '<tr><th width=30%>DNS1:</th><td width=70%><input type=text name=dns1 value="<% getInfo("dhcps-dns1"); %>" <% checkWrite("dns-readonly"); %>></td></tr>'+
-    '<tr><th width=30%>DNS2:</th><td width=70%><input type=text name=dns2 value="<% getInfo("dhcps-dns2"); %>" <% checkWrite("dns-readonly"); %>></td></tr>'+
-    '<tr><th width=30%>DNS3:</th><td width=70%><input type=text name=dns3 value="<% getInfo("dhcps-dns3"); %>" <% checkWrite("dns-readonly"); %>></td></tr>'+
-    '</table></div>'+
-    '</div>'+
-    '<div class="btn_ctl">'+
-    '<input type="submit" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>" name="save" onClick="return saveChanges()" class="link_bg">&nbsp;&nbsp;'+
-    '<input type="button" value="<% multilang("361" "LANG_PORT_BASED_FILTER"); %>" name="macIpTbl" onClick="macIpClick(\'/portBaseFilterDhcp.asp\')" class="link_bg">'+
-    '<input type="button" value="<% multilang("360" "LANG_MAC_BASED_ASSIGNMENT"); %>" name="macIpTbl" onClick="macIpClick(\'/macIptbl.asp\')" class="link_bg">'+
-    '</div>';
-  document.getElementById('displayDhcpSvr').innerHTML=html;
-  if (en_dnsopt) {
-   document.dhcpd.dhcpdns[dnsopt].checked = true;
-   showdns();
+ } else {
+  if (document.getElementById)
+   document.getElementById('dnsset').style.display = 'block';
+  else {
+   if (document.layers == false)
+    document.all.dnsset.style.display = 'block';
   }
  }
- <% DHCPClientClickSetup(); %>
 }
 function checkInputIP(ip)
 {
@@ -186,141 +120,66 @@ function validateKey_leasetime(str)
   }
   return 1;
 }
+function resetClick()
+{
+ document.tcpip.reset;
+}
 function saveChanges()
 {
-   if ( includeSpace(document.dhcpd.dname.value)) {
-  alert('<% multilang("2128" "LANG_INVALID_DOMAIN_NAME"); %>');
-  document.dhcpd.dname.focus();
+ var lpm1 = 0;
+ var lpm2 = 0;
+ if (!checkHostIP(document.tcpip.ip, 1))
   return false;
-  }
- if (checkString(document.dhcpd.dname.value) == 0) {
-  alert('<% multilang("2128" "LANG_INVALID_DOMAIN_NAME"); %>');
-  document.dhcpd.dname.focus();
+ if (!checkNetmask(document.tcpip.mask, 1))
   return false;
- }
- if (pool_ipprefix) {
- if (document.dhcpd.dhcpRangeStart.value=="") {
-  alert('<% multilang("2129" "LANG_PLEASE_INPUT_DHCP_IP_POOL_RANGE_"); %>');
-  document.dhcpd.dhcpRangeStart.value = document.dhcpd.dhcpRangeStart.defaultValue;
-  document.dhcpd.dhcpRangeStart.focus();
-  return false;
- }
- if ( validateKey( document.dhcpd.dhcpRangeStart.value ) == 0 ) {
-  alert('<% multilang("2130" "LANG_INVALID_DHCP_CLIENT_START_RANGE_IT_SHOULD_BE_1_254"); %>');
-  document.dhcpd.dhcpRangeStart.value = document.dhcpd.dhcpRangeStart.defaultValue;
-  document.dhcpd.dhcpRangeStart.focus();
-  return false;
- }
- if ( !checkDigitRange(document.dhcpd.dhcpRangeStart.value,1,1,254) ) {
-  alert('<% multilang("2130" "LANG_INVALID_DHCP_CLIENT_START_RANGE_IT_SHOULD_BE_1_254"); %>');
-  document.dhcpd.dhcpRangeStart.value = document.dhcpd.dhcpRangeStart.defaultValue;
-  document.dhcpd.dhcpRangeStart.focus();
-  return false;
- }
- if ( !checkSubnet(document.dhcpd.lan_ip.value,document.dhcpd.lan_mask.value,document.dhcpd.dhcpRangeStart.value)) {
-  alert('<% multilang("2131" "LANG_INVALID_DHCP_CLIENT_START_ADDRESSIT_SHOULD_BE_LOCATED_IN_THE_SAME_SUBNET_OF_CURRENT_IP_ADDRESS"); %>');
-  document.dhcpd.dhcpRangeStart.value = document.dhcpd.dhcpRangeStart.defaultValue;
-  document.dhcpd.dhcpRangeStart.focus();
-  return false;
- }
- if (document.dhcpd.dhcpRangeEnd.value=="") {
-  alert('<% multilang("2132" "LANG_PLEASE_INPUT_DHCP_IP_POOL_RANGE"); %>');
-  document.dhcpd.dhcpRangeEnd.value = document.dhcpd.dhcpRangeEnd.defaultValue;
-  document.dhcpd.dhcpRangeEnd.focus();
-  return false;
- }
- if ( validateKey( document.dhcpd.dhcpRangeEnd.value ) == 0 ) {
-  alert('<% multilang("2133" "LANG_INVALID_DHCP_CLIENT_END_ADDRESS_RANGE_IT_SHOULD_BE_1_254"); %>');
-  document.dhcpd.dhcpRangeEnd.value = document.dhcpd.dhcpRangeEnd.defaultValue;
-  document.dhcpd.dhcpRangeEnd.focus();
-  return false;
- }
- if ( !checkDigitRange(document.dhcpd.dhcpRangeEnd.value,1,1,254) ) {
-  alert('<% multilang("2134" "LANG_INVALID_DHCP_CLIENT_END_RANGE_IT_SHOULD_BE_1_254"); %>');
-  document.dhcpd.dhcpRangeEnd.value = document.dhcpd.dhcpRangeEnd.defaultValue;
-  document.dhcpd.dhcpRangeEnd.focus();
-  return false;
- }
- if ( !checkSubnet(document.dhcpd.lan_ip.value,document.dhcpd.lan_mask.value,document.dhcpd.dhcpRangeEnd.value)) {
-  alert('<% multilang("2135" "LANG_INVALID_DHCP_CLIENT_END_ADDRESSIT_SHOULD_BE_LOCATED_IN_THE_SAME_SUBNET_OF_CURRENT_IP_ADDRESS"); %>');
-  document.dhcpd.dhcpRangeEnd.value = document.dhcpd.dhcpRangeEnd.defaultValue;
-  document.dhcpd.dhcpRangeEnd.focus();
-  return false;
- }
- if ( parseInt(document.dhcpd.dhcpRangeStart.value, 10) >= parseInt(document.dhcpd.dhcpRangeEnd.value, 10) ) {
-  alert('<% multilang("2136" "LANG_INVALID_DHCP_CLIENT_ADDRESS_RANGEENDING_ADDRESS_SHOULD_BE_GREATER_THAN_STARTING_ADDRESS"); %>');
-  document.dhcpd.dhcpRangeStart.focus();
-  return false;
- }
- }
- else {
-  if (!checkHostIP(document.dhcpd.dhcpRangeStart, 1)) {
-   document.dhcpd.dhcpRangeStart.value = document.dhcpd.dhcpRangeStart.defaultValue;
-   document.dhcpd.dhcpRangeStart.focus();
-   return false;
-  }
-  if (!checkHostIP(document.dhcpd.dhcpRangeEnd, 1)) {
-   document.dhcpd.dhcpRangeEnd.value = document.dhcpd.dhcpRangeEnd.defaultValue;
-   document.dhcpd.dhcpRangeEnd.focus();
-   return false;
-  }
- }
- if (!checkInputIP(document.dhcpd.lan_ip.value)) {
-  alert('<% multilang("2137" "LANG_INVALID_IP_POOL_RANGE_LAN_IP_MUST_BE_EXCLUDED_FROM_DHCP_IP_POOL"); %>');
-  document.dhcpd.dhcpRangeStart.focus();
-  return false;
- }
- if ( document.dhcpd.ltime.value=="") {
-  alert('<% multilang("2138" "LANG_PLEASE_INPUT_DHCP_LEASE_TIME"); %>');
-  document.dhcpd.ltime.focus();
-  return false;
- }
- if ( validateKey_leasetime( document.dhcpd.ltime.value ) == 0 ) {
-  alert('<% multilang("2139" "LANG_INVALID_DHCP_SERVER_LEASE_TIME_NUMBER"); %>');
-  document.dhcpd.ltime.value = document.dhcpd.ltime.defaultValue;
-  document.dhcpd.ltime.focus();
-  return false;
- }
- if ( !checkDigitRange_leaseTime(document.dhcpd.ltime.value, -1) ) {
-  alert('<% multilang("2140" "LANG_INVALID_DHCP_SERVER_LEASE_TIME"); %>');
-  document.dhcpd.ltime.value = document.dhcpd.ltime.defaultValue;
-  document.dhcpd.ltime.focus();
-  return false;
- }
- if (!checkHostIP(document.dhcpd.ip, 1))
-  return false;
-   if (en_dnsopt && document.dhcpd.dhcpdns[1].checked) {
-  if (document.dhcpd.dns1.value=="") {
-   alert('<% multilang("2148" "LANG_ENTER_DNS_VALUE"); %>');
-   document.dhcpd.dhcpdns.value = document.dhcpd.dhcpdns.defaultValue;
-   document.dhcpd.dns1.value = document.dhcpd.dns1.defaultValue;
-   document.dhcpd.dns1.focus();
-   return false;
-  }
-  if (!checkHostIP(document.dhcpd.dns1, 1)) {
-   document.dhcpd.dns1.value = document.dhcpd.dns1.defaultValue;
-   document.dhcpd.dns1.focus();
-   return false;
-  }
-  if (document.dhcpd.dns2.value!="") {
-   if (!checkHostIP(document.dhcpd.dns2, 0)) {
-    document.dhcpd.dns2.value = document.dhcpd.dns2.defaultValue;
-    document.dhcpd.dns2.focus();
-    return false;
+ with (document.forms[0])
+ {
+  if(typeof chk_port_mask1 != 'undefined' && chk_port_mask1 != null){
+   for (var i = 0; i < chk_port_mask1.length; i++) {
+    if (chk_port_mask1[i].checked == true)
+     lpm1 |= (0x1 << i);
    }
-   if (document.dhcpd.dns3.value!="") {
-    if (!checkHostIP(document.dhcpd.dns3, 0)) {
-     document.dhcpd.dns3.value = document.dhcpd.dns3.defaultValue;
-     document.dhcpd.dns3.focus();
+   lan_port_mask1.value = lpm1;
+  }
+  if(typeof chk_port_mask2 != 'undefined' && chk_port_mask2 != null){
+   for (var i = 0; i < chk_port_mask2.length; i++) {
+    if (chk_port_mask2[i].checked == true)
+     lpm2 |= (0x1 << i);
+   }
+   lan_port_mask2.value = lpm2;
+  }
+  if((ip_version1.selectedIndex != 0) && (ipv6_mode1[1].checked)){
+   if (ipv6_addr1.value =="" || ipv6_addr1.value =="::") {
+    alert("LAN IPv6 address cannot be empty! Format is IPV6 address. For example: 3ffe:501:ffff:100::1");
+    ipv6_addr1.focus();
+    return false;
+   } else {
+    if ( validateKeyV6IP(ipv6_addr1.value) == 0) {
+     alert("Invalid LAN IPv6 IP!");
+     ipv6_addr1.focus();
+     return false;
+    }
+   }
+   if (ipv6_prefix1.value =="") {
+    alert("LAN IPv6 address ipv6_prefix1 cannot be empty! valid number is 0~127");
+    ipv6_prefix1.focus();
+    return false;
+   } else {
+    var prefixInt = parseInt(ipv6_prefix1.value);
+    if ( prefixInt>127 ||prefixInt<0) {
+     alert("Invalid LAN IPv6 Previx!");
+     ipv6_prefix1.focus();
      return false;
     }
    }
   }
+  save.isclick = 1;
  }
- document.forms[0].save.isclick = 1;
+ 
  postTableEncrypt(document.forms[0].postSecurityFlag, document.forms[0]);
  return true;
 }
+
 function dhcpTblClick(url) {
  openWindow(url, 'DHCPTbl' );
 }
@@ -354,6 +213,71 @@ function macIpClick(url)
  var settings = 'width='+wide+',height='+high+',screenX='+xOffset+',screenY='+yOffset+',top='+yOffset+',left='+xOffset+', resizable=yes, toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes';
  window.open( url, 'MACIPTbl', settings );
 }
+function ipv6_mode1_change()
+{
+ with (document.forms[0])
+ {
+  if(ipv6_mode1[0].checked)
+  {
+   ipv6_addr1.disabled = true;
+   ipv6_prefix1.disabled = true;
+  }
+  else
+  {
+   ipv6_addr1.disabled = false;
+   ipv6_prefix1.disabled = false;
+   if(ipv6_addr1.value =="::")
+    ipv6_addr1.value ="";
+  }
+ }
+}
+function ipv6_mode2_change()
+{
+ with (document.forms[0])
+ {
+  if(ipv6_mode2[0].checked)
+  {
+   ipv6_addr2.disabled = true;
+   ipv6_prefix2.disabled = true;
+  }
+  else
+  {
+   ipv6_addr2.disabled = false;
+   ipv6_prefix2.disabled = false;
+  }
+ }
+}
+function ipv6_version1_change()
+{
+ with (document.forms[0])
+ {
+  if(ip_version1.selectedIndex == 0)
+  {
+   ipv6_mode1[0].disabled = true;
+   ipv6_mode1[1].disabled = true;
+   ipv6_addr1.disabled = true;
+   ipv6_prefix1.disabled = true;
+   ip.disabled = false;
+   mask.disabled = false;
+  }
+  else
+  {
+   ipv6_mode1[0].disabled = false;
+   ipv6_mode1[1].disabled = false;
+   ipv6_addr1.disabled = false;
+   ipv6_prefix1.disabled = false;
+   ip.disabled = false;
+   mask.disabled = false;
+   ipv6_mode1_change();
+  }
+ }
+}
+
+function on_init()
+{
+ ipv6_version1_change();
+ updateDHCPClient();
+}
 function enabledhcpd()
 {
  document.dhcpd.dhcpdenable[2].checked = true;
@@ -375,33 +299,573 @@ function enabledhcpc()
  showDhcpSvr();
 }
 </SCRIPT>
+<style>
+   .label {
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .input-box {
+            width: 120px;
+            height: 24px;
+            padding: 2px 5px;
+            border: 1px solid #999;
+            text-align: center;
+        }
+
+        .separator {
+            margin: 0 6px;
+            font-weight: bold;
+        }
+
+        .button {
+            height: 28px;
+            padding: 2px 8px;
+            border: 1px solid #666;
+            background: #e0e0e0;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #d0d0d0;
+        }
+        .form-control{
+            width:65%;
+        }
+        .left-field {
+    margin-left: -15px;
+    width: 195px;
+}
+.right-field {
+    margin-left: 4px;
+}
+        </style>
 </head>
-<body>
-<div class="intro_main ">
- <p class="intro_title">DHCP <% multilang("375" "LANG_SETTINGS"); %></p>
- <p class="intro_content"><% multilang("350" "LANG_PAGE_DESC_CONFIGURE_DHCP_SERVER_RELAY"); %></p>
+<body onload="FinishLoad();if(getElById('ConfigForm') != null)LoadFrame();lan_dns_server(1)">
+<INPUT id="Selected_Menu" type="hidden" 
+            value="Net->LAN" name="Net_DHCP"/> 
+    <div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left"
+        vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact"
+        vertical-effect="shrink" vnavigation-view="view1">
+        <div class="scoop-overlay-box">
+        </div>
+        <div class="scoop-container">
+            <div class="scoop-main-container">
+                <div class="scoop-wrapper">
+                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
+                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
+							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+							<div class="scoop-inner-navbar"> 
+								<div class="scoop-logo"> 
+								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/logo.png" class="img-fluid" alt=""/></span></a>
+							</div> 
+							    <div id="LeftMenu">
+							        <SCRIPT language=javascript>
+							        MakeLeftMenu('Net','LAN')
+							        </SCRIPT>
+							    </div>
+							</div> 
+						</nav>
+                    <div class="scoop-content">
+                        <div id="Header">
+                          
+                           
+                    
+                            <SCRIPT language=javascript>
+                            MakeHeader('Gateway Name:','Gateway Type:','Net','LAN','Welcome!','#');
+                            </SCRIPT>
+                        </div>
+                        <div class="">
+                            
+
+                             
+                              <div class="scoop-inner-content">
+									  
+								
+							  
+							  <div class="white_box">
+								<form id='ConfigForm' name="ConfigForm" action="/cgi-bin/net-dhcp.asp" method="post">
+
+									<h1 class="heading_grey heading_margin"><img src="/Dashboard/images/ip_icon.png" width="45" height="40" class="img_sub" alt=""/> IPv4 Configuration</h1>
+									<div class="container-fluid">
+                                     <input type="hidden" name="portDHCPRelayFlag" id="portDHCPRelayFlag" value="N/A">
+                      <input type="hidden" name="portLan1" id="portLan1" value="N/A">
+                      <input type="hidden" name="portLan2" id="portLan2"value="N/A">
+                      <input type="hidden" name="portLan3" id="portLan3" value="N/A">
+                      <input type="hidden" name="portLan4" id="portLan4" value="N/A">
+                      <input type="hidden" name="portSSID1" id="portSSID1" value="N/A">
+                      <input type="hidden" name="portSSID2" id="portSSID2" value="N/A">
+                      <input type="hidden" name="portSSID3" id="portSSID3" value="N/A">
+                      <input type="hidden" name="portSSID4" id="portSSID4" value="N/A">
+                      <input type="hidden" name="DeviceDHCPRelayFlag" id="DeviceDHCPRelayFlag" value="N/A">
+                      <input type="hidden" name="IPV4_Flag" id="IPV4_Flag" value="0">
+                      <input type="hidden" name="Change_Flag" id="Change_Flag" value="0">
+                      <input type="hidden" name="LANChange" id="LANChange" value="0">
+                      <input type="hidden" name="EthendIPcount" id="EthendIPcount" value="100">
+                      <input type="hidden" name="DeviceendIPcount" id="DeviceendIPcount" value="80"> 
+                      <script language="JavaScript" type="text/JavaScript">
+                          function dhcpSecPortRelay() {
+                              with (document.forms['ConfigForm']) {
+                                  if (getCheckVal('enablePortRelay') == 1) {
+                                      setDisplay('portrelayInfo', 0);
+                                      document.ConfigForm.portDHCPRelayFlag.value = "No";
+                                  }
+                                  else {
+                                      setDisplay('portrelayInfo', 0);
+                                      document.ConfigForm.portDHCPRelayFlag.value = "No";
+                                  }
+                              }
+                          }
+                          function checkportcheckboxstate() {
+                              var vForm = document.ConfigForm;
+
+                              if (vForm.PortRelay_lan1.checked)
+                                  vForm.portLan1.value = "Yes";
+                              else vForm.portLan1.value = "No";
+                              if (vForm.PortRelay_lan2.checked)
+                                  vForm.portLan2.value = "Yes";
+                              else vForm.portLan2.value = "No";
+                              if (vForm.PortRelay_lan3.checked)
+                                  vForm.portLan3.value = "Yes";
+                              else vForm.portLan3.value = "No";
+                              if (vForm.PortRelay_lan4.checked)
+                                  vForm.portLan4.value = "Yes";
+                              else vForm.portLan4.value = "No";
+                              if (vForm.PortRelay_ssid1.checked)
+                                  vForm.portSSID1.value = "Yes";
+                              else vForm.portSSID1.value = "No";
+                              if (vForm.PortRelay_ssid2.checked)
+                                  vForm.portSSID2.value = "Yes";
+                              else vForm.portSSID2.value = "No";
+                              if (vForm.PortRelay_ssid3.checked)
+                                  vForm.portSSID3.value = "Yes";
+                              else vForm.portSSID3.value = "No";
+                              if (vForm.PortRelay_ssid4.checked)
+                                  vForm.portSSID4.value = "Yes";
+                              else vForm.portSSID4.value = "No";
+                          }
+                          function GetEndSubStartCount(EndIp, StartIp) {
+                              var vret;
+                              addrEnd = EndIp.split('.');
+                              addrStart = StartIp.split('.');
+                              E = parseInt(addrEnd[3]) + 1;
+                              S = parseInt(addrStart[3]);
+                              vret = E - S;
+                              return vret;
+
+                          }
+			function lan_dns_check()
+			{
+				var landns_val = getRadioVal("dns_config");
+				var config_status = "Disable";
+				document.getElementById("PRIDNS").value = document.getElementById("primarydnsserver").value;
+				document.getElementById("SECDNS").value = document.getElementById("secondarydnsserver").value;
+				document.getElementById("config_dns").value = landns_val;
+
+				if (config_status.localeCompare(landns_val)) {
+					// document.getElementById("primarydnsserver").disabled = true
+					// document.getElementById("secondarydnsserver").disabled = true
+					if (document.getElementById('PRIDNS').value.length){
+						if (isValidIpAddress(document.getElementById('PRIDNS').value) == false) {
+							alert('Address is invalid!');
+							return false;
+						}
+						}else {
+							alert("atleast primary dns server IPv4 address is mandatory.");
+							return false;
+						}
+						if(document.getElementById('SECDNS').value.length)
+							if(isValidIpAddress(document.getElementById('SECDNS').value) == false){
+							alert('Address is invalid!');
+							return false;
+						}
+				} else {
+					// document.getElementById("primarydnsserver").disabled = false
+					// document.getElementById("secondarydnsserver").disabled = false
+					if (document.getElementById('PRIDNS').value.length)
+						if (isValidIpAddress(document.getElementById('PRIDNS').value) == false) {
+							alert('Address is invalid!');
+							return false;
+						}
+						if(document.getElementById('SECDNS').value.length)
+							if(isValidIpAddress(document.getElementById('SECDNS').value) == false){
+							alert('Address is invalid!');
+							return false;
+						}
+				}
+				return true;
+			}
+			
+			function lan_dns_server(rcv_param)
+            {
+                var pdnsval = document.getElementById("primarydnsserver");
+                var sdnsval = document.getElementById("secondarydnsserver");
+                var dnsStatus = document.getElementById("dns_config");
+
+                if (rcv_param ==1) {
+                    if ("Enable" ==getRadioVal("dns_config")) {
+                            pdnsval.disabled = false;
+                            sdnsval.disabled = false;
+                        } else {
+                            pdnsval.disabled = true;
+                            sdnsval.disabled = true;
+                        }
+                } else {
+                    pdnsval.disabled = true;
+                            sdnsval.disabled = true;
+                }
+
+
+            }
+                          function btnSaveIPv4() {
+						  
+				                if (false == lan_dns_check())
+									return false;
+                                if (CheckForm(1) == false)
+									return false;		
+                                var vForm = document.ConfigForm;
+								var radiomode=getRadioVal('dhcpSrvType');
+								if(radiomode=="2")
+								{
+									if ( 0 == $('#dhcpRelayServerIP').val().length )
+									{
+										alert('Remote IP cannot be null');
+										return false;
+									}
+									if(isValidIpAddress($('#dhcpRelayServerIP').val()) == false)
+									{
+										alert('Remote IP is invalid');
+										return false;	
+									}
+									
+								}
+                                if(vForm.Change_Flag.value == "1")
+                                {
+                                    vForm.Change_Flag.value = "0";
+                                    vForm.EthendIPcount.value = GetEndSubStartCount(vForm.dhcpEthEnd.value, vForm.dhcpEthStart.value);
+                                    vForm.DeviceendIPcount.value = GetEndSubStartCount(vForm.dhcpEthEndFrag.value, vForm.dhcpEthStartFrag.value);
+
+                                    checkportcheckboxstate();
+
+                                    vForm.IPV4_Flag.value = "1";
+                                    if (true == setEBooValueCookie(vForm))
+                                        vForm.submit();
+                                    if(vForm.LANChange.value == "1")
+                                        top.location.href = 'http://' + ethIpAddress.value;
+                                }
+                          }
+                          function devicedhcpRelay() {
+							  document.getElementById('portrelayInfo').style.display = 'block'
+                              var vForm = document.ConfigForm;
+                              if (vForm.enableRelay.checked)
+                                  vForm.DeviceDHCPRelayFlag.value = "Yes";
+                              else vForm.DeviceDHCPRelayFlag.value = "No";
+                          }
+
+                          function initLeaseTimeTable() {
+                              var leaseTime = '86400';
+                              var optname = new Array('1hour', '6hour', '1day', '2day', '1week');
+                              var optvalue = new Array('3600', '21600', '86400', '172800', '604800');
+                              var cusname = leaseTime + 'seconds';
+                              var hascusopt = true;
+                              var isSel = 0;
+
+                              with (getElById('dhcpLeasedTimeFrag')) {
+                                  for (i = 0; i < optname.length; i++) {
+                                      var opt = new Option(optname[i], optvalue[i]);
+                                      if (leaseTime == optvalue[i]) {
+                                          opt.selected = true
+                                          isSel = i;
+                                          hascusopt = false;
+                                      }
+                                      options.add(opt);
+                                      options[isSel].setAttribute('selected', 'true');
+                                  }
+
+
+                                  if (hascusopt && isInteger(leaseTime) && '0' != leaseTime) {
+                                      var optcus = new Option(cusname, leaseTime);
+                                      optcus.selected = true
+                                      options.add(optcus);
+                                      isSel = i;
+                                      options[isSel].setAttribute('selected', 'true');
+                                  }
+                              }
+                          }
+					  </script>
+
+                                    
+                                    <div class="lighter_grey_bg">
+										<h2 class="sub_heading">LAN Interface Setting</h2>
+											This page is used to configure the LAN interface of your Device. Here you may change the setting for IP addresses, subnet mask, etc..
+										</div>
+  
+										
+									<div class="row">
+										<div class="col-md-4 form-group">
+											<label>InterfaceName:</label>
+                                            <input type="text" class="form-control" maxlength="15" 
+                      name="ethIpAddress" id="ethIpAddress" value="br0"/>
+										</div>
+										<div class="col-md-4 form-group">
+											<label>IP Address:</label>
+                                            <input type="text" name="ip" id="ip" size="15" maxlength="15" class="form-control" maxlength="15" 
+                         value="192.168.2.1">
+										</div>
+										</div>
+                                        <div class="row">
+										<div class="col-md-4 form-group">
+											<label>Subnet Mask:</label>
+                                            <input type="text"  name="mask" id="mask"class="form-control" maxlength="15" onchange="setDhcpAddresses(this.value)" 
+                      name="ethIpAddress" id="ethIpAddress" value="255.255.255.0"/>
+										</div>
+										<div class="col-md-4 form-group" style="padding:18px">
+											<label  style="margin-left:1px" class ="left-field">IPv6 Address Mode:</label>
+                        <input class ="right-field" type="radio" name="ipv6_mode1" value="0" onchange="ipv6_mode1_change()" checked="" disabled="" style="margin-left:-37px;">Auto
+                        
+                        <input class ="right-field" type="radio" name="ipv6_mode1" value="1" onchange="ipv6_mode1_change()" disabled="" style="margin-left:37px;">Manual
+										</div>
+										</div>
+                                        <div class="row">
+										<div class="col-md-4 form-group" id="tr_ipv6_addr1">
+											<label>IPv6 Address:</label>
+                                            <input type="text" name="ipv6_addr1" class="form-control" size="30" maxlength="60" value=0
+                      size="5" maxlength="5"  >
+										</div>
+										<div  id="tr_ipv6_prefix1"  class="col-md-4 form-group">
+											<label>IPv6 Prefix Length:</label>
+                                            <input type="text"  name="ipv6_prefix1" size="5" maxlength="5" value=0  class="form-control">
+                         
+										</div>
+										</div>
+										<div class="row">
+										<div class="col-md-4 form-group">
+											<label>IP Version</label>
+                       <select size="1"class="form-control"  name="ip_version1" OnChange="ipv6_version1_change()">
+       <option  value="0">IPv4</option>
+       <option  value="2">IPv4/IPv6</option>
+      </select>
+										</div>
+                                        </div>
+                                        <div class="row">
+										<div class="col-md-4 form-group" style="display: flex; align-items: center;">
+											<label  class ="left-field" style="margin:10px;">IGMP Snooping: </label>
+                                          <div class="custom-radio custom-control-inline" style="display: flex; gap: 10px;">
+                                            <input  class="right-field" type="radio" name="snoop" value="0" />
+                                           Disabled
+                                            </div>
+                                            
+												<div class="custom-control custom-radio custom-control-inline">
+												 <input class="right-field" type="radio" name="snoop" value="1"/>
+                                               Enabled
+												</div>
+										
+										</div>
+                                        </div>
+                                        <div class="row">
+										<div class="col-md-4 form-group" style="display: flex; align-items: center;">
+											<label   class ="left-field" style="margin:10px;">Ethernet to Wireless Blocking: </label>
+                                          <div  class="custom-radio custom-control-inline" style="display: flex; gap: 10px;">
+                                            <input class="right-field" type="radio" name="BlockEth2Wir" value="0" />
+                                           Disabled&nbsp;&nbsp;
+                                            </div>
+                                            
+												<div class="custom-control custom-radio custom-control-inline">
+												 <input  class="right-field" type="radio" name="BlockEth2Wir" value="1"/>
+                                           Enabled 
+												</div>
+										
+										</div>
+                                        </div>
+                                        <div class="row">
+										<div class="col-md-4 form-group" style="display: flex; align-items: center;">
+											<label  class ="left-field" style="margin:10px;">Mac Based Tag Decision: </label>
+                                          <div class="custom-radio custom-control-inline" style="display: flex; gap: 10px;">
+                                            <input class="right-field" type="radio" name="snoop" value="0" />
+                                           Disabled
+                                            </div>
+                                            
+												<div class="custom-control custom-radio custom-control-inline">
+												 <input  class="right-field" type="radio" name="snoop" value="1"/>
+                                               Enabled
+												</div>
+										
+										</div>
+                                        </div>
+
+                                
+                            
+                                    <div class="col-md-12">
+										<hr class="margin_adjs" />
+										<div class="form-footer">
+                                       <button class="btn orange_btn" onclick="return saveChanges()" type="button" id="saveIPv4" name="save" value="Apply Changes">Apply Changes</button>
+										</div>
+                                             </div>
+
+							      </div>
+							      <hr class="margin_adjs" />
+							      </div>
+
+								 </form>
+                                  
+                                
+								<div class="white_box">
+									<h1 class="heading_grey heading_margin"><img src="/Dashboard/images/ip_icon.png" width="45" height="40" class="img_sub" alt=""/> DHCP Settings</h1>
+                                   
+                                  
+									<div class="container-fluid">
+										<div class="lighter_grey_bg">										
+											<p>This page is used to configure DHCP Server and DHCP Relay. </p>
+										</div>
+									<div >
+                                    <div class="col-md-12 form-group" style="display: flex; align-items: center;margin-left:-27px;">
+                                    <label  style="margin:10px;"> DHCP Mode:</label>
+											<div class=" custom-radio custom-control-inline" style="display: flex; gap: 10px;">
+                                            <input  id="dhcpSrvType" type="radio"  name="dhcpdenable" value="0" onclick="disabledhcpd()"/>
+                                            NONE
+                                            
+                                            
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+                        
+												 <input name="dhcpdenable" value="1" onclick="enabledhcprelay()"id="dhcpSrvType"   type="radio" checked/>
+                                                 DHCP Relay
+												</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												 
+                                                  <input  name="dhcpdenable" value="2" onclick="enabledhcpd()" id="dhcpSrvType"  type="radio"  /> DHCP Server
+												</div>
+										</div>
+<p>Enable the DHCP Server if you are using this device as a DHCP server. This page lists the IP address pools available to hosts on your LAN. The device distributes numbers in the pool to hosts on your network as they request Internet access.</p>
+<div class="row">
+										<div class="col-md-4 form-group">
+											<label>LAN IP Address:</label>
+                                            <input type="text" class="form-control" maxlength="15" 
+                      name="ethIpAddress" id="ethIpAddress" value="192.168.2.1"/>
+										</div>
+										<div class="col-md-4 form-group">
+											<label>Subnet Mask: </label>
+                                            <input type="text" name="ip" id="ip" size="15" maxlength="15" class="form-control" maxlength="15" 
+                         value="255.255.255.0">
+										</div>
+										</div>
+                                        <div class="row">
+										<div class="col-md-4 form-group">
+											<label>IP Pool Range:</label>
+                                        
+                                            
+                    <div style="display:flex;">
+                    
+                    <div>
+                    <input  type="text" class="form-control" "name="dhcpRangeStart" size="15" maxlength="15" value="192.168.2.2" style="margin-left: 4px;Width:134px"></div> 
+                    <div><font face="Arial"class="separator" size="5">- </font></div><div><input   class="form-control" type="text" name="dhcpRangeEnd" style="margin-left: 4px;width:134px;" size="15" maxlength="15" value="192.168.2.254"></div>&nbsp;<div><input class="btn orange_btn" type="button" class="button" value="Show Client" name="dhcpClientTbl" onclick="dhcpTblClick('/dhcptbl.asp')"></td></div>
+
+										</div>
+                                        </div>
+										<div class="col-md-4 form-group">
+											<label>Subnet Mask:</label>
+                                            <input type="text" class="form-control" maxlength="15" 
+                      name="ethIpAddress" id="ethIpAddress" value="255.255.255.0"/>
+										</div>
+										</div>
+                                        <div class="row">
+
+										<div class="col-md-4 form-group">
+											<label>Max Lease Time:</label>
+                                            <input type="text" name="ip" id="ip" size="15" maxlength="15" class="form-control" maxlength="5" 
+                         value="86400"> seconds (-1 indicates an infinite lease)
+										</div>
+                                        <div class="col-md-4 form-group">
+											<label>DomainName:</label>
+                                            <input type="text" class="form-control" maxlength="15" 
+                      name="dname" id="ethIpAddress" value="bbrouter"/>
+										</div>
+										</div>
+                                        <div class="row">
+
+                                        
+										<div class="col-md-4 form-group">
+											<label>Gateway Address:</label>
+                                            <input type="text" name="ip" id="ip" size="15" maxlength="15" class="form-control" maxlength="5" 
+                         value="192.168.2.1">
+										</div>
+
+                                        <div id="optID" style="display:block">
+    <div class="form-group">
+        <label class="left-field" width="30%" style="margin-left:17px" >DNS option:</label>
+        <div width="70%">
+            <input class="right-field" style="margin-left:18px" type="radio" name="dhcpdns" value="0" onclick="showdns()">Use DNS Relay&nbsp;&nbsp;
+            <input  class="right-field" type="radio" name="dhcpdns" value="1" onclick="showdns()">Set Manually&nbsp;&nbsp;
+            <input  class="right-field" type="radio" name="dhcpdns" value="2" onclick="showdns()">DNS From ISP&nbsp;&nbsp;
+        </div>
+    </div>
 </div>
-<form action=/boaform/formDhcpServer method=POST name="dhcpd">
-<input type="hidden" name="lan_ip" value=<% getInfo("dhcplan-ip"); %>>
-<input type="hidden" name="lan_mask" value=<% getInfo("dhcplan-subnet"); %>>
-<div class="data_common data_common_notitle">
- <table>
-  <tr>
-   <th>DHCP <% multilang("134" "LANG_MODE"); %>:</th>
-   <td>
-   <% checkWrite("dhcpMode"); %>
-   </td>
-  </tr>
- </table>
 </div>
-<div ID="displayDhcpSvr"></div>
-<input type="hidden" value="/dhcpd.asp" name="submit-url">
-<input type="hidden" name="postSecurityFlag" value="">
-<script>
- <% initPage("dhcp-mode"); %>
- showDhcpSvr(pool_ipprefix);
-</script>
-</form>
-<br><br>
+  <div class="row">
+<div class="col-md-4 form-group">
+<div id="dnsset" style="display: block;">
+    <div class="form-group">
+        <label width="30%">DNS1:</label>
+        <div width="70%">
+            <input  class="form-control" type="text" name="dns1" value="0.0.0.0">
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class=" col-md-4 form-group">
+        <label width="30%">DNS2:</label>
+        <div width="70%">
+            <input class="form-control" type="text" name="dns2" value="0.0.0.0">
+        </div>
+    </div>
+    </div>
+  <div class="row">
+<div class="col-md-4 form-group">
+   <label width="30%">DNS3:</label>
+        <div width="70%">
+            <input  class="form-control" type="text" name="dns3" value="0.0.0.0">
+        </div>
+    </div>
+</div>
+										</div>
+                                        
+										</div>
+                                          <div class="col-md-12">
+										<hr class="margin_adjs">
+										<div class="form-footer">
+                                          <input class="btn orange_btn" onclick="return saveChanges()" type="submit" name="save" value="Apply Changes"></input>
+                                            <input class="btn orange_btn" onclick="macIpClick('/portBaseFilterDhcp.asp')" type="button"  name="macIpTbl" value="Port-Based Filter"></input>
+                                              <input class="btn orange_btn" onclick="macIpClick('/macIptbl.asp')" type="button" name="save" value="MAC-Based Assignment"></input>
+										</div>
+                                             </div>
+										</div>
+										</div>
+										</div>
+                          
+                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+           <div class="text-center p-3" style="background-color: rgb(235 234 234 / 20%);">
+© 2022-2025 Copyright :
+<a class="text-white" style="color:#fd7e14 !important;" href="#">Syrotech Networks Pvt. Ltd.</a>
+</div>
+    </div>
+    <!--//set display none-->
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" src="/JS/jquery.min.js"></script>
+	<script type="text/javascript" src="/JS/bootstrap.min.js"></script>
+<!--    <script type="text/javascript" src="/Dashboard/Modules/leftmenu/js/Loader.js"></script>-->
+    <script type="text/javascript"  src="/JS/popper.min.js"></script>
+    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/scoop.min.js"></script>
+    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/left_menu.js"></script>
+    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/lib/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/lib/jquery.mousewheel.min.js"></script>
+
+   
 </body>
 </html>
