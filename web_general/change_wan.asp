@@ -1413,6 +1413,8 @@ function on_init()
   on_ctrlupdate();
  }
 }
+</script>
+<script>
 var nattype=0
 function on_init()
 {
@@ -1464,17 +1466,17 @@ function on_submit()
     width:1248px;
 }
 .right-field-radio{
-    margin-left:17px;
+    margin-left:-1px;
     width:33px; 
     padding:2px
 }
 .right-field{
-    margin-left:178px;
+    margin-left:17px;
     padding:2px;
     width:160px; 
 }
 .right-field-checkbox{
-    margin-left:178px;
+    margin-left:17px;
     padding:3px;
      
 }
@@ -1538,6 +1540,7 @@ function on_submit()
  <p>This page is used to configure which WAN to use of your Router.When change the uplink mode , ONU will reboot.</p>
 </div>
 </div>
+<br>
 <form action="/boaform/admin/formWanPortChange" method="post" name="wanMode">
 <div class="data_common data_common_notitle">
     <div class="col-md-12 form-group">
@@ -1570,10 +1573,17 @@ function on_submit()
 
 </script>
 </form>
-<div class="intro_main ">
-    <p class="intro_title">PON WAN</p>
-    <p class="intro_content"> This page is used to configure the parameters for PONWAN</p>
+												<div class="col-md-12 form-group left-field">
+        <div class="custom-control">
+         <h2 class="sub_heading " style="color:#fd7e14">PON WAN</h2>
+         </div>
+         </div>
+		<div class="col-md-12 form-group left-field-para">
+        <div class="custom-control">
+    <p> This page is used to configure the parameters for PON WAN</p>
    </div>
+   </div>
+
    <form action=/boaform/admin/formWanEth method=POST name="ethwan">
    <!--<table border="0" cellspacing="4" width="800" style="display:none">
     <tr>
@@ -1589,236 +1599,300 @@ function on_submit()
     </tr>
     <tr><td><hr size=1 noshade align=top></td></tr>
    </table>-->
-   <div class="data_common data_common_notitle">
-   <table>
-    <tr>
-     <th colspan=2><select name="lkname" onChange="on_ctrlupdate()" size="1"></th>
-    </tr>
-    <tr>
-     <th>Admin Status:</th>
-     <td><input type=radio value=1 name="chEnable">Enable
-      <input type=radio value=0 name="chEnable" checked>Disable
-     </td>
-    </tr>
-    <tr id="vlan_tr">
-     <th width=30%>Enable VLAN: </th>
-     <td width=70%><input type="checkbox" name="vlan" size="2" maxlength="2" value="ON" onClick=vlanClicked()></td>
-    </tr>
-    <tr id="vid_tr">
-     <th>VLAN ID:</th>
-     <td><input type="text" name="vid" size="10" maxlength="15"></td>
-    </tr>
-    <tr id="cos_tr">
-     <th>802.1p_Mark </th>
-     <td><select style="WIDTH: 60px" name="vprio">
-      <option value="0" > </option>
-      <option value="1" > 0 </option>
-      <option value="2" > 1 </option>
-      <option value="3" > 2 </option>
-      <option value="4" > 3 </option>
-      <option value="5" > 4 </option>
-      <option value="6" > 5 </option>
-      <option value="7" > 6 </option>
-      <option value="8" > 7 </option>
-      </select>
-     </td>
-    </tr>
-    <tr>
-     <th> Channel Mode:</th><td><select size="1" name="adslConnectionMode" onChange="adslConnectionModeSelection(false)">
-         <option selected value="0">Bridged</option>
-         <option value="1">IPoE</option>
-         <option value="2">PPPoE</option>
-   <option value="8">6rd</option></select></td>
+<div class="data_common data_common_notitle">
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+  <select name="lkname" onChange="on_ctrlupdate()" size="1">
+  </select>
+   </div>
+   </div>
+
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Admin Status:</label>
+            
+                <input class="right-field-radio" type="radio" value="1" name="chEnable"> Enable
+                <input class="right-field-radio" type="radio" value="0" name="chEnable" checked> Disable
+            </div>
+        </div>
    
-    </tr>
+    <div class="col-md-12 form-group" id="vlan_tr">
+        <div class="custom-control">
+            <label class="left-field">Enable VLAN:</label>
+            <input type="checkbox" name="vlan" size="2" maxlength="2" value="ON" onClick="vlanClicked()" class="right-field-checkbox">
+        </div>
+    </div>
+    <div class="col-md-12 form-group" id="vid_tr">
+        <div class="custom-control">
+            <label class="left-field">VLAN ID:</label>
+            <input type="text" name="vid" size="10" maxlength="15" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group" id="cos_tr">
+        <div class="custom-control">
+            <label class="left-field">802.1p_Mark:</label>
+            <select name="vprio" class="right-field">
+                <option value="0"> </option>
+                <option value="1"> 0 </option>
+                <option value="2"> 1 </option>
+                <option value="3"> 2 </option>
+                <option value="4"> 3 </option>
+                <option value="5"> 4 </option>
+                <option value="6"> 5 </option>
+                <option value="7"> 6 </option>
+                <option value="8"> 7 </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Channel Mode:</label>
+            <select size="1" name="adslConnectionMode" onChange="adslConnectionModeSelection(false)" class="right-field">
+                <option selected value="0">Bridged</option>
+                <option value="1">IPoE</option>
+                <option value="2">PPPoE</option>
+                <option value="8">6rd</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Enable NAPT:</label>
+            <input type="checkbox" name="naptEnabled" maxlength="2" value="ON" onClick="naptClicked()" class="right-field-checkbox">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Enable QoS:</label>
+            <input type="checkbox" name="qosEnabled" size="2" maxlength="2" value="ON" class="right-field-checkbox">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Connection Type:</label>
+            <select size="1" id="ctype" name="ctype" onchange="onSelectSvrList()" class="right-field">
+                <option value="4">Other</option>
+                <option value="1">TR069</option>
+                <option value="2">INTERNET</option>
+                <option value="3">INTERNET_TR069</option>
+                <option value="8">VOICE</option>
+                <option value="9">VOICE_TR069</option>
+                <option value="10">VOICE_INTERNET</option>
+                <option value="11">VOICE_INTERNET_TR069</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-12 form-group" id="tbmtu">
+        <div class="custom-control">
+            <label class="left-field">MTU:</label>
+            <input type="text" name="mtu" size="10" maxlength="15" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group" id="dgwshow" style="display:none">
+        <div class="custom-control">
+            <label class="left-field">Default Route:</label>
+           
+                <input type="radio" value="0" name="droute" class="right-field-radio"> Disable
+                <input type="radio" value="1" name="droute" checked class="right-field-radio"> Enable
+            </div>
+        </div>
     
-    <tr>
-     <th>Enable NAPT: </th><td><input type="checkbox" name="naptEnabled"
-    maxlength="2" value="ON" onClick=naptClicked()></td>
-    </tr>
-    <tr>
-     <th >
-     Enable QoS: </th>
-     <td><input type="checkbox" name="qosEnabled" size="2" maxlength="2" value="ON" >
-     </th>
-    </tr>
-    <tr>
-           <th>Connection Type:</th>
-           <td><select size=1 id="ctype" name="ctype"  onchange=onSelectSvrList() >
-                   <option  value=4>Other</option>
-                   <option  value=1>TR069</option>
-                   <option  value=2>INTERNET</option>
-                   <option  value=3>INTERNET_TR069</option>
-                   <option  value=8>VOICE</option>
-                   <option  value=9>VOICE_TR069</option>
-                   <option  value=10>VOICE_INTERNET</option>
-                   <option  value=11>VOICE_INTERNET_TR069</option>
-               </select>
-           </td>
-       </tr>
-   
-    <tr id=tbmtu>
-     <th>MTU: </th>
-     <td>
-     <input type="text" name="mtu" size="10" maxlength="15">
-     </td>
-    </tr>
-    <tr ID=dgwshow style="display:none">
-     <th>Default Route:</th>
-     <td>
-      <input type=radio value=0 name="droute">Disable
-      <input type=radio value=1 name="droute" checked>Enable
-     </td>
-    </tr>
-    <tr ID=IGMPProxy_show style="display:none">
-     <th>Enable IGMP-Proxy: </th><td><input type="checkbox" name="igmpEnabled"
-   size="2" maxlength="2" value="ON"></td>
-    </tr>
-    <tr>
-     <th>Enable MLD-Proxy:: </th><td><input type="checkbox" name="mldEnabled"
-   size="2" maxlength="2" value="ON"></td>
-    </tr>
-    <tr id="tbprotocol">
-           <th>IP Protocol:</th>
-           <td><select id="IpProtocolType" style="WIDTH: 130px" onChange="protocolChange()" name="IpProtocolType">
-               <option value="1" > IPv4</option>
-               <option value="2" > IPv6</option>
-               <option value="3" > IPv4/IPv6</option>
-               </select>
-           </td>
-       </tr>
-   
-   </table>
-   </div>
+    <div class="col-md-12 form-group" id="IGMPProxy_show" style="display:none">
+        <div class="custom-control">
+            <label class="left-field">Enable IGMP-Proxy:</label>
+            <input type="checkbox" name="igmpEnabled" size="2" maxlength="2" value="ON" class="right-field-checkbox">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Enable MLD-Proxy:</label>
+            <input type="checkbox" name="mldEnabled" size="2" maxlength="2" value="ON" class="right-field-checkbox">
+        </div>
+    </div>
+    <div class="col-md-12 form-group" id="tbprotocol">
+        <div class="custom-control">
+            <label class="left-field">IP Protocol:</label>
+            <select id="IpProtocolType" style="width: 130px" onChange="protocolChange()" name="IpProtocolType" class="right-field">
+                <option value="1">IPv4</option>
+                <option value="2">IPv6</option>
+                <option value="3">IPv4/IPv6</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+ 
    <div id=tbl_ppp class="column">
-    <div class="column_title">
-     <div class="column_title_left"></div>
-      <p>PPP Settings:</p>
-     <div class="column_title_right"></div>
+    
+      <div class="col-md-12 form-group left-field">
+        <div class="custom-control">
+         <h2 class="sub_heading " style="color:#fd7e14">PPP Settings:</h2>
+     </div>
     </div>
    <div class="data_common">
-   <table>
-   <tr>
-       <th>UserName:</th>
-       <td><input type="text" name="pppUserName" size="16" maxlength="63"></td>
-   </tr><tr>
-       <th>Password:</th>
-       <td><input type="password" name="pppPassword" size="10" maxlength="29">
-       <input type="checkbox" onClick="show_password()">Show Password</td>
-   </tr>
-   <tr>
-       <th>Type:</th>
-       <td><select size="1" name="pppConnectType" onChange="pppTypeSelection()">
-           <option selected value="0">Continuous</option>
-           <option value="1">Connect on Demand</option>
-           <option value="2">Manual</option>
-           </select>
-       </td>
-   </tr><tr>
-       <th>Idle Time (sec):</th>
-       <td><input type="text" name="pppIdleTime" size="10" maxlength="10"></td>
-   </tr>
-   <tr>
-       <th>Authentication Method:</th>
-       <td><select size="1" name="auth">
-           <option selected value="0">AUTO</option>
-           <option value="1">PAP</option>
-           <option value="2">CHAP</option>
-           </select>
-       </td>
-   </tr>
-   <tr>
-       <th>AC-Name:</th>
-       <td><input type="text" name="acName" size="16" maxlength="30"></td>
-   </tr><tr>
-       <th>Service-Name:</th>
-       <td><input type="text" name="serviceName" size="10" maxlength="30"></td>
-   </tr>
-   </table>
-   </div>
-   </div>
-   <div id=tbl_ip class="column">
-    <div class="column_title">
-     <div class="column_title_left"></div>
-      <p>WAN IP Settings:</p>
-     <div class="column_title_right"></div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">UserName:</label>
+            <input type="text" name="pppUserName" size="16" maxlength="63" class="right-field">
+        </div>
     </div>
-   <div class="data_common">
-   <table>
-   <tr>
-   
-       <th>Type:</th>
-       <td>
-       <input type="radio" value="0" name="ipMode" checked onClick="ipTypeSelection(0)">Fixed IP
-       
-       <input type="radio" value="1" name="ipMode" onClick="ipTypeSelection(0)">DHCP</td>
-   </tr>
-   <tr>
-       <th>Local IP Address:</th>
-       <td><input type="text" name="ip" size="10" maxlength="15"></td>
-   </tr><tr>
-       <th>Remote IP Address:</th>
-       <td><input type="text" name="remoteIp" size="10" maxlength="15"></td>
-   </tr><tr>
-       <th>Subnet Mask:</th>
-       <td><input type="text" name="netmask" size="10" maxlength="15"></td>
-   </tr><tr>
-       <th>IP Unnumbered</th>
-       <td><input type="checkbox" name="ipUnnum" size="2" maxlength="2" value="ON"  onClick="ipModeSelection()"></td>
-   </tr>
-   <tr>
-   <th>Request DNS:</th>
-       <td><input type="radio" value="1" name="dnsMode" onClick='dnsModeClicked()'>Enable
-           <input type="radio" value="0" name="dnsMode" checked onClick='dnsModeClicked()'>Disable
-       </td>
-   </tr>
-   <tr>
-        <th>Primary DNS Server:</th>
-        <td><input type="text" name="dns1" size="18" maxlength="15" value=></td>
-   </tr>
-   <tr>
-        <th>Secondary DNS Server:</th>
-        <td><input type="text" name="dns2" size="18" maxlength="15" value=></td>
-   </tr>
-   </table>
-   </div>
-   </div>
-   <div id='gwInfo'>
-   <input type="hidden"  name="gwStr">
-   <div id='id_dfltgwy'>
-   <input type="hidden"  name="dstGtwy"></div>
-   <input type="hidden"  name="gwStr">
-   <div id='id_wanIf'>
-   <input type="hidden"  name="wanIf"></div>
-   </div>
-   
-   <div id=6rdDiv style="display:none" class="column">
-    <div class="column_title">
-     <div class="column_title_left"></div>
-      <p>6rd Config:</p>
-     <div class="column_title_right"></div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Password:</label>
+            <input type="password" name="pppPassword" size="10" maxlength="29" class="right-field">
+            <input type="checkbox" onClick="show_password()" class="right-field-checkbox"> Show Password
+        </div>
     </div>
-   <div class="data_common">
-   <table>
-       <tr>
-           <th>Board Router v4 Address:</th>
-           <td><input  id="SixrdBRv4IP" maxLength=39 size=36 name="SixrdBRv4IP" style="width:150px "></td>
-       </tr>
-       <tr>
-           <th>6rd IPv4 Mask Len:</th>
-           <td><input  id="SixrdIPv4MaskLen"  maxLength=39 size=36 name="SixrdIPv4MaskLen" style="width:150px "></td>
-       </tr>
-       <tr>
-           <th>6rd Prefix (EX:"2001:db8::"):</th>
-           <td><input  id="SixrdPrefix"  maxLength=39 size=36 name="SixrdPrefix" style="width:150px "></td>
-       </tr>
-       <tr>
-           <th>6rd Prefix length:</th>
-           <td><input  id="SixrdPrefixLen"  maxLength=39 size=36 name="SixrdPrefixLen" style="width:150px "></td>
-       </tr>
-   </table>
-   </div>
-   </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Type:</label>
+            <select size="1" name="pppConnectType" onChange="pppTypeSelection()" class="right-field">
+                <option selected value="0">Continuous</option>
+                <option value="1">Connect on Demand</option>
+                <option value="2">Manual</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Idle Time (sec):</label>
+            <input type="text" name="pppIdleTime" size="10" maxlength="10" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Authentication Method:</label>
+            <select size="1" name="auth" class="right-field">
+                <option selected value="0">AUTO</option>
+                <option value="1">PAP</option>
+                <option value="2">CHAP</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">AC-Name:</label>
+            <input type="text" name="acName" size="16" maxlength="30" class="right-field">
+        </div>
+    </div>
+    <div class="col-md-12 form-group">
+        <div class="custom-control">
+            <label class="left-field">Service-Name:</label>
+            <input type="text" name="serviceName" size="10" maxlength="30" class="right-field">
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="tbl_ip" class="column">
+  <div class="col-md-12 form-group left-field">
+        <div class="custom-control">
+         <h2 class="sub_heading " style="color:#fd7e14">WAN IP Settings:</h2>
+      </div>
+    </div>
+    <div class="data_common">
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Type:</label>
+                <div class="right-field">
+                    <input type="radio" value="0" name="ipMode" checked onClick="ipTypeSelection(0)" class="right-field-radio"> Fixed IP
+                    <input type="radio" value="1" name="ipMode" onClick="ipTypeSelection(0)" class="right-field-radio"> DHCP
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Local IP Address:</label>
+                <input type="text" name="ip" size="10" maxlength="15" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Remote IP Address:</label>
+                <input type="text" name="remoteIp" size="10" maxlength="15" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Subnet Mask:</label>
+                <input type="text" name="netmask" size="10" maxlength="15" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">IP Unnumbered:</label>
+                <input type="checkbox" name="ipUnnum" size="2" maxlength="2" value="ON" onClick="ipModeSelection()" class="right-field-checkbox">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Request DNS:</label>
+                <div class="right-field">
+                    <input type="radio" value="1" name="dnsMode" onClick="dnsModeClicked()" class="right-field-radio"> Enable
+                    <input type="radio" value="0" name="dnsMode" checked onClick="dnsModeClicked()" class="right-field-radio"> Disable
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Primary DNS Server:</label>
+                <input type="text" name="dns1" size="18" maxlength="15" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Secondary DNS Server:</label>
+                <input type="text" name="dns2" size="18" maxlength="15" class="right-field">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="gwInfo">
+    <input type="hidden" name="gwStr">
+    <div id="id_dfltgwy">
+        <input type="hidden" name="dstGtwy">
+    </div>
+    <input type="hidden" name="gwStr">
+    <div id="id_wanIf">
+        <input type="hidden" name="wanIf">
+    </div>
+</div>
+
+<div id="6rdDiv" style="display:none" class="column">
+   <div class="col-md-12 form-group left-field">
+        <div class="custom-control">
+         <h2 class="sub_heading " style="color:#fd7e14">6rd Config:</h2>
+        </div>
+    </div>
+    <div class="data_common">
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">Board Router v4 Address:</label>
+                <input id="SixrdBRv4IP" maxLength="39" size="36" name="SixrdBRv4IP" style="width:150px" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">6rd IPv4 Mask Len:</label>
+                <input id="SixrdIPv4MaskLen" maxLength="39" size="36" name="SixrdIPv4MaskLen" style="width:150px" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">6rd Prefix (EX:"2001:db8::"):</label>
+                <input id="SixrdPrefix" maxLength="39" size="36" name="SixrdPrefix" style="width:150px" class="right-field">
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="custom-control">
+                <label class="left-field">6rd Prefix length:</label>
+                <input id="SixrdPrefixLen" maxLength="39" size="36" name="SixrdPrefixLen" style="width:150px" class="right-field">
+            </div>
+        </div>
+    </div>
+</div>
    <div id=IPV6_wan_setting style="display:block" class="column">
    <div id="tbipv6wan">
    <div class="column_title">

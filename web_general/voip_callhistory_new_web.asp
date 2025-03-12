@@ -81,6 +81,12 @@ function on_submit(obj)
     margin-left:-15px;
     width:102.5%
 }
+.data_common table {
+    border-collapse: separate;
+    width: 300%;
+    border-spacing: 2px;
+    background:#aaddff;
+}
 </style>
 </head>
 <body>
@@ -143,18 +149,9 @@ function on_submit(obj)
   <input class="link_bg" type="submit" value="Refresh" name="refresh" onClick="return on_submit(this)">
  </div>
  </div>
- <div class="col-md-12 form-group left-field">
-        <div class="custom-control">
-  <table class="table table-bordered table-striped" style="background-color: #f8f9fa; width:402%">
-  <tr>
-  <td>No.</td>
-  <td>Status</td>
-  <td>From</td>
-  <td>To</td>
-  <td>Type</td>
-  <td>Duration</td>
-  <td>DateTime</td></tr>
-</table>
+ <div class="data_common col-md-12 form-group left-field">
+        <div class="custom-control" id="history">
+  <%voip_log_get();%>
  </div>
  </div>
     <input type="hidden" name="postSecurityFlag" value="">
@@ -164,6 +161,9 @@ function on_submit(obj)
 </div>
 </div>
 </div>
-
+<div class="text-center p-3" style="background-color: rgb(235 234 234 / 20%);">
+  &copy 2022-2026 Copyright :
+<a class="text-white" style="color:#fd7e14 !important;" href="#">Syrotech Networks Pvt. Ltd.</a>
+</div>
 </body>
 </html>
