@@ -7,6 +7,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
 	<link rel="icon" href="" type="image/x-icon"> 
 	<link rel="stylesheet" type="text/css" href="/Dashboard/Modules/fontawesome/css/font-awesome.min.css">  
     <title></title>
@@ -20,6 +21,9 @@
       			   <SCRIPT type="text/javascript" src="/Dashboard/JS/menu.js"></SCRIPT>
       <SCRIPT type="text/javascript" src="/Dashboard/JS/util.js"></SCRIPT>
       <SCRIPT language=JavaScript src="/Dashboard/JS/printtable.js"></SCRIPT>
+       <SCRIPT language=JavaScript src="/Dashboard/JS/menu.js"></SCRIPT>
+    
+
 	  <style type="text/css">
       th {
         font-size: 13px!important;
@@ -135,33 +139,175 @@ function LogOut(obj)
  submit();
  return true;
 }
+function on_submit(obj)
+{
+ obj.isclick = 1;
+ postTableEncrypt(document.forms[0].postSecurityFlag, document.forms[0]);
+ return true;
+}
+
 </script>
+<style>
+#usb{
+border-top: 1px solid #D3D3D3;
+margin-top: 10px;
+     margin-left: 30px;
+
+    width: 705px;
+
+    padding: 2px;
+
+    display: inline-flex;
+
+}
+#usb table 
+
+  th {
+
+     margin-left:-27px;
+
+   width:365px;  /* Adjust the value as needed */
+
+    font-weight: bold;
+
+    padding:2px;
+
+}
+
+#usb table td {
+
+      margin-left:750px;
+
+    width:740px; 
+
+    padding:2px;   /* Adjust the value as needed */
+
+
+
+}
+
+#usb table (td colspan="2"){
+
+  gap:30px;
+
+}
+.data_common_notitle {
+    border-top: 1px solid #D3D3D3;
+    margin-top: 10px;
+}
+.data_common {
+    padding: 1px;
+    background: #fff;
+    border: 1px solidrgb(146, 122, 122);
+    border-top: 0;
+}
+.data_common table {
+    border-collapse: separate;
+    width: 100%;
+    border-spacing: 2px;
+    background: #fff;
+}
+.data_common table th {
+    font-weight: bold;
+}
+.data_common table td, .data_common table th {
+    background: #F5F5F5;
+    padding: 5px 6px;
+}
+ th {
+    text-align: left;
+}
+.data_common table td, .data_common table th {
+    background: #F5F5F5;
+    padding: 5px 6px;
+}
+.data_common {
+    padding: 1px;
+    background: #fff;
+    border: 1px solid #D3D3D3;
+    border-top: 0;
+}
+.data_common_notitle {
+    border-top: 1px solid #D3D3D3;
+    margin-top: 10px;
+}
+.data_common {
+    padding: 1px;
+    background: #fff;
+    border: 1px solid #D3D3D3;
+    border-top: 0;
+}
+#usb1{
+border-top: 1px solid #D3D3D3;
+margin-top: 10px;
+     margin-left: 30px;
+
+    width: 909px;
+
+    padding: 2px;
+
+    display: inline-flex;
+
+}
+#usb1 table 
+
+  th {
+
+     margin-left:-27px;
+
+   width:365px;  /* Adjust the value as needed */
+
+    font-weight: bold;
+
+    padding:2px;
+
+}
+
+#usb1 table td {
+
+      margin-left:750px;
+
+    width:740px; 
+
+    padding:2px;   /* Adjust the value as needed */
+
+
+
+}
+
+#usb1 table (td colspan="2"){
+
+  gap:30px;
+
+}
+</style>
 	</head>
 	<body onload="FinishLoad();if(getElById('ConfigForm') != null)LoadFrame()" onunload="DoUnload()">
-    <INPUT id="Selected_Menu" type="hidden"
-            value="->" name="Sta_Dev"> 
-		<div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left" vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact" vertical-effect="shrink" vnavigation-view="view1">	
-			<div class="scoop-overlay-box"></div>
-			<div class="scoop-container">  				
-				<div class="scoop-main-container">
-					<div class="scoop-wrapper">
-						<nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0" sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
-							<div class="sidebar_toggle">
-                                <a href="#"><i class="icon-close icons"></i></a>
-                            </div>
+   <INPUT id=Selected_Menu type=hidden value="Status->Device Info" name="Sta_Dev">
+    <div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left"
+        vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact"
+        vertical-effect="shrink" vnavigation-view="view1">
+        <div class="scoop-overlay-box">
+        </div>
+        <div class="scoop-container">
+            <div class="scoop-main-container">
+                <div class="scoop-wrapper">
+                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
+                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
+							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
 							<div class="scoop-inner-navbar"> 
 								<div class="scoop-logo"> 
 								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/logo.png" class="img-fluid" alt=""/></span></a>
 							</div> 
 							    <div id="LeftMenu">
 							        <SCRIPT language=javascript>
-							        MakeLeftMenu('','')
+							        MakeLeftMenu('Status','Device Info');
 							        </SCRIPT>
 							    </div>
 							</div> 
-						</nav> 
-						<div class="scoop-content">
-                            <div id="Header">
+						</nav>
+                    <div class="scoop-content">
+                         <div id="Header">
                                 <header class="header_box scoop-header iscollapsed" header-theme="theme2" scoop-header-position="relative">
                                     <div class="sidebar_toggle">
                                         <a href="javascript:void(0)">
@@ -213,6 +359,11 @@ function LogOut(obj)
                             </div>
                             <div class="">
 
+                           
+
+                       
+                           
+
 
 
  <form action=/boaform/admin/formLogout  method=POST name="cmlogout" id="cmlogout">
@@ -260,7 +411,7 @@ function LogOut(obj)
                                                                 <th style="width:25%">Description: </th>
                                                                 <td style="width:75%">
                                                                     <SCRIPT language=javascript>
-                                                                        document.write('');
+                                                                        document.write('&quot;DUAL BAND+ 2GE+1POTS+1USB-XPON&quot;');
                                                                     </SCRIPT>
                                                                     &nbsp;
                                                                 </td>
@@ -269,7 +420,7 @@ function LogOut(obj)
                                                                 <th style="width:25%">Hardware Version </th>
                                                                 <td style="width:75%">
                                                                     <SCRIPT language=javascript>
-                                                                        document.write('<% HwVer(); %>');
+                                                                        document.write('RTL960x');
                                                                     </SCRIPT>
                                                                 </td>
                                                             </tr>
@@ -316,14 +467,14 @@ function LogOut(obj)
                                                                         <tr>
                                                                             <th>Description </th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                        document.write('');
+                                                                        document.write('&quot;DUAL BAND+ 2GE+1POTS+1USB-XPON&quot;');
                                                                     </SCRIPT>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>MAC</th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                        document.write('<% getInfo("elan-Mac"); %>')
+                                                                        document.write('04:11:19:5d:84:e9')
 
                                                                     </SCRIPT>
  </td>
@@ -345,7 +496,7 @@ function LogOut(obj)
                                                                         <tr>
                                                                             <th>Hardware Version </th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                        document.write('');
+                                                                        document.write('RTL960x');
                                                                     </SCRIPT></td>
                                                                         </tr>
                                                                         <tr>
@@ -357,33 +508,21 @@ function LogOut(obj)
                                                                         <tr>
                                                                             <th> Manufacture Info </th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                        document.write('<% ponGetStatus("vendor-name"); %>');
+                                                                        document.write('syrotech');
                                                                     </SCRIPT></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>ONT Registration Status </th>
                                                                             <td>
-                                                                                <Script language=JavaScript type=text/javascript>
-                                                                                    let ponState = '<% showgpon_status(); %> '
-
-												                                    if( ponState == "up")
-													                                    document.write("");
-												                                    else if ( ponState == "connecting")
-													                                    document.write("");
-												                                    else
-													                                    document.write("");
-												                                </Script>
+                                                                              EPON
                                                                              </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>CPU Usage</th>
                                                                             <td>
                                                                              <SCRIPT language=javascript>
-                                                                        document.write('<tr>
-    <th width=40%>CPU Usage</th>
-    <td width=60%><% cpuUtility(); %></td>
-</tr>
-');
+                                                                        document.write('0%') ;
+
                                                                     </SCRIPT>
                                                                     </td>
                                                                         </tr>
@@ -391,19 +530,14 @@ function LogOut(obj)
                                                                             <th> Memory Usage </th>
                                                                             <td>
                                                                                  <SCRIPT language=javascript>
-                                                                                    document.write('<tr>
-    <th width=40%>Memory Usage</th>
-    <td width=60%><% memUtility(); %></td>
+                                                                                    document.write('17%');
+   
 
-</td>
-</tr>
-');
-);
                                                                     </SCRIPT>
                                                                             </td>
                                                                         </tr>
                                                                                                                                          <tr>
-                                                                            <th>System Time</th>
+                                                                            <th>Compile Time</th>
                                                                             <td>
                                                                     <SCRIPT language=javascript>
                                                                         let curTime = '';
@@ -414,8 +548,20 @@ function LogOut(obj)
 																  	document.write(curTimelist[2] + '' + curTimelist[0] + '' + curTimelist[1] + '' + curTimelist[3] + '' + curTimelist[4] + '');
 																  }
 																  else
-																  	document.write('N/A');
+																  	document.write('Thu Dec 12 17:36:49 CST 2024');
                                                                     </SCRIPT>
+                                                                            </td>
+                                                                        </tr>
+                                                                         <tr>
+                                                                            <th>System Time</th>
+                                                                            <td>
+                                                                  Wed Mar 19 14:55:55 CST 2025
+                                                                            </td>
+                                                                        </tr>
+                                                                         <tr>
+                                                                            <th>Uptime</th>
+                                                                            <td>
+                                                                           10:12
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -826,194 +972,49 @@ function LogOut(obj)
                                                     you can query the connection and line status of the WAN port.
                                                 </span>
                                             </div>
-                                            <div class="card-body table-bordered table-responsive" style="height:1300px; overflow:hidden">
+                                           <div class="card-body table-bordered table-responsive ">
                                                 <a style="text-decoration: none;" href="" data-toggle="modal"
-                                                    data-target="#HERO">
-                                                    <table class="table table-striped ">
+                                                   >
+                                                    <table class="table  table-bordered table-striped">
                                                         <tbody>
-                                                            <Script language=javascript>
-                                                                let ipindex = 0;
-                                                                if (pvc_counts < 1) {
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">Connection <br>Name </th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">Status</th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">IP <br>Address </th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">NetMask </th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-
-                                                                }
-                                                                while (Wan_Actives[ipindex] != "N/A" && ipindex < pvc_counts) {
-                                                                    
-                                                                    if (curUserName == sptUserName){
-                                                                            document.write('<tr>');
-                                                                                document.write('<th style="width:25%;">Connection <br>Name </th>');
-                                                                                document.write('<td>' + Wan_WanName[ipindex] + '</td>');
-                                                                            document.write('</tr>');
-                                                                        
-                                                                        }
-								                                    if(Wan_IPVERSION[ipindex] == "IPv4" || Wan_IPVERSION[ipindex] == "IPv4/IPv6")
-                                                                    {
-                                                                        if(curUserName != sptUserName)
-                                                                        {
-                                                                            var tr069 = Wan_WanName[ipindex]
-                                                                            console.log(tr069)
-                                                                            var reg = RegExp(/TR069/);
-                                                                            var reg1 =  RegExp(/VOICE/);
-                                                                            
-                                                                                if(tr069.match(reg) || tr069.match(reg1))
-                                                                                {
-                                                                                    continue;
-                                                                                }
-
-                                                                                if('PPPoE' != Wan_ENCAP[ipindex])
-                                                                                {
-                                                                                    continue;
-                                                                                }
-                                                                        }
-                                                                        
-                                                                        if(EthernetState == "up"){
-                                                                        
-                                                                        if(PonInfo.PonState == "up"){
-                                                                        
-                                                                            document.write('<tr>');
-                                                                                document.write('<th style="width:25%;">Status</th>');
-                                                                                if ('up' == Wan_Status4[ipindex])
-                                                                                
-                                                                                    document.write('<td>&nbsp;</td>');
-                                                                                
-                                                                                else if(Wan_Actives[ipindex]=="Yes"
-                                                                                            && ( Wan_WanName[ipindex].indexOf('_B_') >= 0
-                                                                                                            ||'PPPoE' != Wan_ENCAP[ipindex]
-                                                                                                            || ('PPPoE' == Wan_ENCAP[ipindex] && ('Connect_Keep_Alive' == Wan_Connection[ipindex] || '-' == Wan_Connection[ipindex]))
-                                                                                                            )
-                                                                                                )
-                                                                                
-                                                                                else if(Wan_Actives[ipindex]=="Yes")	
-                                                                                
-                                                                                    document.write('<td>&nbsp;</td>');
-                                                                                else
-                                                                                    document.write('<td>&nbsp;</td>');
-                                                                                    
-                                                                                document.write('</tr>');
-
-                                                                                document.write('<tr>');
-                                                                                    document.write('<th style="width:25%;">IP <br>Address </th>');
-                                                                                
-                                                                                    document.write('<td>' + Wan_IP4[ipindex] + '&nbsp;</td>');
-
-                                                                                document.write('</tr>');
-
-                                                                                document.write('<tr>');
-                                                                                    document.write('<th style="width:25%;">NetMask </th>');
-                                                                                    
-                                                                                    document.write('<td>' + Wan_NetMask4[ipindex] + '&nbsp;</td>');
-                                                                                document.write('</tr>');
-
-                                                                                break;
-                                                                        }
-                                                                        else
-                                                                        {   
-                                                                            document.write('<tr>');
-                                                                                document.write('<th style="width:25%;">Status</th>');
-                                                                                document.write('<td>&nbsp;</td>');
-                                                                            document.write('</tr>');
-
-                                                                            document.write('<tr>');
-                                                                                document.write('<th style="width:25%;">IP <br>Address </th>');
-                                                                                document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                            document.write('</tr>');
-
-                                                                            document.write('<tr>');
-                                                                                document.write('<th style="width:25%;">NetMask </th>');
-                                                                                document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                            document.write('</tr>');
-
-
-                                                                            break;
-                                                                        }
-                                                                    } else if (Wan_IPVERSION[ipindex] == "IPV6") {
-                                                                        var isIPGWUp = 0;
-                                                                        if ( 0 != Wan_IP6[ipindex].length && '-' != Wan_IP6[ipindex] && 0 != Wan_GateWay6[ipindex].length && '-' != Wan_GateWay6[ipindex] )
-                                                                            isIPGWUp = 1;
-                                                                        if(Wan_WanName[ipindex].indexOf('_B_') >= 0)
-                                                                            isIPGWUp = 1;								
-                                                                        
-                                                                        if(EthernetState == "up"){
-                                                                        
-                                                                        if(PonInfo.PonState == "up"){
-                                                                        
-                                                                        document.write('<tr>');
-                                                                            document.write('<th style="width:25%;">Status</th>');
-                                                                        if ('up' == Wan_Status6[ipindex] && (1 == isIPGWUp))
-                                                                            document.write('<td>&nbsp;</td>');
-                                                                        
-                                                                        else if(Wan_Actives[ipindex]=="Yes"
-                                                                                && ( Wan_WanName[ipindex].indexOf('_B_') >= 0
-                                                                                        ||'PPPoE' != Wan_ENCAP[ipindex]
-                                                                                        || ('PPPoE' == Wan_ENCAP[ipindex] && ('Connect_Keep_Alive' == Wan_Connection[ipindex] || '-' == Wan_Connection[ipindex]))
-                                                                                        )
-                                                                                    )
-                                                                        
-                                                                        else if(Wan_Actives[ipindex]=="Yes")	
-                                                                        
-                                                                            document.write('<td>&nbsp;</td>');
-                                                                        else
-                                                                            document.write('<td>&nbsp;</td>');
-                                                                        
-                                                                        document.write('</tr>');
-                                                                    
-                                                                        document.write('<tr>');
-                                                                            document.write('<th style="width:25%;">IPv6 <br>Address </th>');
-                                                                            document.write('<td>' + Wan_IP6[ipindex] + '&nbsp;</td>');
-                                                                        document.write('</tr>');
-
-                                                                        document.write('<tr>');
-                                                                            document.write('<th style="width:25%;">Get <br>Prefix </th>');
-                                                                            document.write('<td>' + Wan_PD6[ipindex] + '&nbsp;</td>');
-                                                                        document.write('</tr>');
-
-                                                                        break;
-                                                                }
-                                                                else
-                                                                {
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">Status</th>');
-                                                                        document.write('<td>&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">IPv6 <br>Address </th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">Get <br>Prefix </th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    break;
-
-                                                                }
-                                                            }
-                                                            ipindex++;
-                                                        }
-                                                            </Script>
+                                                            <tr>
+                                                                <th style="width:25%">Connection Type</th>
+                                                                <td style="width:75%">
+                                                                     <SCRIPT language=javascript>
+                                                                        document.write('INTERNET');
+                                                                    </SCRIPT>
+                                                                    &nbsp;
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="width:25%">Status</th>
+                                                                <td style="width:75%">
+                                                                     <SCRIPT language=javascript>
+                                                                        document.write('up');
+                                                                    </SCRIPT>
+                                                                    &nbsp;
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="width:25%">IP Address </th>
+                                                                <td style="width:75%">
+                                                                    <SCRIPT language=javascript>
+                                                                        document.write('10.215.1.61');
+                                                                    </SCRIPT>
+                                                                    &nbsp;
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="width:25%">Subnet Mask</th>
+                                                                <td style="width:75%">
+                                                                    <SCRIPT language=javascript>
+                                                                        document.write('255.255.255.0');
+                                                                    </SCRIPT>
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
+                                                    
                                                 </a>
                                                 <button class="btn orange_btn" href="" data-toggle="modal"
                                                     data-target="#HERO">View More
@@ -1038,19 +1039,32 @@ function LogOut(obj)
                                                                 <p>
                                                                     <b>IPv4 Information(Click the form for details)</b>
                                                                 </p>
-
+                                                                <a style="text-decoration: none;" href="" data-toggle="modal"
+                                                        data-target="#HERO077">
                                                                 
                                                                     <table class="table table-striped">
-                                                                        <thead class="bg-dark text-white">
-                                                                            <tr>
-                                                                                <th>WAN Name </th>
-                                                                                <th>Status </th>
+                                                                       <thead class="bg-dark text-white">
+                                                                              <tr>
+                                                                                <th>Interface</th>
+                                                                                <th style="width:74px;">VLAN ID</th>
+                                                                                <th>Connection Type</th>
+                                                                                <th>Protocol</th>
+                                                                                <th>MAC</th>
                                                                                 <th>IP Address</th>
-                                                                                <th>VLAN/Priority </th>
-                                                                                <th>Connect </th>
-
+                                                                                <th>Gateway</th>
+                                                                                <th>Connect</th>
+                                                                              </tr>
+                                                                            </thead>
+                                                                            <tr>
+                                                                              <td>nas0_0</td>
+                                                                              <td>0</td>
+                                                                              <td>INTERNET</td>
+                                                                              <td>IPoE</td>
+                                                                              <td>04:11:19:5d:84:e9</td>
+                                                                              <td>10.215.1.61</td>
+                                                                              <td>10.215.1.1</td>
+                                                                              <td>up</td>
                                                                             </tr>
-                                                                        </thead>
                                                                         <tbody>
                                                                         
                                                                             <SCRIPT language=JavaScript type=text/javascript>
@@ -1198,21 +1212,37 @@ function LogOut(obj)
 					                                                        </SCRIPT>
                                                                         </tbody>
                                                                     </table>
+                                                                </a>
 
                                                                 <p><b>IPv6 Information(Click the form for details)</b>
                                                                 </p>
+                                                                <a style="text-decoration: none;" href="" data-toggle="modal" data-target="#HERO078">
                                                                 <p style="text-decoration: none;">
                                                                     <table class="table table-striped">
                                                                         <thead class="bg-dark text-white">
                                                                             <tr>
-                                                                                <th>WAN Name </th>
-                                                                                <th>Status </th>
+                                                                                <th>Interface</th>
+                                                                                <th style="width:74px;">VLAN ID </th>
+                                                                                <th>Connection Type </th>
+                                                                                <th>Protocol<th>
+                                                                                <th>MAC</th>
                                                                                 <th>IP Address</th>
-                                                                                <th>VLAN/Priority </th>
+                                                                                <th>Gateway </th>
                                                                                 <th>Connect </th>
 
                                                                             </tr>
                                                                         </thead>
+                                                                         <tr>
+                                                                              <td>ppp0_nas0_1</td>
+                                                                              <td>0</td>
+                                                                              <td>INTERNET</td>
+                                                                              <td>PPPoE</td>
+                                                                              <td>  </td>
+                                                                              <td> </td>
+                                                                              <td> <td>
+                                                                              <td>up</td>
+                                                                              
+                                                                            </tr>
                                                                         <tbody>
                                                                             <SCRIPT language=JavaScript type=text/javascript>
 
@@ -1339,6 +1369,7 @@ function LogOut(obj)
 					                                                        </SCRIPT>
                                                                         </tbody>
                                                                     </table>
+                                                                    </a>
                                                                 </p>
                                                             </div>
 
@@ -1347,7 +1378,7 @@ function LogOut(obj)
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="modal fade" id="myModal2" role="dialog">
+                                             <div class="modal fade show" id="HERO077" role="dialog">
                                                 <div class="modal-dialog modal-lg">
 
                                                     <!-- Modal content-->
@@ -1367,93 +1398,101 @@ function LogOut(obj)
                                                             <table class="table  table-bordered table-striped">
                                                                 <tbody>
                                                                      <tr>
-                                                                        <th>Connection Name</th>
+                                                                        <th>Interface</th>
                                                                         <td>
-                                                                            
+                                                                            nas0_0
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th style="width: 40%">MAC Address </th>
+                                                                        <th style="width: 40%">MAC</th>
                                                                         <td> 
-                                                                          
+                                                                          04:11:19:5d:84:e9
                                                                     </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>VLAN/Priority</th>
+                                                                        <th>VLAN ID</th>
                                                                         <td>
-                                                                              
+                                                                         0     
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Way of Getting IP</th>
-                                                                        <td> </td>
+                                                                        <th>Protocol</th>
+                                                                        <td>IPoE </td>
                                                                     </tr>
                                     
                                                                     <tr>
-                                                                        <th>NAT</th>
+                                                                        <th>NAT Type:</th>
                                                                         <td>
-                                                                            
+                                                                           NAT4 (default)
+    
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>IP Address</th>
                                                                         <td>
-                                                                              
+                                                                             10.215.1.58 
                                                                         </td>
                                                                     </tr>
                                                                      <tr>
                                                                         <th>Subnet Mask</th>
                                                                         <td>
-                                                                              
+                                                                             255.255.255.0 
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Gateway</th>
                                                                         <td>
-                                                                              
+                                                                              10.215.1.1
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Primary DNS</th>
                                                                         <td>
-                                                                              
+                                                                             8.8.8.8
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Secondary DNS </th>
+                                                                        <th>Secondary DNS</th>
                                                                         <td>
-                                                                             
+                                                                              8.8.4.4
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Release IP </th>
                                                                         <td>
-                                                                             
+                                                                           <input id="btnReleaseIP" name="btnReleaseIP" onclick="renewrelease(2, 0)" type="button" value="Disconnect">  
                                                                         </td>
                                                                     </tr>
                                                                      <tr>
                                                                         <th>Renew IP </th>
                                                                         <td>
-                                                                             
+                                                                            <input id="btnReleaseIP" name="btnReleaseIP" onclick="renewrelease(2, 0)" type="button" value="Connect"> 
                                                                         </td>
                                                                     </tr>
                             
                                                                     <tr>
-                                                                        <th>NTP Server </th>
+                                                                        <th>SNTP Server </th>
                                                                         <td>
-                                                                             
+                                                                           220.130.158.52
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Time Zone Info </th>
+                                                                        <th>Time Zone Select </th>
                                                                         <td>
-                                                                             
+                                                                             Year 1970 Mon 1 Day 1 Hour 5  Min 48  sec 37
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Online Duration (dd:hh:mm:ss):</th>
                                                                         <td>
-                                                                              
+                                                                             up ( 00:00:15 )
+
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Offline Duration (dd:hh:mm:ss):</th>
+                                                                        <td>
+                                                                            down ( 00:32:27 )
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -1468,7 +1507,8 @@ function LogOut(obj)
                                             </div>
 
 
-                                            <div class="modal fade" id="myModal1" role="dialog">
+
+                                            <div class="modal fade show "   id="HERO078"   role="dialog">
                                                 <div class="modal-dialog modal-lg">
 
                                                     <!-- Modal content-->
@@ -1488,8 +1528,8 @@ function LogOut(obj)
                                                             <table class="table  table-bordered table-striped">
                                                                 <tbody>
                                                                      <tr>
-                                                                        <th>Connection Name </th>
-                                                                        <td> </td>
+                                                                        <th>Interface</th>
+                                                                        <td>ppp0_nas0_1 </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th style="width: 40%">MAC Address </th>
@@ -1497,67 +1537,57 @@ function LogOut(obj)
 
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>VLAN/Priority </th>
-                                                                        <td> </td>
+                                                                        <th>VLAN ID</th>
+                                                                        <td> 0</td>
                                                                     </tr>
 
                                                                      <tr>
-                                                                        <th>Way of Getting IPv6</th>
-                                                                        <td></td>
+                                                                        <th>Protocol</th>
+                                                                        <td>PPPoE</td>
                                                                     </tr>
                                                                      <tr>
-                                                                        <th>NAT</th>
+                                                                        <th>NAT Type</th>
                                                                         <td>
-                                                                            
+                                                                            NAT4 (default) 
                                                                         </td>
                                                                     </tr>
                                                                      <tr>
-                                                                        <th>IPv6 Address</th>
+                                                                        <th>IP Address</th>
                                                                         <td>
                                                                         
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Get Prefix</th>
+                                                                        <th>Prefix Delegation</th>
                                                                         <td> </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>IPv6 DefaultGateway</th>
+                                                                        <th>IPv6 Default Gateway</th>
                                                                         <td>
                                                                            
                                                                         </td>
                                                                     </tr>
                                                         
                                                                     <tr>
-                                                                        <th>IPv6 Primary DNS</th>
-                                                                        <td></td>
+                                                                        <th>Primary DNS </th>
+                                                                        <td>8.8.8.8</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>IPv6 Secondary DNS</th>
-                                                                        <td></td>
+                                                                        <th>Secondary DNS</th>
+                                                                        <td>8.8.4.4</td>
                                                                     </tr>
+                                                                  
                                                                     <tr>
-                                                                        <th>Release IP </th>
+                                                                        <th>SNTP Server </th>
                                                                         <td>
-                                                                             
-                                                                        </td>
-                                                                    </tr>
-                                                                     <tr>
-                                                                        <th>Renew IP </th>
-                                                                        <td>
-                                                                             
+                                                                             220.130.158.52
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>NTP Server </th>
+                                                                        <th>Time Zone Select :  </th>
                                                                         <td>
-                                                                             
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Time Zone Info </th>
-                                                                        <td>
-                                                                             
+                                                                         Year 1970 Mon 1 Day 1 Hour 5  Min 48  sec 37
+                                                                            
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -1584,10 +1614,9 @@ function LogOut(obj)
                                                 </span>
                                                 <span> <b style="font-size:18px;"><span
                                                             style="vertical-align:middle;">
-                                                            PON Optical
-                                                            Information</b></span></span>
+                                                            PON Status</b></span></span>
                                                 <hr>
-                                                On this page, you can query the status of the optical module.
+                                               This page shows the current system status of PON.
                                             </div>
                                             <div class="card-body table-bordered table-responsive ">
                                                 <a style="text-decoration: none;" href="" data-toggle="modal"
@@ -1596,49 +1625,42 @@ function LogOut(obj)
                                                     <table class="table table-striped ">
                                                         <tbody>
                                                         <tr>
-                                                                <th>Optical Information</th>
-                                                                <th>Current Value</th>
-                                                                <th>Reference Value</th>
+                                                                <th>Working Mode</th>
+                                                                 <td>
+                                                                            EPON
+                                                                            </td>
+                                                              
                                                             </tr>
                                                             <tr>
-                                                                            <th style="width: 30%"> PON Link Connection
-                                                                                Status</th>
+                                                                            <th style="width: 30%"> Vendor Name
                                                                             <td>
-                                                                                 <Script language=JavaScript type=text/javascript>
-                                                                                 console.log(PonInfo)
-												                                    if( PonInfo.PonState == "up")
-													                                    document.write("");
-												                                    else if ( PonInfo.PonState == "connecting")
-													                                    document.write("");
-												                                    else
-													                                    document.write("");
-												                                </Script>
+                                                                             <SCRIPT language=javascript>
+                                                                             document.write('SYRO')
+                                                        
+                                                                    </SCRIPT>  
                                                                             </td>
-                                                                            <td>
-                                                                                Online / Offline
-                                                                            </td>
-
+                                                                            
                                                                         </tr>
                                                                         
                                                             <tr>
-                                                                <th>RX Optical Power</th>
+                                                                <th>Part Number</th>
                                                                 <td>
                                                                              <SCRIPT language=javascript>
-                                                                             document.write('-inf  dBm')
+                                                                             document.write('CLASS B+')
                                                         
-                                                                    </SCRIPT>   dBm </td>
+                                                                    </SCRIPT> </td>
 
-                                                                <td> -27 to -7 dBm</td>
+                                                                
                                                             </tr>
 
                                                               <tr>
-                                                                <th>TX Optical Power </th>
+                                                                <th>Rx Power</th>
                                                                  <td>
                                                                              <SCRIPT language=javascript>
-                                                                             document.write('-inf dBm')
+                                                                             document.write('-25.528420  dBm')
                                                         
-                                                                    </SCRIPT>   dBm </td>
-                                                                <td> 0.5 to 5 dBm</td>
+                                                                    </SCRIPT></td>
+                                                               
                                                             </tr>
 
 
@@ -1674,87 +1696,34 @@ function LogOut(obj)
                                                                                 Network Link Connection Information</th>
                                                                         </tr>
 
-                                                                        <tr>
-                                                                            <th style="width: 30%"> ONU State</th>
-                                                                            <td colspan="2">
-                                                                                 <Script language=JavaScript type=text/javascript>
-												                                    if( PonInfo.PonState == "up")
-													                                    document.write('<% showgpon_status(); %> ');
-												                                    else if ( PonInfo.PonState == "connecting")
-													                                    document.write('<% showgpon_status(); %> ');
-												                                    else
-													                                    document.write('<% showgpon_status(); %> ');
-												                                </Script>
-                                                                            </td>
-
-                                                                        </tr>
+                                                                    
                                                                         <tr>
                                                                             <th>Working Mode </th>
-                                                                            <td colspan="2">
-                                                                                <Script language=JavaScript type=text/javascript>
-                                                                                    if(( PonInfo.PonState == "up") || ( PonInfo.PonState == "connecting")) {
-                                                                                        if (PonInfo.phyStatus = "gpon_phy_up") {
-													                                        document.write("");
-                                                                                        } else {    
-                                                                                            document.write("");
-                                                                                        }
-                                                                                    }    
-												                                    else {
-													                                    document.write("");
-                                                                                    }
-												                                </Script>
+                                                                            <td>
+                                                                            EPON
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>FEC Errors</th>
-                                                                            <td colspan="2">
-                                                                                 <SCRIPT language=JavaScript type=text/javascript>
-
-                        if (PonInfo.fecEnable)
-                        	document.write(fecEnable);
-                        else
-                        {
-													if(PonInfo.fecEnable == "disabled")
-														document.write("");
-													else
-														document.write("");
-												}
-											</SCRIPT>
+                                                                   <td colspan="2">0 </td>
+										
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>LOID Status </th>
+                                                                            <th>Part Number </th>
                                                                             <td colspan="2">
-                                                                                <SCRIPT language=JavaScript type=text/javascript>
-                                                                                        if ( '1' == PonInfo.LinkSta )
-                                                                                        {
-                                                                                            PonInfo.DispGemPortState();
-                                                                                        }
-                                                                                        else
-                                                                                        {
-                                                                                            if ( '-' == PonInfo.EncryptEnable )
-                                                                                                document.write(PonInfo.EncryptEnable);
-                                                                                            else
-                                                                                            {
-                                                                                                                        if(PonInfo.EncryptEnable == "disabled")
-                                                                                                                            document.write("");
-                                                                                                                        else
-                                                                                                                            document.write("");
-                                                                                                                    }
-                                                                                        }
+                                                                                <SCRIPT language=javascript>
+                                                                                    document.write('CLASS B+');
                                                                                 </SCRIPT>
                                                                             </td>
 
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>ONU ID
+                                                                            <th>Vendor Name
                                                                             </th>
                                                                             <td colspan="2">
-                                                                                 <SCRIPT language=JavaScript type=text/javascript>
-                                                                                 if(PonInfo.WarnInfo == "disconnect")
-                                                                                                            document.write("");
-                                                                                        else
-                                                                                            document.write("");
+                                                                                <SCRIPT language=javascript>
+                                                                                    document.write('SYRO');
                                                                                 </SCRIPT>
                                                                             </td>
 
@@ -1792,7 +1761,7 @@ function LogOut(obj)
                                                                             <th>Reference Value</th>
                                                                         </tr>
                                                                          <tr>
-                                                                            <th>RX Optical Power </th>
+                                                                            <th>Rx Power </th>
                                                                             <td> 
                                                                             <SCRIPT language=javascript>
                                                                              document.write('<% ponGetStatus("rx-power"); %>')
@@ -1801,7 +1770,7 @@ function LogOut(obj)
                                                                             <td> -27 to -7 dBm </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>TX Optical Power</th>
+                                                                            <th>Tx Power</th>
                                                                             <td> <SCRIPT language=javascript>
                                                                              document.write('<% ponGetStatus("tx-power"); %>')
                                                         
@@ -1809,7 +1778,7 @@ function LogOut(obj)
                                                                             <td> 0.5 to 5 dBm</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Working Voltage </th>
+                                                                            <th>Voltage </th>
                                                                             <td> 
                                                                              <SCRIPT language=javascript>
                                                                              
@@ -1828,7 +1797,7 @@ function LogOut(obj)
                                                                             <td> 0 to 90 mA </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Working Temperature </th>
+                                                                            <th>Temperature </th>
                                                                             <td> 
                                                                              <SCRIPT language=javascript>
                                                                         document.write('<% ponGetStatus("temperature"); %>');
@@ -1836,7 +1805,9 @@ function LogOut(obj)
 
 
                                                                     </SCRIPT>   </td>
-                                                                            <td> -10 to +85 ? </td>
+                                                                            <td> -5 to + 55&deg;C
+</td>
+  
                                                                         </tr>
 
                                                                     </tbody>
@@ -2237,11 +2208,19 @@ function LogOut(obj)
                                                     <table class="table table-bordered table-striped">
                                                         <thead></thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th>User Name(Phone Number)</th>
+                                                         <tr>
+                                                                <th>Display Name</th>
                                                                 <td>
                                                                      <SCRIPT language=javascript>
                                                                         document.write('');
+                                                                    </SCRIPT>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Number</th>
+                                                                <td>
+                                                                     <SCRIPT language=javascript>
+                                                                        document.write('1003');
                                                                     </SCRIPT>
                                                                 </td>
                                                             </tr>
@@ -2250,39 +2229,19 @@ function LogOut(obj)
                                                                 <td>1</td>
                                                             </tr>
                                                             <tr>
-                                                                <th>User Status</th>
+                                                                <th>Status</th>
                                                                 <td>
-                                                                     
-                                                                     <SCRIPT language=javascript>
-                                                                        VoipInfo.showRegisterState(1);
-                                                                    </SCRIPT>
-                                                                </td>
+                                                                     Registered
+                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                                <th>Call Status</th>
-                                                                <td>
-                                                                    <SCRIPT language=javascript>        
-                                                                        VoipInfo.showLineState(1);
-                                                                    </SCRIPT>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Registry Error</th>
-                                                                <td>
-                                                                     <SCRIPT language=javascript>
-                                                                        let regFailReason = '';
-                                                                        if (parseInt(regFailReason) === 2) {
-                                                                            document.write("upstream port disconnected");
-                                                                        }
-                                                                    </SCRIPT>
-                                                                </td>
-                                                            </tr>
+                                                          
                                                         </tbody>
 
                                                     </table>
-                                                </a>
-                                                <button class="btn orange_btn" href="" data-toggle="modal"
+                                                    <button class="btn orange_btn" href="" data-toggle="modal"
                                                     data-target="#HERO04">View More</button>
+                                                </a>
+                                               
                                             </div>
 
                                         </div>
@@ -2307,171 +2266,119 @@ function LogOut(obj)
                                                     <div class="table-responsive" id="Voip_content" style="display: none;">
 
                                                           <TABLE id="voipSIP_info" name="voipSIP_info" class="table table-bordered table_text_center">
-															<TBODY>
-																<TR>
-																	<TD >
-																		
-																	</TD>
-																	<TD>
-																		
-																			&nbsp;
-																	</TD>
-																</TR>
+															 <TBODY>
+                                                                            <TR>
+                                                                                <TD >
+                                                                                   Proxy0 Addr
+                                                                                </TD>
+                                                                                <TD>
+                                                                                    192.168.3.2
+                                                                                        &nbsp;
+                                                                                </TD>
+                                                                            </TR>
 
-																<TR>
-																	<TD >
-																		
-																	</TD>
-																	<TD>
-																		
-																			&nbsp;
-																	</TD>
-																</TR>
-																<TR>
-																	<TD >
-																		
-																	</TD>
-																	<TD>
-																		
-																			&nbsp;
-																	</TD>
-																</TR>
-																<TR>
-																	<TD >
-																		
-																	</TD>
-																	<TD>
-																		
-																			&nbsp;
-																	</TD>
-																</TR>
-															</TBODY>
-														</TABLE>
+                                                                            <TR>
+                                                                                <TD >
+                                                                                    Proxy0 Port Number
+                                                                                </TD>
+                                                                                <TD>
+                                                                                    5060
+                                                                                        &nbsp;
+                                                                                </TD>
+                                                                            </TR>
+                                                                            <TR>
+                                                                                <TD >
+                                                                                 Proxy1 Addr
+                                                                                </TD>
+                                                                                <TD>
+                                                                                    192.168.3.2
+                                                                                        &nbsp;
+                                                                                </TD>
+                                                                            </TR>
+                                                                            <TR>
+                                                                                <TD >
+                                                                                   Proxy1 Port Number
+                                                                                </TD>
+                                                                                <TD>
+                                                                                    5060
+                                                                                        &nbsp;
+                                                                                </TD>
+                                                                            </TR>
+                                                                        </TBODY>
+                                                                    </TABLE>
+                                                                </div>
+                                                                <div class="table-responsive">
+                                                                    <TABLE id="perLineTablePlaceholder" class="table table-bordered table_text_center">
+                                                                        <TBODY>
+                                                                            <TR>
+                                                                                <th  >
+                                                                                    Name
+                                                                                </th>
+                                                                                <th >
+                                                                                    Line 1
+                                                                                </th>
+                                                                               
+                                                                               
+                                                                            </TR>
+                                                                            <TR>
+                                                                                <TD >
+                                                                                    Port
+                                                                                </TD>
+                                                                                <TD>
+                                                                                  1
+                                                                                </TD>
+
+                                                                              
+                                                                            </TR>
+                                                                            <TR>
+                                                                                <TD class=table_title width="20%">
+                                                                                  Number
+                                                                                </TD>
+                                                                                <TD>
+                                                                                    <script language=JavaScript type=text/javascript>
+                                                                                        VoipInfo.showRegisterState(1);
+                                                                                    </script>
+                                                                                </TD>
+
+                                                                               
+
+                                                                              
+                                                                             
+                                                                            </TR>
+                                                                            <TR>
+                                                                                <TD class=table_title width="20%">
+                                                                                   Status
+                                                                                </TD>
+                                                                                <TD>
+                                                                                   Disabled
+                                                                                </TD>
+                                                                            </TR>
+                                                                        </TBODY>
+                                                                    </TABLE>
+                                                                </div>
+                                                                <Script language=javascript>
+                                                                        var cur_user = '0';
+                                                                        if (cur_user == "0") {
+                                                                            setDisplay('Voip_content', 1);
+                                                                        }
+                                                                        if (getElById("perLineTablePlaceholder") != null) {
+                                                                            checkLineNum();
+                                                                        }
+                                                                </Script>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn grey_btn" data-dismiss="modal">Close </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="table-responsive">
-                                                        <TABLE id="perLineTablePlaceholder" class="table table-bordered table_text_center">
-															<TBODY>
-																<TR>
-																	<th  >
-																		
-																	</th>
-																	<th >
-																		
-																	</th>
-																	<th >
-																		
-																	</th>
-																	<th >
-																		
-																	</th>
-																	<th >
-																		
-																	</th>
-																</TR>
-																<TR>
-																	<TD >
-																		
-																	</TD>
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showVoipNumber(1);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showVoipNumber(2);
-																		</script>
-																	</TD>
-																		
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showVoipNumber(3);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showVoipNumber(4);
-																		</script>
-																	</TD>
-																</TR>
-																<TR>
-																	<TD class=table_title width="20%">
-																		
-																	</TD>
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showRegisterState(1);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showRegisterState(2);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showRegisterState(3);
-																		</script>
-																	</TD>
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showRegisterState(4);
-																		</script>
-																		</TD>
-																</TR>
-																<TR>
-																	<TD class=table_title width="20%">
-																		
-																	</TD>
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showLineState(1);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showLineState(2);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showLineState(3);
-																		</script>
-																	</TD>
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showLineState(4);
-																		</script>
-																	</TD>
-																</TR>
-															</TBODY>
-														</TABLE>
-                                                    </div>
-                                                    <Script language=javascript>
-                                                            var cur_user = '';
-                                                            if (cur_user == "0") {
-                                                                setDisplay('Voip_content', 1);
-                                                            }
-                                                            if (getElById("perLineTablePlaceholder") != null) {
-                                                                checkLineNum();
-                                                            }
-                                                    </Script>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn grey_btn" data-dismiss="modal">Close </button>
                                                 </div>
                                             </div>
-                                        </div>
+
+                                        
                                     </div>
-                                    </div>
-                                    </div>
+
+                                    
+
 
                                     
 
@@ -2751,7 +2658,7 @@ function LogOut(obj)
                                         return '5';
                                     }                                
                                 </SCRIPT>
-                                <div class="card" style="margin-top:-837px; margin-left:118px">
+                                <div class="card" style="margin-top: -771px;margin-left:118px">
                                     <div class="card-header">
                                         <span>
                                             <img src="/Dashboard/images/logo-user.png" style="width:45px;padding-bottom:5px;">
@@ -3220,7 +3127,7 @@ function DhcpServerRelTime(timeVal)
 
                                         <div class="modal-body table-responsive">
 
-                                            <table class="table table-bordered ">
+                                            <table class="table table-bordered " style="width:100%">
                                                 <p>
                                                     On this page, you can query the WLAN information, WLAN packet
                                                     statistics, and SSID information.
@@ -3233,6 +3140,12 @@ function DhcpServerRelTime(timeVal)
                                                         <td colspan="4">    
                                                             <button class="btn orange_btn" data-target="#HERO010"
                                                                 data-toggle="modal"> Ethernet
+                                                                Port Status
+                                                            </button>
+                                                        </td>
+                                                         <td colspan="4">    
+                                                            <button class="btn orange_btn" data-target="#HERO019"
+                                                                data-toggle="modal"> USB Status
                                                                 Port Status
                                                             </button>
                                                         </td>
@@ -3254,41 +3167,17 @@ function DhcpServerRelTime(timeVal)
                                                     <tr>
                                                         <td style="color:#f58220 " colspan="8">WLAN Info</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th class="table-headcol">WLAN Status</th>
-                                                        <td colspan="7">
-                                                            <SCRIPT language=JavaScript type=text/javascript>
-                                                                let wlanEnabled = '';
+                                                  
+                                                   
 
-					                                            if (wlanEnabled == "0")
-                                                                {
-                                                                    document.write('')
-                                                                }
-                                                                else
-                                                                {
-                                                                    document.write('')
-                                                                }
-                                                            </SCRIPT>
-                                                        </td>
-                                                    </tr>
                                                     <tr>
-                                                        <th class="table-headcol">WLAN Channel</th>
-                                                        <td colspan="7">
-                                                            <SCRIPT language=JavaScript type=text/javascript>
-                                                                if (( wlanEnabled == "1")) {
-                                                                    document.write('');
-                                                                } else {
-                                                                    document.write('--');
-                                                                }
-                                                            </SCRIPT>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-headcol"></th>
-                                                        <th class="table-headcol"></th>
-                                                        <th class="table-headcol" colspan="2"></th>
-                                                        <th class="table-headcol" colspan="2"></th>
-                                                        <th class="table-headcol" colspan="2"> </th>
+                                                        <th>Mode</th>
+                                                        <th colspan="2">Band</th>
+                                                        <th> SSID</th>
+                                                        <th>Channel Number </th>
+                                                        <th> Encryption</th>
+                                                        <th> BSSID</th>
+                                                        <th> Associated Clients</th>
                                                     </tr>
                                                     <script language=javascript>
                                                     var ssidnum="";
@@ -3368,7 +3257,15 @@ function DhcpServerRelTime(timeVal)
 					}
 
 </script>
-                                                    <tr>
+    <tr>
+    <td >AP</td>
+     <td colspan="2">2.4 GHz (B+G+N)</td>
+      <td >FTTH-84E8</td>
+       <td >8</td>
+        <td>WPA2 Mixed</td>
+         <td >04:11:19:5d:84:ec</td>
+          <td >0</td>
+    </tr>                                                <tr>
                                                         <td style="color:#f58220 " colspan="8">
                                                             WLAN Packet Statistics
                                                         </td>
@@ -3439,41 +3336,16 @@ function DhcpServerRelTime(timeVal)
                                                     <tr>
                                                         <td style="color:#f58220 " colspan="8">WLAN 5G Info</td>
                                                     </tr>
+                                                   
+                                                   
                                                     <tr>
-                                                        <th class="table-headcol">WLAN 5G Status</th>
-                                                        <td colspan="7">
-                                                            <SCRIPT language=JavaScript type=text/javascript>
-                                                                let wlan11acEnabled = '';
-
-					                                            if (wlan11acEnabled == "0")
-                                                                {
-                                                                    document.write('')
-                                                                }
-                                                                else
-                                                                {
-                                                                    document.write('')
-                                                                }
-                                                            </SCRIPT>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-headcol">WLAN 5G Channel</th>
-                                                        <td colspan="7">
-                                                            <SCRIPT language=JavaScript type=text/javascript>
-                                                                if (( wlan11acEnabled == "1")) {
-                                                                    document.write('');
-                                                                } else {
-                                                                    document.write('--');
-                                                                }
-                                                            </SCRIPT>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-headcol"></th>
-                                                        <th class="table-headcol"></th>
-                                                        <th class="table-headcol" colspan="2"></th>
-                                                        <th class="table-headcol" colspan="2"></th>
-                                                        <th class="table-headcol" colspan="2"> </th>
+                                                        <th class="table-headcol">Mode</th>
+                                                        <th class="table-headcol">Band</th>
+                                                        <th class="table-headcol">SSID</th>
+                                                        <th class="table-headcol">Channel Number</th>
+                                                        <th class="table-headcol">Encryption </th>
+                                                        <th class="table-headcol">BSSID </th>
+                                                        <th class="table-headcol">Associated Clients</th>
                                                     </tr>
                                                     <script language="javascript">
 var ssidacnum="";
@@ -3558,7 +3430,15 @@ function insert(source, start, newStr)
     return source.slice(0, start) + newStr + source.slice(start);
 }
 </script>
-                                                    <tr>
+             <tr>
+             <td>AP</td>
+             <td>5 GHz (A+N+AC)</td>
+             <td>FTTH-84E8-5G</td>
+             <td>100</td>
+             <td>WPA2 Mixed</td>
+             <td>04:11:19:5d:84:e8</td>
+             <td>0</td>
+             </tr>                                       <tr>
                                                         <td style="color:#f58220 " colspan="8">
                                                             WLA 5G Packet Statistics
                                                         </td>
@@ -3629,6 +3509,43 @@ function insert(source, start, newStr)
                                     </div>
                                 </div>
                             </div>
+<div class="modal fade show" id="HERO019" style="display:none;" aria-modal="true"
+                                role="dialog">
+                                <div class="modal-dialog modal-lg" style="">
+                                    <!-- Modal content-->
+                                    <div class="modal-content" style="width:98%;">
+                                        <div class="modal-header">
+                                            <span>
+                                                <img src="/Dashboard/images/ethernet.png" style="width:45px;">
+                                            </span>
+                                            <h2 class="modal-title" style="display: inline;"> &nbsp;
+                                            <% multilang("2948" "LANG_USB_STATUS"); %>
+                                            </h2>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p> <% multilang("2949" "LANG_USB_PAGE_DESC"); %>
+                                            </p>
+                                            <h5>USB Port Status</h5>
+                                             <div class="data_common data_common_notitle" id="usb">
+                                             <table>
+   <% getInfo("usbstate"); %>
+   </table>
+ </div>
+
+                                           
+                                        </div>
+                                        <div class="modal-footer">
+                                      
+                                            <button type="button" class="btn grey_btn"
+                                                data-dismiss="modal">Close</button>
+                                                
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+                            </div>
 
 
  <div class="modal fade show" id="HERO010" style="display:none;" aria-modal="true"
@@ -3649,205 +3566,23 @@ function insert(source, start, newStr)
                                             <p> This page shows the current LAN Port status.
                                             </p>
                                             <h5>LAN Port Status</h5>
-                                            <table class="table  table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <th colspan="1" rowspan="2" align="center" style="text-align: center">Port</<th>
-                                                        <th colspan="5" align="center" style="text-align: center" > Device Info </th>
-                                                        <th colspan="3" align="center" style="text-align: center" >Status</<th>
-                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-headcol" colspan="2">HostName</<th>
-                                                        <th class="table-headcol" colspan="2">Mac</<th>
-                                                        <th class="table-headcol">IP</<th>
-                                                        <th class="table-headcol">Mode</<th>
-                                                        <th class="table-headcol">Speed</<th>
-                                                        <th class="table-headcol">Reamining Lease</<th>
-                                                    </tr>
+                                             <div class="data_common data_common_notitle" id="usb1">
+  <table>
+  <% showLANPortStatus(); %>
 
-                                                        <SCRIPT language=javascript>
-                                                    
-                                                        for(i = 0; i < dhcpnum; i++)
-                                                        {
-                                                            if(portIP[i] != "N/A" || portMac[i] != "N/A")
-                                                            {   
-                                                                let portIdx = parseInt(getLanPort(portMac[i]))
+  </table>
+ </div>
 
-                                                                if (portIdx === 1 || portIdx === 2) {
-
-                                                                    document.write('<tr>');
-                                                                    document.write('<td>' + portIdx + '</td>' );
-
-                                                                     if(hostName[i] === '' || hostName[i] === "N/A" )
-                                                                    {
-                                                                        document.write('<td colspan="2"> Computer &nbsp;</td>')
-                                                                    } else {
-                                                                        document.write('<td colspan="2">'  + hostName[i] + '</td>');
-                                                                    }
-                                                                        document.write('<td colspan="2">' + portMac[i] + '&nbsp;</td>');
-                                                                        document.write('<td>' + portIP[i] + '&nbsp;</td>');
-
-                                                                        let lanIndex = 0
-
-                                                                        if (lanIndex === 0) {
-                                                                            document.write('<td>');
-                                                                        
-                                                                            let port2Duplex = '';
-                                                                                if (port2Duplex === '')
-                                                                                {   
-                                                                                    document.write('--');
-                                                                                } else {
-                                                                                    document.write(port2Duplex + ' -duplex');    
-                                                                                }
-                                                                            document.write('</td>');
-
-                                                                            document.write('<td>');
-
-                                                                             let port2CurrentBitRate = '';
-                                                                                if (parseInt(port2CurrentBitRate) === 0)
-                                                                                {
-                                                                                    document.write('--');
-                                                                                } else {
-                                                                                    document.write(port2CurrentBitRate + ' Mbit/s');
-                                                                                }
-
-                                                                            document.write('</td>');
-                                                                            lanIndex++;
-
-                                                                        } else {
-                                                                            document.write('<td>');
-                                                                        
-                                                                            let port1Duplex = '';
-                                                                                if (port1Duplex === '')
-                                                                                {   
-                                                                                    document.write('--');
-                                                                                } else {
-                                                                                    document.write(port1Duplex + ' -duplex');    
-                                                                                }
-                                                                            document.write('</td>');
-
-                                                                            document.write('<td>');
-
-                                                                             let port1CurrentBitRate = '';
-                                                                                if (parseInt(port1CurrentBitRate) === 0)
-                                                                                {
-                                                                                    document.write('--');
-                                                                                } else {
-                                                                                    document.write(port1CurrentBitRate + ' Mbit/s');
-                                                                                }
-
-                                                                            document.write('</td>');
-                                                                        }
-
-                                                                        
-
-                                                                        
-                                                                    
-                                                                    if(portDHCP[i] == "1")
-                                                                    {  
-                                                                        let portExpireTime = portExpire[i].split(':');
-                                                                        
-                                                                        if(portExpireTime[0] !== "0"){
-                                                                            
-                                                                            document.write('<td>' + '' + portExpireTime[0] + '' + portExpireTime[1] + '' + portExpireTime[2] + '' + portExpireTime[3] + '' + '</td>');
-                                                                        }
-                                                                        else{
-                                                                            if(("0:0:0:0" == portExpire[i]) || ("0" == portExpire[i])) {
-                                                                                document.write('<td>' + '' + '</td>');
-                                                                                
-                                                                            } else{
-                                                                                document.write('<td>' + '' + portExpireTime[1] + '' + portExpireTime[2] + '' + portExpireTime[3] + '' + '</td>');
-                                                                                
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        document.write('<td>' + '' + '</td>');
-                                                                        
-                                                                    }
-                                                                        
-                                                                        document.write('</tr>');
-    
-                                                                }
-
-                                                                
-                                                                
-                                                            }					
-                                                        }
-                                                    </SCRIPT>
-                                                </tbody>
-                                            </table>
-                                            <table class="table  table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <th colspan="9" align="center" style="text-align: center" > Packet Statistics </th>
-                                                    </tr>
-                                                     <tr>
-                                                        <th colspan="1" rowspan="4"> Ethernet </th>
-                                                        <th colspan="4" align="center" style="text-align: center" > Received(Rx) </th>
-                                                        <th colspan="4" align="center" style="text-align: center" > Sent(Tx) </th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-headcol">Bytes</<th>
-                                                        <th class="table-headcol">Packets</<th>
-                                                        <th class="table-headcol">Error</<th>
-                                                        <th class="table-headcol">Discarded</<th>
-                                                        <th class="table-headcol">Bytes</<th>
-                                                        <th class="table-headcol">Packets</<th>
-                                                        <th class="table-headcol">Error</<th>
-                                                        <th class="table-headcol">Discarded</<th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('');
-                                                            </SCRIPT>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                           
                                         </div>
                                         <div class="modal-footer">
+                                        <input type="hidden" value="/lan_port_status.asp" name="submit-url">
                                             <button type="button" class="btn grey_btn"
                                                 data-dismiss="modal">Close</button>
+                                                <input class=" btn grey_btn" type="submit" value="Refresh" name="refresh" onClick="return on_submit(this)">
+                                                <input type="hidden" name="postSecurityFlag" value="">
                                         </div>
+                                        
                                     </div>
 
                                 </div>
@@ -3860,11 +3595,10 @@ function insert(source, start, newStr)
                                         <span>
                                             <img src="/Dashboard/images/TR069.png" style="width:45px;padding-bottom:5px;">
                                         </span>
-                                        <span> <b style="font-size:18px;"><span style="vertical-align:middle;">&nbsp;&nbsp;TR069
-                                                    Status </b></span></span>
+                                        <span> <b style="font-size:18px;"><span style="vertical-align:middle;">&nbsp;&nbsp;<% multilang("2984" "LANG_TR069_STATUS"); %></b></span></span>
                                         <hr>
                                         <p>
-                                            On this page, you can query the TR069 Information
+                                          <% multilang("2985" "LANG_THIS_PAGE_SHOWS_THE_TR069_INFORM_STATUS"); %>
                                         </p>
                                     </div>
 
@@ -3875,80 +3609,22 @@ function insert(source, start, newStr)
                                                 <!--  <th>Interaction Build</th> -->
                                                 <th colspan="2" class="text-left modal-title"><span>
                                                         <img src="/Dashboard/images/TR069.png" style="width: 30px">
-                                                    </span>Tr069 connection state</th>
+                                                    </span>TR069 <% multilang("3" "LANG_STATUS"); %></th>
                                                
                                                       
                                                  
                                             </tr>
                                             <tr>
-                                                <th class="table-headcol text-center modal-title">Inform Status:</th>
-                                                <th class="table-headcol text-center modal-title">ITMS connection request status:
+                                                <th class="table-headcol text-center modal-title"><% multilang("2986" "LANG_TR069_INFORM_STATUS"); %></th>
+                                                <th class="table-headcol text-center modal-title"><% multilang("2987" "LANG_TR069_CON_REQUEST_STATUS"); %>
                                                   </th>
 
 
 
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    <SCRIPT language=javascript>
-                                                        let cwmpEntryInformStatus = '<% getInfo("tr069Inform"); %>'
-
-
-                                                        switch(cwmpEntryInformStatus)
-                                                        {
-                                                            case "0":
-                                                                document.writeln("");
-                                                                break;
-                                                            case "1":
-                                                                document.writeln("");
-                                                                break;
-                                                            case "2":
-                                                                document.writeln("");
-                                                                break;
-                                                            case "3":
-                                                                document.writeln("");
-                                                                break;
-                                                            case "4":
-                                                                document.writeln("");
-                                                                break;
-                                                            case "5":
-                                                                document.writeln("");
-                                                                break;
-                                                            case "6":
-                                                                document.writeln("");
-                                                                break;
-                                                            case "7":
-                                                                document.writeln(""); 
-                                                                break;
-                                                            case "8":
-                                                                document.writeln("");
-                                                                break;
-                                                            default:
-                                                                document.writeln("N/A");
-                                                                break;			
-                                                        }						
-                                                        </SCRIPT>
-                                                </td>
-                                                <td>
-                                                    <SCRIPT language=javascript>
-                                                        var cwmpEntryAcsConnStatus ='<% getInfo("tr069Connect"); %>'
-                                                        switch(cwmpEntryAcsConnStatus)
-                                                        {
-                                                            case "0":
-                                                                document.writeln("");
-                                                                break;
-                                                            case "1":
-                                                                document.writeln("");
-                                                                break;
-                                                            case "2":
-                                                                document.writeln("");
-                                                                break;
-                                                            default:
-                                                                document.writeln("");
-                                                                break;			
-                                                        }						
-                                                    </SCRIPT>
-                                                </td>
+                                                <td><% getInfo("tr069Inform"); %></td>
+                                                <td><% getInfo("tr069Connect"); %></td>
                                                 
                                             </tr>
                                         </table>
