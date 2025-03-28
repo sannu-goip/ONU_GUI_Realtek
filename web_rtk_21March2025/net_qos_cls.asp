@@ -1,0 +1,422 @@
+<%SendWebHeadStr(); %>
+<TITLE>QoS <% multilang("41" "LANG_CLASSIFICATION"); %></TITLE>
+<link rel="stylesheet" href="./admin/style.css">
+<link rel="stylesheet" href="./admin/reset.css" />
+<link rel="stylesheet" href="./admin/base.css" />
+<script language="javascript" src=voip_script.js></script>
+<link rel="stylesheet" href="/Dashboard/Modules/fontawesome/css/font-awesome.min.css"> 
+    <link href="/Dashboard/Modules/leftmenu/css/scoop-vertical.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Dashboard/css/bootstrap.min.css">
+    <link href="/Dashboard/Modules/leftmenu/css/simple-line-icons.css" rel="stylesheet">
+    <link href="/Dashboard/Modules/leftmenu/css/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <link href="/Dashboard/css/custom.css" type="text/css" rel="stylesheet">
+      <link href="/css/custom-nav.css" type="text/css" rel="stylesheet">
+<script language="javascript" src="common.js"></script>
+<script type="text/javascript" src="share.js"></script>
+<script language="javascript" src="voip_script.js"></script>
+<script type="text/javascript" src="base64_code.js"></script>
+ <script language="javascript" src="/Dashboard/JS/menu.js"></script>
+  <SCRIPT language=javascript src="/Dashboard/JS/util.js"></SCRIPT>
+  <script type="text/javascript" src="/JS/jquery.min.js"></script>
+	<script type="text/javascript" src="/JS/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="/JS/popper.min.js"></script>
+    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/scoop.min.js"></script>
+    <script  type="text/javascript" src="/Dashboard/Modules/leftmenu/js/left_menu.js"></script>
+<style>
+    background-color: #ccc;
+    border: 2px outset #efefef;
+    cursor: pointer;
+    float: left;
+    padding: 1px 2px 2px 0;
+}
+    background-color: #ffffff;
+    border: 1px outset #999;
+    display: none;
+    height: 400px;
+    margin-left: 1px;
+    margin-top: 25px;
+    overflow-y: auto;
+    padding: 1px;
+    position: absolute;
+    text-align: left;
+    z-index: 200;
+ left: 8px;
+ top: 38px;
+}
+.position_a{
+ position: relative;
+}
+</style>
+<SCRIPT language="javascript" type="text/javascript">
+var dscps = new it_nr("dscplst",
+ new it(0, ""),
+ new it(1, "Default(000000)"),
+ new it(57, "AF13(001110)"),
+ new it(49, "AF12(001100)"),
+ new it(41, "AF11(001010)"),
+ new it(33, "CS1(001000)"),
+ new it(89, "AF23(010110)"),
+ new it(81, "AF22(010100)"),
+ new it(73, "AF21(010010)"),
+ new it(65, "CS2(010000)"),
+ new it(121, "AF33(011110)"),
+ new it(113, "AF32(011100)"),
+ new it(105, "AF31(011010)"),
+ new it(97, "CS3(011000)"),
+ new it(153, "AF43(100110)"),
+ new it(145, "AF42(100100)"),
+ new it(137, "AF41(100010)"),
+ new it(129, "CS4(100000)"),
+ new it(185, "EF(101110)"),
+ new it(161, "CS5(101000)"),
+ new it(193, "CS6(110000)"),
+ new it(225, "CS7(111000)")
+);
+var iffs = new Array("", "LAN_1", "LAN_2", "LAN_3", "LAN_4");
+<!--var protos = new Array("", "ICMP", "TCP", "UDP", "TCP/UDP");-->
+var protos = new Array("", "TCP", "UDP", "ICMP", "TCP/UDP");
+var rules = new Array();
+<% initQosRulePage(); %>
+function button_onoff_image(enable)
+{
+ if (enable)
+  return "image src='graphics/button-on.png'";
+ else
+  return "image src='graphics/button-off.png'";
+}
+function button_onoff_html(index, item)
+{
+ var str;
+ str = "<"+button_onoff_image(rules[index].state)+" onClick=on_onoffClick("+index+","+item+"); />";
+ return str;
+}
+function on_chkclick(index)
+{
+ if(index < 0 || index >= rules.length)
+  return;
+ rules[index].select = !rules[index].select;
+}
+function on_onedit(index)
+{
+ if(index < 0 || index >= rules.length)
+  return;
+ window.location.href = "net_qos_cls_edit.asp?rule_index="+rules[index].index+"&rule=" + rules[index].enc();
+}
+function on_onoffClick(index, item)
+{
+ if(index < 0 || index >= rules.length)
+  return;
+ rules[index].state = !rules[index].state;
+ if (rules[index].state != 0)
+  lstrc.rows[index+2].bgColor = "#FFFFFF";
+ else
+  lstrc.rows[index+2].bgColor = "#EEEEEE";
+ lstrc.rows[index+2].cells[item].innerHTML = button_onoff_html(index, item);
+}
+function on_init()
+{
+ if(lstrc.rows){while(lstrc.rows.length > 2) lstrc.deleteRow(2);}
+ for(var i = 0; i < rules.length; i++)
+ {
+  var account = 0;
+  var row = lstrc.insertRow(i + 2);
+  var strprio = "";
+  row.nowrap = true;
+  row.vAlign = "center";
+  row.align = "left";
+  var cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = rules[i].index;
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = rules[i].name;
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = rules[i].qos_order;
+  cell = row.insertCell(account);
+  account = account +1;
+  if (rules[i].mdscp != "0") {
+   cell.innerHTML = "0x"+(rules[i].mdscp-1).toString(16);
+  } else
+   cell.innerHTML = " <br>";
+  cell = row.insertCell(account);
+  account = account +1;
+  if (rules[i].m1p != "0") {
+   cell.innerHTML = rules[i].m1p-1;
+  } else
+   cell.innerHTML = "<br> ";
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = rules[i].prio;
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = rules[i].wanifname;
+  cell = row.insertCell(account);
+  account = account +1;
+  switch(rules[i].ipqos_rule_type)
+  {
+   case 0:
+    cell.innerHTML = "<b>Port Base<br></b>";
+    switch(rules[i].phypt)
+    {
+     case 1:
+      cell.innerHTML += "LAN1<br>";
+      break;
+     case 2:
+      cell.innerHTML += "LAN2<br>";
+      break;
+     case 3:
+      cell.innerHTML += "LAN3<br>";
+      break;
+     case 4:
+      cell.innerHTML += "LAN4<br>";
+      break;
+    }
+    break;
+   case 1:
+    cell.innerHTML = "<b>EtherType Base<br></b>";
+    cell.innerHTML +="0x"+rules[i].ethType;
+    break;
+   case 2:
+    cell.innerHTML = "<b>IP/Protocol Base<br></b>";
+    switch(rules[i].proto)
+    {
+     case 0:
+      break;
+     case 1:
+      cell.innerHTML+= "Protocol: "+ "TCP<br>";
+      break;
+     case 2:
+      cell.innerHTML+= "Protocol: "+ "UDP<br>";
+      break;
+     case 3:
+      cell.innerHTML+= "Protocol: "+ "ICMP<br>";
+      break;
+     case 4:
+      cell.innerHTML+= "Protocol: "+ "TCP/UDP<br>";
+      break;
+    }
+    if(rules[i].dscp == 0)
+     ;
+    else
+      cell.innerHTML+= "DSCP: "+dscps[rules[i].dscp]+"<br>";
+    switch(rules[i].IpProtocolType)
+    {
+     case 1:
+      if(rules[i].sip!= "0.0.0.0")
+       {
+        cell.innerHTML += "Source IP: "+ rules[i].sip+"<br>";
+        cell.innerHTML += "Source Mask: "+ rules[i].smsk+"<br>";
+       }
+      if(rules[i].dip!= "0.0.0.0")
+       {
+        cell.innerHTML += "Destination IP: "+ rules[i].dip+"<br>";
+        cell.innerHTML += "Destination Mask: "+ rules[i].dmsk+"<br>";
+       }
+      break;
+     case 2:
+      if (rules[i].sip6 != "::")
+       {
+        if(rules[i].sip6PrefixLen == "")
+         cell.innerHTML += "Source IP: "+ rules[i].sip6+"<br>";
+        else
+         cell.innerHTML += "Source IP: "+ rules[i].sip6 + "/" + rules[i].sip6PrefixLen+"<br>";
+       }
+      break;
+    }
+    if(rules[i].spts != "0" || rules[i].spte != "0")
+     {
+      cell.innerHTML+= "Source Port: ";
+      if(rules[i].spte == "0")
+       cell.innerHTML+=rules[i].spts + ":"+"<br>";
+      else
+       cell.innerHTML+=rules[i].spts + ":" + rules[i].spte+"<br>";
+     }
+    if(rules[i].dpts != "0" || rules[i].dpte != "0")
+     {
+      cell.innerHTML+= "Destination Port: ";
+      if(rules[i].dpte == "0")
+       cell.innerHTML+=rules[i].dpts + ":"+"<br>";
+      else
+       cell.innerHTML+=rules[i].dpts + ":" + rules[i].dpte+"<br>";
+     }
+    break;
+   case 3:
+    cell.innerHTML = "<b>MAC Address Base<br></b>";
+    cell.innerHTML += "Source MAC: "+ ((rules[i].smac=="00:00:00:00:00:00")?"":rules[i].smac)+"<br>";
+    cell.innerHTML += "Destination MAC:"+ ((rules[i].dmac=="00:00:00:00:00:00")?"":rules[i].dmac)+"<br>";
+    break;
+   case 4:
+    cell.innerHTML = "<b>DHCP Option Base<br></b>";
+    if(typeof rules[i].dhcpopt_type_select !== "undefined")
+    {
+     switch(rules[i].dhcpopt_type_select)
+     {
+      case "0":
+       cell.innerHTML += "Option 60<br>";
+       cell.innerHTML += "Vendor Class ID:"+rules[i].opt60_vendorclass;
+       break;
+      case "1":
+       cell.innerHTML += "Option 61<br>";
+       switch(rules[i].dhcpopt61_DUID_select)
+       {
+        case "0":
+         cell.innerHTML += "DUID Type: DUID_LLT<br>";
+         cell.innerHTML += "IAID: "+rules[i].opt61_iaid+"<br>";
+         cell.innerHTML += "Hardware Type:"+rules[i].duid_hw_type+"<br>";
+         cell.innerHTML += "Time"+rules[i].duid_time+"<br>";
+         cell.innerHTML += "Link-layer Address"+rules[i].duid_mac+"<br>";
+         break;
+        case "1":
+         cell.innerHTML += "DUID Type: DUID_EN<br>";
+         cell.innerHTML += "IAID: "+rules[i].opt61_iaid+"<br>";
+         cell.innerHTML += "Enterprise Number: "+rules[i].duid_ent_num+"<br>";
+         cell.innerHTML += "Identifier: "+rules[i].duid_ent_id+"<br>";
+         break;
+        case "2":
+         cell.innerHTML += "DUID Type: DUID_LL<br>";
+         cell.innerHTML += "IAID: "+rules[i].opt61_iaid+"<br>";
+         cell.innerHTML += "Hardware Type: "+rules[i].duid_hw_type+"<br>";
+         cell.innerHTML += "Link-layer Address: "+rules[i].duid_mac+"<br>";
+         break;
+       }
+       break;
+      case "2":
+       cell.innerHTML += "Option 125<br>";
+       cell.innerHTML += "Enterprise Number: "+rules[i].opt125_ent_num+"<br>";
+       cell.innerHTML += "Manufacturer OUI: "+rules[i].opt125_manufacturer+"<br>";
+       cell.innerHTML += "Product Class: "+rules[i].opt125_product_class+"<br>";
+       cell.innerHTML += "Model Name: "+rules[i].opt125_model+"<br>";
+       cell.innerHTML += "Serial Number: "+rules[i].opt125_serial+"<br>";
+       break;
+     }
+    }
+    break;
+   default:
+    break;
+  }
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.align = "center";
+  cell.innerHTML = "<input type=\"checkbox\" onClick=\"on_chkclick(" + i + ");\">";
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.align = "center";
+  cell.innerHTML = "<input type=\"button\" onClick=\"on_onedit(" + i + ");\" value=\"Edit\">";
+  cell = row.insertCell(account);
+  account = account +1;
+  cell.innerHTML = button_onoff_html(i, account);
+  if (rules[i].state != 0)
+   row.bgColor = "#FFFFFF";
+  else
+   row.bgColor = "#EEEEEE";
+ }
+}
+function rc2string(it)
+{
+ return it.index + "," + Number(it.state) + "," + Number(it.select);
+}
+function on_submit()
+{
+ var tmplst = "";
+ var first = true;
+ if (rules.length == 0)
+  return;
+ with ( document.forms[0] )
+ {
+  for(var i = 0; i < rules.length; i++)
+  {
+   if(first)
+   {
+    first = false;
+   }
+   else
+   {
+    tmplst += "&";
+   }
+   tmplst += rc2string(rules[i]);
+  }
+  lst.value = tmplst;
+  postTableEncrypt(document.forms[0].postSecurityFlag, document.forms[0]);
+  submit();
+ }
+}
+</SCRIPT>
+</HEAD>
+<body onLoad="on_init();" bgcolor="#ffffff" text="#000000">
+<INPUT id=Selected_Menu type=hidden 
+										value="VoIP->VoIP Advanced" name=Selected_Menu> 
+    <div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left"
+        vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact"
+        vertical-effect="shrink" vnavigation-view="view1">
+        <div class="scoop-overlay-box">
+        </div>
+        <div class="scoop-container">
+            <div class="scoop-main-container">
+                <div class="scoop-wrapper">
+                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
+                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
+							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+							<div class="scoop-inner-navbar"> 
+								<div class="scoop-logo"> 
+								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/logo.png" class="img-fluid" alt=""/></span></a>
+							</div> 
+							    <div id="LeftMenu">
+							        <SCRIPT language=javascript>
+							        MakeLeftMenu("VoIP",'VoIP Advanced')
+							        </SCRIPT>
+							    </div>
+							</div> 
+						</nav>
+                    <div class="scoop-content">
+                        <div id="Header">
+                            <SCRIPT language=javascript>
+                            MakeHeader('Gateway Name:','Gateway Type:',"Voice","Advanced VoIP Setup",'Welcome!','#');
+                            </SCRIPT>
+                        </div>
+                        <div class="">
+                            
+
+                             
+                               <div class="scoop-inner-content">
+<div class="intro_main ">
+ <p class="intro_title">QoS <% multilang("41" "LANG_CLASSIFICATION"); %></p>
+ <p class="intro_content"> <% multilang("695" "LANG_PAGE_DESC_CLASSICY_QOS_RULE"); %><font color="red">(<% multilang("696" "LANG_PAGE_DESC_CLASSICY_QOS_RULE_EXTRA"); %>)</font></p>
+</div>
+<form id="form" action="/boaform/admin/formQosRule" method="post">
+<div class="data_common data_common_notitle">
+ <div class="data_common data_vertical">
+  <table id="lstrc" >
+   <tr>
+    <th colspan="2">&nbsp;</th>
+    <th colspan="3" align="center"><% multilang("698" "LANG_MARK"); %></th>
+    <th colspan="3"><% multilang("697" "LANG_CLASSIFICATION_RULES"); %></th>
+    <th colspan="3" align="center">&nbsp;</th>
+   </tr>
+   <tr>
+    <td><% multilang("699" "LANG_ID"); %></td>
+    <td><% multilang("701" "LANG_NAME"); %></td>
+    <td>Order</td>
+    <!--<td><% multilang("124" "LANG_VLAN_ID"); %></td>-->
+    <td>DSCP <% multilang("698" "LANG_MARK"); %></td>
+    <td><% multilang("705" "LANG_802_1P"); %></td>
+    <td> <% multilang("690" "LANG_QUEUE"); %></td>
+    <td> <% multilang("706" "LANG_WANIF"); %></td>
+    <td><% multilang("707" "LANG_RULE_DETAIL"); %></td>
+    <td><% multilang("308" "LANG_DELETE"); %></td>
+    <td><% multilang("703" "LANG_EDIT"); %></td>
+    <td>&nbsp;</td>
+   </tr>
+  </table>
+ </div>
+</div>
+<div class=btn_ctl>
+ <input class=link_bg type="button" class="button" onClick="location.href='net_qos_cls_edit.asp';" value="<% multilang("221" "LANG_ADD"); %>">
+ <input class=link_bg type="button" class="button" onClick="on_submit();" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>">
+ <input type="hidden" id="lst" name="lst" value="">
+ <input type="hidden" name="submit-url" value="/net_qos_cls.asp">
+ <input type="hidden" name="postSecurityFlag" value="">
+</div>
+</form>
+</body>
+</html>

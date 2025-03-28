@@ -1,0 +1,48 @@
+.scoop-navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 45px;
+    overflow-y: visible !important;
+    z-index: 1000;
+}
+
+.scoop-navbar:hover,
+.scoop-navbar.is-hover {
+    width: 260px;
+}
+.scoop-navbar .scoop-submenu {
+    position: relative;
+    z-index: 1001;
+}
+
+.scoop-main-container {
+    min-height: 100vh;
+    position: relative;
+}
+
+        
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Make the navbar fixed */
+
+    .scoop-content {
+        margin-left: 45px;
+        width: calc(100% - 45px);
+        position: relative;
+    }
+    .scoop-header {
+        width: calc(100% - 45px);
+    }
+}
+@media (min-width: 1025px) {
+    
+    .scoop-content {
+        margin-left: 45px;
+        width: calc(100% - 110px);
+        position: relative;
+    }
+    .scoop-header {
+        width: calc(100% - 110px);
+    }
+}
