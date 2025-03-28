@@ -1,0 +1,121 @@
+body, html {
+    height: 100%;
+  }
+  body{
+      background: #fafafa;
+  }
+    .login_body .input-group-text{
+        background: #fff;
+        color: #796d6d;
+    }
+    .login_body input{
+        border-right: 0px;
+    }
+	.input-captcha-text{
+		background: #fff;
+        color: #796d6d;
+		
+		font-size: 13px;
+        padding: 13px;
+        height: auto;
+        #display: block;
+	float: left;
+    font-weight: 400;
+    background-clip: padding-box;
+    line-height: 1.5;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	}
+	.input-captcha-text:focus {
+      color: #495057;
+      background-color: #fff;
+      border-color: #5da039;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(2, 140, 253, 0.25);
+	}
+	.form-captcha{
+		background: #fff;
+        color: #796d6d;
+		
+		font-size: 13px;
+        padding: 10px;
+        height: auto;
+	
+	float: left;
+	font-weight: 400;
+    background-clip: padding-box;
+    line-height: 1.5;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	}
+	.form-captcha:focus {
+	  color: #495057;
+      background-color: #fff;
+      border-color: #5da039;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(2, 140, 253, 0.25);
+	}
+    .form-control{
+        font-size: 13px;
+        padding: 10px;
+        height: auto;
+    }
+  .form-control:focus {
+      color: #495057;
+      background-color: #fff;
+      border-color: #5da039;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(253,97,2,.25);
+  }
+  .login_box{
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0px 0px 6px rgba(0,0,0,0.1);
+      width: 755px;
+      text-align: center;
+      margin: 0 auto;
+      top: 100px;
+      position: relative;
+      padding:20px 40px;
+  }
+  .logo_box{
+      text-align: center;
+      padding: 40px 0px 0px 0px;
+  }   
+  .login_body{
+      padding: 30px 30px 10px 30px;
+  }
+  .login_btn{
+      border: solid 2px #82c15f;
+      background: #82c15f;
+      border-radius: 5px;
+      color: #fff;
+      padding: 10px;
+      width: 100%;
+      font-weight: bold;
+      margin-top: 20px;
+  }
+  .login_btn:hover{
+      border: solid 2px #46752d;
+      background: #ddd;
+      color: #579238;
+  }
+    .wifi_img{
+        padding:60px 15px;
+        text-align: center;
+    }
+    .login_body h1{
+        color: #584848;
+          font-size: 28px;
+          font-weight: bold;
+          margin-bottom: 30px;
+    }
+    @media (max-width: 771px) {
+        .login_box{width: 100%;}
+        .login_box{top: 0px;}
+}
+    @media (max-width: 500px) {
+        .wifi_img{display: none;}
+}
