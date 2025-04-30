@@ -30,7 +30,7 @@
      
       color: #f58220;
       margin: 0;
-      padding-bottom: 5px;
+      padding: 5px;
   }
   
   .intro_content {

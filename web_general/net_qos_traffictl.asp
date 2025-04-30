@@ -400,7 +400,7 @@ with ( document.forms[0] )
  }
  lst_1.value = tmplst;
  postTableEncrypt(document.forms[0].postSecurityFlag, document.forms[0]);
- submit();
+  document.forms[0].submit();
 }
 }
   //trafclt
@@ -619,7 +619,8 @@ with ( document.forms[0] )
 .right-field-radio{
     margin-left:165px;
     width:33px; 
-    padding:2px
+    padding:2px;
+    accent-color: #fd5814;
 }
 .right-field{
     margin-left:178px;
@@ -749,14 +750,14 @@ with ( document.forms[0] )
      </div>
     </div>
    </div>
-
+   <hr class="margin_adjs" style="margin-left:-22px;">
    <div class="btn_ctl form-footer">
      <input class="link_bg btn orange_btn" type="button" class="button" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>" onClick="on_save();">
      <input type="hidden" id="lst" name="lst" value="">
      <input type="hidden" name="submit-url" value="/net_qos_imq_policy.asp">
      <input type="hidden" name="postSecurityFlag" value="">
    </div>
-   <hr class="margin_adjs" style="margin-left:-22px;">
+  
 
 <div class="col-md-12 form-group left-field">
         <div class="custom-control">
@@ -794,6 +795,7 @@ with ( document.forms[0] )
      </table>
     </div>
    </div>
+     <hr class="margin_adjs">
    <div class="btn_ctl form-footer">
     <input class="link_bg btn orange_btn" type="button" class="button" onClick="location.href='net_qos_cls_edit.asp';" value="<% multilang("221" "LANG_ADD"); %>">
     <input class="link_bg btn orange_btn" type="button" class="button" onClick="on_submit();" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>">
@@ -801,7 +803,7 @@ with ( document.forms[0] )
     <input type="hidden" name="submit-url" value="/net_qos_cls.asp">
     <input type="hidden" name="postSecurityFlag" value="">
    </div>
-   <hr class="margin_adjs">
+
 <div class="col-md-12 form-group left-field">
         <div class="custom-control">
          <h2 class="sub_heading " style="color:#fd7e14; width:421px">IP QoS <% multilang("43" "LANG_TRAFFIC_SHAPING"); %></h2>
@@ -838,20 +840,21 @@ with ( document.forms[0] )
      </table>
     </div>
    </div>
+    <hr class="margin_adjs" style="margin-left:-22px;">
    <div class="btn_ctl  form-footer">
     <input class="btn orange_btn link_bg" type="button" onClick="location.href='net_qos_traffictl_edit.asp';" value="<% multilang("221" "LANG_ADD"); %>">
     <input class="btn orange_btn link_bg" type="button" onClick="on_submit();" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>">
        <div id="apply" style="display:none">
-        <input class="btn orange_btn link_bg" type="button" onClick="on_apply_bandwidth();" value="<% multilang("670" "LANG_APPLY_TOTAL_BANDWIDTH_LIMIT"); %>">
+        <input class="btn orange_btn" type="button" onClick="on_apply_bandwidth();" value="<% multilang("670" "LANG_APPLY_TOTAL_BANDWIDTH_LIMIT"); %>">
        </div>
        <div id="cancel" style="display:none">
-        <input class="btn orange_btn link_bg" type="button" onClick="on_cancel_bandwidth();" value="<% multilang("708" "LANG_CANCEL_TOTAL_BANDWIDTH_LIMIT"); %>">
+        <input class="btn orange_btn" type="button" onClick="on_cancel_bandwidth();" value="<% multilang("708" "LANG_CANCEL_TOTAL_BANDWIDTH_LIMIT"); %>">
        </div>
       </td>
      </tr>
     </table>
    </div>
-   <hr class="margin_adjs" style="margin-left:-22px;">
+  
    <input type="hidden" id="lst_2" name="lst" value="">
    <input type="hidden" name="submit-url" value="/net_qos_traffictl.asp">
    <input type="hidden" name="postSecurityFlag" value="">

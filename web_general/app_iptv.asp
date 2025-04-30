@@ -82,7 +82,7 @@ function getValue(id)
 }
 function getImage(src,strmethod,id)
 {
- return ("<image id=\""+id+"\" onclick=\""+ strmethod +"\" src=\"graphics/edit.gif\">");
+ return ("<image id=\""+id+"\" onclick=\""+ strmethod +"\" src=\"Dashboard/images/edit.gif\">");
 }
 function on_init()
 {
@@ -346,9 +346,10 @@ function ModifyApply()
  </div>
  </div>
 </div>
-<div class="btn_ctl">
- <input class="link_bg" type="submit" value="<% multilang("334" "LANG_APPLY"); %>" id="modify" style="display:none" onclick="return ModifyApply();" />
- <input class="link_bg" name="back" type="button" id="back" value="<% multilang("336" "LANG_UNDO"); %>" onclick="back2add()" style="display:none"/>
+<hr class="margin_adjs">
+<div class="btn_ctl form-footer">
+ <input class="link_bg btn orange_btn" type="submit" value="<% multilang("334" "LANG_APPLY"); %>" id="modify" style="display:none" onclick="return ModifyApply();" />
+ <input class="link_bg btn orange_btn" name="back" type="button" id="back" value="<% multilang("336" "LANG_UNDO"); %>" onclick="back2add()" style="display:none"/>
 </div>
 <div class="data_common data_vertical">
  <table id="lstrc" class="table table-bordered table-striped" style="background-color: #f8f9fa; margin-left:25px; width:94%"  >

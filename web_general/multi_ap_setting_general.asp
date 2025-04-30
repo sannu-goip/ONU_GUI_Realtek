@@ -225,7 +225,8 @@ function saveChanges1()
 .right-field-radio{
     margin-left:17px;
     width:33px; 
-    padding:2px
+    padding:2px;
+accent-color: #fd5814;
 }
 .right-field{
     margin-left:29px;
@@ -252,7 +253,7 @@ function saveChanges1()
 							  						 
 								
 								<div class="white_box">
-									<h1 class="heading_grey"><img src="/Dashboard/images/parental.png" width="45" height="40" class="img_sub" alt=""/><% multilang("257" "LANG_WLAN_EASY_MESH_INTERFACE_SETUP"); %></h1>
+									<h1 class="heading_grey col-auto"><img src="/Dashboard/images/easymesh.png" width="45" height="40" class="img_sub" alt=""/><% multilang("257" "LANG_WLAN_EASY_MESH_INTERFACE_SETUP"); %></h1>
 									<div class="container-fluid">
 									<hr class="margin_adjs" />	
 								
@@ -323,10 +324,11 @@ function saveChanges1()
   <% dhcpRsvdIp_List();%>
  </table>
 </div>
+<hr class="margin_adjs">
 <div class="btn_ctl form-footer">
       <input type="submit" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>" class="link_bg btn orange_btn" name="save_apply" onClick="return saveChanges(this)">&nbsp;&nbsp;
       <input type="reset" value="<% multilang("222" "LANG_RESET"); %>" class="link_bg btn orange_btn" name="reset" onClick="resetClick()">
-      <hr class="margin_adjs">
+      
 <!-- <div id="syntaxplugin" class="syntaxplugin" style="border: 1px dashed #bbb; border-radius: 5px !important; overflow: auto; max-height: 30em;">
   <ul class="alternate" type="square">
     <li> Controller - 1a2b3c4d5e6f - <input type="button" value="Show Details" onClick="abc()">

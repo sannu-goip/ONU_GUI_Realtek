@@ -167,7 +167,8 @@ function on_init()
 .right-field-radio{
     margin-left:17px;
     width:33px; 
-    padding:2px
+    padding:2px;
+    accent-color: #fd5814;
 }
 .right-field{
     margin-left:176px;
@@ -177,11 +178,18 @@ function on_init()
 .right-field-checkbox{
     margin-left:178px;
     padding:3px;
+    accent-color: #fd5814;
      
 }
 .margin_adjs{
     margin-left:-29px;
-    width:104.5%
+    width:103.5%
+}
+
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    accent-color: #fd5814;
 }
 </style>
 </head>

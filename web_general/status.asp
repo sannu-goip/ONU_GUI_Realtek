@@ -289,76 +289,7 @@ margin-top: 10px;
         vertical-effect="shrink" vnavigation-view="view1">
         <div class="scoop-overlay-box">
         </div>
-        <div class="scoop-container">
-            <div class="scoop-main-container">
-                <div class="scoop-wrapper">
-                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
-                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
-							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-							<div class="scoop-inner-navbar"> 
-								<div class="scoop-logo"> 
-								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/logo.png" class="img-fluid" alt=""/></span></a>
-							</div> 
-							    <div id="LeftMenu">
-							        <SCRIPT language=javascript>
-							        MakeLeftMenu('Status','Device Info');
-							        </SCRIPT>
-							    </div>
-							</div> 
-						</nav>
-                    <div class="scoop-content">
-                         <div id="Header">
-                                <header class="header_box scoop-header iscollapsed" header-theme="theme2" scoop-header-position="relative">
-                                    <div class="sidebar_toggle">
-                                        <a href="javascript:void(0)">
-                                            <i class="icon-menu"></i>
-                                        </a>
-                                    </div>
-                                    <span class="gateway_box">Gateway Name:Home Gateway</span>
-                                    <span class="model_box">Gateway Type:SY-GPON-2010-WADONT</span>
-                                    <a onclick="document.getElementById('cmlogout').submit();" id="logOut" name="logOut" target="_top" class="Power_btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 22 25"> 
-                                            <path id="power_icon" data-name="power_icon" class="cls-1" d="M15.405,3.524s-1.324-.6-1.324.8A3.166,3.166,0,0,0,15.41,6.65,8.495,8.495,0,0,1,11,22.253,8.495,8.495,0,0,1,6.59,6.65,3.167,3.167,0,0,0,7.919,4.322c0-1.4-1.324-.8-1.324-0.8A11.242,11.242,0,0,0,11,25,11.242,11.242,0,0,0,15.405,3.524ZM11.077,0A1.47,1.47,0,0,0,9.46,1.258V12.325a1.47,1.47,0,0,0,1.618,1.258,1.3,1.3,0,0,0,1.463-1.258V1.258A1.3,1.3,0,0,0,11.077,0Z">
-                                            </path>
-                                        </svg>
-                                    </a> 
-                                </header>
-                                <div class="breadcrum_box">
-                                    <ul style="display: flex; align-items: center;">
-                                        <li><a href="#">Status</a></li>
-                                        <div>
-                                        <a href="https://www.facebook.com/SyrotechNetworks" target="_blank">
-                                            <image src="/img/facebook.png" style="width:30px">
-                                        </a>
-                                        <a href="https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2F13408012%2Fadmin%2F"
-                                            target="_blank">
-                                            <image src="/img/linkedin.png" style="width:30px">
-
-
-                                        </a>
-                                        <a href="https://twitter.com/Syrotech" target="_blank">
-                                            <image src="/img/twitter.png" style="width:30px">
-                                        </a>
-                                        <a href="https://www.youtube.com/channel/UCxKPAshBZ3BjsKoryZqd1jg?reload=9"
-                                            target="_blank">
-                                            <image src="/img/youtube.png" style="width:30px">
-                                        </a> <a href="https://www.instagram.com/syrotechnetworks/" target="_blank">
-                                            <image src="/img/insta.png" style="width:30px">
-                                        </a>
-
-                                    </div>
-                                    </ul>
-                                    <div class="help_icon">
-                                        <a href="/cgi-bin/help_content.asp#UPNP Configuration" target="_blank">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38"> 
-                                                <path id="help_Icon" data-name="help_Icon" class="cls-1" d="M18.746,0A19,19,0,1,0,38,18.744,19,19,0,0,0,18.746,0ZM18.69,30.565l-0.1,0a2.766,2.766,0,0,1,.065-5.531l0.094,0A2.766,2.766,0,1,1,18.69,30.565Zm6.8-13.49a12.558,12.558,0,0,1-2.268,2.031l-1.16.8a3.147,3.147,0,0,0-1.165,1.418,2.933,2.933,0,0,0-.18,1.19l0,0.186H16.286l0.013-.375c0.054-1.54.092-2.446,0.73-3.194a18.823,18.823,0,0,1,3.3-2.658,3.485,3.485,0,0,0,.782-0.8,2.816,2.816,0,0,0,.67-1.641,3.2,3.2,0,0,0-.608-1.89,2.531,2.531,0,0,0-2.19-.823,2.389,2.389,0,0,0-2.213,1.023,4.112,4.112,0,0,0-.67,2.21v0.189H11.539l0.008-.2c0.118-2.8,1.116-4.809,2.965-5.984a7.809,7.809,0,0,1,4.295-1.127,9.269,9.269,0,0,1,5.54,1.595A5.531,5.531,0,0,1,26.587,13.8,5.461,5.461,0,0,1,25.487,17.076Z"></path> 
-                                            </svg> 
-                                        </a> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="">
-
+        
                            
 
                        
@@ -390,7 +321,7 @@ margin-top: 10px;
                                                     <table class="table  table-bordered table-striped">
                                                         <tbody>
                                                             <tr>
-                                                                <th style="width:25%">Model Number </th>
+                                                                <th style="width:25%"><% multilang("99" "LANG_DEVICE_NAME"); %></th>
                                                                 <td style="width:75%">
                                                                      <SCRIPT language=javascript>
                                                                         document.write('<% getInfo("name"); %>');
@@ -399,7 +330,7 @@ margin-top: 10px;
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <th style="width:25%">Device Serial </th>
+                                                                <th style="width:25%"><% multilang("542" "LANG_SERIAL_NUMBER"); %></th>
                                                                 <td style="width:75%">
                                                                      <SCRIPT language=javascript>
                                                                         document.write('<% fmgpon_checkWrite("fmgpon_sn"); %>');
@@ -417,12 +348,7 @@ margin-top: 10px;
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <th style="width:25%">Hardware Version </th>
-                                                                <td style="width:75%">
-                                                                    <SCRIPT language=javascript>
-                                                                        document.write('RTL960x');
-                                                                    </SCRIPT>
-                                                                </td>
+                                                                <% HwVer(); %>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -450,7 +376,7 @@ margin-top: 10px;
                                                                 <table class="table  table-bordered table-striped">
                                                                     <tbody>
                                                                         <tr>
-                                                                            <th style="width:40%">Model Number </th>
+                                                                            <th style="width:40%"><% multilang("99" "LANG_DEVICE_NAME"); %></th>
                                                                             <td style="width:60%">
                                                                              <SCRIPT language=javascript>
                                                                         document.write('<% getInfo("name"); %>');
@@ -458,7 +384,7 @@ margin-top: 10px;
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th style="width:40%">Device Serial </th>
+                                                                            <th style="width:40%"><% multilang("542" "LANG_SERIAL_NUMBER"); %></th>
                                                                             <td style="width:60%">  <SCRIPT language=javascript>
                                                                         document.write('<% fmgpon_checkWrite("fmgpon_sn"); %>');
                                                                     </SCRIPT>
@@ -472,96 +398,64 @@ margin-top: 10px;
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>MAC</th>
-                                                                            <td> <SCRIPT language=javascript>
-                                                                        document.write('04:11:19:5d:84:e9')
-
-                                                                    </SCRIPT>
+                                                                            <th><% multilang("92" "LANG_MAC_ADDRESS"); %></th>
+                                                                            <td> <% getInfo("elan-Mac"); %>
  </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>IP Address</th>
-                                                                            <td> <SCRIPT language=javascript>
-                                                                        document.write('<% getInfo("lan-ip"); %>');
-                                                                    </SCRIPT>
+                                                                            <th><% multilang("89" "LANG_IP_ADDRESS"); %></th>
+                                                                            <td> <% getInfo("lan-ip"); %>
  </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>IPv6 Address</th>
-                                                                            <td> <SCRIPT language=javascript>
-                                                                        document.write('<% getInfo("ip6_ll"); %>');
-                                                                    </SCRIPT>
+                                                                            <th><% multilang("104" "LANG_IPV6_LINK_LOCAL_ADDRESS"); %></th>
+                                                                            <td> <% getInfo("ip6_ll"); %>
  </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Hardware Version </th>
-                                                                            <td> <SCRIPT language=javascript>
-                                                                        document.write('RTL960x');
-                                                                    </SCRIPT></td>
+                                                                            <% HwVer(); %>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Software Version</th>
-                                                                            <td> <SCRIPT language=javascript>
-                                                                        document.write('<% getInfo("fwVersion"); %>');
-                                                                    </SCRIPT></td>
+                                                                            <th><% multilang("79" "LANG_FIRMWARE_VERSION"); %></th>
+                                                                            <td> <% getInfo("fwVersion"); %></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th> Manufacture Info </th>
-                                                                            <td> <SCRIPT language=javascript>
-                                                                        document.write('syrotech');
-                                                                    </SCRIPT></td>
+                                                                            <td> Syrotech</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>ONT Registration Status </th>
+                                                                            <th><% multilang("2929" "LANG_PON_MODE"); %></th>
                                                                             <td>
-                                                                              EPON
+                                                                                <% getInfo("ponmode"); %>
                                                                              </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>CPU Usage</th>
-                                                                            <td>
-                                                                             <SCRIPT language=javascript>
-                                                                        document.write('0%') ;
-
-                                                                    </SCRIPT>
-                                                                    </td>
+                                                                            <% cpuUtility(); %>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th> Memory Usage </th>
-                                                                            <td>
-                                                                                 <SCRIPT language=javascript>
-                                                                                    document.write('17%');
-   
-
-                                                                    </SCRIPT>
-                                                                            </td>
+                                                                            <% memUtility(); %>
                                                                         </tr>
                                                                                                                                          <tr>
-                                                                            <th>Compile Time</th>
-                                                                            <td>
-                                                                    <SCRIPT language=javascript>
-                                                                        let curTime = '';
-                                                                        let curTimelist = curTime.split('/');
-                                                                       
-																  if ( 5 == curTimelist.length )
-																  {
-																  	document.write(curTimelist[2] + '' + curTimelist[0] + '' + curTimelist[1] + '' + curTimelist[3] + '' + curTimelist[4] + '');
-																  }
-																  else
-																  	document.write('Thu Dec 12 17:36:49 CST 2024');
-                                                                    </SCRIPT>
+                                                                            <th><% multilang("2930" "LANG_BUILD_INFO"); %></th>
+                                                                            <td><% getInfo("compiletime"); %>
                                                                             </td>
                                                                         </tr>
                                                                          <tr>
-                                                                            <th>System Time</th>
+                                                                            <th><% multilang("571" "LANG_CURRENT_TIME"); %></th>
                                                                             <td>
-                                                                  Wed Mar 19 14:55:55 CST 2025
+                                                                                <% multilang("578" "LANG_YEAR"); %> "<% getInfo("year"); %>"
+                                                                                <% multilang("579" "LANG_MONTH"); %> "<% getInfo("month"); %>"
+                                                                                <% multilang("580" "LANG_DAY"); %> "<% getInfo("day"); %>"
+                                                                                <% multilang("581" "LANG_HOUR"); %> "<% getInfo("hour"); %>"
+                                                                                <% multilang("582" "LANG_MIN"); %> "<% getInfo("minute"); %>"
+                                                                                <% multilang("583" "LANG_SEC"); %> "<% getInfo("second"); %>"
+                                                                
                                                                             </td>
                                                                         </tr>
                                                                          <tr>
-                                                                            <th>Uptime</th>
+                                                                            <th><% multilang("76" "LANG_UPTIME"); %></th>
                                                                             <td>
-                                                                           10:12
+                                                                                <% getInfo("uptime"); %>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -1043,28 +937,7 @@ margin-top: 10px;
                                                         data-target="#HERO077">
                                                                 
                                                                     <table class="table table-striped">
-                                                                       <thead class="bg-dark text-white">
-                                                                              <tr>
-                                                                                <th>Interface</th>
-                                                                                <th style="width:74px;">VLAN ID</th>
-                                                                                <th>Connection Type</th>
-                                                                                <th>Protocol</th>
-                                                                                <th>MAC</th>
-                                                                                <th>IP Address</th>
-                                                                                <th>Gateway</th>
-                                                                                <th>Connect</th>
-                                                                              </tr>
-                                                                            </thead>
-                                                                            <tr>
-                                                                              <td>nas0_0</td>
-                                                                              <td>0</td>
-                                                                              <td>INTERNET</td>
-                                                                              <td>IPoE</td>
-                                                                              <td>04:11:19:5d:84:e9</td>
-                                                                              <td>10.215.1.61</td>
-                                                                              <td>10.215.1.1</td>
-                                                                              <td>up</td>
-                                                                            </tr>
+                                                                        <% wanConfList(); %>
                                                                         <tbody>
                                                                         
                                                                             <SCRIPT language=JavaScript type=text/javascript>
@@ -1219,30 +1092,7 @@ margin-top: 10px;
                                                                 <a style="text-decoration: none;" href="" data-toggle="modal" data-target="#HERO078">
                                                                 <p style="text-decoration: none;">
                                                                     <table class="table table-striped">
-                                                                        <thead class="bg-dark text-white">
-                                                                            <tr>
-                                                                                <th>Interface</th>
-                                                                                <th style="width:74px;">VLAN ID </th>
-                                                                                <th>Connection Type </th>
-                                                                                <th>Protocol<th>
-                                                                                <th>MAC</th>
-                                                                                <th>IP Address</th>
-                                                                                <th>Gateway </th>
-                                                                                <th>Connect </th>
-
-                                                                            </tr>
-                                                                        </thead>
-                                                                         <tr>
-                                                                              <td>ppp0_nas0_1</td>
-                                                                              <td>0</td>
-                                                                              <td>INTERNET</td>
-                                                                              <td>PPPoE</td>
-                                                                              <td>  </td>
-                                                                              <td> </td>
-                                                                              <td> <td>
-                                                                              <td>up</td>
-                                                                              
-                                                                            </tr>
+                                                                        <% wanip6ConfList(); %>
                                                                         <tbody>
                                                                             <SCRIPT language=JavaScript type=text/javascript>
 
@@ -1614,9 +1464,9 @@ margin-top: 10px;
                                                 </span>
                                                 <span> <b style="font-size:18px;"><span
                                                             style="vertical-align:middle;">
-                                                            PON Status</b></span></span>
+                                                            PON <% multilang("3" "LANG_STATUS"); %></b></span></span>
                                                 <hr>
-                                               This page shows the current system status of PON.
+                                                <% multilang("107" "LANG_PAGE_DESC_PON_STATUS"); %>
                                             </div>
                                             <div class="card-body table-bordered table-responsive ">
                                                 <a style="text-decoration: none;" href="" data-toggle="modal"
@@ -1625,41 +1475,31 @@ margin-top: 10px;
                                                     <table class="table table-striped ">
                                                         <tbody>
                                                         <tr>
-                                                                <th>Working Mode</th>
+                                                                <th><% multilang("2929" "LANG_PON_MODE"); %></th>
                                                                  <td>
-                                                                            EPON
+                                                                    <% getInfo("ponmode"); %>
                                                                             </td>
                                                               
                                                             </tr>
                                                             <tr>
-                                                                            <th style="width: 30%"> Vendor Name
+                                                                            <th style="width: 30%"> <% multilang("109" "LANG_VENDOR_NAME"); %>
                                                                             <td>
-                                                                             <SCRIPT language=javascript>
-                                                                             document.write('SYRO')
-                                                        
-                                                                    </SCRIPT>  
+                                                                                <% ponGetStatus("vendor-name"); %>
                                                                             </td>
                                                                             
                                                                         </tr>
                                                                         
                                                             <tr>
-                                                                <th>Part Number</th>
+                                                                <th><% multilang("110" "LANG_PART_NUMBER"); %></th>
                                                                 <td>
-                                                                             <SCRIPT language=javascript>
-                                                                             document.write('CLASS B+')
-                                                        
-                                                                    </SCRIPT> </td>
+                                                                    <% ponGetStatus("part-number"); %> </td>
 
                                                                 
                                                             </tr>
 
                                                               <tr>
-                                                                <th>Rx Power</th>
-                                                                 <td>
-                                                                             <SCRIPT language=javascript>
-                                                                             document.write('-25.528420  dBm')
-                                                        
-                                                                    </SCRIPT></td>
+                                                                <th><% multilang("114" "LANG_RX_POWER"); %></th>
+                                                                 <td><% ponGetStatus("rx-power"); %></td>
                                                                
                                                             </tr>
 
@@ -1698,33 +1538,29 @@ margin-top: 10px;
 
                                                                     
                                                                         <tr>
-                                                                            <th>Working Mode </th>
+                                                                            <th><% multilang("2929" "LANG_PON_MODE"); %></th>
                                                                             <td>
-                                                                            EPON
+                                                                                <% getInfo("ponmode"); %>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>FEC Errors</th>
-                                                                   <td colspan="2">0 </td>
+                                                                            <th><% multilang("914" "LANG_FEC_ERRORS"); %></th>
+                                                                   <td colspan="2"><% ponGetStatus("fec-errors"); %></td>
 										
-                                                                            </td>
+                                                                          
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Part Number </th>
+                                                                            <th><% multilang("110" "LANG_PART_NUMBER"); %></th>
                                                                             <td colspan="2">
-                                                                                <SCRIPT language=javascript>
-                                                                                    document.write('CLASS B+');
-                                                                                </SCRIPT>
+                                                                                <% ponGetStatus("part-number"); %>
                                                                             </td>
 
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Vendor Name
+                                                                            <th><% multilang("109" "LANG_VENDOR_NAME"); %>
                                                                             </th>
                                                                             <td colspan="2">
-                                                                                <SCRIPT language=javascript>
-                                                                                    document.write('SYRO');
-                                                                                </SCRIPT>
+                                                                                <% ponGetStatus("vendor-name"); %>
                                                                             </td>
 
                                                                         </tr>
@@ -1761,50 +1597,32 @@ margin-top: 10px;
                                                                             <th>Reference Value</th>
                                                                         </tr>
                                                                          <tr>
-                                                                            <th>Rx Power </th>
+                                                                            <th><% multilang("114" "LANG_RX_POWER"); %></th>
                                                                             <td> 
-                                                                            <SCRIPT language=javascript>
-                                                                             document.write('<% ponGetStatus("rx-power"); %>')
-                                                        
-                                                                            </SCRIPT> dBm </td>
+                                                                                <% ponGetStatus("rx-power"); %></td>
                                                                             <td> -27 to -7 dBm </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Tx Power</th>
-                                                                            <td> <SCRIPT language=javascript>
-                                                                             document.write('<% ponGetStatus("tx-power"); %>')
-                                                        
-                                                                    </SCRIPT> dBm</td>
+                                                                            <th><% multilang("113" "LANG_TX_POWER"); %></th>
+                                                                            <td> <% ponGetStatus("tx-power"); %></td>
                                                                             <td> 0.5 to 5 dBm</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Voltage </th>
+                                                                            <th><% multilang("112" "LANG_VOLTAGE"); %></th>
                                                                             <td> 
-                                                                             <SCRIPT language=javascript>
-                                                                             
-                                                                    
-
-                                                                        document.write('<% ponGetStatus("voltage"); %>');
-                                                                    </SCRIPT>   mV</td>
+                                                                                <% ponGetStatus("voltage"); %></td>
                                                                             <td> 3100 to 3500 mV </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Bias Current </th>
+                                                                            <th><% multilang("115" "LANG_BIAS_CURRENT"); %></th>
                                                                             <td> 
-                                                                             <SCRIPT language=javascript>
-                                                                        document.write('<% ponGetStatus("bias-current"); %>');
-                                                                    </SCRIPT>   mA </td>
+                                                                             <% ponGetStatus("bias-current"); %></td>
                                                                             <td> 0 to 90 mA </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Temperature </th>
+                                                                            <th><% multilang("111" "LANG_TEMPERATURE"); %></th>
                                                                             <td> 
-                                                                             <SCRIPT language=javascript>
-                                                                        document.write('<% ponGetStatus("temperature"); %>');
-
-
-
-                                                                    </SCRIPT>   </td>
+                                                                             <% ponGetStatus("temperature"); %></td>
                                                                             <td> -5 to + 55&deg;C
 </td>
   
@@ -2658,7 +2476,7 @@ margin-top: 10px;
                                         return '5';
                                     }                                
                                 </SCRIPT>
-                                <div class="card" style="margin-top: -771px;margin-left:118px">
+                                <div class="card" style="margin-top: -771px; margin-left: 24px; margin-right: 18px;">
                                     <div class="card-header">
                                         <span>
                                             <img src="/Dashboard/images/logo-user.png" style="width:45px;padding-bottom:5px;">
@@ -3162,7 +2980,7 @@ function DhcpServerRelTime(timeVal)
                                                 </tr>
 
                                                 </thead>
-                                                <tbody id="div1" class="active">
+                                                <tbody id="div1" class="active"> 
                                                 
                                                     <tr>
                                                         <td style="color:#f58220 " colspan="8">WLAN Info</td>
@@ -3519,7 +3337,7 @@ function insert(source, start, newStr)
                                                 <img src="/Dashboard/images/ethernet.png" style="width:45px;">
                                             </span>
                                             <h2 class="modal-title" style="display: inline;"> &nbsp;
-                                            <% multilang("2948" "LANG_USB_STATUS"); %>
+                                                <% multilang("2948" "LANG_USB_STATUS"); %>
                                             </h2>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
@@ -3529,7 +3347,7 @@ function insert(source, start, newStr)
                                             <h5>USB Port Status</h5>
                                              <div class="data_common data_common_notitle" id="usb">
                                              <table>
-   <% getInfo("usbstate"); %>
+                                                <% getInfo("usbstate"); %>
    </table>
  </div>
 
@@ -3563,12 +3381,12 @@ function insert(source, start, newStr)
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         <div class="modal-body">
-                                            <p> This page shows the current LAN Port status.
+                                            <p> <% multilang("101" "LANG_THIS_PAGE_SHOWS_THE_CURRENT_LAN_PORT_STATUS"); %>
                                             </p>
-                                            <h5>LAN Port Status</h5>
+                                            <h5><% multilang("100" "LANG_LAN_PORT_STATUS"); %></h5>
                                              <div class="data_common data_common_notitle" id="usb1">
   <table>
-  <% showLANPortStatus(); %>
+    <% showLANPortStatus(); %>
 
   </table>
  </div>
@@ -3590,7 +3408,7 @@ function insert(source, start, newStr)
 
 
 <div class="col-xl-12 col-md-12 mb-4">
-                                <div class="card " style="margin-left:118px">
+                                <div class="card " style="margin-left:139px; margin-right: 18px;">
                                     <div class="card-header">
                                         <span>
                                             <img src="/Dashboard/images/TR069.png" style="width:45px;padding-bottom:5px;">
@@ -3642,7 +3460,7 @@ function insert(source, start, newStr)
 				</div>
                 
 			</div>
-<div class="text-center p-3" style="background-color: rgb(235 234 234 / 20%);">
+<div class="text-center p-3" style="background-color: rgb(235 234 234 / 20%); margin-top: 40px;font-weight: 500;">
 © 2022-2025 Copyright :
 <a class="text-white" style="color:#fd7e14 !important;" href="#">Syrotech Networks Pvt. Ltd.</a>
 </div>

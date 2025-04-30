@@ -954,7 +954,8 @@ function on_submit()
 .right-field-radio{
     margin-left:165px;
     width:33px; 
-    padding:2px
+    padding:2px;
+    accent-color: #fd5814;
 }
 .right-field{
     margin-left:477px;
@@ -987,46 +988,25 @@ function on_submit()
      margin-left:750px;
     width:740px; 
     padding:2px;   
+    accent-color: #fd5814;
 }
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    accent-color: #fd5814;
+}
+
 input[type="text"], input[type="password"], select {
     margin-left: 56px;
     width: 209px;
 }
+accent-color: #fd5814;
 input[type="checkbox"]:checked {
     accent-color: #fd5814;
 }
 </style>
 </head>
 <body>
-<INPUT id=Selected_Menu type=hidden value="APP->AdvancedNAt" name="Selected_Menu"> 
-    <div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left"
-        vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact"
-        vertical-effect="shrink" vnavigation-view="view1">
-        <div class="scoop-overlay-box">
-        </div>
-        <div class="scoop-container">
-            <div class="scoop-main-container">
-                <div class="scoop-wrapper">
-                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
-                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
-							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-							<div class="scoop-inner-navbar"> 
-								<div class="scoop-logo"> 
-								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/parental.png" class="img-fluid" alt=""/></span></a>
-							</div>
-							    <div id="LeftMenu">
-							        <SCRIPT language=javascript>
-							        MakeLeftMenu('APP','AdvancedNAT')
-							        </SCRIPT>
-							    </div>
-							</div> 
-						</nav>
-                    <div class="scoop-content">
-                        <div id="Header">
-                            <SCRIPT language=javascript>
-                            MakeHeader('Gateway Name:','Gateway Type:','APP','AdvancedNAT','Welcome!','#');
-                            </SCRIPT>
-                        </div>
                         <div class="">
 
                           <div class="scoop-inner-content">
@@ -1063,7 +1043,7 @@ input[type="checkbox"]:checked {
  <hr class="margin_adjs" />
  <div class="btn_ctl form-footer">
   <input class="link_bg btn orange_btn" type=submit value="<% multilang("150" "LANG_APPLY_CHANGES"); %>" name=apply onClick="return on_submit()">
-  <input type="hidden" value="/fw-portfw.asp" name="submit-url">
+  <input type="hidden" value="/app-natset.asp" name="submit-url">
   <input type="hidden" name="postSecurityFlag" value="">
  </div>
 </form>

@@ -290,7 +290,7 @@ input[type="checkbox"]:checked {
 <form action=/boaform/formRouting method=POST name="route">
 <div class="data_common data_common_notitle">
 
-  <table>
+
   <div class="col-md-12 form-group">
         <div class="custom-control">
       <label class="left-field"><% multilang("248" "LANG_ENABLE"); %>:</label>
@@ -330,7 +330,7 @@ input[type="checkbox"]:checked {
     </div>
   </div>
     <input type="hidden" value="" name="select_id">
-   </table>
+   
   </div>
   <hr class="margin_adjs" />
   <div class="link_bg form-footer ">
@@ -358,6 +358,7 @@ input[type="checkbox"]:checked {
   </div>
   <input type="hidden" value="/routing.asp" name="submit-url">
   <input type="hidden" name="postSecurityFlag" value="">
+  </form>
  <div class="col-md-12 form-group left-field">
         <div class="custom-control">
          <h2 class="sub_heading " style="color:#fd7e14;width: 392px;"><% multilang("5" "LANG_IPV6"); %> <% multilang("489" "LANG_STATIC"); %> <% multilang("39" "LANG_ROUTING"); %> <% multilang("238" "LANG_CONFIGURATION"); %></h2>

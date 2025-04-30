@@ -66,7 +66,8 @@ function fdbClick(url)
 .right-field-radio{
     margin-left:17px;
     width:33px; 
-    padding:2px
+    padding:2px;
+    accent-color: #fd5814;
 }
 .right-field{
     margin-left:29px;

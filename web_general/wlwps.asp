@@ -1,108 +1,6 @@
-<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Cache-Control" content="no-cache">
-<script language="javascript" src="common.js"></script>
-<script type="text/javascript" src="share.js"></script>
+<% SendWebHeadStr();%>
 <title><% multilang("227" "LANG_WI_FI_PROTECTED_SETUP"); %></title>
 <script type="text/javascript" src="base64_code.js"></script>
-<style>
-  /* General body styling */
-  body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      color: #333;
-  }
-  
-  /* Intro section styling */
-  .intro_main {
-      padding: 15px;
-      background-color: #fff;
-      border-bottom: 1px solid #ddd;
-  }
-  
-  .intro_title {
-      font-size: 24px;
-     
-      color: #f58220;
-      margin: 0;
-      padding-bottom: 5px;
-  }
-  
-  .intro_content {
-      font-size: 12px;
-      margin-top: 5px;
-      color: #666;
-  }
-  
-  /* Form container styling */
-  .data_common {
-      margin: 15px;
-      padding: 2px 15px;
-      background-color: #fff;
-  }
-  
-  .data_common table {
-      width: 100%;
-      border-collapse: collapse;
-  }
-  
-  .data_common th {
-      text-align: left;
-      font-size: 12px;
-      color: #333;
-      padding: 9px;
-      font-weight: 300;
-  }
-  
-  .data_common td {
-      
-      font-size: 12px;
-      color: #333;
-      
-  }
-  
-  .data_common input[type="text"],
-  .data_common select {
-      width: 200px;
-      
-      height: 28px;
-      font-size: 12px;
-      box-sizing: border-box;
-  }
-  
-  /* Checkbox styling */
-  .data_common input[type="checkbox"] {
-      transform: scale(1.2);
-      margin-right: 10px;
-  }
-  
-  /* Button styling */
-  .inner_btn {
-      text-align: right;
-      margin-top: 15px;
-  }
-  
-  .inner_btn {
-      height: 25px;
-      background-color: #f58220;
-      color: white;
-      border: 1px solid #eee;
-      border-radius: 3px;
-     /* Compact padding */
-      font-size: 12px; /* Smaller font size */
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .inner_btn:hover {
-    border: 1px solid #f58220;
-      background-color: #eee;
-      color: #f58220;
-  }
-  
-  
-  </style>
 <style>
 .on {display:on}
 .off {display:none}
@@ -449,7 +347,7 @@ function updatewpsUseVersionIndex()
   </tr>
   <input type="hidden" value="/wlwps.asp" name="submit-url">
   <tr>
-   <td width="100%" colspan="2" style="text-align: right;">
+   <td width="100%" colspan="2">
     <input type="submit" value="<% multilang("150" "LANG_APPLY_CHANGES"); %>" name="save" onClick="return saveChangesWPS(document.formWsc)" class="inner_btn">&nbsp;&nbsp;
     <input type="reset" value="<% multilang("222" "LANG_RESET"); %>" name="reset" class="inner_btn">
    </td>
@@ -482,24 +380,24 @@ function updatewpsUseVersionIndex()
 <div class="column">
  <div class="column_title">
   <div class="column_title_left"></div>
-   <div class="intro_main"><p class="intro_title"><% multilang("242" "LANG_CURRENT_KEY_INFO"); %></p></div>
+   <p><% multilang("242" "LANG_CURRENT_KEY_INFO"); %></p>
   <div class="column_title_right"></div>
  </div>
  <div class="data_common data_vertical">
-  <table id="design_table" style=" width: 100%; border-collapse: collapse; border: 0.5px solid #ccc;">
+  <table>
    <tr>
-    <th width="30%" style="border: 0.5px solid #ccc; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; font-size: 14px; color: #333;"><% multilang("202" "LANG_AUTHENTICATION"); %></th>
-    <th width="20%" style="border: 0.5px solid #ccc; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; font-size: 14px; color: #333;"><% multilang("201" "LANG_ENCRYPTION"); %></th>
-    <th colspan=2 style="border: 0.5px solid #ccc; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; font-size: 14px; color: #333;"><% multilang("243" "LANG_KEY"); %></th>
+    <th width="30%"><% multilang("202" "LANG_AUTHENTICATION"); %></th>
+    <th width="20%"><% multilang("201" "LANG_ENCRYPTION"); %></th>
+    <th colspan=2><% multilang("243" "LANG_KEY"); %></th>
    </tr>
    <tr>
-    <td width="30%" style="border: 0.5px solid #ccc; padding: 10px; text-align: left;">
+    <td width="30%">
      <% checkWrite("wps_auth"); %>
     </td>
-    <td width="20%" style="border: 0.5px solid #ccc; padding: 10px; text-align: left;">
+    <td width="20%">
      <% checkWrite("wps_enc"); %>
     </td>
-    <td width="30%" style="border: 0.5px solid #ccc; padding: 10px; text-align: left;">
+    <td width="30%">
      <% getInfo("wps_key"); %>
     </td>
    </tr>

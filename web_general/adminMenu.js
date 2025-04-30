@@ -123,10 +123,6 @@ var __GLOBAL__ = {
        {
         name: 'IPV6',
         href: pageRoot + 'ipv6_enabledisable.asp'
-       },
-       {
-        name: 'USB Home Sharing',
-        href: pageRoot + 'samba.asp'
        }
        ,
        {
@@ -163,7 +159,6 @@ var __GLOBAL__ = {
         items: [
          {
           name: 'Wi-Fi 2.4G',
-           href: pageRoot + 'boaform/formWlanRedirect?redirect-url=/wlbasic.asp&wlan_idx=1',
           item: [
             {
                 name: 'WlBaisic',
@@ -209,7 +204,6 @@ var __GLOBAL__ = {
         items: [
          {
           name: 'Wi-Fi 5G',
-          href: pageRoot + 'boaform/formWlanRedirect?redirect-url=/wlbasic.asp&wlan_idx=0',
           item: [
             {
                 name: 'WlBaisic',
@@ -379,12 +373,12 @@ var __GLOBAL__ = {
            ,
            {
             name: 'FireWall',
-            href: pageRoot + 'fw-enable.asp'
+            href: pageRoot + 'fw_enable.asp'
            }
            ,
            {
             name: 'Mac Filter',
-            href: pageRoot + 'fw-macfilter_rg.asp'
+            href: pageRoot + 'fw_macfilter_rg.asp'
            }
            ,
            {

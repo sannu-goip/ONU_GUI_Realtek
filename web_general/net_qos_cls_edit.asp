@@ -847,7 +847,8 @@ function update_ui()
 .right-field-radio{
     margin-left:165px;
     width:33px; 
-    padding:2px
+    padding:2px;
+    accent-color: #fd5814;
 }
 .right-field{
     margin-left:178px;

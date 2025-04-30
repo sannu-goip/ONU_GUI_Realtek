@@ -28,48 +28,22 @@
         {@/each}
     </script>
     <script id="side-tmpl" type="text/x-template">
+     
         {@each items as item}
-          <li class="{@if item.collapsed}collapsed{@/if}">
-            <ul>
-              {@each item.items as it}
-                {@if it.item && it.item.length}
-                  <li class="has-submenu">
-                    <a href="javascript:void(0);" class="side-link">${it.name}</a>
-                    <ul class="submenu">
-                      {@each it.item as sub}
-                        <li><a target="contentIframe" href="${sub.href}">${sub.name}</a></li>
-                      {@/each}
-                    </ul>
-                  </li>
-                {@else}
-                  <li><a target="contentIframe" href="${it.href}">${it.name}</a></li>
-                {@/if}
-              {@/each}
-            </ul>
-          </li>
+            <li class="{@if item.collapsed}collapsed{@/if}">
+                
+                <ul>
+                  
+                  {@each item.items as it}
+                      <li><a target="contentIframe" href="${it.href}" class="">${it.name}</a></li>
+                  {@/each}
+              
+                </ul>
+            </li>
         {@/each}
-      </script>
+    </script>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('a[target="contentIframe"]').forEach(link => {
-        link.addEventListener('click', () => {
-            // Show loading indicators if needed
-            // top.document.getElementById('shade').style.display = 'block';
-            // top.document.getElementById('loadpagediv').style.display = 'block';
-            
-            // Set a small timeout to ensure the iframe resets to top when navigation starts
-            setTimeout(() => {
-                const iframe = document.getElementById('contentIframe');
-                if (iframe && iframe.contentWindow) {
-                    iframe.contentWindow.scrollTo(0, 0);
-                }
-            }, 10);
-        });
-    })
-          const iframe = document.getElementById('contentIframe');
-          if (iframe) {
-              iframe.addEventListener('load', adjustIframeHeight);
-          }
             const navItems = document.querySelectorAll('#nav li'); // All <li> elements
             const sideMenu = document.getElementById('side');
             let hideTimeout;
@@ -146,8 +120,6 @@
         function cleanload() {
             top.document.getElementById('shade').style.display = 'none';
             top.document.getElementById('loadpagediv').style.display = 'none';
-            document.getElementById('contentIframe').contentWindow.scrollTo(0, 0);
-          
         }
     </script>
      <script>
@@ -158,38 +130,15 @@
           }
       }
   
-     
+      // Adjust iframe height when the content loads
+      window.addEventListener('DOMContentLoaded', () => {
+          const iframe = document.getElementById('contentIframe');
+          if (iframe) {
+              iframe.addEventListener('load', adjustIframeHeight);
+          }
+      });
   </script>
   <style>
-     .has-submenu {
-    position: relative;
-  }
-
-  .has-submenu .submenu {
-    display: none;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    min-width: 160px;
-    z-index: 100;
-  }
-
-  .has-submenu:hover .submenu {
-    display: block;
-  }
-
-  .submenu li a {
-    display: block;
-    padding: 8px 12px;
-    color: #333;
-    text-decoration: none;
-  }
-
-  .submenu li a:hover {
-    background-color: #eee;
-  }
     .menu-text{
         color: grey;
     }
@@ -344,7 +293,7 @@
                 </div>
             </div>
             <div id="content">
-                <iframe src="#" frameborder="0" name="contentIframe" id="contentIframe" scrolling="no" onload="cleanload(); this.contentWindow.scrollTo(0, 0);"></iframe>
+                <iframe src="#" frameborder="0" name="contentIframe" id="contentIframe" scrolling="no" onload="cleanload()"></iframe>
             </div>             
         </div>
     </div>
