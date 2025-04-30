@@ -1,50 +1,5 @@
-<%
-	If Request_Form("Saveflag")="1" then
-		tcWebApi_set("DeviceInfo_PVC","DipNasName","DipNasName")
-		If Request_Form("Dipflag")="1" then
-			tcWebApi_set("DeviceInfo_PVC","DispBtnType","Dipflag")
-			tcWebApi_commit("DeviceInfo_PVC")
-		elseif Request_Form("Dipflag")="2" then
-			tcWebApi_set("DeviceInfo_PVC","DispBtnType","Dipflag")
-			tcWebApi_commit("DeviceInfo_PVC")
-		elseif Request_Form("Dipflag")="3" then
-			tcWebApi_set("DeviceInfo_PVC","DispBtnType","Dipflag")
-			tcWebApi_set("DeviceInfo_PVC","IP6DispBtnType","Dipflag")
-			tcWebApi_commit("DeviceInfo_PVC")
-		elseif Request_Form("Dipflag")="4" then
-			tcWebApi_set("DeviceInfo_PVC","DispBtnType","Dipflag")
-			tcWebApi_set("DeviceInfo_PVC","IP6DispBtnType","Dipflag")
-			tcWebApi_commit("DeviceInfo_PVC")
-		END If 
-	END If
 
-    tcWebApi_get("Info_WLan", "Test", "h")
-tcWebApi_constSet("WebCurSet_Entry", "info_wlan_read", "1")
 
-tcWebApi_get("Info_Ether", "Test", "h")
-tcWebApi_constSet("WebCurSet_Entry", "info_ether_read", "1")
-
-tcWebApi_get("Info_WLan11ac", "Test", "h")
-tcWebApi_constSet("WebCurSet_Entry", "info_wlan11ac_read", "1")
-
-tcWebApi_constSet("WebCurSet_Entry", "isSSIDHidden", "No")
-if tcWebApi_get("WebCustom_Entry", "isCTPONCZNXSupported", "h") = "Yes"  then
-	if tcwebApi_get("WebCurSet_Entry","CurrentAccess","h") <> "0" then
-		tcWebApi_constSet("WebCurSet_Entry", "isSSIDHidden", "Yes")
-	end if
-elseif tcWebApi_get("WebCustom_Entry", "isCTPONOnlyOneSSIDSupported", "h") = "Yes"  then
-	tcWebApi_constSet("WebCurSet_Entry", "isSSIDHidden", "Yes")
-end if
-
-tcWebApi_get("Info_WLan", "Test", "h")
-tcWebApi_constSet("WebCurSet_Entry", "info_wlan_read", "1")
-
-tcWebApi_get("Info_Ether", "Test", "h")
-tcWebApi_constSet("WebCurSet_Entry", "info_ether_read", "1")
-
-tcWebApi_get("Info_WLan11ac", "Test", "h")
-tcWebApi_constSet("WebCurSet_Entry", "info_wlan11ac_read", "1")
-%>
 
 
 <html lang="en">
@@ -52,9 +7,10 @@ tcWebApi_constSet("WebCurSet_Entry", "info_wlan11ac_read", "1")
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="icon" href="<%tcWebApi_get("String_Entry","iconHerf","s")%>" type="image/x-icon"> 
+   
+	<link rel="icon" href="" type="image/x-icon"> 
 	<link rel="stylesheet" type="text/css" href="/Dashboard/Modules/fontawesome/css/font-awesome.min.css">  
-    <title><%tcWebApi_get("String_Entry","DevInfoDevInformationText","s")%></title>
+    <title></title>
 <link href="/Dashboard/Modules/leftmenu/css/scoop-vertical.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="/Dashboard/css/bootstrap.min.css" type="text/css" > 
 	  <link href="/Dashboard/Modules/leftmenu/css/simple-line-icons.css" type="text/css" rel="stylesheet">
@@ -65,6 +21,9 @@ tcWebApi_constSet("WebCurSet_Entry", "info_wlan11ac_read", "1")
       			   <SCRIPT type="text/javascript" src="/Dashboard/JS/menu.js"></SCRIPT>
       <SCRIPT type="text/javascript" src="/Dashboard/JS/util.js"></SCRIPT>
       <SCRIPT language=JavaScript src="/Dashboard/JS/printtable.js"></SCRIPT>
+       <SCRIPT language=JavaScript src="/Dashboard/JS/menu.js"></SCRIPT>
+    
+
 	  <style type="text/css">
       th {
         font-size: 13px!important;
@@ -164,36 +123,191 @@ visibility:hidden;
 }
 .p-3 {
     padding: 3rem !important;
-}
+}refresh
 
 
     </style>
+    <script>
+    function on_submit(obj)
+{
+ obj.isclick = 1;
+ postTableEncrypt(document.status.postSecurityFlag, document.status);
+ return true;
+}
+function LogOut(obj)
+{
+ submit();
+ return true;
+}
+function on_submit(obj)
+{
+ obj.isclick = 1;
+ postTableEncrypt(document.forms[0].postSecurityFlag, document.forms[0]);
+ return true;
+}
+
+</script>
+<style>
+#usb{
+border-top: 1px solid #D3D3D3;
+margin-top: 10px;
+     margin-left: 30px;
+
+    width: 705px;
+
+    padding: 2px;
+
+    display: inline-flex;
+
+}
+#usb table 
+
+  th {
+
+     margin-left:-27px;
+
+   width:365px;  /* Adjust the value as needed */
+
+    font-weight: bold;
+
+    padding:2px;
+
+}
+
+#usb table td {
+
+      margin-left:750px;
+
+    width:740px; 
+
+    padding:2px;   /* Adjust the value as needed */
+
+
+
+}
+
+#usb table (td colspan="2"){
+
+  gap:30px;
+
+}
+.data_common_notitle {
+    border-top: 1px solid #D3D3D3;
+    margin-top: 10px;
+}
+.data_common {
+    padding: 1px;
+    background: #fff;
+    border: 1px solidrgb(146, 122, 122);
+    border-top: 0;
+}
+.data_common table {
+    border-collapse: separate;
+    width: 100%;
+    border-spacing: 2px;
+    background: #fff;
+}
+.data_common table th {
+    font-weight: bold;
+}
+.data_common table td, .data_common table th {
+    background: #F5F5F5;
+    padding: 5px 6px;
+}
+ th {
+    text-align: left;
+}
+.data_common table td, .data_common table th {
+    background: #F5F5F5;
+    padding: 5px 6px;
+}
+.data_common {
+    padding: 1px;
+    background: #fff;
+    border: 1px solid #D3D3D3;
+    border-top: 0;
+}
+.data_common_notitle {
+    border-top: 1px solid #D3D3D3;
+    margin-top: 10px;
+}
+.data_common {
+    padding: 1px;
+    background: #fff;
+    border: 1px solid #D3D3D3;
+    border-top: 0;
+}
+#usb1{
+border-top: 1px solid #D3D3D3;
+margin-top: 10px;
+     margin-left: 30px;
+
+    width: 909px;
+
+    padding: 2px;
+
+    display: inline-flex;
+
+}
+#usb1 table 
+
+  th {
+
+     margin-left:-27px;
+
+   width:365px;  /* Adjust the value as needed */
+
+    font-weight: bold;
+
+    padding:2px;
+
+}
+
+#usb1 table td {
+
+      margin-left:750px;
+
+    width:740px; 
+
+    padding:2px;   /* Adjust the value as needed */
+
+
+
+}
+
+#usb1 table (td colspan="2"){
+
+  gap:30px;
+
+}
+</style>
 	</head>
 	<body onload="FinishLoad();if(getElById('ConfigForm') != null)LoadFrame()" onunload="DoUnload()">
-    <INPUT id="Selected_Menu" type="hidden"
-            value="<%tcWebApi_get("String_Entry","ContentStatusText","s")%>-><%tcWebApi_get("String_Entry","ContentDeviceInfoText","s")%>" name="Sta_Dev"> 
-		<div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left" vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact" vertical-effect="shrink" vnavigation-view="view1">	
-			<div class="scoop-overlay-box"></div>
-			<div class="scoop-container">  				
-				<div class="scoop-main-container">
-					<div class="scoop-wrapper">
-						<nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0" sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
-							<div class="sidebar_toggle">
-                                <a href="#"><i class="icon-close icons"></i></a>
-                            </div>
+   <INPUT id=Selected_Menu type=hidden value="Status->Device Info" name="Sta_Dev">
+    <div id="scoop" class="scoop iscollapsed" theme-layout="vertical" vertical-placement="left"
+        vertical-layout="wide" scoop-device-type="desktop" vertical-nav-type="compact"
+        vertical-effect="shrink" vnavigation-view="view1">
+        <div class="scoop-overlay-box">
+        </div>
+        <div class="scoop-container">
+            <div class="scoop-main-container">
+                <div class="scoop-wrapper">
+                    <nav class="scoop-navbar is-hover" navbar-theme="theme4" active-item-theme="theme0"
+                        sub-item-theme="theme2" active-item-style="style0" scoop-navbar-position="absolute">  
+							<div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
 							<div class="scoop-inner-navbar"> 
 								<div class="scoop-logo"> 
 								<a href="https://www.syrotech.com/" target="_blank"><span class="logo-text"><img src="/img/logo.png" class="img-fluid" alt=""/></span></a>
 							</div> 
 							    <div id="LeftMenu">
 							        <SCRIPT language=javascript>
-							        MakeLeftMenu('<%tcWebApi_get("String_Entry","ContentStatusText","s")%>','<%tcWebApi_get("String_Entry","ContentDeviceInfoText","s")%>')
+							        MakeLeftMenu('Status','Device Info');
 							        </SCRIPT>
 							    </div>
 							</div> 
-						</nav> 
-						<div class="scoop-content">
-                            <div id="Header">
+						</nav>
+                    <div class="scoop-content">
+                         <div id="Header">
                                 <header class="header_box scoop-header iscollapsed" header-theme="theme2" scoop-header-position="relative">
                                     <div class="sidebar_toggle">
                                         <a href="javascript:void(0)">
@@ -202,7 +316,7 @@ visibility:hidden;
                                     </div>
                                     <span class="gateway_box">Gateway Name:Home Gateway</span>
                                     <span class="model_box">Gateway Type:SY-GPON-2010-WADONT</span>
-                                    <a onclick="DoLogout()" href="/cgi-bin/logout.cgi" id="logOut" name="logOut" target="_top" class="Power_btn">
+                                    <a onclick="document.getElementById('cmlogout').submit();" id="logOut" name="logOut" target="_top" class="Power_btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 22 25"> 
                                             <path id="power_icon" data-name="power_icon" class="cls-1" d="M15.405,3.524s-1.324-.6-1.324.8A3.166,3.166,0,0,0,15.41,6.65,8.495,8.495,0,0,1,11,22.253,8.495,8.495,0,0,1,6.59,6.65,3.167,3.167,0,0,0,7.919,4.322c0-1.4-1.324-.8-1.324-0.8A11.242,11.242,0,0,0,11,25,11.242,11.242,0,0,0,15.405,3.524ZM11.077,0A1.47,1.47,0,0,0,9.46,1.258V12.325a1.47,1.47,0,0,0,1.618,1.258,1.3,1.3,0,0,0,1.463-1.258V1.258A1.3,1.3,0,0,0,11.077,0Z">
                                             </path>
@@ -245,14 +359,17 @@ visibility:hidden;
                             </div>
                             <div class="">
 
+                           
+
+                       
+                           
 
 
-                            <form name="ConfigForm" action="/cgi-bin/sta-device-new.asp" method="post">
-                                <input type="hidden" id="Dipflag" name="Dipflag" value="0">
-                                <input type="hidden" id="Saveflag" name="Saveflag" value="0">
-                                <input type="hidden" id="DipNasName" name="DipNasName" value="0">
-                            </form>
 
+ <form action=/boaform/admin/formLogout  method=POST name="cmlogout" id="cmlogout">
+           <input type="hidden" value="/admin/login.asp" name="submit-url">
+           <input type="hidden" value="Logout" name="save">
+          </form>
                         
                                 <div class="row p-3 mb-4" style="background-color:#fff;" id="overflow-amit">
                                     <div class="col-xl-6 col-md-6 mb-4">
@@ -294,7 +411,7 @@ visibility:hidden;
                                                                 <th style="width:25%">Description: </th>
                                                                 <td style="width:75%">
                                                                     <SCRIPT language=javascript>
-                                                                        document.write('<% tcWebApi_get("DeviceInfo_devParaStatic","DeviceDescription","s") %>');
+                                                                        document.write('&quot;DUAL BAND+ 2GE+1POTS+1USB-XPON&quot;');
                                                                     </SCRIPT>
                                                                     &nbsp;
                                                                 </td>
@@ -303,7 +420,7 @@ visibility:hidden;
                                                                 <th style="width:25%">Hardware Version </th>
                                                                 <td style="width:75%">
                                                                     <SCRIPT language=javascript>
-                                                                        document.write('<% tcWebApi_get("DeviceInfo_devParaStatic","CustomerHWVersion","s") %>');
+                                                                        document.write('RTL960x');
                                                                     </SCRIPT>
                                                                 </td>
                                                             </tr>
@@ -350,14 +467,15 @@ visibility:hidden;
                                                                         <tr>
                                                                             <th>Description </th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                        document.write('<% tcWebApi_get("DeviceInfo_devParaStatic","DeviceDescription","s") %>');
+                                                                        document.write('&quot;DUAL BAND+ 2GE+1POTS+1USB-XPON&quot;');
                                                                     </SCRIPT>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>MAC</th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                        document.write('<% getInfo("elan-Mac"); %>');
+                                                                        document.write('04:11:19:5d:84:e9')
+
                                                                     </SCRIPT>
  </td>
                                                                         </tr>
@@ -371,47 +489,40 @@ visibility:hidden;
                                                                         <tr>
                                                                             <th>IPv6 Address</th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                        document.write('<% tcWebApi_get("Lan_Entry0","IP6","s") %>');
+                                                                        document.write('<% getInfo("ip6_ll"); %>');
                                                                     </SCRIPT>
  </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>Hardware Version </th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                        document.write('<% tcWebApi_get("DeviceInfo_devParaStatic","CustomerHWVersion","s") %>');
+                                                                        document.write('RTL960x');
                                                                     </SCRIPT></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>Software Version</th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                        document.write('<% tcWebApi_get("DeviceInfo_devParaStatic","CustomerSWVersion","s") %>');
+                                                                        document.write('<% getInfo("fwVersion"); %>');
                                                                     </SCRIPT></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th> Manufacture Info </th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                        document.write('<% tcWebApi_get("DeviceInfo_devParaStatic","Manufacturer","s") %>');
+                                                                        document.write('syrotech');
                                                                     </SCRIPT></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>ONT Registration Status </th>
                                                                             <td>
-                                                                                <Script language=JavaScript type=text/javascript>
-                                                                                    let ponState = '<% tcWebApi_get("XPON_Common","trafficStatus","s") %>';
-												                                    if( ponState == "up")
-													                                    document.write("<%tcWebApi_get("String_Entry","NetInfoOnlineText","s")%>");
-												                                    else if ( ponState == "connecting")
-													                                    document.write("<%tcWebApi_get("String_Entry","NetInfoConnectingText","s")%>");
-												                                    else
-													                                    document.write("<%tcWebApi_get("String_Entry","NetInfoOfflineText","s")%>");
-												                                </Script>
+                                                                              EPON
                                                                              </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>CPU Usage</th>
                                                                             <td>
                                                                              <SCRIPT language=javascript>
-                                                                        document.write('<% cpuUtility(); %>');
+                                                                        document.write('0%') ;
+
                                                                     </SCRIPT>
                                                                     </td>
                                                                         </tr>
@@ -419,24 +530,38 @@ visibility:hidden;
                                                                             <th> Memory Usage </th>
                                                                             <td>
                                                                                  <SCRIPT language=javascript>
-                                                                                    document.write('<% memUtility(); %>');
+                                                                                    document.write('17%');
+   
+
                                                                     </SCRIPT>
                                                                             </td>
                                                                         </tr>
                                                                                                                                          <tr>
-                                                                            <th>System Time</th>
+                                                                            <th>Compile Time</th>
                                                                             <td>
                                                                     <SCRIPT language=javascript>
-                                                                        let curTime = '<%tcWebApi_get("DeviceInfo","cur_time2","s")%>';
+                                                                        let curTime = '';
                                                                         let curTimelist = curTime.split('/');
                                                                        
 																  if ( 5 == curTimelist.length )
 																  {
-																  	document.write(curTimelist[2] + '<%tcWebApi_get("String_Entry","YearText","s")%>' + curTimelist[0] + '<%tcWebApi_get("String_Entry","MonthText","s")%>' + curTimelist[1] + '<%tcWebApi_get("String_Entry","DayText","s")%>' + curTimelist[3] + '<%tcWebApi_get("String_Entry","HourText","s")%>' + curTimelist[4] + '<%tcWebApi_get("String_Entry","MinuteText","s")%>');
+																  	document.write(curTimelist[2] + '' + curTimelist[0] + '' + curTimelist[1] + '' + curTimelist[3] + '' + curTimelist[4] + '');
 																  }
 																  else
-																  	document.write('N/A');
+																  	document.write('Thu Dec 12 17:36:49 CST 2024');
                                                                     </SCRIPT>
+                                                                            </td>
+                                                                        </tr>
+                                                                         <tr>
+                                                                            <th>System Time</th>
+                                                                            <td>
+                                                                  Wed Mar 19 14:55:55 CST 2025
+                                                                            </td>
+                                                                        </tr>
+                                                                         <tr>
+                                                                            <th>Uptime</th>
+                                                                            <td>
+                                                                           10:12
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -458,93 +583,93 @@ visibility:hidden;
 	 	if (curUserName == sptUserName)
 			userState = 0;
 	 	var para = 0;
-		var pvc_counts=<% tcWebApi_get("WanInfo_Common","CycleNum","s") %>;
-<% if tcwebApi_get("WebCustom_Entry","isCTSFUC9Supported","h") = "Yes" then %>		
+		var pvc_counts=;
+		
 		pvc_counts = 1;
-<% end if %>
+
 		//get all value
 		// num 0
-		var vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		var vArrayStr = "";
 		var Wan_WanName = vArrayStr.split(',');
 		// num 1
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_WanNas = vArrayStr.split(',');
 		// num 2
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		// num 3
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_Actives = vArrayStr.split(',');
 		// num 4		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_EnNAT = vArrayStr.split(',');
 		// num 5		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		// num 6		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_IPVERSION = vArrayStr.split(',');
 		// num 7		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_Status4 = vArrayStr.split(',');
 		// num 8		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_IP4 = vArrayStr.split(',');
 		// num 9		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_ENCAP = vArrayStr.split(',');
 		// num 10		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_GateWay4 = vArrayStr.split(',');
 		// num 11		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_DNS4 = vArrayStr.split(',');
 		// num 12		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_SecDNS4 = vArrayStr.split(',');
 		// num 13		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_Status6 = vArrayStr.split(',');
 		// num 14		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_IP6 = vArrayStr.split(',');
 		// num 15		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_GateWay6 = vArrayStr.split(',');
 		// num 16		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_DNS6 = vArrayStr.split(',');
 		// num 17		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_SecDNS6 = vArrayStr.split(',');
 		// num 18		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_PD6 = vArrayStr.split(',');
 		// num 19		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_NetMask4 = vArrayStr.split(',');
 		// num 20		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		// num 21		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		// num 22		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_Connection = vArrayStr.split(',');
 		// num 23		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_VidPRI = vArrayStr.split(',');
 		// num 24		
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_MAC = vArrayStr.split(',');
 		// num 25
-        vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+        vArrayStr = "";
         var str_mcvid = vArrayStr.split(',');
         // num 26
-        vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+        vArrayStr = "";
         var str_ppp_bi = vArrayStr.split(',');
         // num 27
-		vArrayStr = "<% tcWebApi_get("WanInfo_Common","CycleValue","s") %>";
+		vArrayStr = "";
 		var Wan_sesstime = vArrayStr.split(',');
 
-		var Uptime = "<%tcWebApi_get("Info_PonPhy","Uptime","s") %>";
+		var Uptime = "";
 		var UptimeSplit = Uptime.split(',');
 
 		SortUtil.SetReplaceStrflag(1);
@@ -577,32 +702,32 @@ visibility:hidden;
                                                                                 for (let i = 0; i < pvc_counts; i++) {
                                                                                     switch(i) {
                                                                                         case 0:
-                                                                                            onlineSecond[i] = '<% tcWebApi_get("WanInfo_Entry0","connect_sec","s") %>';
+                                                                                            onlineSecond[i] = '';
                                                                                             break;
                                                                                         case 1:
-                                                                                            onlineSecond[i] = '<% tcWebApi_get("WanInfo_Entry1","connect_sec","s") %>';
+                                                                                            onlineSecond[i] = '';
                                                                                             break;
                                                                                         case 2:
-                                                                                            onlineSecond[i] = '<% tcWebApi_get("WanInfo_Entry2","connect_sec","s") %>';
+                                                                                            onlineSecond[i] = '';
                                                                                             break;
                                                                                         case 3:
-                                                                                            onlineSecond[i] = '<% tcWebApi_get("WanInfo_Entry3","connect_sec","s") %>';
+                                                                                            onlineSecond[i] = '';
                                                                                             break;
                                                                                         case 4:
-                                                                                            onlineSecond[i] = '<% tcWebApi_get("WanInfo_Entry4","connect_sec","s") %>';
+                                                                                            onlineSecond[i] = '';
                                                                                             break;
                                                                                         case 5:
-                                                                                            onlineSecond[i] = '<% tcWebApi_get("WanInfo_Entry5","connect_sec","s") %>';
+                                                                                            onlineSecond[i] = '';
                                                                                             break;
                                                                                         case 6:
-                                                                                            onlineSecond[i] = '<% tcWebApi_get("WanInfo_Entry6","connect_sec","s") %>';
+                                                                                            onlineSecond[i] = '';
                                                                                             break;
                                                                                     }
                                                                                 }
 
 
-        var Wan_NTPServer = '<% tcWebApi_get("Timezone_Entry","SERVER","s") %>';
-        var Wan_TimeZone = '<% tcWebApi_get("Timezone_Entry","TZ","s") %>'
+        var Wan_NTPServer = '';
+        var Wan_TimeZone = ''
 
         function LoadFrame() {
             return;
@@ -612,71 +737,71 @@ visibility:hidden;
 		{
 			var temp = Number(temperature);
 			if (temp >= Math.pow(2, 15)){
-				<% if tcwebApi_get("WebCustom_Entry","isCTPONGDTemperatureSupported","h") = "Yes" then %>	
+					
 					return -((Math.pow(2, 16)-temp)/256).toFixed(1);
-				<% else %>
+				
 					return -Math.round((Math.pow(2, 16)-temp)/256);
-				<% end if %>
+				
 			}else{
-				<% if tcwebApi_get("WebCustom_Entry","isCTPONGDTemperatureSupported","h") = "Yes" then %>	
+					
 					return (temp/256).toFixed(1);
-				<% else %>
+				
 					return Math.round(temp/256);
-				<% end if %>
+				
 			}
 		}			
 			
 		function PonInfoClass()
 		{
-			var SupplyVoltage = '<%tcWebApi_get("Info_PonPhy", "SupplyVoltage", "s")%>';
-			var TxBiasCurrent = '<%tcWebApi_get("Info_PonPhy", "TxBiasCurrent", "s")%>';
-			var Temperature = '<%tcWebApi_get("Info_PonPhy", "Temperature", "s")%>';
-			var TxPower = '<%tcWebApi_get("Info_PonPhy", "TxPower", "s")%>';
-			var RxPower = '<%tcWebApi_get("Info_PonPhy", "RxPower", "s")%>';
-			this.LinkSta					= '<% tcWebApi_get("XPON_LinkCfg","LinkSta","s") %>';
-			this.trafficstate			= '<% tcWebApi_get("XPON_Common","trafficStatus","s") %>';
-			this.fecState					= '<% tcWebApi_get("Info_PonPhy","FecStatus","s") %>';
-			this.ponType					= '<% tcWebApi_get("XPON_Common","xponMode","s") %>';
+			var SupplyVoltage = '';
+			var TxBiasCurrent = '';
+			var Temperature = '';
+			var TxPower = '';
+			var RxPower = '';
+			this.LinkSta					= '';
+			this.trafficstate			= '';
+			this.fecState					= '';
+			this.ponType					= '';
 			this.loidStatus				= 'init';
 			this.PonState 				= 'down';
 			this.FECEnable 				= '-';
 			this.WarnInfo 				= 'disconnect';
-			this.PonSendPkt 			= '<% tcWebApi_get("Info_PonWanStats","TxFrameCnt","s") %>';
-			this.PonRecvPkt 			= '<% tcWebApi_get("Info_PonWanStats","RxFrameCnt","s") %>';
+			this.PonSendPkt 			= '';
+			this.PonRecvPkt 			= '';
 			this.SendPower 				= '-';
 			this.RecvPower 				= '-';
-			<% if SupplyVoltage <> "N/A" then %>	
+				
 			this.WorkVoltage 			= (Number(SupplyVoltage)/10);
-			<% else %>
+			
 			this.WorkVoltage 			= '-';
-			<% end if %>
-			<% if TxBiasCurrent <> "N/A" then %>	
+			
+				
 			this.WorkElectric 		= (Number(TxBiasCurrent)*2/1000);
-			<% else %>
+			
 			this.WorkElectric 		= '-';
-			<% end if %>
-			<% if Temperature <> "N/A" then %>	
+			
+				
 			this.WorkTemperature 	= transTemperature(Temperature);
-			<% else %>
+			
 			this.WorkTemperature 	= '-';
-			<% end if %>
+			
 			this.EncryptEnable 		= '-';
-			this.encryptState			= '<% tcWebApi_get("WebCurSet_Entry","EPONEncryption","s") %>';
-			this.GemPortInfo			= '<% tcWebApi_get("GPON_GEMPort","EncryptionStateALL","s") %>';
+			this.encryptState			= '';
+			this.GemPortInfo			= '';
 			this.DispGemPortState = DispGemPortState;
-			this.phyStatus				=	'<% tcWebApi_get("XPON_Common","phyStatus","s") %>';
+			this.phyStatus				=	'';
 
 			if ( 'GPON' != this.ponType && 'EPON' != this.ponType )
 				this.ponType = 'GPON';
 			if ( 'GPON' == this.ponType )
 			{
-				this.loidAuth					= '<% tcWebApi_get("GPON_LOIDAuth","AuthStatus","s") %>';
-				this.loidV1						= '<% tcWebApi_get("GPON_LOIDAuth","LOID","s") %>';
+				this.loidAuth					= '';
+				this.loidV1						= '';
 			}
 			else
 			{
-				this.loidAuth					= '<% tcWebApi_get("EPON_LOIDAuth","AuthStatus","s") %>';
-				this.loidV1						= '<% tcWebApi_get("EPON_LOIDAuth","LOID0","s") %>';
+				this.loidAuth					= '';
+				this.loidV1						= '';
 			}
 
 			if ( 'up' == this.trafficstate )
@@ -693,16 +818,16 @@ visibility:hidden;
 			
 			if( '0' != this.LinkSta)
 			{
-				<% if TxPower <> "N/A" then %>	
+					
 				this.SendPower 				= (Math.round(Math.log((Number(TxPower))/10000)/(Math.log(10))*100)/10);
-				<% else %>
+				
 				this.SendPower 				= '-';
-				<% end if %>
-				<% if RxPower <> "N/A" then %>	
+				
+					
 				this.RecvPower 				= (Math.round(Math.log((Number(RxPower))/10000)/(Math.log(10))*100)/10);
-				<% else %>
+				
 				this.RecvPower 				= '-';
-				<% end if %>
+				
 				this.FECEnable 				= ( '1' == this.fecState ) ? 'enabled' : 'disabled';
 
 				if ( '2' == this.LinkSta )
@@ -720,7 +845,7 @@ visibility:hidden;
 					this.GemPortInfo = this.GemPortInfo.substring(0, this.GemPortInfo.length - 1);
 				else
 				{
-					document.write('<%tcWebApi_get("String_Entry","NetInfoDisableText","s")%>');
+					document.write('');
 					return -1;
 				}
 
@@ -731,7 +856,7 @@ visibility:hidden;
 					if ( 2 != gemportInfo.length )
 						continue;
 
-					gemportState = 'GEMPORT' + gemportInfo[0] + ':' + ( ( 1 == gemportInfo[1] ) ? '<%tcWebApi_get("String_Entry","NetInfoEnableText","s")%>' : '<%tcWebApi_get("String_Entry","NetInfoDisableText","s")%>' )
+					gemportState = 'GEMPORT' + gemportInfo[0] + ':' + ( ( 1 == gemportInfo[1] ) ? '' : '' )
 												+ '; '
 					document.write(gemportState);
 				}
@@ -742,7 +867,7 @@ visibility:hidden;
 		
 		var PonInfo = new PonInfoClass();
     
-		var EthernetState = '<% tcWebApi_get("WanInfo_Common","EthernetState","s") %>';
+		var EthernetState = '';
 
 
 		function renewrelease(ip, nasIndex)
@@ -847,194 +972,49 @@ visibility:hidden;
                                                     you can query the connection and line status of the WAN port.
                                                 </span>
                                             </div>
-                                            <div class="card-body table-bordered table-responsive" style="height:1300px; overflow:hidden">
+                                           <div class="card-body table-bordered table-responsive ">
                                                 <a style="text-decoration: none;" href="" data-toggle="modal"
-                                                    data-target="#HERO">
-                                                    <table class="table table-striped ">
+                                                   >
+                                                    <table class="table  table-bordered table-striped">
                                                         <tbody>
-                                                            <Script language=javascript>
-                                                                let ipindex = 0;
-                                                                if (pvc_counts < 1) {
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">Connection <br>Name </th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">Status</th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">IP <br>Address </th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">NetMask </th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-
-                                                                }
-                                                                while (Wan_Actives[ipindex] != "N/A" && ipindex < pvc_counts) {
-                                                                    
-                                                                    if (curUserName == sptUserName){
-                                                                            document.write('<tr>');
-                                                                                document.write('<th style="width:25%;">Connection <br>Name </th>');
-                                                                                document.write('<td>' + Wan_WanName[ipindex] + '</td>');
-                                                                            document.write('</tr>');
-                                                                        
-                                                                        }
-								                                    if(Wan_IPVERSION[ipindex] == "IPv4" || Wan_IPVERSION[ipindex] == "IPv4/IPv6")
-                                                                    {
-                                                                        if(curUserName != sptUserName)
-                                                                        {
-                                                                            var tr069 = Wan_WanName[ipindex]
-                                                                            console.log(tr069)
-                                                                            var reg = RegExp(/TR069/);
-                                                                            var reg1 =  RegExp(/VOICE/);
-                                                                            
-                                                                                if(tr069.match(reg) || tr069.match(reg1))
-                                                                                {
-                                                                                    continue;
-                                                                                }
-
-                                                                                if('PPPoE' != Wan_ENCAP[ipindex])
-                                                                                {
-                                                                                    continue;
-                                                                                }
-                                                                        }
-                                                                        <% if TCWebApi_get("Wan_Common","TransMode","h" ) = "Ethernet" then %>
-                                                                        if(EthernetState == "up"){
-                                                                        <% else %>
-                                                                        if(PonInfo.PonState == "up"){
-                                                                        <% end if %>
-                                                                            document.write('<tr>');
-                                                                                document.write('<th style="width:25%;">Status</th>');
-                                                                                if ('up' == Wan_Status4[ipindex])
-                                                                                
-                                                                                    document.write('<td><%tcWebApi_get("String_Entry","NetInfoConnectedText","s")%>&nbsp;</td>');
-                                                                                <% if TCWebApi_get("WebCustom_Entry","isPPPoEOnDemandSupported","h" ) = "Yes" then %>
-                                                                                else if(Wan_Actives[ipindex]=="Yes"
-                                                                                            && ( Wan_WanName[ipindex].indexOf('_B_') >= 0
-                                                                                                            ||'PPPoE' != Wan_ENCAP[ipindex]
-                                                                                                            || ('PPPoE' == Wan_ENCAP[ipindex] && ('Connect_Keep_Alive' == Wan_Connection[ipindex] || '-' == Wan_Connection[ipindex]))
-                                                                                                            )
-                                                                                                )
-                                                                                <% else %>
-                                                                                else if(Wan_Actives[ipindex]=="Yes")	
-                                                                                <% end if %>
-                                                                                    document.write('<td><%tcWebApi_get("String_Entry","NetInfoConnectingText","s")%>&nbsp;</td>');
-                                                                                else
-                                                                                    document.write('<td><%tcWebApi_get("String_Entry","NetInfoUnconnectedText","s")%>&nbsp;</td>');
-                                                                                    
-                                                                                document.write('</tr>');
-
-                                                                                document.write('<tr>');
-                                                                                    document.write('<th style="width:25%;">IP <br>Address </th>');
-                                                                                
-                                                                                    document.write('<td>' + Wan_IP4[ipindex] + '&nbsp;</td>');
-
-                                                                                document.write('</tr>');
-
-                                                                                document.write('<tr>');
-                                                                                    document.write('<th style="width:25%;">NetMask </th>');
-                                                                                    
-                                                                                    document.write('<td>' + Wan_NetMask4[ipindex] + '&nbsp;</td>');
-                                                                                document.write('</tr>');
-
-                                                                                break;
-                                                                        }
-                                                                        else
-                                                                        {   
-                                                                            document.write('<tr>');
-                                                                                document.write('<th style="width:25%;">Status</th>');
-                                                                                document.write('<td><%tcWebApi_get("String_Entry","NetInfoUnconnectedText","s")%>&nbsp;</td>');
-                                                                            document.write('</tr>');
-
-                                                                            document.write('<tr>');
-                                                                                document.write('<th style="width:25%;">IP <br>Address </th>');
-                                                                                document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                            document.write('</tr>');
-
-                                                                            document.write('<tr>');
-                                                                                document.write('<th style="width:25%;">NetMask </th>');
-                                                                                document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                            document.write('</tr>');
-
-
-                                                                            break;
-                                                                        }
-                                                                    } else if (Wan_IPVERSION[ipindex] == "IPV6") {
-                                                                        var isIPGWUp = 0;
-                                                                        if ( 0 != Wan_IP6[ipindex].length && '-' != Wan_IP6[ipindex] && 0 != Wan_GateWay6[ipindex].length && '-' != Wan_GateWay6[ipindex] )
-                                                                            isIPGWUp = 1;
-                                                                        if(Wan_WanName[ipindex].indexOf('_B_') >= 0)
-                                                                            isIPGWUp = 1;								
-                                                                        <% if TCWebApi_get("Wan_Common","TransMode","h" ) = "Ethernet" then %>
-                                                                        if(EthernetState == "up"){
-                                                                        <% else %>
-                                                                        if(PonInfo.PonState == "up"){
-                                                                        <% end if %>
-                                                                        document.write('<tr>');
-                                                                            document.write('<th style="width:25%;">Status</th>');
-                                                                        if ('up' == Wan_Status6[ipindex] && (1 == isIPGWUp))
-                                                                            document.write('<td><%tcWebApi_get("String_Entry","NetInfoConnectedText","s")%>&nbsp;</td>');
-                                                                        <% if TCWebApi_get("WebCustom_Entry","isPPPoEOnDemandSupported","h" ) = "Yes" then %>
-                                                                        else if(Wan_Actives[ipindex]=="Yes"
-                                                                                && ( Wan_WanName[ipindex].indexOf('_B_') >= 0
-                                                                                        ||'PPPoE' != Wan_ENCAP[ipindex]
-                                                                                        || ('PPPoE' == Wan_ENCAP[ipindex] && ('Connect_Keep_Alive' == Wan_Connection[ipindex] || '-' == Wan_Connection[ipindex]))
-                                                                                        )
-                                                                                    )
-                                                                        <% else %>
-                                                                        else if(Wan_Actives[ipindex]=="Yes")	
-                                                                        <% end if %>
-                                                                            document.write('<td><%tcWebApi_get("String_Entry","NetInfoConnectingText","s")%>&nbsp;</td>');
-                                                                        else
-                                                                            document.write('<td><%tcWebApi_get("String_Entry","NetInfoUnconnectedText","s")%>&nbsp;</td>');
-                                                                        
-                                                                        document.write('</tr>');
-                                                                    
-                                                                        document.write('<tr>');
-                                                                            document.write('<th style="width:25%;">IPv6 <br>Address </th>');
-                                                                            document.write('<td>' + Wan_IP6[ipindex] + '&nbsp;</td>');
-                                                                        document.write('</tr>');
-
-                                                                        document.write('<tr>');
-                                                                            document.write('<th style="width:25%;">Get <br>Prefix </th>');
-                                                                            document.write('<td>' + Wan_PD6[ipindex] + '&nbsp;</td>');
-                                                                        document.write('</tr>');
-
-                                                                        break;
-                                                                }
-                                                                else
-                                                                {
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">Status</th>');
-                                                                        document.write('<td><%tcWebApi_get("String_Entry","NetInfoUnconnectedText","s")%>&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">IPv6 <br>Address </th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    document.write('<tr>');
-                                                                        document.write('<th style="width:25%;">Get <br>Prefix </th>');
-                                                                        document.write('<td>' + '-' + '&nbsp;</td>');
-                                                                    document.write('</tr>');
-
-                                                                    break;
-
-                                                                }
-                                                            }
-                                                            ipindex++;
-                                                        }
-                                                            </Script>
+                                                            <tr>
+                                                                <th style="width:25%">Connection Type</th>
+                                                                <td style="width:75%">
+                                                                     <SCRIPT language=javascript>
+                                                                        document.write('INTERNET');
+                                                                    </SCRIPT>
+                                                                    &nbsp;
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="width:25%">Status</th>
+                                                                <td style="width:75%">
+                                                                     <SCRIPT language=javascript>
+                                                                        document.write('up');
+                                                                    </SCRIPT>
+                                                                    &nbsp;
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="width:25%">IP Address </th>
+                                                                <td style="width:75%">
+                                                                    <SCRIPT language=javascript>
+                                                                        document.write('10.215.1.61');
+                                                                    </SCRIPT>
+                                                                    &nbsp;
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="width:25%">Subnet Mask</th>
+                                                                <td style="width:75%">
+                                                                    <SCRIPT language=javascript>
+                                                                        document.write('255.255.255.0');
+                                                                    </SCRIPT>
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
+                                                    
                                                 </a>
                                                 <button class="btn orange_btn" href="" data-toggle="modal"
                                                     data-target="#HERO">View More
@@ -1059,19 +1039,32 @@ visibility:hidden;
                                                                 <p>
                                                                     <b>IPv4 Information(Click the form for details)</b>
                                                                 </p>
-
+                                                                <a style="text-decoration: none;" href="" data-toggle="modal"
+                                                        data-target="#HERO077">
                                                                 
                                                                     <table class="table table-striped">
-                                                                        <thead class="bg-dark text-white">
-                                                                            <tr>
-                                                                                <th>WAN Name </th>
-                                                                                <th>Status </th>
+                                                                       <thead class="bg-dark text-white">
+                                                                              <tr>
+                                                                                <th>Interface</th>
+                                                                                <th style="width:74px;">VLAN ID</th>
+                                                                                <th>Connection Type</th>
+                                                                                <th>Protocol</th>
+                                                                                <th>MAC</th>
                                                                                 <th>IP Address</th>
-                                                                                <th>VLAN/Priority </th>
-                                                                                <th>Connect </th>
-
+                                                                                <th>Gateway</th>
+                                                                                <th>Connect</th>
+                                                                              </tr>
+                                                                            </thead>
+                                                                            <tr>
+                                                                              <td>nas0_0</td>
+                                                                              <td>0</td>
+                                                                              <td>INTERNET</td>
+                                                                              <td>IPoE</td>
+                                                                              <td>04:11:19:5d:84:e9</td>
+                                                                              <td>10.215.1.61</td>
+                                                                              <td>10.215.1.1</td>
+                                                                              <td>up</td>
                                                                             </tr>
-                                                                        </thead>
                                                                         <tbody>
                                                                         
                                                                             <SCRIPT language=JavaScript type=text/javascript>
@@ -1105,11 +1098,11 @@ visibility:hidden;
                                                                                     setRowContent(3, Wan_ENCAP[wanIndex]);
                                                                                     setRowContent(4, Wan_EnNAT[wanIndex]);
 
-                                                                                    <% if TCWebApi_get("Wan_Common","TransMode","h" ) = "Ethernet" then %>
+                                                                                    
                                                                                     if(EthernetState == "up"){
-                                                                                    <% else %>
+                                                                                    
                                                                                     if(PonInfo.PonState == "up"){
-                                                                                    <% end if %>
+                                                                                    
                                                                                         setRowContent(5, Wan_IP4[wanIndex]);  // Assuming you have this data
                                                                                         setRowContent(6, Wan_NetMask4[wanIndex]); // Assuming you have this data
                                                                                         setRowContent(7, Wan_GateWay4[wanIndex]);    // Assuming you have this data
@@ -1139,7 +1132,7 @@ visibility:hidden;
                                                                                     }    
                                                                                     
                                                                                     setRowContent(12, Wan_NTPServer);
-                                                                                    setRowContent(13, Wan_TimeZone + ", " + '<%tcWebApi_get("String_Entry","Time49Text","s")%>');
+                                                                                    setRowContent(13, Wan_TimeZone + ", " + '');
 
                                                                                     let onlineDuration = formatWanTime(onlineSecond[wanIndex], Wan_Status4[wanIndex]);
                                                                                     setRowContent(14, onlineDuration);
@@ -1172,26 +1165,26 @@ visibility:hidden;
                                                                                                 document.write('<td>' + Wan_WanName[arrayIndex] +'</td>');
                                                                                             }
 
-                                                                                                                                                                    <% if TCWebApi_get("Wan_Common","TransMode","h" ) = "Ethernet" then %>
+                                                                                                                                                                    
                                                                                                         if(EthernetState == "up"){
-                                                                        <% else %>
+                                                                        
                                                                                                             if(PonInfo.PonState == "up"){
-                                                                        <% end if %>
+                                                                        
                                                                                                                 if ('up' == Wan_Status4[arrayIndex])
-                                                                                                                        document.write('<td><%tcWebApi_get("String_Entry","NetInfoConnectedText","s")%>&nbsp;</td>');
-                                                                        <% if TCWebApi_get("WebCustom_Entry","isPPPoEOnDemandSupported","h" ) = "Yes" then %>
+                                                                                                                        document.write('<td>&nbsp;</td>');
+                                                                        
                                                                                                                 else if(Wan_Actives[arrayIndex]=="Yes"
                                                                                                                             && ( Wan_WanName[arrayIndex].indexOf('_B_') >= 0
                                                                                                                                             ||'PPPoE' != Wan_ENCAP[arrayIndex]
                                                                                                                                             || ('PPPoE' == Wan_ENCAP[arrayIndex] && ('Connect_Keep_Alive' == Wan_Connection[arrayIndex] || '-' == Wan_Connection[arrayIndex]))
                                                                                                                                             )
                                                                                                                                 )
-                                                                        <% else %>
+                                                                        
                                                                                                                 else if(Wan_Actives[arrayIndex]=="Yes")	
-                                                                        <% end if %>
-                                                                                                                    document.write('<td><%tcWebApi_get("String_Entry","NetInfoConnectingText","s")%>&nbsp;</td>');
+                                                                        
+                                                                                                                    document.write('<td>&nbsp;</td>');
                                                                                                                 else
-                                                                                                                    document.write('<td><%tcWebApi_get("String_Entry","NetInfoUnconnectedText","s")%>&nbsp;</td>'); 
+                                                                                                                    document.write('<td>&nbsp;</td>'); 
                                                                     
                                                                                             document.write('<td>' + Wan_IP4[arrayIndex] +'</td>');
                                                                                             
@@ -1199,17 +1192,17 @@ visibility:hidden;
                                                                                         } 
                                                                                         else 
                                                                                         {
-                                                                                            document.write('<td><%tcWebApi_get("String_Entry","NetInfoUnconnectedText","s")%>&nbsp;</td>');
+                                                                                            document.write('<td>&nbsp;</td>');
 										                                                    document.write('<td>' + '-' + '&nbsp;</td>');
                                                                                         }
                                                                                             document.write('<td>' + Wan_VidPRI[arrayIndex] +'</td>');
                                                                                             if ( 'Connect_Manually' == Wan_Connection[arrayIndex] )
                                                                                             {
-                                                                                                document.write('<td> <%tcWebApi_get("String_Entry","NetInfoManualText","s")%> </td>');
+                                                                                                document.write('<td>  </td>');
                                                                                             }
                                                                                             else
                                                                                             {
-                                                                                                document.write('<td> <%tcWebApi_get("String_Entry","NetInfoAutomaticText","s")%> </td>');
+                                                                                                document.write('<td>  </td>');
                                                                                             }
                                                                                             document.write('</tr>');
                                                                                         }
@@ -1219,21 +1212,37 @@ visibility:hidden;
 					                                                        </SCRIPT>
                                                                         </tbody>
                                                                     </table>
+                                                                </a>
 
                                                                 <p><b>IPv6 Information(Click the form for details)</b>
                                                                 </p>
+                                                                <a style="text-decoration: none;" href="" data-toggle="modal" data-target="#HERO078">
                                                                 <p style="text-decoration: none;">
                                                                     <table class="table table-striped">
                                                                         <thead class="bg-dark text-white">
                                                                             <tr>
-                                                                                <th>WAN Name </th>
-                                                                                <th>Status </th>
+                                                                                <th>Interface</th>
+                                                                                <th style="width:74px;">VLAN ID </th>
+                                                                                <th>Connection Type </th>
+                                                                                <th>Protocol<th>
+                                                                                <th>MAC</th>
                                                                                 <th>IP Address</th>
-                                                                                <th>VLAN/Priority </th>
+                                                                                <th>Gateway </th>
                                                                                 <th>Connect </th>
 
                                                                             </tr>
                                                                         </thead>
+                                                                         <tr>
+                                                                              <td>ppp0_nas0_1</td>
+                                                                              <td>0</td>
+                                                                              <td>INTERNET</td>
+                                                                              <td>PPPoE</td>
+                                                                              <td>  </td>
+                                                                              <td> </td>
+                                                                              <td> <td>
+                                                                              <td>up</td>
+                                                                              
+                                                                            </tr>
                                                                         <tbody>
                                                                             <SCRIPT language=JavaScript type=text/javascript>
 
@@ -1266,11 +1275,11 @@ visibility:hidden;
                                                                                     setRowContent(3, Wan_ENCAP[wanIndex]);
                                                                                     setRowContent(4, Wan_EnNAT[wanIndex]);
 
-                                                                                    <% if TCWebApi_get("Wan_Common","TransMode","h" ) = "Ethernet" then %>
+                                                                                    
                                                                                     if(EthernetState == "up"){
-                                                                                    <% else %>
+                                                                                    
                                                                                     if(PonInfo.PonState == "up"){
-                                                                                    <% end if %>
+                                                                                    
                                                                                         setRowContent(5, Wan_IP6[wanIndex]);  // Assuming you have this data
                                                                                         setRowContent(6, Wan_PD6[wanIndex]); // Assuming you have this data
                                                                                         setRowContent(7, Wan_GateWay6[wanIndex]);    // Assuming you have this data
@@ -1294,7 +1303,7 @@ visibility:hidden;
                                                                                     }    
                                                                                     
                                                                                     setRowContent(12, Wan_NTPServer);
-                                                                                    setRowContent(13, Wan_TimeZone + ", " + '<%tcWebApi_get("String_Entry","Time49Text","s")%>');
+                                                                                    setRowContent(13, Wan_TimeZone + ", " + '');
                                                                                 }
 						                                
                                                                                 for (let arrayIndex = 0; arrayIndex < pvc_counts; arrayIndex++) {
@@ -1313,26 +1322,26 @@ visibility:hidden;
 												isIPGWUp = 1;
 											if(Wan_WanName[arrayIndex].indexOf('_B_') >= 0)
 												isIPGWUp = 1;								
-											<% if TCWebApi_get("Wan_Common","TransMode","h" ) = "Ethernet" then %>
+											
 											if(EthernetState == "up"){
-											<% else %>
+											
 											if(PonInfo.PonState == "up"){
-											<% end if %>
+											
 											if ('up' == Wan_Status6[arrayIndex] && (1 == isIPGWUp))
-												document.write('<td><%tcWebApi_get("String_Entry","NetInfoConnectedText","s")%>&nbsp;</td>');
-											<% if TCWebApi_get("WebCustom_Entry","isPPPoEOnDemandSupported","h" ) = "Yes" then %>
+												document.write('<td>&nbsp;</td>');
+											
 											else if(Wan_Actives[arrayIndex]=="Yes"
 													&& ( Wan_WanName[arrayIndex].indexOf('_B_') >= 0
 															||'PPPoE' != Wan_ENCAP[arrayIndex]
 															|| ('PPPoE' == Wan_ENCAP[arrayIndex] && ('Connect_Keep_Alive' == Wan_Connection[arrayIndex] || '-' == Wan_Connection[arrayIndex]))
 															)
 														)
-<% else %>
+
 										else if(Wan_Actives[arrayIndex]=="Yes")	
-<% end if %>
-											document.write('<td><%tcWebApi_get("String_Entry","NetInfoConnectingText","s")%>&nbsp;</td>');
+
+											document.write('<td>&nbsp;</td>');
 										else
-											document.write('<td><%tcWebApi_get("String_Entry","NetInfoUnconnectedText","s")%>&nbsp;</td>');
+											document.write('<td>&nbsp;</td>');
                                                                     
                                                                                             document.write('<td>' + Wan_IP6[arrayIndex] +'</td>');
                                                                                             
@@ -1340,17 +1349,17 @@ visibility:hidden;
                                                                                         } 
                                                                                         else 
                                                                                         {
-                                                                                            document.write('<td><%tcWebApi_get("String_Entry","NetInfoUnconnectedText","s")%>&nbsp;</td>');
+                                                                                            document.write('<td>&nbsp;</td>');
 										                                                    document.write('<td>' + '-' + '&nbsp;</td>');
                                                                                         }
                                                                                             document.write('<td>' + Wan_VidPRI[arrayIndex] +'</td>');
                                                                                             if ( 'Connect_Manually' == Wan_Connection[arrayIndex] )
                                                                                             {
-                                                                                                document.write('<td> <%tcWebApi_get("String_Entry","NetInfoManualText","s")%> </td>');
+                                                                                                document.write('<td>  </td>');
                                                                                             }
                                                                                             else
                                                                                             {
-                                                                                                document.write('<td> <%tcWebApi_get("String_Entry","NetInfoAutomaticText","s")%> </td>');
+                                                                                                document.write('<td>  </td>');
                                                                                             }
                                                                                             document.write('</tr>');
                                                                                         }
@@ -1360,6 +1369,7 @@ visibility:hidden;
 					                                                        </SCRIPT>
                                                                         </tbody>
                                                                     </table>
+                                                                    </a>
                                                                 </p>
                                                             </div>
 
@@ -1368,7 +1378,7 @@ visibility:hidden;
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="modal fade" id="myModal2" role="dialog">
+                                             <div class="modal fade show" id="HERO077" role="dialog">
                                                 <div class="modal-dialog modal-lg">
 
                                                     <!-- Modal content-->
@@ -1388,93 +1398,101 @@ visibility:hidden;
                                                             <table class="table  table-bordered table-striped">
                                                                 <tbody>
                                                                      <tr>
-                                                                        <th>Connection Name</th>
+                                                                        <th>Interface</th>
                                                                         <td>
-                                                                            
+                                                                            nas0_0
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th style="width: 40%">MAC Address </th>
+                                                                        <th style="width: 40%">MAC</th>
                                                                         <td> 
-                                                                          
+                                                                          04:11:19:5d:84:e9
                                                                     </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>VLAN/Priority</th>
+                                                                        <th>VLAN ID</th>
                                                                         <td>
-                                                                              
+                                                                         0     
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Way of Getting IP</th>
-                                                                        <td> </td>
+                                                                        <th>Protocol</th>
+                                                                        <td>IPoE </td>
                                                                     </tr>
                                     
                                                                     <tr>
-                                                                        <th>NAT</th>
+                                                                        <th>NAT Type:</th>
                                                                         <td>
-                                                                            
+                                                                           NAT4 (default)
+    
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>IP Address</th>
                                                                         <td>
-                                                                              
+                                                                             10.215.1.58 
                                                                         </td>
                                                                     </tr>
                                                                      <tr>
                                                                         <th>Subnet Mask</th>
                                                                         <td>
-                                                                              
+                                                                             255.255.255.0 
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Gateway</th>
                                                                         <td>
-                                                                              
+                                                                              10.215.1.1
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Primary DNS</th>
                                                                         <td>
-                                                                              
+                                                                             8.8.8.8
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Secondary DNS </th>
+                                                                        <th>Secondary DNS</th>
                                                                         <td>
-                                                                             
+                                                                              8.8.4.4
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Release IP </th>
                                                                         <td>
-                                                                             
+                                                                           <input id="btnReleaseIP" name="btnReleaseIP" onclick="renewrelease(2, 0)" type="button" value="Disconnect">  
                                                                         </td>
                                                                     </tr>
                                                                      <tr>
                                                                         <th>Renew IP </th>
                                                                         <td>
-                                                                             
+                                                                            <input id="btnReleaseIP" name="btnReleaseIP" onclick="renewrelease(2, 0)" type="button" value="Connect"> 
                                                                         </td>
                                                                     </tr>
                             
                                                                     <tr>
-                                                                        <th>NTP Server </th>
+                                                                        <th>SNTP Server </th>
                                                                         <td>
-                                                                             
+                                                                           220.130.158.52
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Time Zone Info </th>
+                                                                        <th>Time Zone Select </th>
                                                                         <td>
-                                                                             
+                                                                             Year 1970 Mon 1 Day 1 Hour 5  Min 48  sec 37
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Online Duration (dd:hh:mm:ss):</th>
                                                                         <td>
-                                                                              
+                                                                             up ( 00:00:15 )
+
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Offline Duration (dd:hh:mm:ss):</th>
+                                                                        <td>
+                                                                            down ( 00:32:27 )
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -1489,7 +1507,8 @@ visibility:hidden;
                                             </div>
 
 
-                                            <div class="modal fade" id="myModal1" role="dialog">
+
+                                            <div class="modal fade show "   id="HERO078"   role="dialog">
                                                 <div class="modal-dialog modal-lg">
 
                                                     <!-- Modal content-->
@@ -1509,8 +1528,8 @@ visibility:hidden;
                                                             <table class="table  table-bordered table-striped">
                                                                 <tbody>
                                                                      <tr>
-                                                                        <th>Connection Name </th>
-                                                                        <td> </td>
+                                                                        <th>Interface</th>
+                                                                        <td>ppp0_nas0_1 </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th style="width: 40%">MAC Address </th>
@@ -1518,67 +1537,57 @@ visibility:hidden;
 
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>VLAN/Priority </th>
-                                                                        <td> </td>
+                                                                        <th>VLAN ID</th>
+                                                                        <td> 0</td>
                                                                     </tr>
 
                                                                      <tr>
-                                                                        <th>Way of Getting IPv6</th>
-                                                                        <td></td>
+                                                                        <th>Protocol</th>
+                                                                        <td>PPPoE</td>
                                                                     </tr>
                                                                      <tr>
-                                                                        <th>NAT</th>
+                                                                        <th>NAT Type</th>
                                                                         <td>
-                                                                            
+                                                                            NAT4 (default) 
                                                                         </td>
                                                                     </tr>
                                                                      <tr>
-                                                                        <th>IPv6 Address</th>
+                                                                        <th>IP Address</th>
                                                                         <td>
                                                                         
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Get Prefix</th>
+                                                                        <th>Prefix Delegation</th>
                                                                         <td> </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>IPv6 DefaultGateway</th>
+                                                                        <th>IPv6 Default Gateway</th>
                                                                         <td>
                                                                            
                                                                         </td>
                                                                     </tr>
                                                         
                                                                     <tr>
-                                                                        <th>IPv6 Primary DNS</th>
-                                                                        <td></td>
+                                                                        <th>Primary DNS </th>
+                                                                        <td>8.8.8.8</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>IPv6 Secondary DNS</th>
-                                                                        <td></td>
+                                                                        <th>Secondary DNS</th>
+                                                                        <td>8.8.4.4</td>
                                                                     </tr>
+                                                                  
                                                                     <tr>
-                                                                        <th>Release IP </th>
+                                                                        <th>SNTP Server </th>
                                                                         <td>
-                                                                             
-                                                                        </td>
-                                                                    </tr>
-                                                                     <tr>
-                                                                        <th>Renew IP </th>
-                                                                        <td>
-                                                                             
+                                                                             220.130.158.52
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>NTP Server </th>
+                                                                        <th>Time Zone Select :  </th>
                                                                         <td>
-                                                                             
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Time Zone Info </th>
-                                                                        <td>
-                                                                             
+                                                                         Year 1970 Mon 1 Day 1 Hour 5  Min 48  sec 37
+                                                                            
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -1605,10 +1614,9 @@ visibility:hidden;
                                                 </span>
                                                 <span> <b style="font-size:18px;"><span
                                                             style="vertical-align:middle;">
-                                                            PON Optical
-                                                            Information</b></span></span>
+                                                            PON Status</b></span></span>
                                                 <hr>
-                                                On this page, you can query the status of the optical module.
+                                               This page shows the current system status of PON.
                                             </div>
                                             <div class="card-body table-bordered table-responsive ">
                                                 <a style="text-decoration: none;" href="" data-toggle="modal"
@@ -1617,49 +1625,42 @@ visibility:hidden;
                                                     <table class="table table-striped ">
                                                         <tbody>
                                                         <tr>
-                                                                <th>Optical Information</th>
-                                                                <th>Current Value</th>
-                                                                <th>Reference Value</th>
+                                                                <th>Working Mode</th>
+                                                                 <td>
+                                                                            EPON
+                                                                            </td>
+                                                              
                                                             </tr>
                                                             <tr>
-                                                                            <th style="width: 30%"> PON Link Connection
-                                                                                Status</th>
+                                                                            <th style="width: 30%"> Vendor Name
                                                                             <td>
-                                                                                 <Script language=JavaScript type=text/javascript>
-                                                                                 console.log(PonInfo)
-												                                    if( PonInfo.PonState == "up")
-													                                    document.write("<%tcWebApi_get("String_Entry","NetInfoOnlineText","s")%>");
-												                                    else if ( PonInfo.PonState == "connecting")
-													                                    document.write("<%tcWebApi_get("String_Entry","NetInfoConnectingText","s")%>");
-												                                    else
-													                                    document.write("<%tcWebApi_get("String_Entry","NetInfoOfflineText","s")%>");
-												                                </Script>
+                                                                             <SCRIPT language=javascript>
+                                                                             document.write('SYRO')
+                                                        
+                                                                    </SCRIPT>  
                                                                             </td>
-                                                                            <td>
-                                                                                Online / Offline
-                                                                            </td>
-
+                                                                            
                                                                         </tr>
                                                                         
                                                             <tr>
-                                                                <th>RX Optical Power</th>
+                                                                <th>Part Number</th>
                                                                 <td>
                                                                              <SCRIPT language=javascript>
-                                                                             document.write(PonInfo.RecvPower)
+                                                                             document.write('CLASS B+')
                                                         
-                                                                    </SCRIPT>   dBm </td>
+                                                                    </SCRIPT> </td>
 
-                                                                <td> -27 to -7 dBm</td>
+                                                                
                                                             </tr>
 
                                                               <tr>
-                                                                <th>TX Optical Power </th>
+                                                                <th>Rx Power</th>
                                                                  <td>
                                                                              <SCRIPT language=javascript>
-                                                                             document.write(PonInfo.SendPower)
+                                                                             document.write('-25.528420  dBm')
                                                         
-                                                                    </SCRIPT>   dBm </td>
-                                                                <td> 0.5 to 5 dBm</td>
+                                                                    </SCRIPT></td>
+                                                               
                                                             </tr>
 
 
@@ -1695,88 +1696,34 @@ visibility:hidden;
                                                                                 Network Link Connection Information</th>
                                                                         </tr>
 
+                                                                    
                                                                         <tr>
-                                                                            <th style="width: 30%"> PON Link Connection
-                                                                                Status</th>
-                                                                            <td colspan="2">
-                                                                                 <Script language=JavaScript type=text/javascript>
-												                                    if( PonInfo.PonState == "up")
-													                                    document.write("<%tcWebApi_get("String_Entry","NetInfoOnlineText","s")%>");
-												                                    else if ( PonInfo.PonState == "connecting")
-													                                    document.write("<%tcWebApi_get("String_Entry","NetInfoConnectingText","s")%>");
-												                                    else
-													                                    document.write("<%tcWebApi_get("String_Entry","NetInfoOfflineText","s")%>");
-												                                </Script>
-                                                                            </td>
-
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>PON Mode </th>
-                                                                            <td colspan="2">
-                                                                                <Script language=JavaScript type=text/javascript>
-                                                                                    if(( PonInfo.PonState == "up") || ( PonInfo.PonState == "connecting")) {
-                                                                                        if (PonInfo.phyStatus = "gpon_phy_up") {
-													                                        document.write("<%tcWebApi_get("String_Entry","NetInfoPONGMODEText","s")%>");
-                                                                                        } else {    
-                                                                                            document.write("<%tcWebApi_get("String_Entry","NetInfoPONEMODEText","s")%>");
-                                                                                        }
-                                                                                    }    
-												                                    else {
-													                                    document.write("<%tcWebApi_get("String_Entry","NetInfoOfflineText","s")%>");
-                                                                                    }
-												                                </Script>
+                                                                            <th>Working Mode </th>
+                                                                            <td>
+                                                                            EPON
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>FEC Status</th>
-                                                                            <td colspan="2">
-                                                                                 <SCRIPT language=JavaScript type=text/javascript>
-
-                        if (PonInfo.fecEnable)
-                        	document.write(fecEnable);
-                        else
-                        {
-													if(PonInfo.fecEnable == "disabled")
-														document.write("<%tcWebApi_get("String_Entry","NetInfoDisable11Text","s")%>");
-													else
-														document.write("<%tcWebApi_get("String_Entry","NetInfoEnable11Text","s")%>");
-												}
-											</SCRIPT>
+                                                                            <th>FEC Errors</th>
+                                                                   <td colspan="2">0 </td>
+										
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Encryption Mode </th>
+                                                                            <th>Part Number </th>
                                                                             <td colspan="2">
-                                                                                <SCRIPT language=JavaScript type=text/javascript>
-                                                                                        if ( '1' == PonInfo.LinkSta )
-                                                                                        {
-                                                                                            PonInfo.DispGemPortState();
-                                                                                        }
-                                                                                        else
-                                                                                        {
-                                                                                            if ( '-' == PonInfo.EncryptEnable )
-                                                                                                document.write(PonInfo.EncryptEnable);
-                                                                                            else
-                                                                                            {
-                                                                                                                        if(PonInfo.EncryptEnable == "disabled")
-                                                                                                                            document.write("<%tcWebApi_get("String_Entry","NetInfoDisableText","s")%>");
-                                                                                                                        else
-                                                                                                                            document.write("<%tcWebApi_get("String_Entry","NetInfoEnableText","s")%>");
-                                                                                                                    }
-                                                                                        }
+                                                                                <SCRIPT language=javascript>
+                                                                                    document.write('CLASS B+');
                                                                                 </SCRIPT>
                                                                             </td>
 
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Alarm Information
+                                                                            <th>Vendor Name
                                                                             </th>
                                                                             <td colspan="2">
-                                                                                 <SCRIPT language=JavaScript type=text/javascript>
-                                                                                 if(PonInfo.WarnInfo == "disconnect")
-                                                                                                            document.write("<%tcWebApi_get("String_Entry","NetInfoConIntText","s")%>");
-                                                                                        else
-                                                                                            document.write("<%tcWebApi_get("String_Entry","NetInfoNAlaText","s")%>");
+                                                                                <SCRIPT language=javascript>
+                                                                                    document.write('SYRO');
                                                                                 </SCRIPT>
                                                                             </td>
 
@@ -1792,7 +1739,7 @@ visibility:hidden;
                                                                             <th>Number Of Packets PON Port Sent </th>
                                                                             <td colspan="2">
                                                                                 <SCRIPT language=javascript>
-                                                                                    document.write(PonInfo.PonSendPkt);
+                                                                                    document.write('<% ponGetStatus("packets-sent"); %>');
                                                                                 </SCRIPT>
                                                                             </td>
                                                                         </tr>
@@ -1800,7 +1747,7 @@ visibility:hidden;
                                                                             <th>Number Of Packets PON Port Received</th>
                                                                             <td colspan="2">
                                                                                  <SCRIPT language=javascript>
-                                                                                    document.write(PonInfo.PonRecvPkt);
+                                                                                    document.write('<% ponGetStatus("packets-received"); %>');
                                                                                 </SCRIPT>
                                                                             </td>
                                                                         </tr>
@@ -1814,30 +1761,30 @@ visibility:hidden;
                                                                             <th>Reference Value</th>
                                                                         </tr>
                                                                          <tr>
-                                                                            <th>RX Optical Power </th>
+                                                                            <th>Rx Power </th>
                                                                             <td> 
                                                                             <SCRIPT language=javascript>
-                                                                             document.write(PonInfo.RecvPower)
+                                                                             document.write('<% ponGetStatus("rx-power"); %>')
                                                         
                                                                             </SCRIPT> dBm </td>
                                                                             <td> -27 to -7 dBm </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>TX Optical Power</th>
+                                                                            <th>Tx Power</th>
                                                                             <td> <SCRIPT language=javascript>
-                                                                             document.write(PonInfo.SendPower)
+                                                                             document.write('<% ponGetStatus("tx-power"); %>')
                                                         
                                                                     </SCRIPT> dBm</td>
                                                                             <td> 0.5 to 5 dBm</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Working Voltage </th>
+                                                                            <th>Voltage </th>
                                                                             <td> 
                                                                              <SCRIPT language=javascript>
                                                                              
                                                                     
 
-                                                                        document.write(PonInfo.WorkVoltage);
+                                                                        document.write('<% ponGetStatus("voltage"); %>');
                                                                     </SCRIPT>   mV</td>
                                                                             <td> 3100 to 3500 mV </td>
                                                                         </tr>
@@ -1845,17 +1792,22 @@ visibility:hidden;
                                                                             <th>Bias Current </th>
                                                                             <td> 
                                                                              <SCRIPT language=javascript>
-                                                                        document.write(PonInfo.WorkElectric);
+                                                                        document.write('<% ponGetStatus("bias-current"); %>');
                                                                     </SCRIPT>   mA </td>
                                                                             <td> 0 to 90 mA </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Working Temperature </th>
+                                                                            <th>Temperature </th>
                                                                             <td> 
                                                                              <SCRIPT language=javascript>
-                                                                        document.write(PonInfo.WorkTemperature);
+                                                                        document.write('<% ponGetStatus("temperature"); %>');
+
+
+
                                                                     </SCRIPT>   </td>
-                                                                            <td> -10 to +85 ? </td>
+                                                                            <td> -5 to + 55&deg;C
+</td>
+  
                                                                         </tr>
 
                                                                     </tbody>
@@ -1885,25 +1837,25 @@ visibility:hidden;
                                                 Status information of voice users and reset the voice function.
                                             </div>
                                             <Script language=javascript>
-                                            <% if tcWebApi_get("VoIPBasic_Common", "SIPProtocol", "h") = "SIP"  then %>
+                                            
 			                                    function VoipInfoClass()
 		{
-			this.Reg1Status = '<%if tcWebAPI_get("InfoVoIP_Entry0", "Status", "h") <> "N/A" then tcWebAPI_get("InfoVoIP_Entry0", "Status", "s") else asp_Write("") end if %>';
-			this.Line1Status = '<%if tcWebApi_get("VoIPSysParam_Entry0", "SC_LINE_INFO_STATUS", "h") <> "N/A" then tcWebAPI_get("VoIPSysParam_Entry0", "SC_LINE_INFO_STATUS", "s") else asp_Write("") end if %>';
+			this.Reg1Status = '';
+			this.Line1Status = '';
 			
-			this.Reg2Status = '<%if tcWebAPI_get("InfoVoIP_Entry1", "Status", "h") <> "N/A" then tcWebAPI_get("InfoVoIP_Entry1", "Status", "s") else asp_Write("") end if %>';
-			this.Line2Status = '<%if tcWebApi_get("VoIPSysParam_Entry1", "SC_LINE_INFO_STATUS", "h") <> "N/A" then tcWebAPI_get("VoIPSysParam_Entry1", "SC_LINE_INFO_STATUS", "s") else asp_Write("") end if %>';
+			this.Reg2Status = '';
+			this.Line2Status = '';
 			
-			this.Reg3Status = '<%if tcWebAPI_get("InfoVoIP_Entry2", "Status", "h") <> "N/A" then tcWebAPI_get("InfoVoIP_Entry2", "Status", "s") else asp_Write("") end if %>';
-			this.Line3Status = '<%if tcWebApi_get("VoIPSysParam_Entry2", "SC_LINE_INFO_STATUS", "h") <> "N/A" then tcWebAPI_get("VoIPSysParam_Entry2", "SC_LINE_INFO_STATUS", "s") else asp_Write("") end if %>';
+			this.Reg3Status = '';
+			this.Line3Status = '';
 			
-			this.Reg4Status = '<%if tcWebAPI_get("InfoVoIP_Entry3", "Status", "h") <> "N/A" then tcWebAPI_get("InfoVoIP_Entry3", "Status", "s") else asp_Write("") end if %>';
-			this.Line4Status = '<%if tcWebApi_get("VoIPSysParam_Entry3", "SC_LINE_INFO_STATUS", "h") <> "N/A" then tcWebAPI_get("VoIPSysParam_Entry3", "SC_LINE_INFO_STATUS", "s") else asp_Write("") end if %>';
+			this.Reg4Status = '';
+			this.Line4Status = '';
 			
 
-			var line1number='<%if tcWebApi_get("VoIPBasic_Common","SIPProtocol", "h") = "SIP" then asp_Write("") elseif tcWebAPI_get("VoIPBasic_Entry0", "SIPDisplayName", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry0", "SIPDisplayName", "s") else asp_Write("") end if %>';
+			var line1number='';
 			if(line1number == ''){
-				var tmp='<%if tcWebAPI_get("VoIPBasic_Entry0", "SIPAuthenticationName", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry0", "SIPAuthenticationName", "s") else asp_Write("") end if %>';
+				var tmp='';
 				if(tmp.indexOf('@') >= 0)
 					line1number=tmp.substr(0,tmp.indexOf('@'));
 				else
@@ -1911,9 +1863,9 @@ visibility:hidden;
 			}
 			this.Line1Number = line1number;
 
-			var line2number = '<%if tcWebApi_get("VoIPBasic_Common","SIPProtocol", "h") = "SIP" then asp_Write("") elseif tcWebAPI_get("VoIPBasic_Entry1", "SIPDisplayName", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry1", "SIPDisplayName", "s") else asp_Write("") end if %>';
+			var line2number = '';
 			if(line2number == ''){
-				var tmp2='<%if tcWebAPI_get("VoIPBasic_Entry1", "SIPAuthenticationName", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry1", "SIPAuthenticationName", "s") else asp_Write("") end if %>';
+				var tmp2='';
 				if(tmp2.indexOf('@') >= 0)
 					line2number=tmp2.substr(0,tmp2.indexOf('@'));
 				else
@@ -1921,9 +1873,9 @@ visibility:hidden;
 			}
 			this.Line2Number = line2number;
 
-			var line3number = '<%if tcWebApi_get("VoIPBasic_Common","SIPProtocol", "h") = "SIP" then asp_Write("") elseif tcWebAPI_get("VoIPBasic_Entry2", "SIPDisplayName", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry2", "SIPDisplayName", "s") else asp_Write("") end if %>';
+			var line3number = '';
 			if(line3number == ''){
-				var tmp3='<%if tcWebAPI_get("VoIPBasic_Entry2", "SIPAuthenticationName", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry2", "SIPAuthenticationName", "s") else asp_Write("") end if %>';
+				var tmp3='';
 				if(tmp3.indexOf('@') >= 0)
 					line3number=tmp3.substr(0,tmp3.indexOf('@'));
 				else
@@ -1931,9 +1883,9 @@ visibility:hidden;
 			}
 			this.Line3Number = line3number;
 
-			var line4number = '<%if tcWebApi_get("VoIPBasic_Common","SIPProtocol", "h") = "SIP" then asp_Write("") elseif tcWebAPI_get("VoIPBasic_Entry3", "SIPDisplayName", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry3", "SIPDisplayName", "s") else asp_Write("") end if %>';
+			var line4number = '';
 			if(line4number == ''){
-				var tmp4='<%if tcWebAPI_get("VoIPBasic_Entry3", "SIPAuthenticationName", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry3", "SIPAuthenticationName", "s") else asp_Write("") end if %>';
+				var tmp4='';
 				if(tmp4.indexOf('@') >= 0)
 					line4number=tmp4.substr(0,tmp4.indexOf('@'));
 				else
@@ -1953,63 +1905,63 @@ visibility:hidden;
 
 			if ( 1 == port ){
 				Status = this.Reg1Status;
-				LineEnable = '<%if tcWebAPI_get("VoIPBasic_Entry0", "Enable", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry0", "Enable", "s") else asp_Write("") end if %>';
-				RegFailReason = "<% tcWebAPI_get("InfoVoIP_Entry0", "RegFailReason", "s") %>";
+				LineEnable = '';
+				RegFailReason = "";
 
 			}
 			else if ( 2 == port ){
 				Status = this.Reg2Status;
-				LineEnable = '<%if tcWebAPI_get("VoIPBasic_Entry1", "Enable", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry1", "Enable", "s") else asp_Write("") end if %>';
-				RegFailReason = "<% tcWebAPI_get("InfoVoIP_Entry1", "RegFailReason", "s") %>";
+				LineEnable = '';
+				RegFailReason = "";
 			}
 			else if ( 3 == port ){
 				Status = this.Reg3Status;
-				LineEnable = '<%if tcWebAPI_get("VoIPBasic_Entry2", "Enable", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry2", "Enable", "s") else asp_Write("") end if %>';
-				RegFailReason = "<% tcWebAPI_get("InfoVoIP_Entry2", "RegFailReason", "s") %>";
+				LineEnable = '';
+				RegFailReason = "";
 			}
 			else if ( 4 == port ){
 				Status = this.Reg3Status;
-				LineEnable = '<%if tcWebAPI_get("VoIPBasic_Entry3", "Enable", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Entry3", "Enable", "s") else asp_Write("") end if %>';
-				RegFailReason = "<% tcWebAPI_get("InfoVoIP_Entry3", "RegFailReason", "s") %>";
+				LineEnable = '';
+				RegFailReason = "";
 			}
 			else
 				return;
 						if(LineEnable == 'No'){
-							document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP2Text","s")%>');
+							document.write('');
 							return;
 						}
 						if ( Status == 'Up' )
-							document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP3Text","s")%>');
+							document.write('');
 						else if ( Status == 'Initializing' )
-							document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP4Text","s")%>');
+							document.write('');
 						else if ( Status == 'Registering' )
-							document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP5Text","s")%>');
+							document.write('');
 						else if ( Status == 'Unregistering' )
-							document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP6Text","s")%>');
+							document.write('');
 						else if ( Status == 'Quiescent' )
-							document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP7Text","s")%>');
+							document.write('');
 						else if ( Status == 'Disabled' )
-							document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP2Text","s")%>');
+							document.write('');
 						else if ( Status == 'Error' ){
 							switch ( parseInt(RegFailReason) ){
 								case 2:
 								case 3:
-									voiptatus = '<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP9Text","s")%>';
+									voiptatus = '';
 									break;
 								case 4:
-									voiptatus = '<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP10Text","s")%>';
+									voiptatus = '';
 									break;
 								case 6:
-									voiptatus = '<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP11Text","s")%>';
+									voiptatus = '';
 									break;
 								default:
-									voiptatus = '<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP12Text","s")%>';
+									voiptatus = '';
 									break;
 							}
 							document.write(voiptatus);
 							}
 						else if ( Status == 'Testing' )
-							document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP13Text","s")%>');
+							document.write('');
 						else
 							document.write('--');
 		}
@@ -2056,17 +2008,17 @@ visibility:hidden;
 			else
 				return;
 			if ( lineStatus == 'Idle' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP14Text","s")%>');
+				document.write('');
 			else if ( lineStatus == 'Ringing' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP15Text","s")%>');
+				document.write('');
 			else if ( lineStatus == 'Dialing' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP16Text","s")%>');
+				document.write('');
 			else if ( lineStatus == 'Ringback' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP17Text","s")%>');
+				document.write('');
 			else if ( lineStatus == 'Connect' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP18Text","s")%>');
+				document.write('');
 			else if ( lineStatus == 'Disconnect' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP19Text","s")%>');	
+				document.write('');	
 			else
 				document.write('--');
 		}	
@@ -2076,7 +2028,7 @@ visibility:hidden;
 		function checkLineNum()
 		{
 			var i, j, k;
-			var lineNumber = parseInt(<% tcwebApi_get("VoIPBasic_Common","VoIPLineNumber","s") %>);
+			var lineNumber = parseInt();
 			var table = document.getElementById("perLineTablePlaceholder");
 			for(i = 0; i < lineNumber; i++)
 			{
@@ -2099,24 +2051,24 @@ visibility:hidden;
 				}
 			}
 		}
-		                                    <% end if %>
+		                                    
         </script>
 
 
         <Script language=javascript>
-            <% if tcWebApi_get("VoIPBasic_Common", "SIPProtocol", "h") = "H.248"  then %>
-			    var lineNumber = parseInt(<% tcwebApi_get("VoIPBasic_Common","VoIPLineNumber","s") %>);
+            
+			    var lineNumber = parseInt();
 		function VoipInfoClass()
 		{
-			this.Reg1Status = '<%if tcWebAPI_get("VoIPH248_Entry0", "UserServiceState", "h") <> "N/A" then tcWebAPI_get("VoIPH248_Entry0", "UserServiceState", "s") else asp_Write("") end if %>';
-			this.Reg2Status = '<%if tcWebAPI_get("VoIPH248_Entry1", "UserServiceState", "h") <> "N/A" then tcWebAPI_get("VoIPH248_Entry1", "UserServiceState", "s") else asp_Write("") end if %>';
-			this.Reg3Status = '<%if tcWebAPI_get("VoIPH248_Entry2", "UserServiceState", "h") <> "N/A" then tcWebAPI_get("VoIPH248_Entry2", "UserServiceState", "s") else asp_Write("") end if %>';
-			this.Reg4Status = '<%if tcWebAPI_get("VoIPH248_Entry3", "UserServiceState", "h") <> "N/A" then tcWebAPI_get("VoIPH248_Entry3", "UserServiceState", "s") else asp_Write("") end if %>';
+			this.Reg1Status = '';
+			this.Reg2Status = '';
+			this.Reg3Status = '';
+			this.Reg4Status = '';
 			
-			this.UserState1 = '<%if tcWebAPI_get("InfoVoIPH248_Entry0", "lineInfoStatus", "h") <> "N/A" then tcWebAPI_get("InfoVoIPH248_Entry0", "lineInfoStatus", "s") else asp_Write("") end if %>';
-			this.UserState2 = '<%if tcWebAPI_get("InfoVoIPH248_Entry1", "lineInfoStatus", "h") <> "N/A" then tcWebAPI_get("InfoVoIPH248_Entry1", "lineInfoStatus", "s") else asp_Write("") end if %>';
-			this.UserState3 = '<%if tcWebAPI_get("InfoVoIPH248_Entry2", "lineInfoStatus", "h") <> "N/A" then tcWebAPI_get("InfoVoIPH248_Entry2", "lineInfoStatus", "s") else asp_Write("") end if %>';
-			this.UserState4 = '<%if tcWebAPI_get("InfoVoIPH248_Entry3", "lineInfoStatus", "h") <> "N/A" then tcWebAPI_get("InfoVoIPH248_Entry3", "lineInfoStatus", "s") else asp_Write("") end if %>';
+			this.UserState1 = '';
+			this.UserState2 = '';
+			this.UserState3 = '';
+			this.UserState4 = '';
 			this.showRegisterState = showRegisterState;
 			this.showUserState = showUserState;
 		}
@@ -2127,54 +2079,54 @@ visibility:hidden;
 
 			if ( 1 == port ){
 			Status = this.Reg1Status;
-			RegFailReason = "<% tcWebAPI_get("InfoVoIPH248_Entry0", "RegFailReason", "s") %>";
+			RegFailReason = "";
 			}
 		
 			else if ( 2 == port ){
 			Status = this.Reg2Status;
-			RegFailReason = "<% tcWebAPI_get("InfoVoIPH248_Entry1", "RegFailReason", "s") %>";
+			RegFailReason = "";
 			}
 			
 			else if ( 3 == port ){
 			Status = this.Reg3Status;
-			RegFailReason = "<% tcWebAPI_get("InfoVoIPH248_Entry2", "RegFailReason", "s") %>";
+			RegFailReason = "";
 			}
 			
 			else if ( 4 == port ){
 			Status = this.Reg4Status;
-			RegFailReason = "<% tcWebAPI_get("InfoVoIPH248_Entry3", "RegFailReason", "s") %>";
+			RegFailReason = "";
 			}
 		
 			else
 				return;
 
 			if ( Status == '1' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP3Text","s")%>');
+				document.write('');
 			else if ( Status == '3' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP5Text","s")%>');
+				document.write('');
 			else if ( Status == '5' ){
 				switch ( parseInt(RegFailReason) ){
 					case 2:
 					case 3:
-						voiptatus = '<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP9Text","s")%>';
+						voiptatus = '';
 						break;
 					case 4:
-						voiptatus = '<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP10Text","s")%>';
+						voiptatus = '';
 						break;
 					case 6:
-						voiptatus = '<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP11Text","s")%>';
+						voiptatus = '';
 						break;
 					case 7:
-						voiptatus = '<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP33Text","s")%>';
+						voiptatus = '';
 						break;
 					default:
-						voiptatus = '<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP34Text","s")%>';
+						voiptatus = '';
 						break;
 				}
 				document.write(voiptatus);
 			}
 			else if ( Status == '8' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP35Text","s")%>');
+				document.write('');
 			else
 				document.write('--');
 			}
@@ -2199,27 +2151,27 @@ visibility:hidden;
 				return;
 
 			if ( Status == "" )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP5Text","s")%>');
+				document.write('');
 			else if ( Status == "Idle" )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP14Text","s")%>');
+				document.write('');
 			else if ( Status == '3' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP36Text","s")%>');
+				document.write('');
 			else if ( Status == "Dialing" )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP16Text","s")%>');
+				document.write('');
 			else if ( Status == "Ringing" )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP15Text","s")%>');
+				document.write('');
 			else if ( Status == "Ringback" )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP17Text","s")%>');
+				document.write('');
 			else if ( Status == "Connect" )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP18Text","s")%>');
+				document.write('');
 			else if ( Status == "Disconnect" )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP19Text","s")%>');
+				document.write('');
 			else if ( Status == '9' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP37Text","s")%>');
+				document.write('');
 			else if ( Status == '10' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP34Text","s")%>');
+				document.write('');
 			else if ( Status == '11' )
-				document.write('<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP38Text","s")%>');
+				document.write('');
 			else
 				document.write('--');
 		}
@@ -2229,7 +2181,7 @@ visibility:hidden;
 		function checkLineNum()
 		{
 			var i, j, k;
-			var lineNumber = parseInt(<% tcwebApi_get("VoIPBasic_Common","VoIPLineNumber","s") %>);
+			var lineNumber = parseInt();
 			var table = document.getElementById("perLineTablePlaceholder");
 			for(i = 0; i < lineNumber; i++)
 				{
@@ -2247,7 +2199,7 @@ visibility:hidden;
 					}
 				}
 		}
-		    <% end if %>
+		    
         </Script>
 
                                             <div class="card-body">
@@ -2256,11 +2208,19 @@ visibility:hidden;
                                                     <table class="table table-bordered table-striped">
                                                         <thead></thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th>User Name(Phone Number)</th>
+                                                         <tr>
+                                                                <th>Display Name</th>
                                                                 <td>
                                                                      <SCRIPT language=javascript>
-                                                                        document.write('<% tcWebApi_get("VoIPBasic_Entry0","SIPAuthenticationName","s") %>');
+                                                                        document.write('');
+                                                                    </SCRIPT>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Number</th>
+                                                                <td>
+                                                                     <SCRIPT language=javascript>
+                                                                        document.write('1003');
                                                                     </SCRIPT>
                                                                 </td>
                                                             </tr>
@@ -2269,39 +2229,19 @@ visibility:hidden;
                                                                 <td>1</td>
                                                             </tr>
                                                             <tr>
-                                                                <th>User Status</th>
+                                                                <th>Status</th>
                                                                 <td>
-                                                                     
-                                                                     <SCRIPT language=javascript>
-                                                                        VoipInfo.showRegisterState(1);
-                                                                    </SCRIPT>
-                                                                </td>
+                                                                     Registered
+                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                                <th>Call Status</th>
-                                                                <td>
-                                                                    <SCRIPT language=javascript>        
-                                                                        VoipInfo.showLineState(1);
-                                                                    </SCRIPT>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th>Registry Error</th>
-                                                                <td>
-                                                                     <SCRIPT language=javascript>
-                                                                        let regFailReason = '<% tcWebApi_get("InfoVoIP_Entry0","RegFailReason","s") %>';
-                                                                        if (parseInt(regFailReason) === 2) {
-                                                                            document.write("upstream port disconnected");
-                                                                        }
-                                                                    </SCRIPT>
-                                                                </td>
-                                                            </tr>
+                                                          
                                                         </tbody>
 
                                                     </table>
-                                                </a>
-                                                <button class="btn orange_btn" href="" data-toggle="modal"
+                                                    <button class="btn orange_btn" href="" data-toggle="modal"
                                                     data-target="#HERO04">View More</button>
+                                                </a>
+                                               
                                             </div>
 
                                         </div>
@@ -2326,171 +2266,119 @@ visibility:hidden;
                                                     <div class="table-responsive" id="Voip_content" style="display: none;">
 
                                                           <TABLE id="voipSIP_info" name="voipSIP_info" class="table table-bordered table_text_center">
-															<TBODY>
-																<TR>
-																	<TD >
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP21Text","s")%>
-																	</TD>
-																	<TD>
-																		<%if tcWebApi_get("VoIPBasic_Common", "RegistrarServer", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Common", "RegistrarServer", "s") else asp_Write("--") end if %>
-																			&nbsp;
-																	</TD>
-																</TR>
+															 <TBODY>
+                                                                            <TR>
+                                                                                <TD >
+                                                                                   Proxy0 Addr
+                                                                                </TD>
+                                                                                <TD>
+                                                                                    192.168.3.2
+                                                                                        &nbsp;
+                                                                                </TD>
+                                                                            </TR>
 
-																<TR>
-																	<TD >
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP22Text","s")%>
-																	</TD>
-																	<TD>
-																		<%if tcWebApi_get("VoIPBasic_Common", "RegistrarServerPort", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Common", "RegistrarServerPort", "s") else asp_Write("--") end if %>
-																			&nbsp;
-																	</TD>
-																</TR>
-																<TR>
-																	<TD >
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP23Text","s")%>
-																	</TD>
-																	<TD>
-																		<%if tcWebApi_get("VoIPBasic_Common", "SBRegistrarServer", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Common", "SBRegistrarServer", "s") else asp_Write("--") end if %>
-																			&nbsp;
-																	</TD>
-																</TR>
-																<TR>
-																	<TD >
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP24Text","s")%>
-																	</TD>
-																	<TD>
-																		<%if tcWebApi_get("VoIPBasic_Common", "SBRegistrarServerPort", "h") <> "N/A" then tcWebAPI_get("VoIPBasic_Common", "SBRegistrarServerPort", "s") else asp_Write("--") end if %>
-																			&nbsp;
-																	</TD>
-																</TR>
-															</TBODY>
-														</TABLE>
+                                                                            <TR>
+                                                                                <TD >
+                                                                                    Proxy0 Port Number
+                                                                                </TD>
+                                                                                <TD>
+                                                                                    5060
+                                                                                        &nbsp;
+                                                                                </TD>
+                                                                            </TR>
+                                                                            <TR>
+                                                                                <TD >
+                                                                                 Proxy1 Addr
+                                                                                </TD>
+                                                                                <TD>
+                                                                                    192.168.3.2
+                                                                                        &nbsp;
+                                                                                </TD>
+                                                                            </TR>
+                                                                            <TR>
+                                                                                <TD >
+                                                                                   Proxy1 Port Number
+                                                                                </TD>
+                                                                                <TD>
+                                                                                    5060
+                                                                                        &nbsp;
+                                                                                </TD>
+                                                                            </TR>
+                                                                        </TBODY>
+                                                                    </TABLE>
+                                                                </div>
+                                                                <div class="table-responsive">
+                                                                    <TABLE id="perLineTablePlaceholder" class="table table-bordered table_text_center">
+                                                                        <TBODY>
+                                                                            <TR>
+                                                                                <th  >
+                                                                                    Name
+                                                                                </th>
+                                                                                <th >
+                                                                                    Line 1
+                                                                                </th>
+                                                                               
+                                                                               
+                                                                            </TR>
+                                                                            <TR>
+                                                                                <TD >
+                                                                                    Port
+                                                                                </TD>
+                                                                                <TD>
+                                                                                  1
+                                                                                </TD>
+
+                                                                              
+                                                                            </TR>
+                                                                            <TR>
+                                                                                <TD class=table_title width="20%">
+                                                                                  Number
+                                                                                </TD>
+                                                                                <TD>
+                                                                                    <script language=JavaScript type=text/javascript>
+                                                                                        VoipInfo.showRegisterState(1);
+                                                                                    </script>
+                                                                                </TD>
+
+                                                                               
+
+                                                                              
+                                                                             
+                                                                            </TR>
+                                                                            <TR>
+                                                                                <TD class=table_title width="20%">
+                                                                                   Status
+                                                                                </TD>
+                                                                                <TD>
+                                                                                   Disabled
+                                                                                </TD>
+                                                                            </TR>
+                                                                        </TBODY>
+                                                                    </TABLE>
+                                                                </div>
+                                                                <Script language=javascript>
+                                                                        var cur_user = '0';
+                                                                        if (cur_user == "0") {
+                                                                            setDisplay('Voip_content', 1);
+                                                                        }
+                                                                        if (getElById("perLineTablePlaceholder") != null) {
+                                                                            checkLineNum();
+                                                                        }
+                                                                </Script>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn grey_btn" data-dismiss="modal">Close </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="table-responsive">
-                                                        <TABLE id="perLineTablePlaceholder" class="table table-bordered table_text_center">
-															<TBODY>
-																<TR>
-																	<th  >
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP25Text","s")%>
-																	</th>
-																	<th >
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP26Text","s")%>
-																	</th>
-																	<th >
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP27Text","s")%>
-																	</th>
-																	<th >
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP28Text","s")%>
-																	</th>
-																	<th >
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP29Text","s")%>
-																	</th>
-																</TR>
-																<TR>
-																	<TD >
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP30Text","s")%>
-																	</TD>
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showVoipNumber(1);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showVoipNumber(2);
-																		</script>
-																	</TD>
-																		
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showVoipNumber(3);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showVoipNumber(4);
-																		</script>
-																	</TD>
-																</TR>
-																<TR>
-																	<TD class=table_title width="20%">
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP31Text","s")%>
-																	</TD>
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showRegisterState(1);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showRegisterState(2);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showRegisterState(3);
-																		</script>
-																	</TD>
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showRegisterState(4);
-																		</script>
-																		</TD>
-																</TR>
-																<TR>
-																	<TD class=table_title width="20%">
-																		<%tcWebApi_get("String_Entry","VoipInfoVoIPSIP32Text","s")%>
-																	</TD>
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showLineState(1);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showLineState(2);
-																		</script>
-																	</TD>
-
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showLineState(3);
-																		</script>
-																	</TD>
-																	<TD>
-																		<script language=JavaScript type=text/javascript>
-																		    VoipInfo.showLineState(4);
-																		</script>
-																	</TD>
-																</TR>
-															</TBODY>
-														</TABLE>
-                                                    </div>
-                                                    <Script language=javascript>
-                                                            var cur_user = '<%tcWebApi_get("WebCurSet_Entry", "CurrentAccess", "s")%>';
-                                                            if (cur_user == "0") {
-                                                                setDisplay('Voip_content', 1);
-                                                            }
-                                                            if (getElById("perLineTablePlaceholder") != null) {
-                                                                checkLineNum();
-                                                            }
-                                                    </Script>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn grey_btn" data-dismiss="modal">Close </button>
                                                 </div>
                                             </div>
-                                        </div>
+
+                                        
                                     </div>
-                                    </div>
-                                    </div>
+
+                                    
+
 
                                     
 
@@ -2589,7 +2477,7 @@ visibility:hidden;
                                                                         var selfNumber;
                                                                         var dulation;
                                                                         var imgSrc;
-                                                                        var PrivateNumber = '<%tcWebApi_get("String_Entry","PrivateNumberText","s")%>';
+                                                                        var PrivateNumber = '';
                                                                         var port;
                                                                         var phoneNumber;
 
@@ -2736,22 +2624,22 @@ visibility:hidden;
 
  <div class="col-xl-12 col-md-12 mb-4">
                                 <SCRIPT language=javascript>
-                                    let hostName = '<% tcWebApi_get("Info_Ether","HostName","s") %>';
+                                    let hostName = '';
                                     hostName = hostName.split(',');
 
-                                    let portMac = '<% tcWebApi_get("Info_Ether","PortMac","s") %>';
+                                    let portMac = '';
                                     portMac = portMac.split(',');
 
-                                    let portIP = '<% tcWebApi_get("Info_Ether","PortIP","s") %>';
+                                    let portIP = '';
                                     portIP = portIP.split(',');
 
-                                    let portDHCP = '<% tcWebApi_get("Info_Ether","PortDHCP","s") %>';
+                                    let portDHCP = '';
                                     portDHCP = portDHCP.split(",");
 
-                                    let portExpire = '<% tcWebApi_get("Info_Ether","PortExpire","s") %>';
+                                    let portExpire = '';
                                     portExpire = portExpire.split(',');
 
-                                    let portBrHost = '<% tcWebApi_get("Info_Ether", "brHost", "s")%>';
+                                    let portBrHost = '';
                                     portBrHost = portBrHost.split(',');
 
                                     let dhcpnum = portDHCP.length - 1;
@@ -2770,7 +2658,7 @@ visibility:hidden;
                                         return '5';
                                     }                                
                                 </SCRIPT>
-                                <div class="card" style="margin-top:-837px; margin-left:118px">
+                                <div class="card" style="margin-top: -771px;margin-left:118px">
                                     <div class="card-header">
                                         <span>
                                             <img src="/Dashboard/images/logo-user.png" style="width:45px;padding-bottom:5px;">
@@ -2839,21 +2727,21 @@ visibility:hidden;
                                                                         
                                                                         if(portExpireTime[0] !== "0"){
                                                                             
-                                                                            document.write('<td colspan="2">' + '<%tcWebApi_get("String_Entry","UserInfoLeRemText","s")%>' + portExpireTime[0] + '<%tcWebApi_get("String_Entry","UserInfodayText","s")%>' + portExpireTime[1] + '<%tcWebApi_get("String_Entry","UserInfohourText","s")%>' + portExpireTime[2] + '<%tcWebApi_get("String_Entry","UserInfominuteText","s")%>' + portExpireTime[3] + '<%tcWebApi_get("String_Entry","UserInfosecondText","s")%>' + '</td>');
+                                                                            document.write('<td colspan="2">' + '' + portExpireTime[0] + '' + portExpireTime[1] + '' + portExpireTime[2] + '' + portExpireTime[3] + '' + '</td>');
                                                                         }
                                                                         else{
                                                                             if(("0:0:0:0" == portExpire[i]) || ("0" == portExpire[i])) {
-                                                                                document.write('<td colspan="2">' + '<%tcWebApi_get("String_Entry","UserInfoLeIFuText","s")%>' + '</td>');
+                                                                                document.write('<td colspan="2">' + '' + '</td>');
                                                                                 
                                                                             } else{
-                                                                                document.write('<td colspan="2">' + '<%tcWebApi_get("String_Entry","UserInfoLeRemText","s")%>' + portExpireTime[1] + '<%tcWebApi_get("String_Entry","UserInfohourText","s")%>' + portExpireTime[2] + '<%tcWebApi_get("String_Entry","UserInfominuteText","s")%>' + portExpireTime[3] + '<%tcWebApi_get("String_Entry","UserInfosecondText","s")%>' + '</td>');
+                                                                                document.write('<td colspan="2">' + '' + portExpireTime[1] + '' + portExpireTime[2] + '' + portExpireTime[3] + '' + '</td>');
                                                                                 
                                                                             }
                                                                         }
                                                                     }
                                                                     else
                                                                     {
-                                                                        document.write('<td colspan="2">' + '<%tcWebApi_get("String_Entry","UserInfoStaallText","s")%>' + '</td>');
+                                                                        document.write('<td colspan="2">' + '' + '</td>');
                                                                         
                                                                     }
                                                                         
@@ -2924,21 +2812,21 @@ visibility:hidden;
                                                                         
                                                                         if(portExpireTime[0] !== "0"){
                                                                             
-                                                                            document.write('<td colspan="2">' + '<%tcWebApi_get("String_Entry","UserInfoLeRemText","s")%>' + portExpireTime[0] + '<%tcWebApi_get("String_Entry","UserInfodayText","s")%>' + portExpireTime[1] + '<%tcWebApi_get("String_Entry","UserInfohourText","s")%>' + portExpireTime[2] + '<%tcWebApi_get("String_Entry","UserInfominuteText","s")%>' + portExpireTime[3] + '<%tcWebApi_get("String_Entry","UserInfosecondText","s")%>' + '</td>');
+                                                                            document.write('<td colspan="2">' + '' + portExpireTime[0] + '' + portExpireTime[1] + '' + portExpireTime[2] + '' + portExpireTime[3] + '' + '</td>');
                                                                         }
                                                                         else{
                                                                             if(("0:0:0:0" == portExpire[i]) || ("0" == portExpire[i])) {
-                                                                                document.write('<td colspan="2">' + '<%tcWebApi_get("String_Entry","UserInfoLeIFuText","s")%>' + '</td>');
+                                                                                document.write('<td colspan="2">' + '' + '</td>');
                                                                                 
                                                                             } else{
-                                                                                document.write('<td colspan="2">' + '<%tcWebApi_get("String_Entry","UserInfoLeRemText","s")%>' + portExpireTime[1] + '<%tcWebApi_get("String_Entry","UserInfohourText","s")%>' + portExpireTime[2] + '<%tcWebApi_get("String_Entry","UserInfominuteText","s")%>' + portExpireTime[3] + '<%tcWebApi_get("String_Entry","UserInfosecondText","s")%>' + '</td>');
+                                                                                document.write('<td colspan="2">' + '' + portExpireTime[1] + '' + portExpireTime[2] + '' + portExpireTime[3] + '' + '</td>');
                                                                                 
                                                                             }
                                                                         }
                                                                     }
                                                                     else
                                                                     {
-                                                                        document.write('<td colspan="2">' + '<%tcWebApi_get("String_Entry","UserInfoStaallText","s")%>' + '</td>');
+                                                                        document.write('<td colspan="2">' + '' + '</td>');
                                                                         
                                                                     }
 
@@ -3002,27 +2890,27 @@ visibility:hidden;
 
 <Script language=javascript>
                                             var PortConnStatus = new Array(4);
-		PortConnStatus[0] = "<% tcWebApi_get("Info_Ether","Port1Status","s") %>";
-		PortConnStatus[1] = "<% tcWebApi_get("Info_Ether","Port2Status","s") %>";
-		PortConnStatus[2] = "<% tcWebApi_get("Info_Ether","Port3Status","s") %>";
-		PortConnStatus[3] = "<% tcWebApi_get("Info_Ether","Port4Status","s") %>";
+		PortConnStatus[0] = "";
+		PortConnStatus[1] = "";
+		PortConnStatus[2] = "";
+		PortConnStatus[3] = "";
 
 
 		var PortConnSpeed = new Array(4);
-		PortConnSpeed[0] = "<% tcWebApi_get("Info_Ether","Port1Speed","s") %>";
-		PortConnSpeed[1] = "<% tcWebApi_get("Info_Ether","Port2Speed","s") %>";
-		PortConnSpeed[2] = "<% tcWebApi_get("Info_Ether","Port3Speed","s") %>";
-		PortConnSpeed[3] = "<% tcWebApi_get("Info_Ether","Port4Speed","s") %>";
+		PortConnSpeed[0] = "";
+		PortConnSpeed[1] = "";
+		PortConnSpeed[2] = "";
+		PortConnSpeed[3] = "";
 
 		var PortConnDuplex = new Array(4);
-		PortConnDuplex[0] = "<% tcWebApi_get("Info_Ether","Port1Duplex","s") %>";
-		PortConnDuplex[1] = "<% tcWebApi_get("Info_Ether","Port2Duplex","s") %>";
-		PortConnDuplex[2] = "<% tcWebApi_get("Info_Ether","Port3Duplex","s") %>";
-		PortConnDuplex[3] = "<% tcWebApi_get("Info_Ether","Port4Duplex","s") %>";
+		PortConnDuplex[0] = "";
+		PortConnDuplex[1] = "";
+		PortConnDuplex[2] = "";
+		PortConnDuplex[3] = "";
 
 function print_port_status(port_index)
 {
-	var portnum = "<%tcWebApi_get("portconfig_common", "PortNum", "s") %>";
+	var portnum = "";
 	if (port_index > portnum)
 	{
 		document.write("--");
@@ -3031,38 +2919,38 @@ function print_port_status(port_index)
 	{
 	    if (PortConnStatus[port_index-1] == 1)
 	    {
-	        //document.write("<%tcWebApi_get("String_Entry","UserInfoCONneText","s")%>");
+	        //document.write("");
 	        document.write(PortConnSpeed[port_index-1] + ' ' + PortConnDuplex[port_index-1]);
 
 	    }
 	    else 
 	    {
 			// link down
-			document.write("<%tcWebApi_get("String_Entry","UserInfoUnCONneText","s")%>");
+			document.write("");
 	    }
 	}
 }
 
-		var aryInfoTemp = "<% tcWebApi_get("Info_Ether","PortIP","s") %>";
+		var aryInfoTemp = "";
 		var PortIp = aryInfoTemp.split(',');
 		dhcpnum = 0;
                 if (PortIp.length > 0)
                     dhcpnum = PortIp.length - 1;
-		aryInfoTemp = "<% tcWebApi_get("Info_Ether","PortMac","s") %>";
-		aryInfoTemp += "<% tcWebApi_get("Info_Ether","PortMac2","s") %>";
+		aryInfoTemp = "";
+		aryInfoTemp += "";
 		var PortMac = aryInfoTemp.split(',');
-		aryInfoTemp = "<% tcWebApi_get("Info_Ether","PortDHCP","s") %>";
+		aryInfoTemp = "";
 		var PortDhcp = aryInfoTemp.split(',');
-		aryInfoTemp = "<% tcWebApi_get("Info_Ether","PortExpire","s") %>";
+		aryInfoTemp = "";
 		var PortExpireTime = aryInfoTemp.split(',');
-		aryInfoTemp = "<% tcWebApi_get("Info_Ether","HostName","s") %>";
+		aryInfoTemp = "";
 		var PortHostName = aryInfoTemp.split(',');
 		
-		var wlanEnbl = "<% TCWebApi_get("WLan_Common", "APOn", "s") %>";
-		var wlanacEnbl = "<% TCWebApi_get("WLan11ac_Common", "APOn", "s") %>";
-		aryInfoTemp = "<% tcWebApi_get("Info_Ether","HostName","s") %>";
+		var wlanEnbl = "";
+		var wlanacEnbl = "";
+		aryInfoTemp = "";
 		var PortHostName = aryInfoTemp.split(',');
-		aryInfoTemp = "<% tcWebApi_get("Info_Ether","brHost","s") %>";
+		aryInfoTemp = "";
 		var LayerConInterface = aryInfoTemp.split(',');
 
 		function getLanPort(mac)
@@ -3097,43 +2985,43 @@ this.ChannelsInUse = ChannelsInUse;
 
 var DeviceInfo =  [["0","Computer","  "," ","0"," Static "],null];
 
-<% if tcwebApi_get("WebCustom_Entry","isMultiUserITFSupported","h") <> "Yes" then %>
-var WlanInfo = new Array(4);
-<% else %>
-var WlanInfo = new Array(8);
-<% end if %>
-WlanInfo[0] = new stWlan("0","<% tcWebApi_get("WLan_Entry0","HideSSID","s") %>","<% tcWebApi_get("WLan_Entry0","SSID","s") %>","<% tcWebApi_get("WLan_Entry0","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry0","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry0","WEPAuthType","s") %>","<% tcWebApi_get("WLan_Entry0","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry0","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-<% if tcwebApi_get("WebCurSet_Entry","isSSIDHidden","h") <> "Yes" then %>
-WlanInfo[1] = new stWlan("1","<% tcWebApi_get("WLan_Entry1","HideSSID","s") %>","<% tcWebApi_get("WLan_Entry1","SSID","s") %>","<% tcWebApi_get("WLan_Entry1","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry1","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry1","WEPAuthType","s") %>","<% tcWebApi_get("WLan_Entry1","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry1","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-<% if tcwebApi_get("WebCustom_Entry","isCTPONOnlyTwoSSIDSupported","h") <> "Yes" then %>
-WlanInfo[2] = new stWlan("2","<% tcWebApi_get("WLan_Entry2","HideSSID","s") %>","<% tcWebApi_get("WLan_Entry2","SSID","s") %>","<% tcWebApi_get("WLan_Entry2","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry2","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry2","WEPAuthType","s") %>","<% tcWebApi_get("WLan_Entry2","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry2","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-WlanInfo[3] = new stWlan("3","<% tcWebApi_get("WLan_Entry3","HideSSID","s") %>","<% tcWebApi_get("WLan_Entry3","SSID","s") %>","<% tcWebApi_get("WLan_Entry3","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry3","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry3","WEPAuthType","s") %>","<% tcWebApi_get("WLan_Entry3","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry3","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-<% end if %>
-<% if tcwebApi_get("WebCustom_Entry","isMultiUserITFSupported","h") = "Yes" then %>
-WlanInfo[4] = new stWlan("4","<% tcWebApi_get("WLan_Entry4","HideSSID","s") %>","<% tcWebApi_get("WLan_Entry4","SSID","s") %>","<% tcWebApi_get("WLan_Entry4","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry4","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry4","WEPAuthType","s") %>","<% tcWebApi_get("WLan_Entry4","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry4","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-WlanInfo[5] = new stWlan("5","<% tcWebApi_get("WLan_Entry5","HideSSID","s") %>","<% tcWebApi_get("WLan_Entry5","SSID","s") %>","<% tcWebApi_get("WLan_Entry5","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry5","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry5","WEPAuthType","s") %>","<% tcWebApi_get("WLan_Entry5","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry5","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-WlanInfo[6] = new stWlan("6","<% tcWebApi_get("WLan_Entry6","HideSSID","s") %>","<% tcWebApi_get("WLan_Entry6","SSID","s") %>","<% tcWebApi_get("WLan_Entry6","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry6","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry6","WEPAuthType","s") %>","<% tcWebApi_get("WLan_Entry6","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry6","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-WlanInfo[7] = new stWlan("7","<% tcWebApi_get("WLan_Entry7","HideSSID","s") %>","<% tcWebApi_get("WLan_Entry7","SSID","s") %>","<% tcWebApi_get("WLan_Entry7","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry7","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry7","WEPAuthType","s") %>","<% tcWebApi_get("WLan_Entry7","AuthMode","s") %>","<% tcWebApi_get("WLan_Entry7","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-<% end if %>
-<% end if %>
 
-<% if tcwebApi_get("WebCustom_Entry","isMultiUserITFSupported","h") <> "Yes" then %>
+var WlanInfo = new Array(4);
+
+var WlanInfo = new Array(8);
+
+WlanInfo[0] = new stWlan("0","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+
+WlanInfo[1] = new stWlan("1","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+
+WlanInfo[2] = new stWlan("2","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+WlanInfo[3] = new stWlan("3","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+
+
+WlanInfo[4] = new stWlan("4","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+WlanInfo[5] = new stWlan("5","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+WlanInfo[6] = new stWlan("6","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+WlanInfo[7] = new stWlan("7","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+
+
+
+
 var WlanacInfo = new Array(4);
-<% else %>
+
 var WlanacInfo = new Array(8);
-<% end if %>
-WlanacInfo[0] = new stWlan("0","<% tcWebApi_get("WLan11ac_Entry0","HideSSID","s") %>","<% tcWebApi_get("WLan11ac_Entry0","SSID","s") %>","<% tcWebApi_get("WLan11ac_Entry0","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry0","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry0","WEPAuthType","s") %>","<% tcWebApi_get("WLan11ac_Entry0","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry0","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-<% if tcwebApi_get("WebCustom_Entry","isCTPONSNSupported","h") <> "Yes" then %>
-WlanacInfo[1] = new stWlan("1","<% tcWebApi_get("WLan11ac_Entry1","HideSSID","s") %>","<% tcWebApi_get("WLan11ac_Entry1","SSID","s") %>","<% tcWebApi_get("WLan11ac_Entry1","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry1","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry1","WEPAuthType","s") %>","<% tcWebApi_get("WLan11ac_Entry1","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry1","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-WlanacInfo[2] = new stWlan("2","<% tcWebApi_get("WLan11ac_Entry2","HideSSID","s") %>","<% tcWebApi_get("WLan11ac_Entry2","SSID","s") %>","<% tcWebApi_get("WLan11ac_Entry2","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry2","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry2","WEPAuthType","s") %>","<% tcWebApi_get("WLan11ac_Entry2","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry2","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-WlanacInfo[3] = new stWlan("3","<% tcWebApi_get("WLan11ac_Entry3","HideSSID","s") %>","<% tcWebApi_get("WLan11ac_Entry3","SSID","s") %>","<% tcWebApi_get("WLan11ac_Entry3","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry3","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry3","WEPAuthType","s") %>","<% tcWebApi_get("WLan11ac_Entry3","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry3","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-<% end if %>
-<% if tcwebApi_get("WebCustom_Entry","isMultiUserITFSupported","h") = "Yes" then %>
-WlanacInfo[4] = new stWlan("4","<% tcWebApi_get("WLan11ac_Entry4","HideSSID","s") %>","<% tcWebApi_get("WLan11ac_Entry4","SSID","s") %>","<% tcWebApi_get("WLan11ac_Entry4","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry4","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry4","WEPAuthType","s") %>","<% tcWebApi_get("WLan11ac_Entry4","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry4","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-WlanacInfo[5] = new stWlan("5","<% tcWebApi_get("WLan11ac_Entry5","HideSSID","s") %>","<% tcWebApi_get("WLan11ac_Entry5","SSID","s") %>","<% tcWebApi_get("WLan11ac_Entry5","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry5","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry5","WEPAuthType","s") %>","<% tcWebApi_get("WLan11ac_Entry5","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry5","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-WlanacInfo[6] = new stWlan("6","<% tcWebApi_get("WLan11ac_Entry6","HideSSID","s") %>","<% tcWebApi_get("WLan11ac_Entry6","SSID","s") %>","<% tcWebApi_get("WLan11ac_Entry6","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry6","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry6","WEPAuthType","s") %>","<% tcWebApi_get("WLan11ac_Entry6","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry6","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-WlanacInfo[7] = new stWlan("7","<% tcWebApi_get("WLan11ac_Entry7","HideSSID","s") %>","<% tcWebApi_get("WLan11ac_Entry7","SSID","s") %>","<% tcWebApi_get("WLan11ac_Entry7","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry7","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry7","WEPAuthType","s") %>","<% tcWebApi_get("WLan11ac_Entry7","AuthMode","s") %>","<% tcWebApi_get("WLan11ac_Entry7","EncrypType","s") %>","AESEncryption","PSKAuthentication","0","1");
-<% end if %>
+
+WlanacInfo[0] = new stWlan("0","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+
+WlanacInfo[1] = new stWlan("1","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+WlanacInfo[2] = new stWlan("2","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+WlanacInfo[3] = new stWlan("3","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+
+
+WlanacInfo[4] = new stWlan("4","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+WlanacInfo[5] = new stWlan("5","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+WlanacInfo[6] = new stWlan("6","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+WlanacInfo[7] = new stWlan("7","","","","","","","","AESEncryption","PSKAuthentication","0","1");
+
 
 var PacketInfo = new Array();
 PacketInfo = [["0","0","0","0","0","0","0","0","0"],null];
@@ -3142,8 +3030,8 @@ PacketInfo = [["0","0","0","0","0","0","0","0","0"],null];
 
 Ethernet = [["0","Disabled","560097","4123","0","0","3096680","5897","0","0"],["InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceConfig.2","Up","560097","4123","0","0","3096680","5897","0","0"],["InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceConfig.3","Disabled","560362","4124","0","0","3096680","5897","0","0"],["InternetGatewayDevice.LANDevice.1.LANEthernetInterfaceConfig.4","Disabled","560362","4124","0","0","3096680","5897","0","0"],null]
 
-var usbstate0 = "<% tcWebApi_get("Usb_Entry0","usbstate","s") %>";
-var usbstate1 = "<% tcWebApi_get("Usb_Entry1","usbstate","s") %>";
+var usbstate0 = "";
+var usbstate1 = "";
 
 var usb = [null];
 var usb1 = usb[0];
@@ -3161,9 +3049,9 @@ function stUserInfo(domain,name,level,busy)
 }
 
 var UserInfo = new Array(3);
-	UserInfo[0] = new stUserInfo(0,"<% tcWebApi_get("Account_Entry0","username","s") %>","<% tcWebApi_get("Account_Entry1","usertype","s") %>","null");
-	UserInfo[1] = new stUserInfo(1,"<% tcWebApi_get("Account_Entry1","username","s") %>","<% tcWebApi_get("Account_Entry2","usertype","s") %>","null");
-	UserInfo[2] = new stUserInfo(2,"<% tcWebApi_get("Account_Entry2","username","s") %>","<% tcWebApi_get("Account_Entry3","usertype","s") %>","null");
+	UserInfo[0] = new stUserInfo(0,"","","null");
+	UserInfo[1] = new stUserInfo(1,"","","null");
+	UserInfo[2] = new stUserInfo(2,"","","null");
 
 var k = 1;
 for(k=0; k < UserInfo.length-1; k++)
@@ -3194,29 +3082,29 @@ function LanInfoConstruction(Device, IPAddr, MACAddr, Status)
 }
 function DhcpServerRelTime(timeVal)
 {
-	var timeString = "<%tcWebApi_get("String_Entry","UserInfoLeRemText","s")%>";
+	var timeString = "";
 	if (timeVal == 0)
 	{
-	return '<%tcWebApi_get("String_Entry","UserInfoLeIFuText","s")%>';
+	return '';
 	}
 	if (timeVal >= 60*60*24)
 	{
-	timeString += parseInt(timeVal/(60*60*24)) + "<%tcWebApi_get("String_Entry","UserInfodayText","s")%>" ;
+	timeString += parseInt(timeVal/(60*60*24)) + "" ;
 	timeVal %= 60*60*24;
 	}
 	if (timeVal >= 60*60)
 	{
-	timeString += parseInt(timeVal / (60*60)) + "<%tcWebApi_get("String_Entry","UserInfohourText","s")%>" ;
+	timeString += parseInt(timeVal / (60*60)) + "" ;
 	timeVal %= 60*60;
 	}
 	if (timeVal >= 60)
 	{
-	timeString += parseInt(timeVal / (60)) + "<%tcWebApi_get("String_Entry","UserInfominuteText","s")%>" ;
+	timeString += parseInt(timeVal / (60)) + "" ;
 	timeVal %= 60;
 	}
 	if (timeVal > 0)
 	{
-	timeString += timeVal + '<%tcWebApi_get("String_Entry","UserInfosecondText","s")%>';
+	timeString += timeVal + '';
 	}
 	return timeString;
 }
@@ -3239,7 +3127,7 @@ function DhcpServerRelTime(timeVal)
 
                                         <div class="modal-body table-responsive">
 
-                                            <table class="table table-bordered ">
+                                            <table class="table table-bordered " style="width:100%">
                                                 <p>
                                                     On this page, you can query the WLAN information, WLAN packet
                                                     statistics, and SSID information.
@@ -3252,6 +3140,12 @@ function DhcpServerRelTime(timeVal)
                                                         <td colspan="4">    
                                                             <button class="btn orange_btn" data-target="#HERO010"
                                                                 data-toggle="modal"> Ethernet
+                                                                Port Status
+                                                            </button>
+                                                        </td>
+                                                         <td colspan="4">    
+                                                            <button class="btn orange_btn" data-target="#HERO019"
+                                                                data-toggle="modal"> USB Status
                                                                 Port Status
                                                             </button>
                                                         </td>
@@ -3273,72 +3167,48 @@ function DhcpServerRelTime(timeVal)
                                                     <tr>
                                                         <td style="color:#f58220 " colspan="8">WLAN Info</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th class="table-headcol">WLAN Status</th>
-                                                        <td colspan="7">
-                                                            <SCRIPT language=JavaScript type=text/javascript>
-                                                                let wlanEnabled = '<% TCWebApi_get("WLan_Common", "APOn", "s") %>';
+                                                  
+                                                   
 
-					                                            if (wlanEnabled == "0")
-                                                                {
-                                                                    document.write('<%tcWebApi_get("String_Entry","UserInfoDisableText","s")%>')
-                                                                }
-                                                                else
-                                                                {
-                                                                    document.write('<%tcWebApi_get("String_Entry","UserInfoEnableText","s")%>')
-                                                                }
-                                                            </SCRIPT>
-                                                        </td>
-                                                    </tr>
                                                     <tr>
-                                                        <th class="table-headcol">WLAN Channel</th>
-                                                        <td colspan="7">
-                                                            <SCRIPT language=JavaScript type=text/javascript>
-                                                                if (( wlanEnabled == "1")) {
-                                                                    document.write('<%tcWebApi_get("Info_WLan","CurrentChannel","s") %>');
-                                                                } else {
-                                                                    document.write('--');
-                                                                }
-                                                            </SCRIPT>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-headcol"><%tcWebApi_get("String_Entry","UserInfoSSIDIText","s")%></th>
-                                                        <th class="table-headcol"><%tcWebApi_get("String_Entry","UserInfoSSIDNaText","s")%></th>
-                                                        <th class="table-headcol" colspan="2"><%tcWebApi_get("String_Entry","UserInfoSeCoText","s")%></th>
-                                                        <th class="table-headcol" colspan="2"><%tcWebApi_get("String_Entry","UserInfoAutMeText","s")%></th>
-                                                        <th class="table-headcol" colspan="2"><%tcWebApi_get("String_Entry","UserInfoEncryText","s")%> </th>
+                                                        <th>Mode</th>
+                                                        <th colspan="2">Band</th>
+                                                        <th> SSID</th>
+                                                        <th>Channel Number </th>
+                                                        <th> Encryption</th>
+                                                        <th> BSSID</th>
+                                                        <th> Associated Clients</th>
                                                     </tr>
                                                     <script language=javascript>
-                                                    var ssidnum="<% tcWebApi_get("WLan_Common","BssidNum","s") %>";
+                                                    var ssidnum="";
 
 					if (wlanEnbl == "1")
 					{
-<% if tcwebApi_get("WebCustom_Entry","isCTPONCZGDSupported","h") = "Yes" then %>
+
 					        var dispSSIDNum = 0;
 						for (var i = 0; i < 4; i++)
-<%else%>
+
 						for (var i = 0; i < ssidnum; i++)
-<%end if%>
+
 						{
-<% if tcWebApi_get("WebCurSet_Entry", "isSSIDHidden", "h") = "Yes"  then %>
+
 							if ( i > 0 )
 								continue;
-<% end if %>
-<% if tcwebApi_get("WebCustom_Entry","isCTPONOnlyTwoSSIDSupported","h") = "Yes" then %>
+
+
 							if ( i > 1 )
 								continue;
-<% end if %>
-<% if tcwebApi_get("WebCustom_Entry","isCTPONCZGDSupported","h") = "Yes" then %>
+
+
 							if(dispSSIDNum >= ssidnum)
 								continue;
 
 							if(WlanInfo[i].enable=='0' || WlanInfo[i].enable=='1'){
 								dispSSIDNum++;
-<% end if %>
+
 							var Auth = "";
 							var Encrypt = "";
-							var AuthSt = "<%tcWebApi_get("String_Entry","UserInfoConfiguText","s")%>";
+							var AuthSt = "";
 							if (WlanInfo[i].BeaconType.indexOf('WEP') > -1)
 							{
 								Auth = WlanInfo[i].BasicAuth;
@@ -3348,7 +3218,7 @@ function DhcpServerRelTime(timeVal)
 							{
 								Auth = "OPENSYSTEM";
 								Encrypt = "NONE";
-								AuthSt = "<%tcWebApi_get("String_Entry","UserInfoUnconfiguText","s")%>";
+								AuthSt = "";
 							}
 							else
 							{
@@ -3383,11 +3253,19 @@ function DhcpServerRelTime(timeVal)
 							document.writeln('<tr>' + '<td>' + 'SSID-' + (i+1) + ':</td>' + '<td  >' + WlanInfo[i].ssid + '&nbsp;</td><td colspan="2" >' + AuthSt + '&nbsp;</td>' + '<td  colspan="2">' + Auth.toUpperCase () + '&nbsp;</td>' + '<td colspan="2"' + ' >' + Encrypt.toUpperCase() + '&nbsp;</td>' + '</tr>');
 						}
 					}
-<% if tcwebApi_get("WebCustom_Entry","isCTPONCZGDSupported","h") = "Yes" then %>
+
 					}
-<% end if %>
+
 </script>
-                                                    <tr>
+    <tr>
+    <td >AP</td>
+     <td colspan="2">2.4 GHz (B+G+N)</td>
+      <td >FTTH-84E8</td>
+       <td >8</td>
+        <td>WPA2 Mixed</td>
+         <td >04:11:19:5d:84:ec</td>
+          <td >0</td>
+    </tr>                                                <tr>
                                                         <td style="color:#f58220 " colspan="8">
                                                             WLAN Packet Statistics
                                                         </td>
@@ -3411,42 +3289,42 @@ function DhcpServerRelTime(timeVal)
                                                     <tr>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan","rxbytes","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan","wlanRxFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan","wlanRxErrFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan","wlanRxDropFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan","txbytes","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan","wlanTxFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan","wlanTxErrFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan","wlanTxDropFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                     </tr>
@@ -3458,56 +3336,31 @@ function DhcpServerRelTime(timeVal)
                                                     <tr>
                                                         <td style="color:#f58220 " colspan="8">WLAN 5G Info</td>
                                                     </tr>
+                                                   
+                                                   
                                                     <tr>
-                                                        <th class="table-headcol">WLAN 5G Status</th>
-                                                        <td colspan="7">
-                                                            <SCRIPT language=JavaScript type=text/javascript>
-                                                                let wlan11acEnabled = '<% TCWebApi_get("WLan11ac_Common", "APOn", "s") %>';
-
-					                                            if (wlan11acEnabled == "0")
-                                                                {
-                                                                    document.write('<%tcWebApi_get("String_Entry","UserInfoDisableText","s")%>')
-                                                                }
-                                                                else
-                                                                {
-                                                                    document.write('<%tcWebApi_get("String_Entry","UserInfoEnableText","s")%>')
-                                                                }
-                                                            </SCRIPT>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-headcol">WLAN 5G Channel</th>
-                                                        <td colspan="7">
-                                                            <SCRIPT language=JavaScript type=text/javascript>
-                                                                if (( wlan11acEnabled == "1")) {
-                                                                    document.write('<%tcWebApi_get("Info_WLan11ac","CurrentChannel","s") %>');
-                                                                } else {
-                                                                    document.write('--');
-                                                                }
-                                                            </SCRIPT>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-headcol"><%tcWebApi_get("String_Entry","UserInfoSSIDIText","s")%></th>
-                                                        <th class="table-headcol"><%tcWebApi_get("String_Entry","UserInfoSSIDNaText","s")%></th>
-                                                        <th class="table-headcol" colspan="2"><%tcWebApi_get("String_Entry","UserInfoSeCoText","s")%></th>
-                                                        <th class="table-headcol" colspan="2"><%tcWebApi_get("String_Entry","UserInfoAutMeText","s")%></th>
-                                                        <th class="table-headcol" colspan="2"><%tcWebApi_get("String_Entry","UserInfoEncryText","s")%> </th>
+                                                        <th class="table-headcol">Mode</th>
+                                                        <th class="table-headcol">Band</th>
+                                                        <th class="table-headcol">SSID</th>
+                                                        <th class="table-headcol">Channel Number</th>
+                                                        <th class="table-headcol">Encryption </th>
+                                                        <th class="table-headcol">BSSID </th>
+                                                        <th class="table-headcol">Associated Clients</th>
                                                     </tr>
                                                     <script language="javascript">
-var ssidacnum="<% tcWebApi_get("WLan11ac_Common","BssidNum","s") %>";
+var ssidacnum="";
 if (wlanacEnbl == "1")
 {
 	for (var i = 0; i < ssidacnum; i++)
 	{
-<% if tcwebApi_get("WebCustom_Entry","isCTPONSNSupported","h") = "Yes" then %>
+
 		if ( i > 0 )
 		continue;
-<% end if %>
+
 
 		var Auth = "";
 		var Encrypt = "";
-		var AuthSt = "<%tcWebApi_get("String_Entry","UserInfoConfiguText","s")%>";
+		var AuthSt = "";
 		if (WlanacInfo[i].BeaconType.indexOf('WEP') > -1)
 		{
 			Auth = WlanacInfo[i].BasicAuth;
@@ -3517,7 +3370,7 @@ if (wlanacEnbl == "1")
 		{
 			Auth = "OPENSYSTEM";
 			Encrypt = "NONE";
-			AuthSt = "<%tcWebApi_get("String_Entry","UserInfoUnconfiguText","s")%>";
+			AuthSt = "";
 		}
 		else
 		{
@@ -3577,7 +3430,15 @@ function insert(source, start, newStr)
     return source.slice(0, start) + newStr + source.slice(start);
 }
 </script>
-                                                    <tr>
+             <tr>
+             <td>AP</td>
+             <td>5 GHz (A+N+AC)</td>
+             <td>FTTH-84E8-5G</td>
+             <td>100</td>
+             <td>WPA2 Mixed</td>
+             <td>04:11:19:5d:84:e8</td>
+             <td>0</td>
+             </tr>                                       <tr>
                                                         <td style="color:#f58220 " colspan="8">
                                                             WLA 5G Packet Statistics
                                                         </td>
@@ -3601,42 +3462,42 @@ function insert(source, start, newStr)
                                                     <tr>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan11ac","wlanRxBytes","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan11ac","wlanRxFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan11ac","wlanRxErrFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan11ac","wlanRxDropFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan11ac","wlanTxBytes","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan11ac","wlanTxFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan11ac","wlanTxErrFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                         <td>
                                                             <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_WLan11ac","wlanTxDropFrames","s") %>');
+                                                                document.write('');
                                                             </SCRIPT>
                                                         </td>
                                                     </tr>
@@ -3646,6 +3507,43 @@ function insert(source, start, newStr)
                                             </table>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+<div class="modal fade show" id="HERO019" style="display:none;" aria-modal="true"
+                                role="dialog">
+                                <div class="modal-dialog modal-lg" style="">
+                                    <!-- Modal content-->
+                                    <div class="modal-content" style="width:98%;">
+                                        <div class="modal-header">
+                                            <span>
+                                                <img src="/Dashboard/images/ethernet.png" style="width:45px;">
+                                            </span>
+                                            <h2 class="modal-title" style="display: inline;"> &nbsp;
+                                            <% multilang("2948" "LANG_USB_STATUS"); %>
+                                            </h2>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p> <% multilang("2949" "LANG_USB_PAGE_DESC"); %>
+                                            </p>
+                                            <h5>USB Port Status</h5>
+                                             <div class="data_common data_common_notitle" id="usb">
+                                             <table>
+   <% getInfo("usbstate"); %>
+   </table>
+ </div>
+
+                                           
+                                        </div>
+                                        <div class="modal-footer">
+                                      
+                                            <button type="button" class="btn grey_btn"
+                                                data-dismiss="modal">Close</button>
+                                                
+                                        </div>
+                                        
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -3660,213 +3558,31 @@ function insert(source, start, newStr)
                                                 <img src="/Dashboard/images/ethernet.png" style="width:45px;">
                                             </span>
                                             <h2 class="modal-title" style="display: inline;"> &nbsp;
-                                                Eth Port Information
+                                                LAN Port Information
                                             </h2>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>On this page, you can query the user-side Ethernet port information.
+                                            <p> This page shows the current LAN Port status.
                                             </p>
-                                            <h5>Ethernet Port Status</h5>
-                                            <table class="table  table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <th colspan="1" rowspan="2" align="center" style="text-align: center">Port</<th>
-                                                        <th colspan="5" align="center" style="text-align: center" > Device Info </th>
-                                                        <th colspan="3" align="center" style="text-align: center" >Status</<th>
-                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-headcol" colspan="2">HostName</<th>
-                                                        <th class="table-headcol" colspan="2">Mac</<th>
-                                                        <th class="table-headcol">IP</<th>
-                                                        <th class="table-headcol">Mode</<th>
-                                                        <th class="table-headcol">Speed</<th>
-                                                        <th class="table-headcol">Reamining Lease</<th>
-                                                    </tr>
+                                            <h5>LAN Port Status</h5>
+                                             <div class="data_common data_common_notitle" id="usb1">
+  <table>
+  <% showLANPortStatus(); %>
 
-                                                        <SCRIPT language=javascript>
-                                                    
-                                                        for(i = 0; i < dhcpnum; i++)
-                                                        {
-                                                            if(portIP[i] != "N/A" || portMac[i] != "N/A")
-                                                            {   
-                                                                let portIdx = parseInt(getLanPort(portMac[i]))
+  </table>
+ </div>
 
-                                                                if (portIdx === 1 || portIdx === 2) {
-
-                                                                    document.write('<tr>');
-                                                                    document.write('<td>' + portIdx + '</td>' );
-
-                                                                     if(hostName[i] === '' || hostName[i] === "N/A" )
-                                                                    {
-                                                                        document.write('<td colspan="2"> Computer &nbsp;</td>')
-                                                                    } else {
-                                                                        document.write('<td colspan="2">'  + hostName[i] + '</td>');
-                                                                    }
-                                                                        document.write('<td colspan="2">' + portMac[i] + '&nbsp;</td>');
-                                                                        document.write('<td>' + portIP[i] + '&nbsp;</td>');
-
-                                                                        let lanIndex = 0
-
-                                                                        if (lanIndex === 0) {
-                                                                            document.write('<td>');
-                                                                        
-                                                                            let port2Duplex = '<% tcWebApi_get("Info_Ether","Port2Duplex","s") %>';
-                                                                                if (port2Duplex === '')
-                                                                                {   
-                                                                                    document.write('--');
-                                                                                } else {
-                                                                                    document.write(port2Duplex + ' -duplex');    
-                                                                                }
-                                                                            document.write('</td>');
-
-                                                                            document.write('<td>');
-
-                                                                             let port2CurrentBitRate = '<% tcWebApi_get("Info_Ether","port2CurrentBitRate","s") %>';
-                                                                                if (parseInt(port2CurrentBitRate) === 0)
-                                                                                {
-                                                                                    document.write('--');
-                                                                                } else {
-                                                                                    document.write(port2CurrentBitRate + ' Mbit/s');
-                                                                                }
-
-                                                                            document.write('</td>');
-                                                                            lanIndex++;
-
-                                                                        } else {
-                                                                            document.write('<td>');
-                                                                        
-                                                                            let port1Duplex = '<% tcWebApi_get("Info_Ether","Port1Duplex","s") %>';
-                                                                                if (port1Duplex === '')
-                                                                                {   
-                                                                                    document.write('--');
-                                                                                } else {
-                                                                                    document.write(port1Duplex + ' -duplex');    
-                                                                                }
-                                                                            document.write('</td>');
-
-                                                                            document.write('<td>');
-
-                                                                             let port1CurrentBitRate = '<% tcWebApi_get("Info_Ether","port1CurrentBitRate","s") %>';
-                                                                                if (parseInt(port1CurrentBitRate) === 0)
-                                                                                {
-                                                                                    document.write('--');
-                                                                                } else {
-                                                                                    document.write(port1CurrentBitRate + ' Mbit/s');
-                                                                                }
-
-                                                                            document.write('</td>');
-                                                                        }
-
-                                                                        
-
-                                                                        
-                                                                    
-                                                                    if(portDHCP[i] == "1")
-                                                                    {  
-                                                                        let portExpireTime = portExpire[i].split(':');
-                                                                        
-                                                                        if(portExpireTime[0] !== "0"){
-                                                                            
-                                                                            document.write('<td>' + '<%tcWebApi_get("String_Entry","UserInfoLeRemText","s")%>' + portExpireTime[0] + '<%tcWebApi_get("String_Entry","UserInfodayText","s")%>' + portExpireTime[1] + '<%tcWebApi_get("String_Entry","UserInfohourText","s")%>' + portExpireTime[2] + '<%tcWebApi_get("String_Entry","UserInfominuteText","s")%>' + portExpireTime[3] + '<%tcWebApi_get("String_Entry","UserInfosecondText","s")%>' + '</td>');
-                                                                        }
-                                                                        else{
-                                                                            if(("0:0:0:0" == portExpire[i]) || ("0" == portExpire[i])) {
-                                                                                document.write('<td>' + '<%tcWebApi_get("String_Entry","UserInfoLeIFuText","s")%>' + '</td>');
-                                                                                
-                                                                            } else{
-                                                                                document.write('<td>' + '<%tcWebApi_get("String_Entry","UserInfoLeRemText","s")%>' + portExpireTime[1] + '<%tcWebApi_get("String_Entry","UserInfohourText","s")%>' + portExpireTime[2] + '<%tcWebApi_get("String_Entry","UserInfominuteText","s")%>' + portExpireTime[3] + '<%tcWebApi_get("String_Entry","UserInfosecondText","s")%>' + '</td>');
-                                                                                
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        document.write('<td>' + '<%tcWebApi_get("String_Entry","UserInfoStaallText","s")%>' + '</td>');
-                                                                        
-                                                                    }
-                                                                        
-                                                                        document.write('</tr>');
-    
-                                                                }
-
-                                                                
-                                                                
-                                                            }					
-                                                        }
-                                                    </SCRIPT>
-                                                </tbody>
-                                            </table>
-                                            <table class="table  table-bordered table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <th colspan="9" align="center" style="text-align: center" > Packet Statistics </th>
-                                                    </tr>
-                                                     <tr>
-                                                        <th colspan="1" rowspan="4"> Ethernet </th>
-                                                        <th colspan="4" align="center" style="text-align: center" > Received(Rx) </th>
-                                                        <th colspan="4" align="center" style="text-align: center" > Sent(Tx) </th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-headcol">Bytes</<th>
-                                                        <th class="table-headcol">Packets</<th>
-                                                        <th class="table-headcol">Error</<th>
-                                                        <th class="table-headcol">Discarded</<th>
-                                                        <th class="table-headcol">Bytes</<th>
-                                                        <th class="table-headcol">Packets</<th>
-                                                        <th class="table-headcol">Error</<th>
-                                                        <th class="table-headcol">Discarded</<th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_Ether","inOctets","s") %>');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_Ether","rxFrames","s") %>');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_Ether","rxCrcErr","s") %>');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_Ether","inMulticastPkts","s") %>');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_Ether","outOctets","s") %>');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_Ether","txFrames","s") %>');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_Ether","outErrors","s") %>');
-                                                            </SCRIPT>
-                                                        </td>
-                                                        <td>
-                                                            <SCRIPT language=javascript>
-                                                                document.write('<% tcWebApi_get("Info_Ether","outMulticastPkts","s") %>');
-                                                            </SCRIPT>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                           
                                         </div>
                                         <div class="modal-footer">
+                                        <input type="hidden" value="/lan_port_status.asp" name="submit-url">
                                             <button type="button" class="btn grey_btn"
                                                 data-dismiss="modal">Close</button>
+                                                <input class=" btn grey_btn" type="submit" value="Refresh" name="refresh" onClick="return on_submit(this)">
+                                                <input type="hidden" name="postSecurityFlag" value="">
                                         </div>
+                                        
                                     </div>
 
                                 </div>
@@ -3879,11 +3595,10 @@ function insert(source, start, newStr)
                                         <span>
                                             <img src="/Dashboard/images/TR069.png" style="width:45px;padding-bottom:5px;">
                                         </span>
-                                        <span> <b style="font-size:18px;"><span style="vertical-align:middle;">&nbsp;&nbsp;TR069
-                                                    Status </b></span></span>
+                                        <span> <b style="font-size:18px;"><span style="vertical-align:middle;">&nbsp;&nbsp;<% multilang("2984" "LANG_TR069_STATUS"); %></b></span></span>
                                         <hr>
                                         <p>
-                                            On this page, you can query the TR069 Information
+                                          <% multilang("2985" "LANG_THIS_PAGE_SHOWS_THE_TR069_INFORM_STATUS"); %>
                                         </p>
                                     </div>
 
@@ -3894,78 +3609,22 @@ function insert(source, start, newStr)
                                                 <!--  <th>Interaction Build</th> -->
                                                 <th colspan="2" class="text-left modal-title"><span>
                                                         <img src="/Dashboard/images/TR069.png" style="width: 30px">
-                                                    </span>Tr069 connection state</th>
+                                                    </span>TR069 <% multilang("3" "LANG_STATUS"); %></th>
                                                
                                                       
                                                  
                                             </tr>
                                             <tr>
-                                                <th class="table-headcol text-center modal-title">Active inform state</th>
-                                                <th class="table-headcol text-center modal-title">ACS connect request state
+                                                <th class="table-headcol text-center modal-title"><% multilang("2986" "LANG_TR069_INFORM_STATUS"); %></th>
+                                                <th class="table-headcol text-center modal-title"><% multilang("2987" "LANG_TR069_CON_REQUEST_STATUS"); %>
                                                   </th>
 
 
 
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    <SCRIPT language=javascript>
-                                                        let cwmpEntryInformStatus = "<%TCWebApi_get("Cwmp_Entry","Inform_Status","s")%>";
-                                                        switch(cwmpEntryInformStatus)
-                                                        {
-                                                            case "0":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusUnReText","s")%>");
-                                                                break;
-                                                            case "1":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusUnReNOText","s")%>");
-                                                                break;
-                                                            case "2":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusUnReMText","s")%>");
-                                                                break;
-                                                            case "3":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusUnNoMText","s")%>");
-                                                                break;
-                                                            case "4":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusUnNoACSText","s")%>");
-                                                                break;
-                                                            case "5":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusUnACSDoText","s")%>");
-                                                                break;
-                                                            case "6":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusReNoReText","s")%>");
-                                                                break;
-                                                            case "7":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusRePInText","s")%>"); 
-                                                                break;
-                                                            case "8":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusReSuccText","s")%>");
-                                                                break;
-                                                            default:
-                                                                document.writeln("N/A");
-                                                                break;			
-                                                        }						
-                                                        </SCRIPT>
-                                                </td>
-                                                <td>
-                                                    <SCRIPT language=javascript>
-                                                        var cwmpEntryAcsConnStatus = "<%TCWebApi_get("Cwmp_Entry","AcsConnStatus","s")%>";
-                                                        switch(cwmpEntryAcsConnStatus)
-                                                        {
-                                                            case "0":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusNRRCText","s")%>");
-                                                                break;
-                                                            case "1":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusThRCText","s")%>");
-                                                                break;
-                                                            case "2":
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusTRConText","s")%>");
-                                                                break;
-                                                            default:
-                                                                document.writeln("<%tcWebApi_get("String_Entry","CwmpStatusNRRCText","s")%>");
-                                                                break;			
-                                                        }						
-                                                    </SCRIPT>
-                                                </td>
+                                                <td><% getInfo("tr069Inform"); %></td>
+                                                <td><% getInfo("tr069Connect"); %></td>
                                                 
                                             </tr>
                                         </table>
