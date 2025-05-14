@@ -98,15 +98,12 @@
 }
 .logo_box_login {
  text-align: center;
-    padding: 80px 0px 0px 0px;
 }
   </style>
  <body onload="on_init()" >
 <div class="container-fluid">
 <div class="row">
-<div class="col-md-12 col-sm-12 col-xs-12 logo_box_login" style="position: relative;margin-left:-33px">
- <img style="max-width: 20% !important" src="/img/logo.png" class="img-fluid" alt="">
-</div>
+
 </div>
 </div>
 <div class="login_box container" style="margin-top:30px;">
@@ -115,8 +112,11 @@
   <form action=/boaform/admin/formLogin method=POST name="cmlogin">
   <input type="hidden" name="challenge">
   <input type="hidden" name="code1" id="code1" />
-  <div class="login_body" style="background-color:#cacaca40; border-radius:10px;margin-left:-18%; margin-top:-50px !important;margin-right:40px;width:100%;height:100%; margin-top:20px">
-   <h1 style="color: #fd6102;margin-left:-20px; font-size: 40px;">Login Now</h1>
+  <div class="login_body" style="background-color:#cacaca40; border-radius:10px;margin-left:-18%; margin-right:40px;width:100%;height:100%; margin-top:20px">
+   <div class="col-md-12 col-sm-12 col-xs-12 logo_box_login" style="position: relative;margin-left:-10px">
+ <img style="max-width: 37% !important" src="/img/logo.png" class="img-fluid" alt="">
+</div>
+    <h1 style="color: #fd6102;margin-left:-20px; font-size: 40px;">Login Now</h1>
    <div class="form-group input-group pb-2">
       <input id="username" name="username" size="20" autocomplete="off" class="form-control" placeholder="<% multilang("836" "LANG_USER"); %><% multilang("701" "LANG_NAME"); %>:">
    </div>
