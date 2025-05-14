@@ -1,0 +1,45 @@
+.breadcrum_box {
+     margin-top:-6px;
+       padding: 8px 12px;
+      
+       position: relative;
+   }
+   .breadcrum_box ul {
+       margin: 0px;
+       padding: 0px;
+       list-style: none;
+   }
+   .help_icon {
+       position: absolute;
+       right: 14px;
+       top: 7px;
+   }
+   .breadcrum_box ul li {
+       display: inline-block;
+       padding: 0px 15px;
+       color: #a4a6a9;
+       font-size: 13px;
+   }
+   .breadcrum_box ul li a {
+       color: #f58220;
+   }
+   
+   a {
+       color: #f58220;
+       text-decoration: none;
+       background-color: transparent;
+   }
+   .help_icon svg {
+       width: 25px;
+       height: auto;
+       fill: #f58220;
+   }
+   
+   #help_icon_svg {
+       overflow: hidden;
+       vertical-align: middle;
+	display: none;
+   }
+   .list_header{
+     margin-top: 10px;
+   }

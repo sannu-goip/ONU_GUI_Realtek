@@ -1,235 +1,671 @@
+<!DOCTYPE HTML>
+
 <html>
+
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>HGU</title>
-<script language="JavaScript" type="text/javascript">
 
-var VirServerModifyMappingIndex = -1;
-var VirServerModifyEntryIndex = -1;
-var AclFilterEditRule = new Array();
-var AclEditNumber = -1;
-var ssidIdx = 0;
-var lanDevIndex = 1;
-var QoSCurInterface = '';
-var DDNSProvider = '';
-var curUser = "0";
-var ripIndex = "";
-var previousPage = "";
-var gateWayName = "GateWay";
-var ModelName = "XPON";
-var IPv6Support = "Yes";
-var ipsecSupport = "No";
-var pageMap =  new Array();//pageMap[8][9]
-var voipType = "SIP";
+    <title><% checkWrite("web-title"); %></title>
 
-var Content_Status="Status";
-var Content_DeviceInfo="DeviceInfo";
-var Content_NetInfo="NetInfo";
-var Content_UserInfo="UserInfo";
-var Content_VoIPInfo="VoIPInfo";
-var Content_CWMPInfo="CWMPStatus";
-var Content_WifiInfo="WiFiInfo";
-var Content_CATVInfo="CATVInfo";
-var Content_PonInfo="PonInfo";
-var Content_ConnectivityInfo="ConnectStatus";
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-var Content_Net="Net";
-var Content_WAN="Wan";
-var Content_Binding="Binding";
-var Content_LAN="Lan";
-var Content_Iphone="IPhone";
-var Content_Qos="QoS";
-var Content_Time="Time";
-var Content_Route="Route";
-var Content_QosBand="BandWidth";
+    <link rel="stylesheet" href="admin/style.css">
 
-var Content_Wireless="Wireless";
-var Content_WLAN="WLan";
-var Content_WLAN5G="WLan5G";
-var Content_WIFI="WiFi";
-var Content_WIFI5G="Wifi5G";
-var Content_Bandsteering="BandSteering";
-var Content_EasyMesh="EasyMesh";
+    <link rel="stylesheet" href="admin/reset.css" />
 
-var Content_VoiceSetup="VoIP";
-var Content_VoIPSet="VoIP Basic";
-var Content_VoIPSetAdv="VoIP Advanced";
-var Content_VoiceHistory="VoIP History";
+    <link rel="stylesheet" href="admin/base.css" />
 
-var Content_TR069="Tr069";
+    <link href="favicon.ico" type="image/x-icon" rel="shortcut icon" />
 
-var Content_Security="Security";
-var Content_URLFilter="URLFilter";
-var Content_Firewall="Firewall";
-var Content_MACFilter="MACFilter";
-var Content_PortFilter="PortFilter";
-var Content_AclFilter="AclFilter";
-var Content_Parental="Parental";
-var Content_LoopDetect="LoopDetect";
+    <script src="admin/jquip_sizzle.js" type="text/javascript" ></script>
 
-var Content_APP="APP";
-var Content_DDNS="DDNS";
-var Content_NAT="AdvancedNAT";
-var Content_UPNP="UPNP";
-var Content_IGMPOrMLD="IGMPMLD";
-var Content_IGMP="IGMP";
-var Content_DailyAPP="DailyAPP";
-var Content_SAMBA="SAMBA";
-var Content_VPN="VPN";
-var Content_SNMP="SNMP";
-var Content_FTP="FTP";
-var Content_IPTV="IPTV";
+    <script src="admin/jquip.js" type="text/javascript" ></script>
 
-var Content_Management="Manage";
-var Content_UserManagement="User Manage";
-var Content_DeviceManagement="Device Manage";
-var Content_LogManagement="Log Manage";
-var Content_Upgrade="Upgrade";
-var Content_Maintain="Maintain";
-var Content_Telnet="Telnet";
+    <script src="admin/juicer.js" type="text/javascript" ></script>
 
-var Content_Diagnose="Diagnose";
-var Content_InternetDiagnose="InternetDiagnose";
-var Content_SpeedTestDiagnose="SpeedTest";
+    <script src="admin/ui.js" type="text/javascript" ></script>
 
-var Content_Help="Help";
-var Content_UseHelp="Use Help";
+    <script>
 
-var getWlanWpsTimerCount = 0;
-var maxWlanWpsTimerCount = 10;
-for (i = 0; i < 11; i++)
-{
-   pageMap[i] = new Array();
+        document.write("<s"+"cript type='text/javascript' src='adminMenu.js?v="+Math.random()+"'></scr"+"ipt>");
+
+    </script>
+
+    <script type="text/javascript" src="admin/init.js"></script>
+
+    <script id="nav-tmpl" type="text/template">
+
+        {@each items as item}
+
+            <li>
+
+                
+
+                <a href="javascript:void(0)" rel="${item.sub}" class="menu-item" style="width: 102px; height: 60px; display: inline-block; ">
+
+                    <img src=${item.img} alt="" height=${item.height} width=${item.width} style="padding-top: ${item.padding}px" class="menu-img" />
+
+                    <div class="menu-text">${item.name}</div>
+
+                </a>
+
+                <span></span>
+
+            </li>
+
+        {@/each}
+
+    </script>
+
+    <script id="side-tmpl" type="text/x-template">
+
+        {@each items as item}
+
+          <li class="{@if item.collapsed}collapsed{@/if}">
+
+            <ul>
+
+              {@each item.items as it}
+
+                  <li><a target="contentIframe" href="${it.href}">${it.name}</a></li>
+
+              {@/each}
+
+            </ul>
+
+          </li>
+
+        {@/each}
+
+      </script>
+
+      <script>
+
+        window.addEventListener('DOMContentLoaded', () => {
+
+            const navItems = document.querySelectorAll('#nav li'); // All <li> elements
+
+            const sideMenu = document.getElementById('side');
+
+            let hideTimeout;
+
+    
+
+            function showSideMenu(item) {
+
+                const rect = item.getBoundingClientRect();
+
+                const menuHeight = sideMenu.offsetHeight;
+
+                const windowHeight = window.innerHeight;
+
+    
+
+                let topPosition = rect.top;
+
+    
+
+                // Adjust if side menu overflows the bottom of viewport
+
+                if (topPosition + menuHeight > windowHeight) {
+
+                    topPosition = windowHeight - menuHeight - 10; // Add 10px padding
+
+                    if (topPosition < 0) topPosition = 0; // Prevent negative top
+
+                }
+
+    
+
+                sideMenu.style.top = `${topPosition}px`;
+
+                sideMenu.style.left = `${rect.right}px`;
+
+                sideMenu.style.display = 'block';
+
+            }
+
+    
+
+            navItems.forEach((li, index) => {
+
+                li.addEventListener('click', (e) => {
+
+    // Remove all active classes
+
+    navItems.forEach(i => i.classList.remove('active'));
+
+
+
+    // Add active to clicked <li>
+
+    li.classList.add('active');
+
+
+
+    if (index === 0) {
+
+        sideMenu.style.display = 'none';
+
+    } else {
+
+        // Wait for DOM to render side menu content, then show it
+
+        sideMenu.style.display = 'block';
+
+        requestAnimationFrame(() => {
+
+            showSideMenu(li);
+
+        });
+
+    }
+
+});
+
+    
+
+                li.addEventListener('mouseover', () => {
+
+                    if (li.classList.contains('active')) {
+
+                        clearTimeout(hideTimeout);
+
+                        if (index !== 0) {
+
+                            showSideMenu(li);
+
+                        } else {
+
+                            sideMenu.style.display = 'none';
+
+                        }
+
+                    }
+
+                });
+
+    
+
+                li.addEventListener('mouseout', () => {
+
+                    hideTimeout = setTimeout(() => {
+
+                        if (!sideMenu.matches(':hover')) {
+
+                            sideMenu.style.display = 'none';
+
+                        }
+
+                    }, 200);
+
+                });
+
+            });
+
+    
+
+            sideMenu.addEventListener('mouseover', () => {
+
+                clearTimeout(hideTimeout);
+
+            });
+
+    
+
+            sideMenu.addEventListener('mouseout', () => {
+
+                hideTimeout = setTimeout(() => {
+
+                    sideMenu.style.display = 'none';
+
+                }, 200);
+
+            });
+
+    
+
+            // Automatically click the first nav item (index 0) on page load
+
+            if (navItems.length > 0) {
+
+                navItems[0].click();
+
+            }
+
+        });
+
+    </script>
+
+    
+
+        
+
+    
+
+    <script>
+
+        function confirmlogout() {
+
+            if (!confirm('do you confirm to logout?')) {
+
+                return false;
+
+            } else {
+
+                return true;
+
+            }
+
+        }
+
+        function cleanload() {
+
+            top.document.getElementById('shade').style.display = 'none';
+
+            top.document.getElementById('loadpagediv').style.display = 'none';
+
+            
+
+        }
+
+        
+
+    </script>
+
+     
+
+  <style>
+
+    .menu-text{
+
+        color: grey;
+
+    }
+
+    #nav li:hover .menu-text {
+
+        color: #f3892e; /* Removes grey filter */
+
+    }
+
+
+
+    /* On click, keep the image orange-red */
+
+    #nav li.active .menu-text {
+
+        color: #f3892e;
+
+    }
+
+
+
+    .menu-img {
+
+        filter: grayscale(100%); /* Makes the image grey */
+
+        transition: filter 0.3s ease; /* Smooth transition */
+
+    }
+
+
+
+    /* On hover, change the image color to orange-red */
+
+    #nav li:hover .menu-img {
+
+        filter: grayscale(0%); /* Removes grey filter */
+
+    }
+
+
+
+    /* On click, keep the image orange-red */
+
+    #nav li.active .menu-img {
+
+        filter: grayscale(0%);
+
+    }
+
+
+
+   .header_box {
+
+        position: fixed; /* Make the header fixed */
+
+        top: 0; /* Stick it to the top */
+
+        left: 0; /* Align it to the left */
+
+        width: 100%; /* Ensure it spans the full width */
+
+        z-index: 1000; /* Ensure it stays above other elements */
+
+        height: 45px; /* Keep the same height */
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        border-bottom: 1px solid #eee;
+
+        font-family: Arial, sans-serif;
+
+        background: #fff;
+
+    }
+
+
+
+    /* Add padding to the wrapper to prevent overlap */
+
+    #wrapper {
+
+        padding-top: 45px; /* Same as the header height */
+
+    }
+
+
+
+.gateway_box, .model_box {
+
+    font-size: 14px;
+
+    margin-right: 15px;
+
+    color: #3366cc;
+
 }
 
-pageMap[0][0] = "1";
-pageMap[1][0] = "1";
-pageMap[2][0] = "1";
-pageMap[3][0] = "1";
-pageMap[4][0] = "1";
-pageMap[5][0] = "1";
-pageMap[6][0] = "1";
-pageMap[7][0] = "1";
-pageMap[8][0] = "1";
-pageMap[9][0] = "1";
-pageMap[10][0] = "1";
 
-pageMap[0][1] = "1";
-pageMap[0][2] = "1";
-pageMap[0][3] = "1";
-pageMap[0][4] = "1";
-pageMap[0][5] = "1";
-pageMap[0][6] = "1";
-pageMap[0][7] = "1";
-pageMap[0][8] = "1";
 
-pageMap[1][1] = "1";
-pageMap[1][2] = "1";
-pageMap[1][3] = "1";
-pageMap[1][4] = "0";
+.model_box {
 
-pageMap[1][5] = "1";
-pageMap[1][6] = "1";
-pageMap[1][7] = "1";
-pageMap[1][8] = "1";
+    color: #ff6600;
 
-pageMap[2][1] = "1";
-pageMap[2][2] = "1";
-pageMap[2][3] = "1";
-pageMap[2][4] = "1";
-pageMap[2][5] = "1";
-pageMap[2][6] = "1";
-pageMap[2][7] = "1";
-pageMap[2][8] = "1";
-pageMap[2][9] = "1";
-pageMap[2][10] = "1";
-pageMap[2][11] = "0";
-pageMap[2][12] = "0";
+}
 
-pageMap[2][13] = "0";
 
-pageMap[3][1] = "1";
-pageMap[3][2] = "1";
-pageMap[3][3] = "1";
-pageMap[3][4] = "1";
-pageMap[3][5] = "1";
-pageMap[3][6] = 0;
 
-pageMap[3][7] = "1";
-pageMap[3][8] = "1";
-pageMap[3][9] = "0";
+.Power_btn {
 
-pageMap[4][1] = "1";
-pageMap[4][2] = "1";
-pageMap[4][3] = "1";
-pageMap[4][4] = "1";
-pageMap[4][5] = "1";
-pageMap[4][6] = "1";
-pageMap[4][7] = "0";
-pageMap[4][8] = "1";
-pageMap[4][9] = "0";
-pageMap[4][10] = "0";
-pageMap[4][11] = "1";
+    margin-left: auto;
 
-pageMap[5][1] = "1";
-pageMap[5][2] = "1";
-pageMap[5][3] = "1";
-pageMap[5][4] = "1";
-pageMap[5][5] = "0";
-pageMap[5][6] = "1";
-pageMap[5][7] = "1";
-pageMap[5][8] = "1";
+    cursor: pointer;
 
-pageMap[6][1] = "1";
-pageMap[6][2] = "1";
-pageMap[6][3] = "1";
-pageMap[6][4] = "1";
-pageMap[6][5] = "1";
-pageMap[6][6] = "1";
-pageMap[6][7] = "1";
-pageMap[6][8] = "1";
+}
 
-pageMap[7][1] = "1";
-pageMap[7][2] = "1";
-pageMap[7][3] = "1";
-pageMap[7][4] = "1";
-pageMap[7][5] = "1";
-pageMap[7][6] = "1";
-pageMap[7][7] = "1";
-pageMap[7][8] = "1";
 
-pageMap[8][1] = "1";
-pageMap[8][2] = "1";
-pageMap[8][3] = "1";
-pageMap[8][4] = "1";
-pageMap[8][5] = "1";
-pageMap[8][6] = "1";
-pageMap[8][7] = "1";
-pageMap[8][8] = "1";
 
-pageMap[9][1] = "1";
-pageMap[9][2] = "1";
-pageMap[9][3] = "1";
-pageMap[9][4] = "1";
-pageMap[9][5] = "1";
-pageMap[9][6] = "1";
-pageMap[9][7] = "1";
-pageMap[9][8] = "1";
+.powerBtn {
+    margin-left: auto; /* Pushes the button to the right */
+    padding: 1px;
+    height: 41px;
+    width: 40px;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+}
 
-pageMap[10][1] = "1";
-pageMap[10][2] = "1";
-pageMap[10][3] = "1";
-pageMap[10][4] = "1";
-pageMap[10][5] = "1";
-pageMap[10][6] = "1";
-pageMap[10][7] = "1";
-pageMap[10][8] = "1";
-</script>
-<frameset rows='0,*' frameborder='0' border='0'>
-<frame src='refresh.asp' name='refreshfrm' frameborder='no' border='0' scrolling='no' target='_self' marginwidth='0' marginheight='0' noresize>
-      <frame src='status.asp' name='contentfrm' frameborder='no' border='0' target='_self' marginwidth='0' marginheight='0' >
-</frameset>
-<noframes>The information on the page makes use of frame technology. For best results, use the new version of Browser.</noframes>
+.powerBtn:hover {
+    background-color: #ff6600;
+    transition: background-color 0.3s ease;
+    border-radius: 3px;
+}
+
+.powerBtn:hover svg path {
+    fill: #fff; /* Change to white or any desired color */
+}
+
+    .powerBtn:hover svg  {
+
+        fill: #fff; /* Change to red or any desired color */
+
+    }
+
+    .powerBtn:hover a  {
+
+        fill: #fff; /* Change to red or any desired color */
+
+    }
+
+    .sidebar_toggle{
+
+        width: 107px;
+
+        border-right: 1px solid #e5e5e5;
+
+    }
+
+  .sidebar_toggle img{
+
+    height: 22px;
+
+    margin-left: 5px;
+
+  }
+.right-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Pushes the container to the right */
+    gap: 15px; /* Adds spacing between model_box and powerBtn */
+}
+
+.model_box {
+    font-size: 14px;
+    color: #ff6600;
+    height: 100%; /* Match the height of the parent container (.header_box) */
+    display: flex; /* Align content vertically */
+    align-items: center; /* Center content vertically */
+    margin-right: 15px; /* Add spacing between .model_box and other elements */
+}
+  </style>
+
 </head>
+
+<body>
+
+   
+
+   
+
+    <div id="wrapper">
+
+        <div id="header">
+
+          <div class="scoop-content">
+
+            <div id="Header">
+
+              <header class="header_box scoop-header iscollapsed" header-theme="theme2">
+    <div class="sidebar_toggle">
+        <img src="/img/logo.png" alt="">
+    </div>
+
+    <div class="right-container">
+        <span class="model_box">Gateway Name: <strong style="margin-right: 20px; font-weight: 400;">Home Gateway</strong> Gateway Type: "<strong style="font-weight: 400;"><script>document.write('<% getInfo("name"); %>');
+</script></strong>"</span>
+        <div class="powerBtn">
+            <a onclick="document.getElementById('cmlogout').submit();" id="logOut" name="logOut" target="_top" class="Power_btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 22 25">
+                    <path id="power_icon" class="cls-1" fill="#ff6600" d="M15.405,3.524s-1.324-.6-1.324.8A3.166,3.166,0,0,0,15.41,6.65,8.495,8.495,0,0,1,11,22.253,8.495,8.495,0,0,1,6.59,6.65,3.167,3.167,0,0,0,7.919,4.322c0-1.4-1.324-.8-1.324-0.8A11.242,11.242,0,0,0,11,25,11.242,11.242,0,0,0,15.405,3.524ZM11.077,0A1.47,1.47,0,0,0,9.46,1.258V12.325a1.47,1.47,0,0,0,1.618,1.258,1.3,1.3,0,0,0,1.463-1.258V1.258A1.3,1.3,0,0,0,11.077,0Z"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+</header>                     
+
+            </div>
+
+        
+
+            <form action="/boaform/admin/formLogout" method="POST" name="cmlogout" id="cmlogout">
+
+                <input type="hidden" name="submit-url" value="/admin/login.asp">
+
+                <input type="hidden" name="save" value="Logout">
+
+            </form>
+
+        </div>
+
+        
+
+            <div class="nav_side clearfix">
+
+                <ul id="nav" class="round"></ul>
+
+            </div>
+
+
+
+        </div>
+
+        <div id="main" class="clearfix">
+
+            <div id="side_wrapper">
+
+                <div class="box_wrapper round">
+
+                    <div class="box_content">
+
+                        <ul id="side"></ul>
+
+                    </div>
+
+                </div>
+
+                <div class="box_wrapper none" id="attention">
+
+                    <div class="box_content">
+
+                        <div class="page_confirm">
+
+                            <form name="formAttensave" method="POST" action="form2AttenSave.cgi">
+
+                                <div class="page_confirm">
+
+                                    <p>Attention Config is modified to make it effective forever!</p>
+
+                                    <input type="submit" value="save" class="link_bg" />
+
+                                    <input type="hidden" name="submit.htm?index.htm" value="Send"/>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+       
+
+            <div id="content">
+
+                <iframe src="#" frameborder="0" name="contentIframe" id="contentIframe" scrolling="no" onload="cleanload(); window.scrollTo(0, 0);"></iframe>
+
+            </div>
+            <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #f0f0f0; text-align: center; padding: 10px 0; font-size: 13px; font-weight: 500; border-top: 1px solid #ddd;">
+                &copy; 2022-2025 Copyright :
+                <a class="text-white" style="color:#fd7e14 !important;" href="#">Syrotech Networks Pvt. Ltd.</a>
+            </footer>
+            <script>
+
+                const iframe = document.getElementById("contentIframe");
+
+              
+
+                function resizeIframe() {
+
+                  try {
+
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+                    const height = iframeDoc.body.scrollHeight;
+
+                    iframe.style.height = (height + 30) + "px";
+
+                  } catch (err) {
+
+                    console.error("Iframe resize error:", err);
+
+                  }
+
+                }
+
+              
+
+                iframe.onload = function () {
+
+                  try {
+
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    resizeIframe();
+                    const observer = new MutationObserver(() => {
+
+                      resizeIframe();
+
+                    });
+
+              
+
+                    observer.observe(iframeDoc.body, {
+
+                      childList: true,
+
+                      subtree: true,
+
+                      attributes: true,
+
+                      characterData: true
+
+                    });
+                    iframe.contentWindow.addEventListener('resize', resizeIframe);
+
+                  } catch (err) {
+
+                    console.error("Cannot access iframe (maybe cross-origin):", err);
+
+                  }
+
+                };
+
+              </script>
+
+              <script>
+
+                document.addEventListener("DOMContentLoaded", function () {
+                    const clickableElements = document.querySelectorAll("a, #nav li, #side");
+                    clickableElements.forEach(element => {
+
+                        element.addEventListener("click", function (event) {
+                            window.scrollTo({
+
+                                top: 0,
+
+                                behavior: "smooth"
+
+                            });
+
+                        });
+
+                    });
+
+                });
+
+            </script>
+        </div>
+
+    </div>
+
 </body>
+
 </html>
