@@ -1658,7 +1658,7 @@
                     <div class="modal-body">
 
                         <p>Status information of voice users and reset the voice</p>
-                        <div class="table-responsive" id="Voip_content" style="display: none;">
+                        <div class="table-responsive" id="Voip_content">
                             <!-- Your first table where data will be displayed -->
                             <table id="voipSIP_info" name="voipSIP_info" class="table table-bordered table_text_center">
                                 <tbody>
